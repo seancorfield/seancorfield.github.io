@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://seancorfield.github.io
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+title: An Architect's View
+subtitle: Clojure, Software Design, Frameworks and more...
+author: Sean Corfield
 simple_search: https://www.google.com/search
-description:
+description: Thoughts on Functional Programming and Software Design from a Senior Software Architect
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
