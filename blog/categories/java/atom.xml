@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[An Architect's View]]></title>
-  <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Java | An Architect's View]]></title>
+  <link href="http://seancorfield.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
   <updated>2014-06-20T18:33:15-07:00</updated>
   <id>http://seancorfield.github.io/</id>
@@ -26,13 +26,13 @@
 
 <p>At least, it started out that way.</p>
 
-<p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho&#8217;. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
+<p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho'. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
 
 <p>As far as I was concerned, Java had lost its way and become a bloated, verbose language that acted as a nursemaid to mediocre enterprise developers. I vowed I&rsquo;d never write Java again and took every opportunity to tell recruiters that whenever they contacted me with great opportunities for Java architect roles.</p>
 
 <p>I went off to Groovy, then Scala, then Clojure. And there I&rsquo;ve stayed for the last three or four years.</p>
 
-<p>When Java 8 was first getting press, I was very skeptical: how could they bring the elegance and ease of functional programming to a language so buried in boilerplate and a verbose, simplistic type system? I liked the simplicity of Groovy (and its dynamic approach to typing), I liked the elegance of Scala (even tho&#8217; I found the quirks of its type system and slow compilation to be significant drawbacks), and I really liked Clojure&rsquo;s combination of elegance, simplicity, and dynamic typing.</p>
+<p>When Java 8 was first getting press, I was very skeptical: how could they bring the elegance and ease of functional programming to a language so buried in boilerplate and a verbose, simplistic type system? I liked the simplicity of Groovy (and its dynamic approach to typing), I liked the elegance of Scala (even tho' I found the quirks of its type system and slow compilation to be significant drawbacks), and I really liked Clojure&rsquo;s combination of elegance, simplicity, and dynamic typing.</p>
 
 <p>But, at World Singles, we run our dating platform on the JVM and so an upgrade to Java 8 was inevitable to take advantage of the improvements in heap management and garbage collection. Since I was testing everything on the new JVM, I figured I might as well take a look at Java&rsquo;s new language features&hellip;</p>
 
