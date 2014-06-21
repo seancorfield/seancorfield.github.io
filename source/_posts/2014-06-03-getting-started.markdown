@@ -3,7 +3,7 @@ layout: post
 title: "Getting Started"
 date: 2014-06-03 18:42:36 -0700
 comments: true
-categories: process
+categories: [process, clojure]
 ---
 Sometimes it's very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I'm going to talk about the first ten tickets we created at World Singles as we kicked off our green field rewrite project five years ago.<!-- more -->
 
