@@ -12,7 +12,7 @@ _Originally posted on [Google Plus](https://plus.google.com/u/0/+SeanCorfield_A/
 I first started doing Java development in 1997. I was pretty invested in this "new" technology after being initially skeptical with my strong C++ background. I even wrote an editorial in a C++ journal about "the new kid on the block", casting aspersions as to whether it had what it would take to become popular. Over time, Java became the juggernaut of corporate development and I actually found it quite refreshing after C++'s somewhat obtuse syntax and complexities: Java was a simple language by comparison, with a well-structured, modular library.
 
 At least, it started out that way.
-
+<!-- more -->
 Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho'. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).
 
 As far as I was concerned, Java had lost its way and become a bloated, verbose language that acted as a nursemaid to mediocre enterprise developers. I vowed I'd never write Java again and took every opportunity to tell recruiters that whenever they contacted me with great opportunities for Java architect roles.
