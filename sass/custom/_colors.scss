@@ -17,7 +17,7 @@ $subtitle-color: lighten($header-bg-color, 10);
 //$footer-bg-front: image-url('noise.png');
 //$footer-bg-back: linear-gradient(lighten($footer-bg, 8), $footer-bg, darken($footer-bg, 11));
 
-$page-bg: #feecfd !default;
+$page-bg: $header-bg-color; // #feecfd;
 
 /* To use the light Solarized highlighting theme uncomment the following line */
 //$solarized: light;
