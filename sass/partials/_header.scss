@@ -1,5 +1,10 @@
 body > header {
   background: $header-bg;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: right;
   h1 {
     display: inline-block;
     margin: 0;
