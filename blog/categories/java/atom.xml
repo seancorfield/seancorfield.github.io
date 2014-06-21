@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Java | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2014-06-20T18:39:13-07:00</updated>
+  <updated>2014-06-20T18:53:47-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -24,10 +24,7 @@
 
 <p>I first started doing Java development in 1997. I was pretty invested in this &ldquo;new&rdquo; technology after being initially skeptical with my strong C++ background. I even wrote an editorial in a C++ journal about &ldquo;the new kid on the block&rdquo;, casting aspersions as to whether it had what it would take to become popular. Over time, Java became the juggernaut of corporate development and I actually found it quite refreshing after C++&rsquo;s somewhat obtuse syntax and complexities: Java was a simple language by comparison, with a well-structured, modular library.</p>
 
-<p>At least, it started out that way.</p>
-
-<!-- more -->
-
+<p>At least, it started out that way.<!-- more --></p>
 
 <p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho'. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
 
