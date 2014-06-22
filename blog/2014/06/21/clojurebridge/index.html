@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Some Thoughts on Java 8 - An Architect's View</title>
+  <title>ClojureBridge - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="Originally posted on Google Plus on June 14th, 2014. Why Java 8 might win me back&hellip; I first started doing Java development in 1997. I was &hellip;">
+  <meta name="description" content="Adapted from a post I made on my old blog in January, 2014, about the first few workshops being planned. I&rsquo;ve been an advocate of diversity in &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8">
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2014/06/21/clojurebridge">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Some Thoughts on Java 8</h1>
+      <h1 class="entry-title">ClojureBridge</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2014-06-20T17:58:34-07:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
+<time datetime="2014-06-21T19:39:03-07:00" pubdate data-updated="true">Jun 21<span>st</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://seancorfield.github.io">Comments</a>
@@ -95,31 +95,33 @@
   </header>
 
 
-<div class="entry-content"><p><em>Originally posted on <a href="https://plus.google.com/u/0/+SeanCorfield_A/posts/dTiYLDXV5AV">Google Plus</a> on June 14th, 2014.</em></p>
+<div class="entry-content"><p><em>Adapted from a post I made on my old blog in January, 2014, about the first few workshops being planned.</em></p>
 
-<p><strong>Why Java 8 might win me back&hellip;</strong></p>
+<p>I&rsquo;ve been an advocate of diversity in IT for a long time. I&rsquo;m very pleased to work in a company that has an above average ratio of female to male employees, as well as very diverse cultural backgrounds amongst our staff. In most tech communities, diversity is pretty low. It&rsquo;s why organizations like <a href="http://railsbridge.org/">RailsBridge</a> and <a href="http://womenwhocode.com/">Women Who Code</a> and numerous others exist. The lack of diversity hurts us all because a homogeneous community doesn&rsquo;t have diversity of thought either: <a href="https://www.google.com/search?q=diverse+teams+outperform">diverse teams outperform homogeneous teams</a>.<!-- more --></p>
 
-<p>I first started doing Java development in 1997. I was pretty invested in this &ldquo;new&rdquo; technology after being initially skeptical with my strong C++ background. I even wrote an editorial in a C++ journal about &ldquo;the new kid on the block&rdquo;, casting aspersions as to whether it had what it would take to become popular. Over time, Java became the juggernaut of corporate development and I actually found it quite refreshing after C++&rsquo;s somewhat obtuse syntax and complexities: Java was a simple language by comparison, with a well-structured, modular library.</p>
+<p>Back in 2012, I became very bothered by the lack of diversity in the Clojure community &ndash; it&rsquo;s a lot less diverse than several other communities I&rsquo;ve experienced &ndash; and after talking to a few people, I reached out to a former colleague from Macromedia, <a href="http://en.wikipedia.org/wiki/Sarah_Allen_(software_developer">Sarah Allen</a>) &ndash; president of RailsBridge, to see what it would take to get something started to address it. I continued talking to people about the idea of ClojureBridge and was thrilled when Bridget Hillyer, Lynn Grogan, Maggie Litton and others took up the torch to make it happen!</p>
 
-<p>At least, it started out that way.<!-- more --></p>
+<p>Early in 2014, I was thrilled to announce that ClojureBridge had become a reality: you could <a href="http://clojurebridge.org/">sign up on the web site</a> to get involved, you could <a href="https://groups.google.com/forum/#!forum/clojurebridge-workshops">join the ClojureBridge Workshops mailing list</a>. And hundreds of people have done that!</p>
 
-<p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho&#8217;. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
+<p>ClojureBridge has already run four workshops: Durham, NC; San Francisco, CA; Brisbane, Australia; Minneapolis, MN. More workshops are being planned in Melbourne, Australia; Edinburgh, Scotland; Chicago, IL; Portland, OR; Austin, TX. It&rsquo;s incredible to see the level of interest in this effort to introduce Clojure to more people, and help improve diversity in our community.</p>
 
-<p>As far as I was concerned, Java had lost its way and become a bloated, verbose language that acted as a nursemaid to mediocre enterprise developers. I vowed I&rsquo;d never write Java again and took every opportunity to tell recruiters that whenever they contacted me with great opportunities for Java architect roles.</p>
+<p>With four successful workshops behind us now, we&rsquo;re working to update the <a href="https://github.com/ClojureBridge/curriculum">curriculum</a> to incorporate lessons we&rsquo;ve learned, so that future workshops can be a better experience for students.</p>
 
-<p>I went off to Groovy, then Scala, then Clojure. And there I&rsquo;ve stayed for the last three or four years.</p>
+<p>The ClojureBridge web site says:</p>
 
-<p>When Java 8 was first getting press, I was very skeptical: how could they bring the elegance and ease of functional programming to a language so buried in boilerplate and a verbose, simplistic type system? I liked the simplicity of Groovy (and its dynamic approach to typing), I liked the elegance of Scala (even tho&#8217; I found the quirks of its type system and slow compilation to be significant drawbacks), and I really liked Clojure&rsquo;s combination of elegance, simplicity, and dynamic typing.</p>
+<blockquote><p>ClojureBridge aims to increase diversity within the Clojure community by offering free, beginner-friendly workshops for women.</p>
 
-<p>But, at World Singles, we run our dating platform on the JVM and so an upgrade to Java 8 was inevitable to take advantage of the improvements in heap management and garbage collection. Since I was testing everything on the new JVM, I figured I might as well take a look at Java&rsquo;s new language features&hellip;</p>
+<p>Our students range from those completely new to programming to professional developers who want to learn more about Clojure.</p>
 
-<p>And I was pleasantly surprised! Streams providing lazy/efficient map, filter, and reduce. Optional providing a way out of the null-checking tar pit of typical Java code. Lambda expressions providing a huge improvement in expressiveness and conciseness &ndash; compared to the ugly anonymous classes and single-method interfaces we&rsquo;d had to put up with before. All those new functional interfaces. Method references. A lot of improvements in the type system and type inference.</p>
+<p>ClojureBridge is inspired by RailsBridge, and closely models the RailsBridge philosophy.</p></blockquote>
 
-<p>In many ways, Java 8 is a whole new language. It&rsquo;s still fairly verbose but its support for functional programming is actually not bad at all. There are still no immutable collections &ndash; maybe Java 9 will address that &ndash; but streams, lambdas, etc make a huge difference in what you can do with relative ease.</p>
+<p>A typical workshop description says:</p>
 
-<p>I think I can safely say that I would no longer rather fall on a sword than program in Java &ndash; as long as it&rsquo;s Java 8!</p>
+<blockquote><p>This workshop is intended to reach out to women who are interested in learning programming with Clojure. Men are welcome to come if you find a woman who wants to learn Clojure and come together. ClojureBridge is emphatically queer and trans* friendly.</p></blockquote>
 
-<p><em>p.s. No, I&rsquo;m not switching from Clojure, but now I view Java as &ldquo;palatable&rdquo; rather than &ldquo;hideous&rdquo;.</em></p>
+<p>A common question is: why the focus on women? The answer is that there are already plenty of ways guys can learn a new programming language in an environment that is comfortable for them. The whole of IT is a comfortable space for men (and it is particularly so for white cis-het men). Since many male-dominated environments are not comfortable spaces for many women &ndash; and many other underrepresented groups &ndash; it&rsquo;s important to create a safe, friendly environment in which to encourage new people to learn technology. ClojureBridge has chosen to follow the RailsBridge model in starting out with a focus on workshops for women. I recently spoke with Dr. Kortney Ziegler, founder of <a href="http://www.transhack.org/">Trans*H4CK</a>, about the possibility of a joint workshop with ClojureBridge aimed at the transgender community. I hope to see ClojureBridge workshops run jointly with other groups that advocate for underrepresented groups in technology.</p>
+
+<p>If you&rsquo;re interested in improving diversity in IT, reach out to a group like ClojureBridge and get involved. Help organize events in your area. Together we can change the face of IT, and our community will grow and our teams will be more productive and more creative!</p>
 </div>
 
 
@@ -142,12 +144,12 @@
   
 
 
-<time datetime="2014-06-20T17:58:34-07:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
+<time datetime="2014-06-21T19:39:03-07:00" pubdate data-updated="true">Jun 21<span>st</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/java/'>java</a>
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/diversity/'>diversity</a>
   
 </span>
 
@@ -156,7 +158,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2014/06/21/clojurebridge/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2014/06/21/clojurebridge/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -169,10 +171,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/03/getting-started/" title="Previous Post: Getting Started">&laquo; Getting Started</a>
+        <a class="basic-alignment left" href="/blog/2014/06/20/some-thoughts-on-java-8/" title="Previous Post: Some thoughts on Java 8">&laquo; Some thoughts on Java 8</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/21/clojurebridge/" title="Next Post: ClojureBridge">ClojureBridge &raquo;</a>
       
     </p>
   </footer>
@@ -285,8 +285,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/';
-        var disqus_url = 'http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/';
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2014/06/21/clojurebridge/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2014/06/21/clojurebridge/';
         var disqus_script = 'embed.js';
       
     (function () {
