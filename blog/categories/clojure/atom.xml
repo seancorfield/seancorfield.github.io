@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2014-09-26T20:37:53-07:00</updated>
+  <updated>2014-09-26T20:39:45-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -128,7 +128,7 @@
     <link href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/"/>
     <updated>2013-05-01T20:09:04-07:00</updated>
     <id>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring</id>
-    <content type="html"><![CDATA[<p>We&rsquo;ve recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&rsquo;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&rsquo;re lucky!).</p>
+    <content type="html"><![CDATA[<p>We&rsquo;ve recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&rsquo;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces).<!-- more --> For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&rsquo;re lucky!).</p>
 
 <p>However, we have a mixture of CFML and Clojure, running on the <a href="http://www.getrailo.org">free open source Railo server</a> so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.</p>
 
