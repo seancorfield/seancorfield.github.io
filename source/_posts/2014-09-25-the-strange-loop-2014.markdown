@@ -3,7 +3,7 @@ layout: post
 title: "The Strange Loop 2014"
 date: 2014-09-25 18:32:18 -0700
 comments: true
-categories: 
+categories: conferences
 ---
 Last week I attended [The Strange Loop](https://thestrangeloop.com/) in St Louis. I attended in 2011 and was blown away. I missed 2012 but attended again in 2013 and was blown away once more. I already have 2015's dates in my calendar. How was 2014?<!-- more -->
 

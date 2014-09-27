@@ -3,7 +3,7 @@ layout: post
 title: "Powered by JavaScript"
 date: 2014-09-20 20:03:15 -0700
 comments: true
-categories: 
+categories: [javascript, conferences]
 ---
 The first annual [Powered by JavaScript](http://www.manning.com/poweredbyjavascript/) conference, organized by [Manning Books](http://www.manning.com/), took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn't JavaScript?<!-- more -->
 

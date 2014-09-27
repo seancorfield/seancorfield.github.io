@@ -3,7 +3,7 @@ layout: post
 title: "Clojure in the Enterprise?"
 date: 2014-09-23 23:05:05 -0700
 comments: true
-categories: 
+categories: clojure
 ---
 _This was originally posted on [corfield.org back in April 2013](http://corfield.org/blog/post.cfm/clojure-in-the-enterprise) and I noticed it was recently referenced by Eric Normand in his recent blog post [Convince your boss to use Clojure](http://www.lispcast.com/convince-your-boss-to-use-clojure) so I figured it was time to update the article and bring it onto my new blog._
 
