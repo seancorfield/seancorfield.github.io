@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2014-09-25T19:53:30-07:00</updated>
+  <updated>2014-09-26T20:37:53-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure in the Enterprise?]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/"/>
+    <updated>2014-09-23T23:05:05-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise</id>
+    <content type="html"><![CDATA[<p><em>This was originally posted on <a href="http://corfield.org/blog/post.cfm/clojure-in-the-enterprise">corfield.org back in April 2013</a> and I noticed it was recently referenced by Eric Normand in his recent blog post <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">Convince your boss to use Clojure</a> so I figured it was time to update the article and bring it onto my new blog.</em></p>
+
+<p>A question was asked in early 2013 on a Clojure group on LinkedIn about reasons to migrate to Clojure for enterprise applications in a Java shop. It&rsquo;s a fairly typical question from people in the Java world when they hear the buzz about Clojure, and of course asking the question on a Clojure group garnered a lot of positive responses about why Clojure is a good choice. I didn&rsquo;t feel anyone had really addressed a core aspect of the original question which was, essentially, &ldquo;Why should I, as a Java web developer, using JPA, JSF etc, choose Clojure instead for an enterprise application?&rdquo;.<!-- more --> The key considerations here are &ldquo;enterprise application&rdquo; and &ldquo;Java web devloper, using JPA, JSF etc&rdquo;. Clojure is rightly praised for big data projects, simplified concurrency due to immutable data, and the conciseness of its solutions. The general advice when introducing Clojure to an organization is to take a grass roots approach: use it for some tooling first, or a small low-risk (but perhaps high-profile) project and show how well it works in a Java-dominated world. Then you get more and more developers trying it out and gradually the organization adopts it for more and more projects. It&rsquo;s good advice, and it&rsquo;s often how Clojure has crept into Java shops so far (as opposed to those fast-moving small shops that already have a tendency toward polyglot development).</p>
+
+<p>I didn&rsquo;t feel anyone had really talked about how radical Clojure seems to a conservative &ldquo;enterprise&rdquo; company that&rsquo;s already bought into the Java way of doing things from top-to-bottom (as indicated by the original poster&rsquo;s references to JPA and JSF). I had a couple of people ask me to turn my <a href="http://www.linkedin.com/groupItem?view=&amp;gid=1058217&amp;item=ANET%3AS%3A228031575&amp;commentID=129649205&amp;trk=NUS_RITM-title#commentID_129649205">(fairly length) response on the group</a> into a blog post, so I did, and here&rsquo;s the updated version for 2014&hellip;</p>
+
+<p>The &ldquo;enterprise&rdquo; in general is extremely conservative about change. Those companies use Java because it&rsquo;s &ldquo;safe&rdquo;: it&rsquo;s pretty much ubiquitous, it&rsquo;s been around for decades, it&rsquo;s easy to hire low-to-mid-range developers, you can outsource it relatively easily. If you have a company that&rsquo;s bought into the whole Java stack and uses Java for &ldquo;everything&rdquo;, you have a deeply entrenched company and it may be extremely difficult to bring Clojure in. You might have some success bringing Scala in &ndash; as a &ldquo;better Java&rdquo; &ndash; because Scala is less alien to Java developers and the marketing behind Scala is focused on serving the &ldquo;enterprise&rdquo; already.</p>
+
+<p>Having talked to a number of Java developers who work in big &ldquo;enterprise&rdquo; shops, one of the biggest problems is simply that the average skill level in such shops is often pretty mediocre, especially if some of the work is outsourced (and considered acceptable quality). The processes tend to be old-fashioned, the tooling tends to be years behind the bleeding edge. Even bringing Scala in can be very disruptive and the worst part is you might just end up with Java-in-Scala, without a lot of the benefits of moving to a highly expressive, (partly) functional language.</p>
+
+<p>Clojure is very alien to the average Java developer. If you have a shop full of &ldquo;average&rdquo; Java developers who have grown up only knowing &ldquo;OOP in Java&rdquo;, they will struggle really badly with the functional concepts in Clojure (and Scala &ndash; which is why you get Java-in-Scala instead of idiomatic Scala). Unlearning all those OOP habits to write effective functional code is really, really hard for a lot of people. Writing high performance idiomatic functional code can be even harder. Don&rsquo;t underestimate that difficulty! Take away objects, mutable state, variables, loops&hellip; a lot of Java developers are immediately all at sea and have no idea how to solve even basic problems. They&rsquo;ll try to bend Clojure to their OOP way of thinking and they&rsquo;ll most likely fail.</p>
+
+<p>Clojure is great for bleeding edge developers and it is also great for new developers who have not yet learned the bad habits of OOP (conflating state and identity, mutability, loss of data history / time concepts).</p>
+
+<p>Everything that everyone said in the original comment thread on LinkedIn is true: Clojure has many wonderful benefits, you can start with a small, eager team and a high profile but relatively low-risk project, and so on. But don&rsquo;t underestimate the difficulty of getting a conservative organization to switch from the COBOL of the modern era (Java) to something as radical as Clojure currently is, nor the difficulty of retraining your army of low-to-med-range Java-only programmers.</p>
+
+<p>At my company, we first took Clojure to production in mid-2011 and cross-training the team &ndash; a small group of developers eager to learn new things &ndash; is an ongoing process, slow and steady. We&rsquo;re at 22KLOC in Clojure with over 5KLOC in our test suite, and about 1KLOC of ClojureScript now. That&rsquo;s probably the equivalent of at least 80KLOC of Java (and quite likely north of 150KLOC). We&rsquo;re a small company with a very supportive management team. At this point, almost all new development is in Clojure with maintenance still continuing on the &ldquo;legacy&rdquo; code base (another factor to consider, by the way: what about your existing Java code base?). We love Clojure. It&rsquo;s made development a lot more fun. We&rsquo;re able to solve harder problems, make changes faster, leverage multi-core concurrency more effectively, and we have a much smaller code base to maintain. But we are about as far from &ldquo;enterprise&rdquo; as you can imagine, while not actually being a start-up (World Singles has been around for over a decade).</p>
+
+<p>The half dozen paragraphs above are an edited version of what I posted on LinkedIn (and slightly updated from my original blog post) but there&rsquo;s something else I wanted to cover in this post: the mindset of Clojure.</p>
+
+<p>A common question amongst folks new to Clojure, especially those who want to do web development, is &ldquo;Where are the &lsquo;batteries included&rsquo; frameworks?&rdquo;. If you come to Clojure from Ruby on Rails, you&rsquo;ll probably be surprised to see no full-stack web framework. If you come to Clojure from Java, you might be looking for something like Spring (or Hibernate). The Clojure community favors small, composable libraries over opinionated frameworks. If you want to do web development in Clojure, you can pick a library for routing, a library for basic HTTP request/response plumbing, a library for persistence, and so on, and you&rsquo;ll compose those together with your application code to build the solution you like best. For almost every task, Clojure has several libraries, each focused on doing one thing well and an expectation to &ldquo;play nicely with others&rdquo;, mostly through the idiom of building on Clojure&rsquo;s core data structures (mostly maps and vectors, but also sets and the ubiquitous sequence abstraction). For some, this is seen as a lack of structure or a lack of maturity but it&rsquo;s a very deliberate decision by the core of the Clojure community. Instead of just falling into a particular way of doing something, Clojure encourages you to pick'n'mix, focusing on the problem at hand and solving it in the most elegant way, rather than trying to shoehorn your solution into someone else&rsquo;s way of thinking.</p>
+
+<p>A couple of examples from World Singles might illustrate this. We use two different libraries for generating HTML/XML, which have very different approaches. We use <a href="https://github.com/yogthos/Selmer">Selmer</a> to generate HTML emails. We use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate XML documents that we use with 3rd party web services. Selmer takes mustache-style templates with substitutions for data structures and some embedded control structures. Hiccup takes Clojure data structures and renders them to HTML/XML. For our web service interaction, we tend to have data structures that we want to render to XML so it is more natural to annotate the data with more data and let Hiccup take care of the rendering. With our HTML emails, we want something close to HTML with a controlled set of substitutions, for member profile data etc. Similarly we use two different testing libraries for different situations. We use <a href="https://github.com/jaycfields/expectations">Expectations</a> for most of our testing because we like the language it uses: &ldquo;Expect {some conditions} to be true of {our test expression}&rdquo;. It lets us write very natural, expressive tests. However, for our WebDriver based tests (using <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a>), we prefer the more assert-based approach of Clojure&rsquo;s built-in testing library (clojure.test). These end-to-end tests are organized in a much more procedural way, asserting certain things about the state of the UI at various points in each scenario we are testing. Finally, we use two different date/time libraries: <a href="https://github.com/stackoverflow/date-clj">date-clj</a> and <a href="https://github.com/clj-time/clj-time">clj-time</a>. The former is great for interacting with data stores since it uses <code>java.util.Date</code> and supports basic date manipulation (adding / subtracting a number of time units). The latter is great for more complex date/time manipulation (midnight-based instants, periods, intervals, range checking) but is based on Joda Time and needs to be explicitly converted to/from <code>java.util.Date</code> at the boundaries.</p>
+
+<p>Clojure&rsquo;s wealth of choices can be overwhelming but it&rsquo;s also very freeing. The &ldquo;enterprise&rdquo; often wants a more proscribed way to do things, with more consistent solutions across different teams and different abilities. For more ideas on getting Clojure into your &ldquo;enterprise&rdquo; shop, take a look at <a href="http://www.youtube.com/watch?v=2WLgzCkhN2g">Neal Ford&rsquo;s Master Plan for Clojure Enterprise Mindshare Domination</a> presentation from Clojure/conj 2011.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ClojureBridge]]></title>
@@ -87,6 +120,96 @@
 <p>A reasonable question is to ask what has changed in our approach over the five years since. We&rsquo;re still using Unfuddle (in case you&rsquo;re wondering, we&rsquo;re up to ticket 6537 as I write this!), we&rsquo;re still using Git (and still loving it). Our development stack has changed, as has some of our technology.</p>
 
 <p>Over time we all migrated to Macs for development so maintaining the VM image stopped being important: everyone could have the entire development stack locally. We eventually settled on Railo instead of ColdFusion (we&rsquo;re on Railo 4.2 now), and we added MongoDB to MySQL a couple of years ago. We added some Scala code in 2010 to tackle a problematic long-running process (that did a lot of XML transformation and publishing). We added Clojure code in 2011 for a few key processes and then replaced Scala with Clojure and today Clojure is our primary language for all new development, often running inside Railo. We stopped using Reactor (we wrote a data mapper in Clojure that is very close to the &ldquo;metal&rdquo; of JDBC). Recently we stopped using MXUnit and replaced it with TestBox. We&rsquo;re slowing changing over from Selenium RC tests to WebDriver (powered by Clojure). We have about 20,000 lines of Clojure now and our CFML code base is holding steady at around 39,000 lines of Model and Controller CFCs and 45,000 lines of View cfm files.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Instrumenting Clojure for New Relic Monitoring]]></title>
+    <link href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/"/>
+    <updated>2013-05-01T20:09:04-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring</id>
+    <content type="html"><![CDATA[<p>We&rsquo;ve recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&rsquo;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&rsquo;re lucky!).</p>
+
+<p>However, we have a mixture of CFML and Clojure, running on the <a href="http://www.getrailo.org">free open source Railo server</a> so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.</p>
+
+<p>This <a href="http://blog.newrelic.com/2012/11/13/setting-up-custom-instrumentation-using-the-new-relic-java-agent/">New Relic blog post talks about custom instrumentation</a> and shows how you can use method annotations in Java to make specific function calls show up in web transaction traces. (The New Relic documentation, accessible from their monitoring console, provides more detail)</p>
+
+<p>In Java (approximately):</p>
+
+<pre><code>import com.newrelic.api.agent.Trace;
+
+public class Thing {
+
+    @Trace
+    public void someMethod() {
+        ...
+    }
+
+}
+</code></pre>
+
+<p>So how do you do the same thing in Clojure? Annotations have been supported for quite a while in Clojure but they&rsquo;re very poorly documented and they require some specialized code.</p>
+
+<p>Let&rsquo;s suppose you have this Clojure code:</p>
+
+<pre><code>(ns my-project.stuff)
+
+(defn some-func [x y z] ...)
+
+(defn another-fn [a b] ...)
+</code></pre>
+
+<p>We want to annotate both of these functions so they show up in New Relic web transaction traces. You can add annotations in a <code>deftype</code> so we have to transform our code quite a bit. First off, you&rsquo;ll need the New Relic JAR as a dependency in <code>project.clj</code>:</p>
+
+<pre><code>  :dependencies
+    [...
+     [com.newrelic.agent.java/newrelic-api "3.10.0"]
+     ...]
+</code></pre>
+
+<p>Check <a href="http://search.maven.org/#search%7Cga%7C1%7Cnewrelic-api">Maven Central</a> for the latest version! <em>As of September 26th, 2014, it was <code>3.10.0</code>.</em></p>
+
+<p>Then you need to import the <code>Trace</code> annotation:</p>
+
+<pre><code>(ns my-project.stuff
+  (:import com.newrelic.api.agent.Trace))
+</code></pre>
+
+<p>Since we need to use <code>deftype</code> we need to define an interface type for the functions we want to instrument. We also need to use Java-compatible names. Here&rsquo;s a first cut:</p>
+
+<pre><code>(definterface INR
+  (some_func [x y z])
+  (another_fn [a b]))
+</code></pre>
+
+<p>Now we can define the implementation type with the annotations. Then we&rsquo;ll need to expose a Clojure API based on that. Let&rsquo;s start by renaming our existing implementations and making them private, so we can call them from the <code>deftype</code> with minimal code changes:</p>
+
+<pre><code>(defn- some-func* [x y z] ...)
+
+(defn- another-fn* [a b] ...)
+</code></pre>
+
+<p>Now we can write our <code>deftype</code> with annotations:</p>
+
+<pre><code>(deftype NR []
+  INR
+  ;; @Trace maps to Trace {} metadata:
+  (^{Trace {}} some_func  [_ x y z] (some-func* x y z))
+  (^{Trace {}} another_fn [_ a b]   (another-fn* a b)))
+</code></pre>
+
+<p>Here we have an implementation &ndash; <code>NR</code> &ndash; of our interface &ndash; <code>INR</code> &ndash; which provides the two methods. Note that they ignore their first argument (<code>this</code>) because the object type is just an artifact of <code>deftype</code> for us to add the annotations. Finally, we can reimplement our original API in terms of the new type. In order to do that, we need an instance of our type, and to avoid classloader issues, we&rsquo;ll create a new instance in each call. <em>In my original blog post I suggested using a private singleton but later discovered that caused problems with classloaders sometimes.</em></p>
+
+<p>And finally here is our original API reimplemented in a traceable way:</p>
+
+<pre><code>(defn some-func  [x y z] (.some_func (NR.) x y z))
+
+(defn another-fn [a b]   (.another_fn (NR.) a b))
+</code></pre>
+
+<p>Now you just need to start your web application container with the JVM option <code>-javaagent:/path/to/newrelic.jar</code> (which is your licensed JAR file downloaded from your monitoring console, not the one pulled in by Leiningen based on the dependency we added above!).</p>
+
+<p>When you drill into web transaction traces, you should see <code>my_project.stuff.NR.some_func</code> and <code>my_project.stuff.NR.another_fn</code> entries in it!</p>
 ]]></content>
   </entry>
   
