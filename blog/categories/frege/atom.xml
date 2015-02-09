@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Frege | An Architect's View]]></title>
+  <link href="http://seancorfield.github.io/blog/categories/frege/atom.xml" rel="self"/>
+  <link href="http://seancorfield.github.io/"/>
+  <updated>2015-02-09T00:52:06-08:00</updated>
+  <id>http://seancorfield.github.io/</id>
+  <author>
+    <name><![CDATA[Sean Corfield]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Frege (and Clojure)]]></title>
+    <link href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/"/>
+    <updated>2015-02-13T02:32:18-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho'!). I also spent some time with Go last year (don&rsquo;t like it).</p>
+
+<p>The Elm language is really nice &ndash; and useful for building interactive browser-based applications (and games). I&rsquo;ve been meaning to blog about it for quite a while, and I hope to get around to that in due course. Elm is sort of inspired by Haskell, and that&rsquo;s really what this blog post is about. Sort of.<!-- more --></p>
+
+<p>Haskell and I have a strange relationship. I really liked Haskell when it appeared in the early 90&rsquo;s. I hoped it would finally be the language to help Functional Programming go mainstream (I&rsquo;d been dabbling with FP for about a decade by then). It didn&rsquo;t. Sigh. But I continued to dabble with FP &ndash; and Haskell &ndash; on and off (mostly off) for another couple of decades. I&rsquo;ve occasionally blogged about Haskell (yes, on my old ColdFusion-focused blog it used to crop up about once a year), and I&rsquo;ve always wanted to be able to <em>use</em> Haskell for something more than just playing around. For a long, long time tho', my programming life has been tied to the JVM, for better or worse, and Haskell&rsquo;s standalone nature has meant that I haven&rsquo;t been able to integrate it into my daily stack.</p>
+
+<p>That tie to the JVM is why I learned Groovy, Scala, Clojure &ndash; and took them all to production &ndash; but haven&rsquo;t really been able to get deeply into Python (much as I like it)&hellip; or poor old Haskell, despite now decades of toying with it.</p>
+
+<p>Fortunately for me, Ingo Wechsung likes Haskell enough that he created the <a href="http://www.frege-lang.org">Frege programming language</a> which is &ldquo;a <strong>pure</strong> functional programming language for the JVM in the spirit of Haskell&rdquo;. It&rsquo;s sufficiently similar to Haskell &ndash; see <a href="https://github.com/Frege/frege/wiki/Differences-between-Frege-and-Haskell">Differences between Frege and Haskell</a> &ndash; that many people consider Frege to be &ldquo;Haskell for the JVM&rdquo;. This makes me happy because I can finally start to use Haskell (sort of) as part of my daily stack and therefore <em>really learn it</em>! Finally!</p>
+
+<p>So why is this post titled <strong>Frege (and Clojure)</strong>?</p>
+
+<p>Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure&rsquo;s build tool. So I created <a href="https://github.com/seancorfield/lein-fregec"><code>lein-fregec</code></a>, a Frege plugin for Leiningen, that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.</p>
+
+<p>Today I released version 3.22.324 (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
+
+<p>Here&rsquo;s the Frege code:</p>
+
+<pre><code>module Fibonacci where
+
+-- lazy infinite sequence of Fibonacci numbers starting with a, b:
+fibs a b = a : fibs b (a + b)
+
+-- lazy infinite sequence of Fibonacci numbers (0, 1, 1, 2, 3, ...):
+fibonacci = fibs 0 1
+
+-- let Frege infer the types here (it'll be Int -&gt; Int):
+fibn n = head $ drop n $ fibonacci
+
+-- Clojure uses Long by default so this is our public API:
+fib :: Long -&gt; Long
+fib n = Int.long $ fibn (Long.int n)
+</code></pre>
+
+<p>This declares a module (class in the Java bytecode) called <code>Fibonacci</code> which contains four functions. Even tho' Frege is a (very) strongly typed language, you can often omit the types as it will infer them for you. Starting at the bottom, we have <code>fib</code> which is declared to take a <code>Long</code> and return a <code>Long</code> &ndash; and will be compiled down to a static method on the <code>Fibonacci</code> class and therefore easily callable from Clojure (or Java). It casts its argument <code>n</code> to an integer, calls <code>fibn</code> on it, and then casts the result to a <code>Long</code> to return it to Clojure. <code>f $ g x</code> is shorthand for <code>f (g x)</code> that avoids the parentheses. <code>fibn</code>, in turn starts with the (lazy infinite) sequence of fibonacci numbers and drops the first <code>n</code> of them (the sequence starts with zero, but I&rsquo;m treating one as the &ldquo;first&rdquo; number) and then returns the first of what&rsquo;s left (the <code>head</code>). Again <code>$</code> means we don&rsquo;t have to write <code>head (drop n (fibonnaci))</code>. The <code>fibonacci</code> function takes no arguments and just calls <code>fibs</code> with the seed values of zero and one. <code>fibs</code> takes two arguments and returns a sequence with the first argument followed by the fibonacci sequence that starts with the second argument. Frege, like Haskell, is a non-strict (lazy) language so <code>fibs</code> isn&rsquo;t really a recursive call, even tho' it looks like it ought to blow the stack. Instead, when it is called, it returns a list whose first element is (the value of) <code>a</code> and whose remaining elements will be evaluated as needed &ndash; or rather <em>if needed</em>. Technically, it doesn&rsquo;t even evaluate <code>a</code> unless you actually refer to the value.</p>
+
+<p>What that means is that when <code>fib</code> is called, the cast (from <code>Int</code> to <code>Long</code>) forces evaluation of the call to <code>fibn</code>, which in turn asks for the <code>head</code> of &hellip; the sequence we get by dropping the first <code>n</code> elements of &hellip; that lazy infinite sequence. So we construct the first <code>n + 1</code> elements of the list and then we look at the last one of those, which forces the calculation of that value (yes, the additions are deferred until the value is needed!). We write simple, obvious code that looks like it might be very inefficient but Frege ensures that only the values we actually need are ever calculated &ndash; and because of the way the sequence is constructed from previous elements, it means that once we&rsquo;ve calculated the <em>nth</em> number, all the previous ones are essentially calculated and cached for us. This is possible because our functions are <strong>pure</strong> (no side effects).</p>
+
+<p>What about the Clojure code? Since Frege compiles modules to classes and certain functions (with basic Java type signatures) to static methods, we simply import the compiled class and call the function we want:</p>
+
+<pre><code>(ns example.core
+  (:import Fibonacci))
+
+... (Fibonacci/fib 13) ...
+</code></pre>
+
+<p>We can even play with the code from the REPL:</p>
+
+<pre><code>$ lein do fregec, repl
+...
+example.core=&gt; (Fibonacci/fib 11)
+89
+example.core=&gt; (Fibonacci/fib 42)
+267914296
+example.core=&gt; 
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
