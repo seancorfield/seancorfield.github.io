@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2015-02-09T01:05:10-08:00</updated>
+  <updated>2015-02-09T16:56:40-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -32,7 +32,7 @@
 
 <p>Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure&rsquo;s build tool. So I created <code>lein-fregec</code>, a <a href="https://github.com/seancorfield/lein-fregec">Frege plugin for Leiningen</a>, that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.</p>
 
-<p>Today I released version 3.22.324 (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
+<p>Today I released version <del>3.22.324</del> <strong>3.22.367-i</strong> (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
 
 <p>Here&rsquo;s the Frege code:</p>
 
