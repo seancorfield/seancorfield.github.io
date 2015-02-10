@@ -19,7 +19,7 @@ So why is this post titled **Frege (and Clojure)**?
 
 Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure's build tool. So I created `lein-fregec`, a [Frege plugin for Leiningen](https://github.com/seancorfield/lein-fregec), that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.
 
-Today I released version 3.22.324 (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use `lein-fregec` for pure Frege projects as well as Clojure / Frege projects. Let's take a look at the mixed language one.
+Today I released version ~~3.22.324~~ **3.22.367-i** (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use `lein-fregec` for pure Frege projects as well as Clojure / Frege projects. Let's take a look at the mixed language one.
 
 Here's the Frege code:
 
