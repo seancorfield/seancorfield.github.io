@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | An Architect's View]]></title>
+  <link href="http://seancorfield.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://seancorfield.github.io/"/>
+  <updated>2015-02-09T16:56:40-08:00</updated>
+  <id>http://seancorfield.github.io/</id>
+  <author>
+    <name><![CDATA[Sean Corfield]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Some Thoughts on Java 8]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/"/>
+    <updated>2014-06-20T17:58:34-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8</id>
+    <content type="html"><![CDATA[<p><em>Originally posted on <a href="https://plus.google.com/u/0/+SeanCorfield_A/posts/dTiYLDXV5AV">Google Plus</a> on June 14th, 2014.</em></p>
+
+<p><strong>Why Java 8 might win me back&hellip;</strong></p>
+
+<p>I first started doing Java development in 1997. I was pretty invested in this &ldquo;new&rdquo; technology after being initially skeptical with my strong C++ background. I even wrote an editorial in a C++ journal about &ldquo;the new kid on the block&rdquo;, casting aspersions as to whether it had what it would take to become popular. Over time, Java became the juggernaut of corporate development and I actually found it quite refreshing after C++&rsquo;s somewhat obtuse syntax and complexities: Java was a simple language by comparison, with a well-structured, modular library.</p>
+
+<p>At least, it started out that way.<!-- more --></p>
+
+<p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho'. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
+
+<p>As far as I was concerned, Java had lost its way and become a bloated, verbose language that acted as a nursemaid to mediocre enterprise developers. I vowed I&rsquo;d never write Java again and took every opportunity to tell recruiters that whenever they contacted me with great opportunities for Java architect roles.</p>
+
+<p>I went off to Groovy, then Scala, then Clojure. And there I&rsquo;ve stayed for the last three or four years.</p>
+
+<p>When Java 8 was first getting press, I was very skeptical: how could they bring the elegance and ease of functional programming to a language so buried in boilerplate and a verbose, simplistic type system? I liked the simplicity of Groovy (and its dynamic approach to typing), I liked the elegance of Scala (even tho' I found the quirks of its type system and slow compilation to be significant drawbacks), and I really liked Clojure&rsquo;s combination of elegance, simplicity, and dynamic typing.</p>
+
+<p>But, at World Singles, we run our dating platform on the JVM and so an upgrade to Java 8 was inevitable to take advantage of the improvements in heap management and garbage collection. Since I was testing everything on the new JVM, I figured I might as well take a look at Java&rsquo;s new language features&hellip;</p>
+
+<p>And I was pleasantly surprised! Streams providing lazy/efficient map, filter, and reduce. Optional providing a way out of the null-checking tar pit of typical Java code. Lambda expressions providing a huge improvement in expressiveness and conciseness &ndash; compared to the ugly anonymous classes and single-method interfaces we&rsquo;d had to put up with before. All those new functional interfaces. Method references. A lot of improvements in the type system and type inference.</p>
+
+<p>In many ways, Java 8 is a whole new language. It&rsquo;s still fairly verbose but its support for functional programming is actually not bad at all. There are still no immutable collections &ndash; maybe Java 9 will address that &ndash; but streams, lambdas, etc make a huge difference in what you can do with relative ease.</p>
+
+<p>I think I can safely say that I would no longer rather fall on a sword than program in Java &ndash; as long as it&rsquo;s Java 8!</p>
+
+<p><em>p.s. No, I&rsquo;m not switching from Clojure, but now I view Java as &ldquo;palatable&rdquo; rather than &ldquo;hideous&rdquo;.</em></p>
+]]></content>
+  </entry>
+  
+</feed>

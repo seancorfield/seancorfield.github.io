@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Frege (and Clojure) - An Architect's View</title>
+  <meta name="author" content="Sean Corfield">
+
+  
+  <meta name="description" content="I&rsquo;ve often said that I try to follow The Pragmatic Programmer&rsquo;s advice to learn a new language every year. I don&rsquo;t always achieve &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">An Architect's View</a></h1>
+  
+    <h2>Clojure, Software Design, Frameworks and more...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:seancorfield.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Frege (and Clojure)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-13T02:32:18-08:00" pubdate data-updated="true">Feb 13<span>th</span>, 2015</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://seancorfield.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho&#8217;!). I also spent some time with Go last year (don&rsquo;t like it).</p>
+
+<p>The Elm language is really nice &ndash; and useful for building interactive browser-based applications (and games). I&rsquo;ve been meaning to blog about it for quite a while, and I hope to get around to that in due course. Elm is sort of inspired by Haskell, and that&rsquo;s really what this blog post is about. Sort of.<!-- more --></p>
+
+<p>Haskell and I have a strange relationship. I really liked Haskell when it appeared in the early 90&rsquo;s. I hoped it would finally be the language to help Functional Programming go mainstream (I&rsquo;d been dabbling with FP for about a decade by then). It didn&rsquo;t. Sigh. But I continued to dabble with FP &ndash; and Haskell &ndash; on and off (mostly off) for another couple of decades. I&rsquo;ve occasionally blogged about Haskell (yes, on my old ColdFusion-focused blog it used to crop up about once a year), and I&rsquo;ve always wanted to be able to <em>use</em> Haskell for something more than just playing around. For a long, long time tho&#8217;, my programming life has been tied to the JVM, for better or worse, and Haskell&rsquo;s standalone nature has meant that I haven&rsquo;t been able to integrate it into my daily stack.</p>
+
+<p>That tie to the JVM is why I learned Groovy, Scala, Clojure &ndash; and took them all to production &ndash; but haven&rsquo;t really been able to get deeply into Python (much as I like it)&hellip; or poor old Haskell, despite now decades of toying with it.</p>
+
+<p>Fortunately for me, Ingo Wechsung likes Haskell enough that he created the <a href="http://www.frege-lang.org">Frege programming language</a> which is &ldquo;a <strong>pure</strong> functional programming language for the JVM in the spirit of Haskell&rdquo;. It&rsquo;s sufficiently similar to Haskell &ndash; see <a href="https://github.com/Frege/frege/wiki/Differences-between-Frege-and-Haskell">Differences between Frege and Haskell</a> &ndash; that many people consider Frege to be &ldquo;Haskell for the JVM&rdquo;. This makes me happy because I can finally start to use Haskell (sort of) as part of my daily stack and therefore <em>really learn it</em>! Finally!</p>
+
+<p>So why is this post titled <strong>Frege (and Clojure)</strong>?</p>
+
+<p>Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure&rsquo;s build tool. So I created <code>lein-fregec</code>, a <a href="https://github.com/seancorfield/lein-fregec">Frege plugin for Leiningen</a>, that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.</p>
+
+<p>Today I released version <del>3.22.324</del> <strong>3.22.367-i</strong> (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
+
+<p>Here&rsquo;s the Frege code:</p>
+
+<pre><code>module Fibonacci where
+
+-- lazy infinite sequence of Fibonacci numbers starting with a, b:
+fibs a b = a : fibs b (a + b)
+
+-- lazy infinite sequence of Fibonacci numbers (0, 1, 1, 2, 3, ...):
+fibonacci = fibs 0 1
+
+-- let Frege infer the types here (it'll be Int -&gt; Int):
+fibn n = head $ drop n $ fibonacci
+
+-- Clojure uses Long by default so this is our public API:
+fib :: Long -&gt; Long
+fib n = Int.long $ fibn (Long.int n)
+</code></pre>
+
+<p>This declares a module (class in the Java bytecode) called <code>Fibonacci</code> which contains four functions. Even tho&#8217; Frege is a (very) strongly typed language, you can often omit the types as it will infer them for you. Starting at the bottom, we have <code>fib</code> which is declared to take a <code>Long</code> and return a <code>Long</code> &ndash; and will be compiled down to a static method on the <code>Fibonacci</code> class and therefore easily callable from Clojure (or Java). It casts its argument <code>n</code> to an integer, calls <code>fibn</code> on it, and then casts the result to a <code>Long</code> to return it to Clojure. <code>f $ g x</code> is shorthand for <code>f (g x)</code> that avoids the parentheses. <code>fibn</code>, in turn starts with the (lazy infinite) sequence of fibonacci numbers and drops the first <code>n</code> of them (the sequence starts with zero, but I&rsquo;m treating one as the &ldquo;first&rdquo; number) and then returns the first of what&rsquo;s left (the <code>head</code>). Again <code>$</code> means we don&rsquo;t have to write <code>head (drop n (fibonnaci))</code>. The <code>fibonacci</code> function takes no arguments and just calls <code>fibs</code> with the seed values of zero and one. <code>fibs</code> takes two arguments and returns a sequence with the first argument followed by the fibonacci sequence that starts with the second argument. Frege, like Haskell, is a non-strict (lazy) language so <code>fibs</code> isn&rsquo;t really a recursive call, even tho&#8217; it looks like it ought to blow the stack. Instead, when it is called, it returns a list whose first element is (the value of) <code>a</code> and whose remaining elements will be evaluated as needed &ndash; or rather <em>if needed</em>. Technically, it doesn&rsquo;t even evaluate <code>a</code> unless you actually refer to the value.</p>
+
+<p>What that means is that when <code>fib</code> is called, the cast (from <code>Int</code> to <code>Long</code>) forces evaluation of the call to <code>fibn</code>, which in turn asks for the <code>head</code> of &hellip; the sequence we get by dropping the first <code>n</code> elements of &hellip; that lazy infinite sequence. So we construct the first <code>n + 1</code> elements of the list and then we look at the last one of those, which forces the calculation of that value (yes, the additions are deferred until the value is needed!). We write simple, obvious code that looks like it might be very inefficient but Frege ensures that only the values we actually need are ever calculated &ndash; and because of the way the sequence is constructed from previous elements, it means that once we&rsquo;ve calculated the <em>nth</em> number, all the previous ones are essentially calculated and cached for us. This is possible because our functions are <strong>pure</strong> (no side effects).</p>
+
+<p>What about the Clojure code? Since Frege compiles modules to classes and certain functions (with basic Java type signatures) to static methods, we simply import the compiled class and call the function we want:</p>
+
+<pre><code>(ns example.core
+  (:import Fibonacci))
+
+... (Fibonacci/fib 13) ...
+</code></pre>
+
+<p>We can even play with the code from the REPL:</p>
+
+<pre><code>$ lein do fregec, repl
+...
+example.core=&gt; (Fibonacci/fib 11)
+89
+example.core=&gt; (Fibonacci/fib 42)
+267914296
+example.core=&gt; 
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-02-13T02:32:18-08:00" pubdate data-updated="true">Feb 13<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/frege/'>frege</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/25/the-strange-loop-2014/" title="Previous Post: The Strange Loop 2014">&laquo; The Strange Loop 2014</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+  <p><em>Looking for my old blog at <a href="http://corfield.org/blog/index.cfm">corfield.org</a>
+      or perhaps the <a href="http://framework-one.github.io">Framework One (FW/1)</a> blog?</em></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/02/13/frege-and-clojure/">Frege (and Clojure)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/25/the-strange-loop-2014/">The Strange Loop 2014</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/23/clojure-in-the-enterprise/">Clojure in the Enterprise?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/20/powered-by-javascript/">Powered by JavaScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/21/clojurebridge/">ClojureBridge</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+  
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'seancorfield',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+<section>
+  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://www.linkedin.com/in/seancorfield">
+      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
+    </a>
+  </h1>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Sean Corfield -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seancorfield';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

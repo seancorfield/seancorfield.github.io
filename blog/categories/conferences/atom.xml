@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Conferences | An Architect's View]]></title>
+  <link href="http://seancorfield.github.io/blog/categories/conferences/atom.xml" rel="self"/>
+  <link href="http://seancorfield.github.io/"/>
+  <updated>2015-02-09T16:56:40-08:00</updated>
+  <id>http://seancorfield.github.io/</id>
+  <author>
+    <name><![CDATA[Sean Corfield]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Strange Loop 2014]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/"/>
+    <updated>2014-09-25T18:32:18-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014</id>
+    <content type="html"><![CDATA[<p>Last week I attended <a href="https://thestrangeloop.com/">The Strange Loop</a> in St Louis. I attended in 2011 and was blown away. I missed 2012 but attended again in 2013 and was blown away once more. I already have 2015&rsquo;s dates in my calendar. How was 2014?<!-- more --></p>
+
+<p>Yup, blown away again. Alex Miller and his team have created an iconic event that crosses technology boundaries and bridges between academia and industry, to bring some of the brightest minds together to share their ideas. And for attendees too, the opportunity to meet a huge variety of our peers &ndash; from novice to expert &ndash; in all different technologies, creates an atmosphere of excitement, wonder, and enjoyment.</p>
+
+<p>All the sessions were recorded and have been posted to YouTube. Link at the bottom of this post!</p>
+
+<p>Here are the sessions I attended with brief notes so you can see why I love this conference:</p>
+
+<ul>
+<li>Joe Armstrong &ndash; The Mess We&rsquo;re In. The creator of Erlang focused on the overwhelming complexity of the systems we are building today, and how they got that way, with a good dose of humor and some quantum mechanics.</li>
+<li>Jessica Kerr &ndash; Concurrency Options on the JVM. Jessica took us on a whirlwind tour of Clojure, Scala, Java and what they offer the developer (futures, agents, actors, parallel streams, channels, executors etc), with a whimsical (but consistent) analogy of traffic patterns in JVM-town. A great overview with enough detail to be very useful!</li>
+<li>Ambrose Bonnaire-Sargeant &ndash; Typed Clojure in Practice. We&rsquo;re using core.typed a little at work so I wanted to hear how others were using it in a production environment. After starting out with a practical example of eliminating bugs through gradual typing, Ambrose walked through a case study of CircleCI which has applied core.typed to a substantial amount of their code. It greatly encouraged me!</li>
+<li>Julie Lavoie &ndash; Analyzing Rap Lyrics with Python. This sounded so off-the-wall I was intrigued &ndash; and I&rsquo;m actually a huge fan of early West Coast rap music (although I find the misogyny very hard to take which, again, was something that intrigued me about the talk). Julie&rsquo;s talk looked at numerous pitfalls in the process end-to-end as well as the difficulties in establishing good metrics of sexism. Musical excerpts, lots of data, lots of questions. A fascinating topic!</li>
+<li>Amanda Laucher, Paul Snively &ndash; Type Systems: The Good, Bad, and Ugly. Honest, opinionated, and somewhat controversial, Amanda and Paul took us on a tour of type systems available in current and future languages. My takeaway: if you don&rsquo;t like static typing, you have probably only used languages with bad or ugly type systems &ndash; but we&rsquo;re not quite there yet in terms of capabilities&hellip;</li>
+<li>Brian McKenna &ndash; Idris: Practical Dependent Types With Practical Examples. &hellip;which was a nice segue into Brian&rsquo;s talk which showed us some of the things that a truly powerful type system can do for us. Idris isn&rsquo;t production-ready yet but it&rsquo;s an exciting glimpse into a future where type systems are powerful, really useful, and relatively painless to use. I&rsquo;ll need to watch this one a few more times, I think.</li>
+<li>Leah Hanson &ndash; How Julia Goes Fast. I&rsquo;m currently reading <a href="https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks">Seven More Languages in Seven Weeks</a> and one of those seven is Julia. I haven&rsquo;t gotten to that chapter yet but I wanted to hear more about how it achieves near-C level performance. Leah took us through various implementation details, showing what Julia was capable of. Her passion for Julia was contagious and I&rsquo;m really looking forward to that chapter now!</li>
+<li>Stefanie Schirmer &ndash; Dynamic Programming at Ease: with Grammars, Algebras, Products. Stefanie showed us a very powerful set of abstractions that can tame a very difficult type of programming algorithm, with reference to real-world analysis of RNA molecules. Like Brian&rsquo;s talk on Idris, I&rsquo;ll need to watch this a few more times to soak it all in.</li>
+<li>Stephen Wolfram &ndash; Inside the Wolfram Language. Wolfram is a system that has grown to encompass a huge amount of knowledge across many different disciplines, and Stephen was able to give us a preview of their brand new &ldquo;programming language&rdquo; that can query their (very impressive) knowledge engine. Highly entertaining &ndash; make sure you watch the video!</li>
+<li>Eleanor McHugh &ndash; Fun with Go (Unsession). Several friends have raved about Go so, before the conference, I installed it and worked through the built-in &ldquo;Tour of Go&rdquo; and learned a little of the language. In fifty minutes of fun and increasingly wild and wacky code, Eleanor taught me a lot more of Go than the official tour. I found myself repeatedly thinking &ldquo;Wow! I didn&rsquo;t know Go could do that!&rdquo;.</li>
+<li>Nada Amin &ndash; Programming Should Eat Itself. Meta-turtles, all the way down. Nada explored reflective metaprogramming. I wasn&rsquo;t sure of the &ldquo;why&rdquo; behind this talk, but she proved that the way to really understand an academic computer science paper is to implement the ideas in it yourself.</li>
+<li>Evan Czaplicki &ndash; Controlling Space and Time: understanding the many formulations of FRP. Evan created the <a href="http://elm-lang.org">Elm programming language</a> as an embodiment of Functional Reactive Programming &ldquo;done right&rdquo;, so I was very interested to get the &ldquo;big picture&rdquo; on this space. Great background for the different types of FRP out there.</li>
+<li>Bodil Stokke &ndash; PureScript (Maybe This Time We Get JavaScript Right). Bodil was highly entertaining as always, this time live programming a game in PureScript, a Haskell-like language that compiled down to JavaScript. Although it has many surface similarities to Elm, it is a much more lightweight system, which she needed for her use case. Interestingly, she has built a library in PureScript that provides some of Elm&rsquo;s elegant Signal semantics (which she will hopefully open source soon!).</li>
+<li>Rich Hickey &ndash; Transducers. Drawing parallels with how we describe processes in the real world &ndash; as a series of steps to be performed together &ndash; Rich showed how transducers allow us to describe processes in Clojure, without needing to specify the format of inputs, outputs, or intermediate results. Coming soon to a Clojure release near you (it&rsquo;s in 1.7.0-alpha2 already).</li>
+<li>Ian Davis &ndash; The challenges and benefits of a functional reactive frontend. Ian described Prismatic&rsquo;s experiences with a large-scale interactive web application that is built with ClojureScript and Om on top of Facebook&rsquo;s React.js framework. Real world FRP at scale.</li>
+<li>Heather Miller &ndash; Function Passing Style: Typed, Distributed Functional Programming. The actor model allows use to perform distributed processing by sending data to nodes and getting results back. Heather talk looked at a different model where the data is distributed (rather than the processing) and you send your functions out to the data instead. Having played with distributed function execution in a cluster of Hazelcast nodes, I was left thinking &ldquo;So?&rdquo; but the emphasis on type systems and immutability means I probably missed something important in her talk so I&rsquo;ll have to watch it again.</li>
+<li>Elise Huard &ndash; Writing a Game in Haskell. I hadn&rsquo;t considered Haskell as a language for writing games but Elise used it to showcase Functional Reactive Programming as the core of her game&rsquo;s engine. She had embarked on the project for a bit of fun and she shared the whole journey with us, from initial curiosity about games, to design, to multiple implementations and the challenges and paths not taken along the way, to the finished game &ndash; and a <a href="https://leanpub.com/gameinhaskell">forthcoming book about her experiences</a>.</li>
+<li>Aditya Siram &ndash; Shen: A Sufficiently Advanced Lisp. Aditya showed us some of Shen&rsquo;s power &ndash; building on traditional Lisp values with a powerful macro system and a powerful type system &ndash; producing very elegant solutions.</li>
+</ul>
+
+
+<p>Big trends this year? Functional Reactive Programming (in the real world), and Advanced Type Systems (coming soon?).</p>
+
+<p>One final note on the conference: I picked topics that interested / intrigued me without paying much attention to the speakers (because, with a handful of exceptions, I don&rsquo;t recognize most of the speakers listed anyway!) and now I see that over half of the sessions I attended had women speakers. As I noted last year, Alex Miller and his team did a terrific job of <a href="http://corfield.org/blog/post.cfm/the-strange-loop-2013">ensuring a diverse speaker lineup</a> &ndash; and did it again this year! I&rsquo;ve been reading some great blog posts from people who attended the conference this year on the <a href="https://thestrangeloop.com/news/doubling-down-on-diversity">diversity scholarships</a> that were set up. It shows that we <em>can</em> change things if we try. We still have a long way to go for equality in tech, but The Strange Loop is a great model for us in that area.</p>
+
+<p>You can watch all of these sessions for free now, on <a href="https://www.youtube.com/channel/UC_QIfHvN9auy2CoOdSfMWDw">The Strange Loop 2014 YouTube channel</a>!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Powered by JavaScript]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/"/>
+    <updated>2014-09-20T20:03:15-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript</id>
+    <content type="html"><![CDATA[<p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&rsquo;t JavaScript?<!-- more --></p>
+
+<p>I&rsquo;m fairly public about my dislike of JavaScript &ndash; and it&rsquo;s an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript&rsquo;s flaws have led to so much innovation in both the compile-to-JS (&ldquo;altJS&rdquo;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p>
+
+<p>The conference opened with keynotes from Dan Shaw about Node.js and Tomomi Imura about the state of the mobile web. Tomomi&rsquo;s keynote was particularly interesting, as she went through the evolution of mobile browsers in detail, looking at features and releases of Chrome, Firefox, Opera, Safari, and Internet Explorer, as well as some of the politics behind the modern &ldquo;browser wars&rdquo;. I always enjoy a keynote that teaches me something practical I can use as well as providing inspiration, and Tomomi scored on both.</p>
+
+<p>Since this was the first year of the conference, I had signed up long before I knew how the schedule would pan out and as the number of speakers announced continued to grow, I was wondering how they would fit everyone into a one day event. The answer turned out to be three tracks of seven sessions each, which made for a lot of difficult choices. Here&rsquo;s what I chose to attend:</p>
+
+<ul>
+<li>Steven Luscher &ndash; Decomplexifying UI Code with React. Steven did a great job of explaining the motivations and concepts behind React.js. We&rsquo;re just starting to use React.js at World Singles, for an internal application, albeit wrapped up in a ClojureScript framework and I haven&rsquo;t had to suffer through the pain of large-scale JS development, so it was very interesting to hear <em>why</em> this approach helps &ndash; declarative and reactive.</li>
+<li>Josh Powell &ndash; Unravelling the Knot: Client &amp; Testable Client Side Code. One of the authors of &ldquo;<a href="http://www.manning.com/mikowski/">Single Page Web Applications</a>&rdquo;, Josh walked us through a relatively simple example that showed how data dependencies quickly build up and can lead to bugs and offered us a design pattern to address this: a central data store that is updated by all components and which shifts dependencies from a web of component-to-component to a hub'n'spoke architecture of component-to-data. For me it was a nice follow-on from Steven&rsquo;s talk which also dealt with the complexity of dependencies.</li>
+<li>Sarah Groff-Palermo &ndash; Art.js: Transfigure Data to Create 21st Century Art. Time for a complete shift of gears with a talk that covered emotion and whimsy and what can be grown out of fragmented data with a variety of JS tools and frameworks and some creativity. It was a very engaging talk and it inspires me to be more experimental with some of the visualization tools that I&rsquo;d like to play with but have previously been intimidated by.</li>
+<li>Brian Lonsdorf &ndash; Fact, Fiction, &amp; Functional Programming. After lunch, Brian took us on a whirlwind tour of monads, functors, and point-free programming in JavaScript, using a web application written in a nearly pure functional style. I was impressed at how far this sort of thing has come in JS, with things like <a href="https://github.com/CrossEye/ramda">Project Ramda</a>!</li>
+<li>Mike Mikowksi &ndash; Dump Less and SASS: Dynamic CSS Manipulation with JavaScript. This was the real dud of the day. The other author of Single Page Web Applications, Mike was far more interested in telling us how clever he was and how lucky we were to have chosen his session (seriously dude?) than actually showing us anything useful. He made at least one sexist joke, and several other very dodgy comments, and came off as an arrogant jerk. I&rsquo;d heard complaints about his arrogant, sexist behavior in the bar the previous night but was still intrigued by the topic &ndash; unfortunately it was a waste of time.</li>
+<li>Trek Glowacki &ndash; Single Page Applications: The Web&rsquo;s Horseless Carriage. After the break, the conference got back on track with a fascinating look at the evolution of web applications and how we talk about them, positing that &ldquo;Single Page Web Application&rdquo; is a term that indicates we don&rsquo;t really have a handle on what this space is really about &ndash; and what it will become.</li>
+<li>Marcus Kobler &ndash; React.js and the Importance of Isomorphic SPAs. For the last session of the day, I chose another React.js session and it was another good choice. Marcus dug into React.js in more detail than Steven so it was a good progression and I hadn&rsquo;t heard about &ldquo;Isomorphic JavaScript&rdquo; before so that was yet another topic to Google and add pages to <a href="http://getpocket.com/">Pocket</a> for later reading!</li>
+</ul>
+
+
+<p>Manning made an excellent choice to close out the conference with a roundtable of JavaScript experts playing what turned out to be a hilarious version of The Newlywed Game which touched on the good and the bad in JavaScript.</p>
+
+<p>In addition, Manning set up a comprehensive library of their books in the lobby of the conference and selected various tweets they liked throughout the day to award free books. I picked up &ldquo;Java 8 in Action&rdquo; for one of my tweets &ndash; and I&rsquo;d signed up early enough to get &ldquo;Single Page Web Applications&rdquo; as well as a registration gift so I was very happy with that.</p>
+
+<p>Watch out for Powered by JavaScript 2015!</p>
+]]></content>
+  </entry>
+  
+</feed>

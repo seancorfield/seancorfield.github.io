@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ClojureBridge - An Architect's View</title>
+  <meta name="author" content="Sean Corfield">
+
+  
+  <meta name="description" content="Adapted from a post I made on my old blog in January, 2014, about the first few workshops being planned. I&rsquo;ve been an advocate of diversity in &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2014/06/21/clojurebridge">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">An Architect's View</a></h1>
+  
+    <h2>Clojure, Software Design, Frameworks and more...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:seancorfield.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ClojureBridge</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-21T19:39:03-07:00" pubdate data-updated="true">Jun 21<span>st</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://seancorfield.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>Adapted from a post I made on my old blog in January, 2014, about the first few workshops being planned.</em></p>
+
+<p>I&rsquo;ve been an advocate of diversity in IT for a long time. I&rsquo;m very pleased to work in a company that has an above average ratio of female to male employees, as well as very diverse cultural backgrounds amongst our staff. In most tech communities, diversity is pretty low. It&rsquo;s why organizations like <a href="http://railsbridge.org/">RailsBridge</a> and <a href="http://womenwhocode.com/">Women Who Code</a> and numerous others exist. The lack of diversity hurts us all because a homogeneous community doesn&rsquo;t have diversity of thought either: <a href="https://www.google.com/search?q=diverse+teams+outperform">diverse teams outperform homogeneous teams</a>.<!-- more --></p>
+
+<p>Back in 2012, I became very bothered by the lack of diversity in the Clojure community &ndash; it&rsquo;s a lot less diverse than several other communities I&rsquo;ve experienced &ndash; and after talking to a few people, I reached out to a former colleague from Macromedia, <a href="http://en.wikipedia.org/wiki/Sarah_Allen_(software_developer">Sarah Allen</a>) &ndash; president of RailsBridge, to see what it would take to get something started to address it. I continued talking to people about the idea of ClojureBridge and was thrilled when Bridget Hillyer, Lynn Grogan, Maggie Litton and others took up the torch to make it happen!</p>
+
+<p>Early in 2014, I was thrilled to announce that ClojureBridge had become a reality: you could <a href="http://clojurebridge.org/">sign up on the web site</a> to get involved, you could <a href="https://groups.google.com/forum/#!forum/clojurebridge-workshops">join the ClojureBridge Workshops mailing list</a>. And hundreds of people have done that!</p>
+
+<p>ClojureBridge has already run four workshops: Durham, NC; San Francisco, CA; Brisbane, Australia; Minneapolis, MN. More workshops are being planned in Melbourne, Australia; Edinburgh, Scotland; Chicago, IL; Portland, OR; Austin, TX. It&rsquo;s incredible to see the level of interest in this effort to introduce Clojure to more people, and help improve diversity in our community.</p>
+
+<p>With four successful workshops behind us now, we&rsquo;re working to update the <a href="https://github.com/ClojureBridge/curriculum">curriculum</a> to incorporate lessons we&rsquo;ve learned, so that future workshops can be a better experience for students.</p>
+
+<p>The ClojureBridge web site says:</p>
+
+<blockquote><p>ClojureBridge aims to increase diversity within the Clojure community by offering free, beginner-friendly workshops for women.</p>
+
+<p>Our students range from those completely new to programming to professional developers who want to learn more about Clojure.</p>
+
+<p>ClojureBridge is inspired by RailsBridge, and closely models the RailsBridge philosophy.</p></blockquote>
+
+<p>A typical workshop description says:</p>
+
+<blockquote><p>This workshop is intended to reach out to women who are interested in learning programming with Clojure. Men are welcome to come if you find a woman who wants to learn Clojure and come together. ClojureBridge is emphatically queer and trans* friendly.</p></blockquote>
+
+<p>A common question is: why the focus on women? The answer is that there are already plenty of ways guys can learn a new programming language in an environment that is comfortable for them. The whole of IT is a comfortable space for men (and it is particularly so for white cis-het men). Since many male-dominated environments are not comfortable spaces for many women &ndash; and many other underrepresented groups &ndash; it&rsquo;s important to create a safe, friendly environment in which to encourage new people to learn technology. ClojureBridge has chosen to follow the RailsBridge model in starting out with a focus on workshops for women. I recently spoke with Dr. Kortney Ziegler, founder of <a href="http://www.transhack.org/">Trans*H4CK</a>, about the possibility of a joint workshop with ClojureBridge aimed at the transgender community. I hope to see ClojureBridge workshops run jointly with other groups that advocate for underrepresented groups in technology.</p>
+
+<p>If you&rsquo;re interested in improving diversity in IT, reach out to a group like ClojureBridge and get involved. Help organize events in your area. Together we can change the face of IT, and our community will grow and our teams will be more productive and more creative!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-21T19:39:03-07:00" pubdate data-updated="true">Jun 21<span>st</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/diversity/'>diversity</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2014/06/21/clojurebridge/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2014/06/21/clojurebridge/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/06/20/some-thoughts-on-java-8/" title="Previous Post: Some thoughts on Java 8">&laquo; Some thoughts on Java 8</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/09/20/powered-by-javascript/" title="Next Post: Powered by JavaScript">Powered by JavaScript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+  <p><em>Looking for my old blog at <a href="http://corfield.org/blog/index.cfm">corfield.org</a>
+      or perhaps the <a href="http://framework-one.github.io">Framework One (FW/1)</a> blog?</em></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/02/13/frege-and-clojure/">Frege (and Clojure)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/25/the-strange-loop-2014/">The Strange Loop 2014</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/23/clojure-in-the-enterprise/">Clojure in the Enterprise?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/20/powered-by-javascript/">Powered by JavaScript</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/06/21/clojurebridge/">ClojureBridge</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+  
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'seancorfield',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+<section>
+  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://www.linkedin.com/in/seancorfield">
+      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
+    </a>
+  </h1>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2015 - Sean Corfield -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seancorfield';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2014/06/21/clojurebridge/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2014/06/21/clojurebridge/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
