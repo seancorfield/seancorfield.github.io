@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting Started - An Architect's View</title>
+  <meta name="author" content="Sean Corfield">
+
+  
+  <meta name="description" content="Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2014/06/03/getting-started">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">An Architect's View</a></h1>
+  
+    <h2>Clojure, Software Design, Frameworks and more...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:seancorfield.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Getting Started</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-03T18:42:36-07:00" pubdate data-updated="true"></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://seancorfield.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created at World Singles as we kicked off our green field rewrite project five years ago.<!-- more --></p>
+
+<p>I&rsquo;ve been involved with World Singles for about five years now, about three and a half years as a full-time engineer. The project was a green field rewrite of a dating system the company had evolved over about a decade that, back in 2009, was running on ColdFusion 8 on Windows, and using SQL Server. The new platform soft-launched in late 2011 as we migrated a few small sites across and our full launch - migrating millions of members in the process - was May 2012. At that point we switched from &ldquo;build&rdquo; mode to &ldquo;operations&rdquo; mode, and today we maintain a large codebase that is a combination of CFML and Clojure, running on Railo 4.2 on Linux, and using MySQL and MongoDB, running partly in our East Coast data center and partly on Amazon.</p>
+
+<p>Like all projects, it&rsquo;s had some ups and downs, but overall it&rsquo;s been great: I love my team, we love working with Clojure, and we have a steady stream of interesting problems to solve, working with a large user base, on a multi-tenant, multi-lingual platform that generates millions of records of data every day. It&rsquo;s a lot of fun. And we all get to work from home.</p>
+
+<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created as we kicked the project off. Eleven if you include ticket &ldquo;zero&rdquo;.</p>
+
+<ul>
+<li><p>#0 - Choose a bug tracking / ticketing system. We chose <a href="https://unfuddle.com/">Unfuddle</a>. It&rsquo;s clean and simple. It&rsquo;s easy to use. It provides Git (and SVN) hosting. It provides notebooks (wikis), ticketing, time management, customizable &ldquo;agile&rdquo; task boards, collaboration with external users, and it&rsquo;s pleasing to the eye. I&rsquo;ve never regreted our choice of Unfuddle (even when they did a massive overhaul of the UI and it took us a week or so to get used to the radically new ticket editing workflow!).</p></li>
+<li><p>#1 - Version control. Yes, really, this was our first ticket in Unfuddle. The resolution to this ticket says:</p>
+
+<blockquote><p>Selected vcs system (git), created repository in Unfuddle, and provided detailed documentation on why git, how to set it up, how to connect to the repo and how to work with git.</p></blockquote></li>
+<li><p>And the documentation was all there in an Unfuddle notebook for the whole team. A good first step.</p></li>
+<li><p>#2 - Developer image. Once we had version control setup and documented, we needed an easy way for every developer to have a full, self-contained local development environment. We had some developers on Windows, some on OS X, some on Linux, so we created a VMWare image with all the basic development tools, a database, a standardized ColdFusion installation, with Apache properly configured etc. This established a basic working practice for everyone on the team: develop and test everything locally, commit to Git, push to Unfuddle. We could then pull the latest code down to a showcase / QA server for the business team to review, whenever we or they wanted.</p></li>
+<li><p>#3 - Project management system. Although we had bug tracking and wikis, we wanted to nail down how communication would work in practice. We created a project management mailing list for discussion threads. We created a notebook section in Unfuddle for documenting decisions and requirements. We decided to use Basecamp for more free-form evolution of business ideas. We agreed to use tickets in Unfuddle for all actionable work, and we settled on a Scrum-like process for day-to-day development, with short, regular sprints so we could get fast feedback from the business team, and they could easily see what progress we were making.</p></li>
+<li><p>#4 - General project management. Since we had agreed to use Unfuddle for time tracking, we created a ticket against which to track project management hours that didn&rsquo;t fit into any actual work tickets. We used this for the first six months of the project (and logged about 300 hours against it).</p></li>
+<li><p>#5 - Performance planning/tuning. This was mostly a placeholder (and initially focused on how to make a Reactor-based application perform better!). It was superceded by several more specific tickets, six months into the project. But it&rsquo;s one of those things we wanted on the radar early for tracking purposes.</p></li>
+<li><p>#6 - Architectural planning. Like ticket #4, this was a time tracking bucket that we used for the first six months of the project.</p></li>
+<li><p>#7 - Set up Continuous Integration. Yup, even before we got to our first actual coding ticket, as part of the early project setup, we wanted a Continuous Integration server. Whilst we were using ColdFusion for local development (prerelease builds of ACF9, at the time), we chose to use Railo 3.2 for the CI server so that we could ensure our code was cross-platform - we were still evaluating which engine to ultimately go to production with. The resolution of this ticket says:</p>
+
+<blockquote><p>Apache / Tomcat / Railo / MySQL / Transparensee / Hudson in place. Automated test run restarts Railo, reloads the DB, reloads Transparensee, cleans the Reactor project, runs all test suites and generates test results.</p></blockquote></li>
+<li><p>We developed an Ant script that stopped and started Railo, tore down and rebuilt the test database, using a canned dataset we created (with 1,000 random users), repopulated the search engine we use and cleaned up generated files, then ran our fledgling MXUnit test suite (and later our fledgling Selenium test suite).</p></li>
+<li><p>#8 - Display About us/trust. This was our first actual code ticket. The company had selected ColdBox, ColdSpring, and Reactor as our basic frameworks (yeah, no ticket for that, it was a choice that essentially predated the project &ldquo;getting started&rdquo;). This ticket was to produce a first working skeleton of the application that could actually display dynamically generated pages of content from the database. We created the skeleton of the site navigation and handlers for each section as part of this ticket. The &ldquo;trust&rdquo; in the ticket title was about showing that we really could produce basic multilingual content dynamically and show an application architecture that worked for the business.</p></li>
+<li><p>#9 - Implement resource bundles for templates. And this was also an early key requirement: so that we could support Internationalization from day one and perform Localization of each site&rsquo;s content easily.</p></li>
+<li><p>#10 - Display appropriate template for each site. This was our other key requirement: the ability to easily skin each site differently. Like #9, this was an important proof of concept to show we could support multiple sites, in multiple languages, on a single codebase, with easy customization of page layouts, content, and even forms / questions we asked.</p></li>
+</ul>
+
+
+<p>So that&rsquo;s how we got started. Bug tracking, version control, local development environment, continuous integration and the key concepts tackled first!</p>
+
+<p>A reasonable question is to ask what has changed in our approach over the five years since. We&rsquo;re still using Unfuddle (in case you&rsquo;re wondering, we&rsquo;re up to ticket 6537 as I write this!), we&rsquo;re still using Git (and still loving it). Our development stack has changed, as has some of our technology.</p>
+
+<p>Over time we all migrated to Macs for development so maintaining the VM image stopped being important: everyone could have the entire development stack locally. We eventually settled on Railo instead of ColdFusion (we&rsquo;re on Railo 4.2 now), and we added MongoDB to MySQL a couple of years ago. We added some Scala code in 2010 to tackle a problematic long-running process (that did a lot of XML transformation and publishing). We added Clojure code in 2011 for a few key processes and then replaced Scala with Clojure and today Clojure is our primary language for all new development, often running inside Railo. We stopped using Reactor (we wrote a data mapper in Clojure that is very close to the &ldquo;metal&rdquo; of JDBC). Recently we stopped using MXUnit and replaced it with TestBox. We&rsquo;re slowing changing over from Selenium RC tests to WebDriver (powered by Clojure). We have about 20,000 lines of Clojure now and our CFML code base is holding steady at around 39,000 lines of Model and Controller CFCs and 45,000 lines of View cfm files.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-03T18:42:36-07:00" pubdate data-updated="true"></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/process/'>process</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2014/06/03/getting-started/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2014/06/03/getting-started/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/" title="Previous Post: Instrumenting Clojure for New Relic Monitoring">&laquo; Instrumenting Clojure for New Relic Monitoring</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/06/20/some-thoughts-on-java-8/" title="Next Post: Some thoughts on Java 8">Some thoughts on Java 8 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+  <p><em>Looking for my old blog at <a href="http://corfield.org/blog/index.cfm">corfield.org</a>
+      or perhaps the <a href="http://framework-one.github.io">Framework One (FW/1)</a> blog?</em></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2016/01/01/where-did-2015-go/">Where Did 2015 Go?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/02/13/frege-and-clojure/">Frege (and Clojure)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/25/the-strange-loop-2014/">The Strange Loop 2014</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/23/clojure-in-the-enterprise/">Clojure in the Enterprise?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/09/20/powered-by-javascript/">Powered by JavaScript</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+  
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'seancorfield',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+<section>
+  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://www.linkedin.com/in/seancorfield">
+      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
+    </a>
+  </h1>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Sean Corfield -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seancorfield';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2014/06/03/getting-started/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2014/06/03/getting-started/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

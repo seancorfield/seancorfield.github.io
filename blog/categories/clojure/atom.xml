@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Clojure | An Architect's View]]></title>
+  <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="http://seancorfield.github.io/"/>
+  <updated>2016-01-03T15:46:42-08:00</updated>
+  <id>http://seancorfield.github.io/</id>
+  <author>
+    <name><![CDATA[Sean Corfield]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go/"/>
+    <updated>2016-01-01T11:30:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go</id>
+    <content type="html"><![CDATA[<p>I did not intend to stop blogging in 2015 but that&rsquo;s certainly what it looks like here!</p>
+
+<p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
+
+<p>Almost a year ago, I <a href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/">talked about my Leiningen plugin for Frege</a>. Back then it was version 3.22.367. That plugin is now version 3.23.450 and there&rsquo;s a Leiningen template to go with it, tracking prerelease builds of Frege which I&rsquo;ve been publishing to Sonatype&rsquo;s OSS Snapshots repository.</p>
+
+<pre><code>lein new frege myapp
+</code></pre>
+
+<p>That will generate a new, pure Frege project for you to build on. If you want a mixed Frege and Clojure project, like the original concept:</p>
+
+<pre><code>lein new frege myapp -- :with-clojure
+</code></pre>
+
+<p>I haven&rsquo;t gotten to work with Frege as much as I&rsquo;d hoped but I managed to contribute ports of two very small Haskell 2010 libraries (<code>System.Environment</code> and <code>System.Exit</code>) as well as exposing a few more pieces of Java&rsquo;s <code>Runtime</code> class in Frege&rsquo;s <code>java.lang.System</code> data type. I hope 2016 will bring a lot more Frege to my life!</p>
+
+<p>In that blog post, I also talked about learning a new language every year. I mentioned <a href="http://elm-lang.org/">Elm</a>: I&rsquo;d experimented with it quite a bit in its early days and I&rsquo;d hoped to continue experimenting, but work and life distracted me from front end concerns and I lost touch with Elm&rsquo;s evolution. All I can say is that Elm continues to go from strength to strength, and it is gaining more press inches and more visibility at conferences, which is all good. It&rsquo;s truly innovative and I want to see it succeed!</p>
+
+<p>In the past, I&rsquo;ve also blogged about almost every conference I&rsquo;ve attended so you would be forgiven for thinking I didn&rsquo;t attend any events in 2015. I was able to attend The Strange Loop and Clojure/conj this past year. I would have loved to have attended Clojure/West as <a href="http://clojurewest.org/speakers#fhanreich">my colleague Fumiko gave a talk about HoneySQL</a>. That link will evaporate when this year&rsquo;s conference comes around but you can <a href="https://www.youtube.com/watch?v=alkcjyhesjI">watch Fumiko&rsquo;s talk about HoneySQL</a> on ClojureTV. It was her first ever conference talk and she did a great job &ndash; I&rsquo;m very proud of her! Oh, she also likes Elm.</p>
+
+<p>Fumiko and I worked on a project with ClojureScript, <a href="http://reagent-project.github.io/">Reagent</a> &ndash; a ClojureScript wrapper for <a href="http://facebook.github.io/react/">React.js</a>, and <a href="https://github.com/ptaoussanis/sente">Sente</a> &ndash; core.async over WebSockets. It was a lot of fun and very interesting. It was a proof of concept but, in the end, our company decided to go with JavaScript as being more mainstream (but still with React.js so, win!).</p>
+
+<p><a href="http://www.thestrangeloop.com/">The Strange Loop</a> was its usual amazing self. Alex Miller and his team manage to excel themselves, year-on-year. The keynote talks were <em>phenomenal</em> this year with Idalin Bob&eacute;&rsquo;s inspiring talk about activism and Morgan Marquis-Boire&rsquo;s terrifying security and espionage talk as the highlights of the whole conference. The &ldquo;theme&rdquo; this year was distributed systems. I think this image sums it up well:</p>
+
+<p><img class="center" src="/images/distributed.jpg" width="600" height="450" title="&lsquo;image&rsquo; &lsquo;images&rsquo;" ></p>
+
+<p>The other highlight for me was a social event: the <a href="http://lgbtq.technology/">LGBTQ in Technology Slack</a> dinner, generously sponsored by <a href="https://codeclimate.com/">Code Climate</a>. The Strange Loop team work hard to ensure the conference is a diverse, welcoming, safe space for everyone and I was excited to be able to organize this dinner with the support of the conference organizers.</p>
+
+<p>That social theme continued at <a href="http://clojure-conj.org/">Clojure/conj</a> in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at <a href="http://www.thetwistedtail.com/">The Twisted Tail</a> with my friend <a href="https://twitter.com/quephird">Danielle</a>. If you&rsquo;re ever in Philly, <em>go to that restaurant</em>!!</p>
+
+<p>As usual, Clojure/conj was an incredible mix of real world Clojure, academic research, and bleeding edge exploration in industry. One talk made the entire conference worth the cost for me: Bobby Calderwood&rsquo;s <a href="https://www.youtube.com/watch?v=qDNPQo9UmJA">From REST to CQRS</a> with Clojure, Kafka (and Samza), and Datomic. The &ldquo;hallway track&rdquo; that followed this talk caused me to miss the last two talks but it was oh so valuable! Fast forward two months and we&rsquo;re starting down the path of Kafka and distributed systems at work. Priceless, as they say. Other highlights were the father and son Engelbergs on Automata, Ram Krishnan&rsquo;s &ldquo;Clojure for Business Teams&rdquo;, Stuart Halloway&rsquo;s keynote &ldquo;Debugging with the Scientific Method&rdquo; (<em>everyone</em> should watch <a href="https://www.youtube.com/watch?v=FihU5JxmnBg">this talk</a>), Lee Spector&rsquo;s &ldquo;Genetic Programming&rdquo; talk, and Benjamin Pierce&rsquo;s keynote about formal specifications and generative testing.</p>
+
+<p>And then there was work&hellip;</p>
+
+<p>I love my job, I love my team, and we get to solve some fascinating problems at <a href="http://worldsinglesnetworks.com/">World Singles</a>. The company has a history of using <a href="http://www.adobe.com/products/coldfusion-family.html">ColdFusion</a>, although we switched to a Free Open Source Software alternative in 2009 and we&rsquo;ve been running on <a href="http://lucee.org/">Lucee</a> for most of 2015. We started using Clojure in production almost five years ago now (with Clojure 1.3 Alpha 7 or Alpha 8) and we declared it our &ldquo;primary language&rdquo; about a year ago. Since then we&rsquo;ve systematically rewritten code in Clojure as we&rsquo;ve needed to enhance functionality &ndash; definitely a situation where &ldquo;refactor&rdquo; really does mean &ldquo;rewrite&rdquo;. I created a bridge project that allows Cloure to be loaded and run easily inside CFML engines about five years ago and that&rsquo;s continued to evolve. The MVC framework I created in 2009 has continued to evolve as well, with 2015 seeing release 3.1 and 3.5 &ndash; the latter has integrated the Clojure bridge, to enable seamless mixed language projects. We rely heavily on this. Release 4.0 is almost ready for Alpha 1, and focuses on enhancing REST API capabilities.</p>
+
+<p>In addition, we created an OAuth 2 server, mostly in Clojure, to support our REST API, and we&rsquo;ve worked hard to move all of our persistence from CFML&rsquo;s &ldquo;query&rdquo; functionality to a Clojure &ldquo;<a href="https://github.com/seancorfield/datamapper">data mapper</a>&rdquo; based on <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">clojure.java.jdbc</a>. We closed out 2015 with <em>all</em> of our persistence handled by Clojure, a big win for performance and maintainability!</p>
+
+<p>Our other big change, coming at the tail end of year, was a switch from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a> for our primary Clojure build tool. I&rsquo;ll be blogging about this more in due course, but for now I&rsquo;ll just mention the <a href="https://github.com/seancorfield/boot-expectations">Boot task for running Expectations tests</a> and that Leiningen-style templates will be coming to Boot soon&hellip;</p>
+
+<p>Happy 2016!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Frege (and Clojure)]]></title>
+    <link href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/"/>
+    <updated>2015-02-13T02:32:18-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho'!). I also spent some time with Go last year (don&rsquo;t like it).</p>
+
+<p>The Elm language is really nice - and useful for building interactive browser-based applications (and games). I&rsquo;ve been meaning to blog about it for quite a while, and I hope to get around to that in due course. Elm is sort of inspired by Haskell, and that&rsquo;s really what this blog post is about. Sort of.<!-- more --></p>
+
+<p>Haskell and I have a strange relationship. I really liked Haskell when it appeared in the early 90&rsquo;s. I hoped it would finally be the language to help Functional Programming go mainstream (I&rsquo;d been dabbling with FP for about a decade by then). It didn&rsquo;t. Sigh. But I continued to dabble with FP - and Haskell - on and off (mostly off) for another couple of decades. I&rsquo;ve occasionally blogged about Haskell (yes, on my old ColdFusion-focused blog it used to crop up about once a year), and I&rsquo;ve always wanted to be able to <em>use</em> Haskell for something more than just playing around. For a long, long time tho', my programming life has been tied to the JVM, for better or worse, and Haskell&rsquo;s standalone nature has meant that I haven&rsquo;t been able to integrate it into my daily stack.</p>
+
+<p>That tie to the JVM is why I learned Groovy, Scala, Clojure - and took them all to production - but haven&rsquo;t really been able to get deeply into Python (much as I like it)&hellip; or poor old Haskell, despite now decades of toying with it.</p>
+
+<p>Fortunately for me, Ingo Wechsung likes Haskell enough that he created the <a href="http://www.frege-lang.org">Frege programming language</a> which is &ldquo;a <strong>pure</strong> functional programming language for the JVM in the spirit of Haskell&rdquo;. It&rsquo;s sufficiently similar to Haskell - see <a href="https://github.com/Frege/frege/wiki/Differences-between-Frege-and-Haskell">Differences between Frege and Haskell</a> - that many people consider Frege to be &ldquo;Haskell for the JVM&rdquo;. This makes me happy because I can finally start to use Haskell (sort of) as part of my daily stack and therefore <em>really learn it</em>! Finally!</p>
+
+<p>So why is this post titled <strong>Frege (and Clojure)</strong>?</p>
+
+<p>Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure&rsquo;s build tool. So I created <code>lein-fregec</code>, a <a href="https://github.com/seancorfield/lein-fregec">Frege plugin for Leiningen</a>, that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.</p>
+
+<p>Today I released version <del>3.22.324</del> <strong>3.22.367-i</strong> (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
+
+<p>Here&rsquo;s the Frege code:</p>
+
+<pre><code>module Fibonacci where
+
+-- lazy infinite sequence of Fibonacci numbers starting with a, b:
+fibs a b = a : fibs b (a + b)
+
+-- lazy infinite sequence of Fibonacci numbers (0, 1, 1, 2, 3, ...):
+fibonacci = fibs 0 1
+
+-- let Frege infer the types here (it'll be Int -&gt; Int):
+fibn n = head $ drop n $ fibonacci
+
+-- Clojure uses Long by default so this is our public API:
+fib :: Long -&gt; Long
+fib n = Int.long $ fibn (Long.int n)
+</code></pre>
+
+<p>This declares a module (class in the Java bytecode) called <code>Fibonacci</code> which contains four functions. Even tho' Frege is a (very) strongly typed language, you can often omit the types as it will infer them for you. Starting at the bottom, we have <code>fib</code> which is declared to take a <code>Long</code> and return a <code>Long</code> - and will be compiled down to a static method on the <code>Fibonacci</code> class and therefore easily callable from Clojure (or Java). It casts its argument <code>n</code> to an integer, calls <code>fibn</code> on it, and then casts the result to a <code>Long</code> to return it to Clojure. <code>f $ g x</code> is shorthand for <code>f (g x)</code> that avoids the parentheses. <code>fibn</code>, in turn starts with the (lazy infinite) sequence of fibonacci numbers and drops the first <code>n</code> of them (the sequence starts with zero, but I&rsquo;m treating one as the &ldquo;first&rdquo; number) and then returns the first of what&rsquo;s left (the <code>head</code>). Again <code>$</code> means we don&rsquo;t have to write <code>head (drop n (fibonnaci))</code>. The <code>fibonacci</code> function takes no arguments and just calls <code>fibs</code> with the seed values of zero and one. <code>fibs</code> takes two arguments and returns a sequence with the first argument followed by the fibonacci sequence that starts with the second argument. Frege, like Haskell, is a non-strict (lazy) language so <code>fibs</code> isn&rsquo;t really a recursive call, even tho' it looks like it ought to blow the stack. Instead, when it is called, it returns a list whose first element is (the value of) <code>a</code> and whose remaining elements will be evaluated as needed - or rather <em>if needed</em>. Technically, it doesn&rsquo;t even evaluate <code>a</code> unless you actually refer to the value.</p>
+
+<p>What that means is that when <code>fib</code> is called, the cast (from <code>Int</code> to <code>Long</code>) forces evaluation of the call to <code>fibn</code>, which in turn asks for the <code>head</code> of &hellip; the sequence we get by dropping the first <code>n</code> elements of &hellip; that lazy infinite sequence. So we construct the first <code>n + 1</code> elements of the list and then we look at the last one of those, which forces the calculation of that value (yes, the additions are deferred until the value is needed!). We write simple, obvious code that looks like it might be very inefficient but Frege ensures that only the values we actually need are ever calculated - and because of the way the sequence is constructed from previous elements, it means that once we&rsquo;ve calculated the <em>nth</em> number, all the previous ones are essentially calculated and cached for us. This is possible because our functions are <strong>pure</strong> (no side effects).</p>
+
+<p>What about the Clojure code? Since Frege compiles modules to classes and certain functions (with basic Java type signatures) to static methods, we simply import the compiled class and call the function we want:</p>
+
+<pre><code>(ns example.core
+  (:import Fibonacci))
+
+... (Fibonacci/fib 13) ...
+</code></pre>
+
+<p>We can even play with the code from the REPL:</p>
+
+<pre><code>$ lein do fregec, repl
+...
+example.core=&gt; (Fibonacci/fib 11)
+89
+example.core=&gt; (Fibonacci/fib 42)
+267914296
+example.core=&gt; 
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure in the Enterprise?]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/"/>
+    <updated>2014-09-23T23:05:05-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise</id>
+    <content type="html"><![CDATA[<p><em>This was originally posted on <a href="http://corfield.org/blog/post.cfm/clojure-in-the-enterprise">corfield.org back in April 2013</a> and I noticed it was recently referenced by Eric Normand in his recent blog post <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">Convince your boss to use Clojure</a> so I figured it was time to update the article and bring it onto my new blog.</em></p>
+
+<p>A question was asked in early 2013 on a Clojure group on LinkedIn about reasons to migrate to Clojure for enterprise applications in a Java shop. It&rsquo;s a fairly typical question from people in the Java world when they hear the buzz about Clojure, and of course asking the question on a Clojure group garnered a lot of positive responses about why Clojure is a good choice. I didn&rsquo;t feel anyone had really addressed a core aspect of the original question which was, essentially, &ldquo;Why should I, as a Java web developer, using JPA, JSF etc, choose Clojure instead for an enterprise application?&rdquo;.<!-- more --> The key considerations here are &ldquo;enterprise application&rdquo; and &ldquo;Java web devloper, using JPA, JSF etc&rdquo;. Clojure is rightly praised for big data projects, simplified concurrency due to immutable data, and the conciseness of its solutions. The general advice when introducing Clojure to an organization is to take a grass roots approach: use it for some tooling first, or a small low-risk (but perhaps high-profile) project and show how well it works in a Java-dominated world. Then you get more and more developers trying it out and gradually the organization adopts it for more and more projects. It&rsquo;s good advice, and it&rsquo;s often how Clojure has crept into Java shops so far (as opposed to those fast-moving small shops that already have a tendency toward polyglot development).</p>
+
+<p>I didn&rsquo;t feel anyone had really talked about how radical Clojure seems to a conservative &ldquo;enterprise&rdquo; company that&rsquo;s already bought into the Java way of doing things from top-to-bottom (as indicated by the original poster&rsquo;s references to JPA and JSF). I had a couple of people ask me to turn my <a href="http://www.linkedin.com/groupItem?view=&amp;gid=1058217&amp;item=ANET%3AS%3A228031575&amp;commentID=129649205&amp;trk=NUS_RITM-title#commentID_129649205">(fairly length) response on the group</a> into a blog post, so I did, and here&rsquo;s the updated version for 2014&hellip;</p>
+
+<p>The &ldquo;enterprise&rdquo; in general is extremely conservative about change. Those companies use Java because it&rsquo;s &ldquo;safe&rdquo;: it&rsquo;s pretty much ubiquitous, it&rsquo;s been around for decades, it&rsquo;s easy to hire low-to-mid-range developers, you can outsource it relatively easily. If you have a company that&rsquo;s bought into the whole Java stack and uses Java for &ldquo;everything&rdquo;, you have a deeply entrenched company and it may be extremely difficult to bring Clojure in. You might have some success bringing Scala in - as a &ldquo;better Java&rdquo; - because Scala is less alien to Java developers and the marketing behind Scala is focused on serving the &ldquo;enterprise&rdquo; already.</p>
+
+<p>Having talked to a number of Java developers who work in big &ldquo;enterprise&rdquo; shops, one of the biggest problems is simply that the average skill level in such shops is often pretty mediocre, especially if some of the work is outsourced (and considered acceptable quality). The processes tend to be old-fashioned, the tooling tends to be years behind the bleeding edge. Even bringing Scala in can be very disruptive and the worst part is you might just end up with Java-in-Scala, without a lot of the benefits of moving to a highly expressive, (partly) functional language.</p>
+
+<p>Clojure is very alien to the average Java developer. If you have a shop full of &ldquo;average&rdquo; Java developers who have grown up only knowing &ldquo;OOP in Java&rdquo;, they will struggle really badly with the functional concepts in Clojure (and Scala - which is why you get Java-in-Scala instead of idiomatic Scala). Unlearning all those OOP habits to write effective functional code is really, really hard for a lot of people. Writing high performance idiomatic functional code can be even harder. Don&rsquo;t underestimate that difficulty! Take away objects, mutable state, variables, loops&hellip; a lot of Java developers are immediately all at sea and have no idea how to solve even basic problems. They&rsquo;ll try to bend Clojure to their OOP way of thinking and they&rsquo;ll most likely fail.</p>
+
+<p>Clojure is great for bleeding edge developers and it is also great for new developers who have not yet learned the bad habits of OOP (conflating state and identity, mutability, loss of data history / time concepts).</p>
+
+<p>Everything that everyone said in the original comment thread on LinkedIn is true: Clojure has many wonderful benefits, you can start with a small, eager team and a high profile but relatively low-risk project, and so on. But don&rsquo;t underestimate the difficulty of getting a conservative organization to switch from the COBOL of the modern era (Java) to something as radical as Clojure currently is, nor the difficulty of retraining your army of low-to-med-range Java-only programmers.</p>
+
+<p>At my company, we first took Clojure to production in mid-2011 and cross-training the team - a small group of developers eager to learn new things - is an ongoing process, slow and steady. We&rsquo;re at 22KLOC in Clojure with over 5KLOC in our test suite, and about 1KLOC of ClojureScript now. That&rsquo;s probably the equivalent of at least 80KLOC of Java (and quite likely north of 150KLOC). We&rsquo;re a small company with a very supportive management team. At this point, almost all new development is in Clojure with maintenance still continuing on the &ldquo;legacy&rdquo; code base (another factor to consider, by the way: what about your existing Java code base?). We love Clojure. It&rsquo;s made development a lot more fun. We&rsquo;re able to solve harder problems, make changes faster, leverage multi-core concurrency more effectively, and we have a much smaller code base to maintain. But we are about as far from &ldquo;enterprise&rdquo; as you can imagine, while not actually being a start-up (World Singles has been around for over a decade).</p>
+
+<p>The half dozen paragraphs above are an edited version of what I posted on LinkedIn (and slightly updated from my original blog post) but there&rsquo;s something else I wanted to cover in this post: the mindset of Clojure.</p>
+
+<p>A common question amongst folks new to Clojure, especially those who want to do web development, is &ldquo;Where are the &lsquo;batteries included&rsquo; frameworks?&rdquo;. If you come to Clojure from Ruby on Rails, you&rsquo;ll probably be surprised to see no full-stack web framework. If you come to Clojure from Java, you might be looking for something like Spring (or Hibernate). The Clojure community favors small, composable libraries over opinionated frameworks. If you want to do web development in Clojure, you can pick a library for routing, a library for basic HTTP request/response plumbing, a library for persistence, and so on, and you&rsquo;ll compose those together with your application code to build the solution you like best. For almost every task, Clojure has several libraries, each focused on doing one thing well and an expectation to &ldquo;play nicely with others&rdquo;, mostly through the idiom of building on Clojure&rsquo;s core data structures (mostly maps and vectors, but also sets and the ubiquitous sequence abstraction). For some, this is seen as a lack of structure or a lack of maturity but it&rsquo;s a very deliberate decision by the core of the Clojure community. Instead of just falling into a particular way of doing something, Clojure encourages you to pick'n'mix, focusing on the problem at hand and solving it in the most elegant way, rather than trying to shoehorn your solution into someone else&rsquo;s way of thinking.</p>
+
+<p>A couple of examples from World Singles might illustrate this. We use two different libraries for generating HTML/XML, which have very different approaches. We use <a href="https://github.com/yogthos/Selmer">Selmer</a> to generate HTML emails. We use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate XML documents that we use with 3rd party web services. Selmer takes mustache-style templates with substitutions for data structures and some embedded control structures. Hiccup takes Clojure data structures and renders them to HTML/XML. For our web service interaction, we tend to have data structures that we want to render to XML so it is more natural to annotate the data with more data and let Hiccup take care of the rendering. With our HTML emails, we want something close to HTML with a controlled set of substitutions, for member profile data etc. Similarly we use two different testing libraries for different situations. We use <a href="https://github.com/jaycfields/expectations">Expectations</a> for most of our testing because we like the language it uses: &ldquo;Expect {some conditions} to be true of {our test expression}&rdquo;. It lets us write very natural, expressive tests. However, for our WebDriver based tests (using <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a>), we prefer the more assert-based approach of Clojure&rsquo;s built-in testing library (clojure.test). These end-to-end tests are organized in a much more procedural way, asserting certain things about the state of the UI at various points in each scenario we are testing. Finally, we use two different date/time libraries: <a href="https://github.com/stackoverflow/date-clj">date-clj</a> and <a href="https://github.com/clj-time/clj-time">clj-time</a>. The former is great for interacting with data stores since it uses <code>java.util.Date</code> and supports basic date manipulation (adding / subtracting a number of time units). The latter is great for more complex date/time manipulation (midnight-based instants, periods, intervals, range checking) but is based on Joda Time and needs to be explicitly converted to/from <code>java.util.Date</code> at the boundaries.</p>
+
+<p>Clojure&rsquo;s wealth of choices can be overwhelming but it&rsquo;s also very freeing. The &ldquo;enterprise&rdquo; often wants a more proscribed way to do things, with more consistent solutions across different teams and different abilities. For more ideas on getting Clojure into your &ldquo;enterprise&rdquo; shop, take a look at <a href="http://www.youtube.com/watch?v=2WLgzCkhN2g">Neal Ford&rsquo;s Master Plan for Clojure Enterprise Mindshare Domination</a> presentation from Clojure/conj 2011.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ClojureBridge]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/06/21/clojurebridge/"/>
+    <updated>2014-06-21T19:39:03-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/06/21/clojurebridge</id>
+    <content type="html"><![CDATA[<p><em>Adapted from a post I made on my old blog in January, 2014, about the first few workshops being planned.</em></p>
+
+<p>I&rsquo;ve been an advocate of diversity in IT for a long time. I&rsquo;m very pleased to work in a company that has an above average ratio of female to male employees, as well as very diverse cultural backgrounds amongst our staff. In most tech communities, diversity is pretty low. It&rsquo;s why organizations like <a href="http://railsbridge.org/">RailsBridge</a> and <a href="http://womenwhocode.com/">Women Who Code</a> and numerous others exist. The lack of diversity hurts us all because a homogeneous community doesn&rsquo;t have diversity of thought either: <a href="https://www.google.com/search?q=diverse+teams+outperform">diverse teams outperform homogeneous teams</a>.<!-- more --></p>
+
+<p>Back in 2012, I became very bothered by the lack of diversity in the Clojure community - it&rsquo;s a lot less diverse than several other communities I&rsquo;ve experienced - and after talking to a few people, I reached out to a former colleague from Macromedia, <a href="http://en.wikipedia.org/wiki/Sarah_Allen_(software_developer">Sarah Allen</a>) - president of RailsBridge, to see what it would take to get something started to address it. I continued talking to people about the idea of ClojureBridge and was thrilled when Bridget Hillyer, Lynn Grogan, Maggie Litton and others took up the torch to make it happen!</p>
+
+<p>Early in 2014, I was thrilled to announce that ClojureBridge had become a reality: you could <a href="http://clojurebridge.org/">sign up on the web site</a> to get involved, you could <a href="https://groups.google.com/forum/#!forum/clojurebridge-workshops">join the ClojureBridge Workshops mailing list</a>. And hundreds of people have done that!</p>
+
+<p>ClojureBridge has already run four workshops: Durham, NC; San Francisco, CA; Brisbane, Australia; Minneapolis, MN. More workshops are being planned in Melbourne, Australia; Edinburgh, Scotland; Chicago, IL; Portland, OR; Austin, TX. It&rsquo;s incredible to see the level of interest in this effort to introduce Clojure to more people, and help improve diversity in our community.</p>
+
+<p>With four successful workshops behind us now, we&rsquo;re working to update the <a href="https://github.com/ClojureBridge/curriculum">curriculum</a> to incorporate lessons we&rsquo;ve learned, so that future workshops can be a better experience for students.</p>
+
+<p>The ClojureBridge web site says:</p>
+
+<blockquote><p>ClojureBridge aims to increase diversity within the Clojure community by offering free, beginner-friendly workshops for women.</p>
+
+<p>Our students range from those completely new to programming to professional developers who want to learn more about Clojure.</p>
+
+<p>ClojureBridge is inspired by RailsBridge, and closely models the RailsBridge philosophy.</p></blockquote>
+
+<p>A typical workshop description says:</p>
+
+<blockquote><p>This workshop is intended to reach out to women who are interested in learning programming with Clojure. Men are welcome to come if you find a woman who wants to learn Clojure and come together. ClojureBridge is emphatically queer and trans* friendly.</p></blockquote>
+
+<p>A common question is: why the focus on women? The answer is that there are already plenty of ways guys can learn a new programming language in an environment that is comfortable for them. The whole of IT is a comfortable space for men (and it is particularly so for white cis-het men). Since many male-dominated environments are not comfortable spaces for many women - and many other underrepresented groups - it&rsquo;s important to create a safe, friendly environment in which to encourage new people to learn technology. ClojureBridge has chosen to follow the RailsBridge model in starting out with a focus on workshops for women. I recently spoke with Dr. Kortney Ziegler, founder of <a href="http://www.transhack.org/">Trans*H4CK</a>, about the possibility of a joint workshop with ClojureBridge aimed at the transgender community. I hope to see ClojureBridge workshops run jointly with other groups that advocate for underrepresented groups in technology.</p>
+
+<p>If you&rsquo;re interested in improving diversity in IT, reach out to a group like ClojureBridge and get involved. Help organize events in your area. Together we can change the face of IT, and our community will grow and our teams will be more productive and more creative!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting Started]]></title>
+    <link href="http://seancorfield.github.io/blog/2014/06/03/getting-started/"/>
+    <updated>2014-06-03T18:42:36-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2014/06/03/getting-started</id>
+    <content type="html"><![CDATA[<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created at World Singles as we kicked off our green field rewrite project five years ago.<!-- more --></p>
+
+<p>I&rsquo;ve been involved with World Singles for about five years now, about three and a half years as a full-time engineer. The project was a green field rewrite of a dating system the company had evolved over about a decade that, back in 2009, was running on ColdFusion 8 on Windows, and using SQL Server. The new platform soft-launched in late 2011 as we migrated a few small sites across and our full launch - migrating millions of members in the process - was May 2012. At that point we switched from &ldquo;build&rdquo; mode to &ldquo;operations&rdquo; mode, and today we maintain a large codebase that is a combination of CFML and Clojure, running on Railo 4.2 on Linux, and using MySQL and MongoDB, running partly in our East Coast data center and partly on Amazon.</p>
+
+<p>Like all projects, it&rsquo;s had some ups and downs, but overall it&rsquo;s been great: I love my team, we love working with Clojure, and we have a steady stream of interesting problems to solve, working with a large user base, on a multi-tenant, multi-lingual platform that generates millions of records of data every day. It&rsquo;s a lot of fun. And we all get to work from home.</p>
+
+<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created as we kicked the project off. Eleven if you include ticket &ldquo;zero&rdquo;.</p>
+
+<ul>
+<li><p>#0 - Choose a bug tracking / ticketing system. We chose <a href="https://unfuddle.com/">Unfuddle</a>. It&rsquo;s clean and simple. It&rsquo;s easy to use. It provides Git (and SVN) hosting. It provides notebooks (wikis), ticketing, time management, customizable &ldquo;agile&rdquo; task boards, collaboration with external users, and it&rsquo;s pleasing to the eye. I&rsquo;ve never regreted our choice of Unfuddle (even when they did a massive overhaul of the UI and it took us a week or so to get used to the radically new ticket editing workflow!).</p></li>
+<li><p>#1 - Version control. Yes, really, this was our first ticket in Unfuddle. The resolution to this ticket says:</p>
+
+<blockquote><p>Selected vcs system (git), created repository in Unfuddle, and provided detailed documentation on why git, how to set it up, how to connect to the repo and how to work with git.</p></blockquote></li>
+<li><p>And the documentation was all there in an Unfuddle notebook for the whole team. A good first step.</p></li>
+<li><p>#2 - Developer image. Once we had version control setup and documented, we needed an easy way for every developer to have a full, self-contained local development environment. We had some developers on Windows, some on OS X, some on Linux, so we created a VMWare image with all the basic development tools, a database, a standardized ColdFusion installation, with Apache properly configured etc. This established a basic working practice for everyone on the team: develop and test everything locally, commit to Git, push to Unfuddle. We could then pull the latest code down to a showcase / QA server for the business team to review, whenever we or they wanted.</p></li>
+<li><p>#3 - Project management system. Although we had bug tracking and wikis, we wanted to nail down how communication would work in practice. We created a project management mailing list for discussion threads. We created a notebook section in Unfuddle for documenting decisions and requirements. We decided to use Basecamp for more free-form evolution of business ideas. We agreed to use tickets in Unfuddle for all actionable work, and we settled on a Scrum-like process for day-to-day development, with short, regular sprints so we could get fast feedback from the business team, and they could easily see what progress we were making.</p></li>
+<li><p>#4 - General project management. Since we had agreed to use Unfuddle for time tracking, we created a ticket against which to track project management hours that didn&rsquo;t fit into any actual work tickets. We used this for the first six months of the project (and logged about 300 hours against it).</p></li>
+<li><p>#5 - Performance planning/tuning. This was mostly a placeholder (and initially focused on how to make a Reactor-based application perform better!). It was superceded by several more specific tickets, six months into the project. But it&rsquo;s one of those things we wanted on the radar early for tracking purposes.</p></li>
+<li><p>#6 - Architectural planning. Like ticket #4, this was a time tracking bucket that we used for the first six months of the project.</p></li>
+<li><p>#7 - Set up Continuous Integration. Yup, even before we got to our first actual coding ticket, as part of the early project setup, we wanted a Continuous Integration server. Whilst we were using ColdFusion for local development (prerelease builds of ACF9, at the time), we chose to use Railo 3.2 for the CI server so that we could ensure our code was cross-platform - we were still evaluating which engine to ultimately go to production with. The resolution of this ticket says:</p>
+
+<blockquote><p>Apache / Tomcat / Railo / MySQL / Transparensee / Hudson in place. Automated test run restarts Railo, reloads the DB, reloads Transparensee, cleans the Reactor project, runs all test suites and generates test results.</p></blockquote></li>
+<li><p>We developed an Ant script that stopped and started Railo, tore down and rebuilt the test database, using a canned dataset we created (with 1,000 random users), repopulated the search engine we use and cleaned up generated files, then ran our fledgling MXUnit test suite (and later our fledgling Selenium test suite).</p></li>
+<li><p>#8 - Display About us/trust. This was our first actual code ticket. The company had selected ColdBox, ColdSpring, and Reactor as our basic frameworks (yeah, no ticket for that, it was a choice that essentially predated the project &ldquo;getting started&rdquo;). This ticket was to produce a first working skeleton of the application that could actually display dynamically generated pages of content from the database. We created the skeleton of the site navigation and handlers for each section as part of this ticket. The &ldquo;trust&rdquo; in the ticket title was about showing that we really could produce basic multilingual content dynamically and show an application architecture that worked for the business.</p></li>
+<li><p>#9 - Implement resource bundles for templates. And this was also an early key requirement: so that we could support Internationalization from day one and perform Localization of each site&rsquo;s content easily.</p></li>
+<li><p>#10 - Display appropriate template for each site. This was our other key requirement: the ability to easily skin each site differently. Like #9, this was an important proof of concept to show we could support multiple sites, in multiple languages, on a single codebase, with easy customization of page layouts, content, and even forms / questions we asked.</p></li>
+</ul>
+
+
+<p>So that&rsquo;s how we got started. Bug tracking, version control, local development environment, continuous integration and the key concepts tackled first!</p>
+
+<p>A reasonable question is to ask what has changed in our approach over the five years since. We&rsquo;re still using Unfuddle (in case you&rsquo;re wondering, we&rsquo;re up to ticket 6537 as I write this!), we&rsquo;re still using Git (and still loving it). Our development stack has changed, as has some of our technology.</p>
+
+<p>Over time we all migrated to Macs for development so maintaining the VM image stopped being important: everyone could have the entire development stack locally. We eventually settled on Railo instead of ColdFusion (we&rsquo;re on Railo 4.2 now), and we added MongoDB to MySQL a couple of years ago. We added some Scala code in 2010 to tackle a problematic long-running process (that did a lot of XML transformation and publishing). We added Clojure code in 2011 for a few key processes and then replaced Scala with Clojure and today Clojure is our primary language for all new development, often running inside Railo. We stopped using Reactor (we wrote a data mapper in Clojure that is very close to the &ldquo;metal&rdquo; of JDBC). Recently we stopped using MXUnit and replaced it with TestBox. We&rsquo;re slowing changing over from Selenium RC tests to WebDriver (powered by Clojure). We have about 20,000 lines of Clojure now and our CFML code base is holding steady at around 39,000 lines of Model and Controller CFCs and 45,000 lines of View cfm files.</p>
+]]></content>
+  </entry>
+  
+</feed>
