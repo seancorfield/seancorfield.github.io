@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Where Did 2015 Go?"
-date: 2016-01-01 19:30:00
+date: 2016-01-03 16:00:00
 comments: true
 categories: [clojure, frege, conferences, diversity]
 ---
@@ -31,7 +31,7 @@ Fumiko and I worked on a project with ClojureScript, [Reagent](http://reagent-pr
 
 The other highlight for me was a social event: the [LGBTQ in Technology Slack](http://lgbtq.technology/) dinner, generously sponsored by [Code Climate](https://codeclimate.com/). The Strange Loop team work hard to ensure the conference is a diverse, welcoming, safe space for everyone and I was excited to be able to organize this dinner with the support of the conference organizers.
 
-That social theme continued at [Clojure/conj](http://clojure-conj.org/) in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at [The Twisted Tail](http://www.thetwistedtail.com/) with my friend [Danielle](https://twitter.com/quephird). If you're ever in Philly, *go to that restaurant*!!
+That social theme continued at [Clojure/conj](http://clojure-conj.org/) in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at [The Twisted Tail](http://www.thetwistedtail.com/) with my friend [Danielle](https://twitter.com/quephird). If you're ever in Philly, *go to that restaurant*!!).
 
 As usual, Clojure/conj was an incredible mix of real world Clojure, academic research, and bleeding edge exploration in industry. One talk made the entire conference worth the cost for me: Bobby Calderwood's [From REST to CQRS](https://www.youtube.com/watch?v=qDNPQo9UmJA) with Clojure, Kafka (and Samza), and Datomic. The "hallway track" that followed this talk caused me to miss the last two talks but it was oh so valuable! Fast forward two months and we're starting down the path of Kafka and distributed systems at work. Priceless, as they say. Other highlights were the father and son Engelbergs on Automata, Ram Krishnan's "Clojure for Business Teams", Stuart Halloway's keynote "Debugging with the Scientific Method" (*everyone* should watch [this talk](https://www.youtube.com/watch?v=FihU5JxmnBg)), Lee Spector's "Genetic Programming" talk, and Benjamin Pierce's keynote about formal specifications and generative testing.
 
