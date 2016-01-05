@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Diversity | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/diversity/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-03T16:00:18-08:00</updated>
+  <updated>2016-01-04T17:35:03-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -34,7 +34,7 @@
 
 <p>I haven&rsquo;t gotten to work with Frege as much as I&rsquo;d hoped but I managed to contribute ports of two very small Haskell 2010 libraries (<code>System.Environment</code> and <code>System.Exit</code>) as well as exposing a few more pieces of Java&rsquo;s <code>Runtime</code> class in Frege&rsquo;s <code>java.lang.System</code> data type. I hope 2016 will bring a lot more Frege to my life!</p>
 
-<p>In that blog post, I also talked about learning a new language every year. I mentioned <a href="http://elm-lang.org/">Elm</a>: I&rsquo;d experimented with it quite a bit in its early days and I&rsquo;d hoped to continue experimenting, but work and life distracted me from front end concerns and I lost touch with Elm&rsquo;s evolution. All I can say is that Elm continues to go from strength to strength, and it is gaining more press inches and more visibility at conferences, which is all good. It&rsquo;s truly innovative and I want to see it succeed!</p>
+<p>In that blog post, I also talked about learning a new language every year. I mentioned <a href="http://elm-lang.org/">Elm</a>: I&rsquo;d experimented with it quite a bit in its early days and I&rsquo;d hoped to continue experimenting, but work and life distracted me from front end concerns and I lost touch with Elm&rsquo;s evolution. All I can say is that Elm continues to go from strength to strength, and it is gaining more press inches and more visibility at conferences, which is all good. It&rsquo;s truly innovative and I want to see it succeed! I did however spend quite a bit of time learning a little <a href="https://www.rust-lang.org">Rust</a> and it makes me wish I did a lot more close-to-the-metal programming: it&rsquo;s a <em>really</em> nice language and the &ldquo;borrowing&rdquo; system is very impressive (even if you find yourself fighting with it a lot at first!).</p>
 
 <p>In the past, I&rsquo;ve also blogged about almost every conference I&rsquo;ve attended so you would be forgiven for thinking I didn&rsquo;t attend any events in 2015. I was able to attend The Strange Loop and Clojure/conj this past year. I would have loved to have attended Clojure/West as <a href="http://clojurewest.org/speakers#fhanreich">my colleague Fumiko gave a talk about HoneySQL</a>. That link will evaporate when this year&rsquo;s conference comes around but you can <a href="https://www.youtube.com/watch?v=alkcjyhesjI">watch Fumiko&rsquo;s talk about HoneySQL</a> on ClojureTV. It was her first ever conference talk and she did a great job &ndash; I&rsquo;m very proud of her! Oh, she also likes Elm.</p>
 
