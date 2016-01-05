@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Conferences | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/conferences/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-03T15:57:59-08:00</updated>
+  <updated>2016-01-03T16:00:18-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go/"/>
-    <updated>2016-01-01T11:30:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go</id>
+    <link href="http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go/"/>
+    <updated>2016-01-03T08:00:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go</id>
     <content type="html"><![CDATA[<p>I did not intend to stop blogging in 2015 but that&rsquo;s certainly what it looks like here!</p>
 
 <p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
@@ -46,7 +46,7 @@
 
 <p>The other highlight for me was a social event: the <a href="http://lgbtq.technology/">LGBTQ in Technology Slack</a> dinner, generously sponsored by <a href="https://codeclimate.com/">Code Climate</a>. The Strange Loop team work hard to ensure the conference is a diverse, welcoming, safe space for everyone and I was excited to be able to organize this dinner with the support of the conference organizers.</p>
 
-<p>That social theme continued at <a href="http://clojure-conj.org/">Clojure/conj</a> in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at <a href="http://www.thetwistedtail.com/">The Twisted Tail</a> with my friend <a href="https://twitter.com/quephird">Danielle</a>. If you&rsquo;re ever in Philly, <em>go to that restaurant</em>!!</p>
+<p>That social theme continued at <a href="http://clojure-conj.org/">Clojure/conj</a> in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at <a href="http://www.thetwistedtail.com/">The Twisted Tail</a> with my friend <a href="https://twitter.com/quephird">Danielle</a>. If you&rsquo;re ever in Philly, <em>go to that restaurant</em>!!).</p>
 
 <p>As usual, Clojure/conj was an incredible mix of real world Clojure, academic research, and bleeding edge exploration in industry. One talk made the entire conference worth the cost for me: Bobby Calderwood&rsquo;s <a href="https://www.youtube.com/watch?v=qDNPQo9UmJA">From REST to CQRS</a> with Clojure, Kafka (and Samza), and Datomic. The &ldquo;hallway track&rdquo; that followed this talk caused me to miss the last two talks but it was oh so valuable! Fast forward two months and we&rsquo;re starting down the path of Kafka and distributed systems at work. Priceless, as they say. Other highlights were the father and son Engelbergs on Automata, Ram Krishnan&rsquo;s &ldquo;Clojure for Business Teams&rdquo;, Stuart Halloway&rsquo;s keynote &ldquo;Debugging with the Scientific Method&rdquo; (<em>everyone</em> should watch <a href="https://www.youtube.com/watch?v=FihU5JxmnBg">this talk</a>), Lee Spector&rsquo;s &ldquo;Genetic Programming&rdquo; talk, and Benjamin Pierce&rsquo;s keynote about formal specifications and generative testing.</p>
 
