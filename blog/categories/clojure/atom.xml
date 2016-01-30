@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-04T17:35:03-08:00</updated>
+  <updated>2016-01-29T22:29:27-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rebooting Clojure]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/"/>
+    <updated>2016-01-29T12:30:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure</id>
+    <content type="html"><![CDATA[<p>We switched from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a>. What is Boot and why did we switched?<!-- more --></p>
+
+<h2>Leiningen</h2>
+
+<p>Before we talk about Boot, let&rsquo;s first talk about Leiningen. Leiningen describes itself as being &ldquo;for automating Clojure projects without setting your hair on fire&rdquo; and claims to be &ldquo;the easiest way to use Clojure&rdquo;. Rightly so. Leiningen hides all of the messy Maven-y dependency stuff, makes it drop-dead simple to package your applications and libraries as JAR files, makes it easy to run Clojure and provides a nice REPL experience, as well as integrating well with all the editors that Clojurians enjoy.</p>
+
+<p>For a long time, Leiningen was the only game in town, and when we started using Clojure at World Singles, it was the fundamental basis of everything we did with parentheses. We started with a 1.x version of Leiningen, we upgraded to 2.x and we constructed a fair bit of our build / deploy / execute chain around it.</p>
+
+<p>We wrote a couple of Leiningen plugins to deal with some &ldquo;interesting&rdquo; use cases in our environment: one to copy just dependencies to a specific target folder, one to set up a browser environment to run multiple <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a> tests in a single browser session.</p>
+
+<p>Over time we evolved a fairly large Ant script and a bunch of shell scripts but we really wanted to do more of that automation with Leiningen &ndash; since it&rsquo;s all about &ldquo;automating Clojure projects&rdquo; &ndash; but the reality of writing Leiningen plugins for general automation doesn&rsquo;t quite live up to the promise. Between the declarative nature of <code>project.clj</code> and overall framework in which plugins must execute, there&rsquo;s a lot more than just &ldquo;writing Clojure&rdquo; and there are evaluation restrictions around the processes. Bottom line, we just didn&rsquo;t get as far as we&rsquo;d have liked with Leiningen.</p>
+
+<h2>Early Boot</h2>
+
+<p>Going back to the second ever <a href="http://www.clojurebridge.org/">ClojureBridge</a> workshop. I was organizing this and at teacher training we were going over the curriculum that had been built for the first workshop and it used an early version of Boot. Unfortunately, it was a very rough experience and virtually unusable on Windows. As my first exposure to Boot, it was less than ideal and it put me off exploring it any further.</p>
+
+<p>Looking back, I&rsquo;m sure Boot was well-designed from the start and the design choices made were all solid &ndash; Boot was created by some very smart people &ndash; but I was less than charitable about Boot and unnecessarily vocal. I didn&rsquo;t take Boot very seriously.</p>
+
+<h2>Boot 2.5.0</h2>
+
+<p>Coming back to the present, Boot 2.5.0 was released in mid-December 2015. I owed it a serious second look. I was impressed. For starters, the installation process had become hella slick and the documentation looked really good. My early exploration was to try Boot on Windows 10, Mac OS X, and Linux for both the REPL experience and the basic project build process. One of the most striking differences from Leiningen was that &ldquo;it&rsquo;s just Clojure&rdquo;: the build script is straightforward executable Clojure, and tasks are just functions, and everything is based on an abstraction of a fileset. Another striking difference is that composability is baked right into the core of Boot: tasks are like Ring middleware and can wrap each other in a pipeline that allows tasks to talk control both before and after other tasks in the pipeline.</p>
+
+<p>After a promising &ldquo;first look&rdquo;, I decided to convert a couple of our core processes to run under Boot so that I could see what a real <code>build.boot</code> would look like in our environment. The only fly in the ointment for us was that Boot uses a single JVM and we were used to being able to compute our JVM options in <code>project.clj</code> (inside the first Leiningen JVM) for use by the application JVM (Leiningen&rsquo;s second JVM). By contrast, Boot uses environment variables to set up a single JVM environment and is a minimal intrusion itself. Boot further mitigates its own intrusion by allowing you execute code in a &ldquo;pod&rdquo; with its own isolated dependencies.</p>
+
+<p>We opted for a wrapper shell script to deal with our JVM environment computation. Once we had that in place, having just a single JVM up and running was a win all round: every process started up faster, our task and automation code was simpler.</p>
+
+<p>We decided on a two week spike to replace Leiningen with Boot across our entire project, and lift all of our executable processes up as Boot tasks. As of January 21st, we have Boot as an integral part of our production infrastructure. We&rsquo;re happy.</p>
+
+<p>In the next blog post, I&rsquo;ll talk about some of the specifics in our Boot infrastructure and the tasks we&rsquo;re writing. As a teaser, you can look at <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> and <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
@@ -191,48 +228,6 @@ example.core=&gt;
 <p>A common question is: why the focus on women? The answer is that there are already plenty of ways guys can learn a new programming language in an environment that is comfortable for them. The whole of IT is a comfortable space for men (and it is particularly so for white cis-het men). Since many male-dominated environments are not comfortable spaces for many women - and many other underrepresented groups - it&rsquo;s important to create a safe, friendly environment in which to encourage new people to learn technology. ClojureBridge has chosen to follow the RailsBridge model in starting out with a focus on workshops for women. I recently spoke with Dr. Kortney Ziegler, founder of <a href="http://www.transhack.org/">Trans*H4CK</a>, about the possibility of a joint workshop with ClojureBridge aimed at the transgender community. I hope to see ClojureBridge workshops run jointly with other groups that advocate for underrepresented groups in technology.</p>
 
 <p>If you&rsquo;re interested in improving diversity in IT, reach out to a group like ClojureBridge and get involved. Help organize events in your area. Together we can change the face of IT, and our community will grow and our teams will be more productive and more creative!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Getting Started]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/06/03/getting-started/"/>
-    <updated>2014-06-03T18:42:36-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/06/03/getting-started</id>
-    <content type="html"><![CDATA[<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created at World Singles as we kicked off our green field rewrite project five years ago.<!-- more --></p>
-
-<p>I&rsquo;ve been involved with World Singles for about five years now, about three and a half years as a full-time engineer. The project was a green field rewrite of a dating system the company had evolved over about a decade that, back in 2009, was running on ColdFusion 8 on Windows, and using SQL Server. The new platform soft-launched in late 2011 as we migrated a few small sites across and our full launch - migrating millions of members in the process - was May 2012. At that point we switched from &ldquo;build&rdquo; mode to &ldquo;operations&rdquo; mode, and today we maintain a large codebase that is a combination of CFML and Clojure, running on Railo 4.2 on Linux, and using MySQL and MongoDB, running partly in our East Coast data center and partly on Amazon.</p>
-
-<p>Like all projects, it&rsquo;s had some ups and downs, but overall it&rsquo;s been great: I love my team, we love working with Clojure, and we have a steady stream of interesting problems to solve, working with a large user base, on a multi-tenant, multi-lingual platform that generates millions of records of data every day. It&rsquo;s a lot of fun. And we all get to work from home.</p>
-
-<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created as we kicked the project off. Eleven if you include ticket &ldquo;zero&rdquo;.</p>
-
-<ul>
-<li><p>#0 - Choose a bug tracking / ticketing system. We chose <a href="https://unfuddle.com/">Unfuddle</a>. It&rsquo;s clean and simple. It&rsquo;s easy to use. It provides Git (and SVN) hosting. It provides notebooks (wikis), ticketing, time management, customizable &ldquo;agile&rdquo; task boards, collaboration with external users, and it&rsquo;s pleasing to the eye. I&rsquo;ve never regreted our choice of Unfuddle (even when they did a massive overhaul of the UI and it took us a week or so to get used to the radically new ticket editing workflow!).</p></li>
-<li><p>#1 - Version control. Yes, really, this was our first ticket in Unfuddle. The resolution to this ticket says:</p>
-
-<blockquote><p>Selected vcs system (git), created repository in Unfuddle, and provided detailed documentation on why git, how to set it up, how to connect to the repo and how to work with git.</p></blockquote></li>
-<li><p>And the documentation was all there in an Unfuddle notebook for the whole team. A good first step.</p></li>
-<li><p>#2 - Developer image. Once we had version control setup and documented, we needed an easy way for every developer to have a full, self-contained local development environment. We had some developers on Windows, some on OS X, some on Linux, so we created a VMWare image with all the basic development tools, a database, a standardized ColdFusion installation, with Apache properly configured etc. This established a basic working practice for everyone on the team: develop and test everything locally, commit to Git, push to Unfuddle. We could then pull the latest code down to a showcase / QA server for the business team to review, whenever we or they wanted.</p></li>
-<li><p>#3 - Project management system. Although we had bug tracking and wikis, we wanted to nail down how communication would work in practice. We created a project management mailing list for discussion threads. We created a notebook section in Unfuddle for documenting decisions and requirements. We decided to use Basecamp for more free-form evolution of business ideas. We agreed to use tickets in Unfuddle for all actionable work, and we settled on a Scrum-like process for day-to-day development, with short, regular sprints so we could get fast feedback from the business team, and they could easily see what progress we were making.</p></li>
-<li><p>#4 - General project management. Since we had agreed to use Unfuddle for time tracking, we created a ticket against which to track project management hours that didn&rsquo;t fit into any actual work tickets. We used this for the first six months of the project (and logged about 300 hours against it).</p></li>
-<li><p>#5 - Performance planning/tuning. This was mostly a placeholder (and initially focused on how to make a Reactor-based application perform better!). It was superceded by several more specific tickets, six months into the project. But it&rsquo;s one of those things we wanted on the radar early for tracking purposes.</p></li>
-<li><p>#6 - Architectural planning. Like ticket #4, this was a time tracking bucket that we used for the first six months of the project.</p></li>
-<li><p>#7 - Set up Continuous Integration. Yup, even before we got to our first actual coding ticket, as part of the early project setup, we wanted a Continuous Integration server. Whilst we were using ColdFusion for local development (prerelease builds of ACF9, at the time), we chose to use Railo 3.2 for the CI server so that we could ensure our code was cross-platform - we were still evaluating which engine to ultimately go to production with. The resolution of this ticket says:</p>
-
-<blockquote><p>Apache / Tomcat / Railo / MySQL / Transparensee / Hudson in place. Automated test run restarts Railo, reloads the DB, reloads Transparensee, cleans the Reactor project, runs all test suites and generates test results.</p></blockquote></li>
-<li><p>We developed an Ant script that stopped and started Railo, tore down and rebuilt the test database, using a canned dataset we created (with 1,000 random users), repopulated the search engine we use and cleaned up generated files, then ran our fledgling MXUnit test suite (and later our fledgling Selenium test suite).</p></li>
-<li><p>#8 - Display About us/trust. This was our first actual code ticket. The company had selected ColdBox, ColdSpring, and Reactor as our basic frameworks (yeah, no ticket for that, it was a choice that essentially predated the project &ldquo;getting started&rdquo;). This ticket was to produce a first working skeleton of the application that could actually display dynamically generated pages of content from the database. We created the skeleton of the site navigation and handlers for each section as part of this ticket. The &ldquo;trust&rdquo; in the ticket title was about showing that we really could produce basic multilingual content dynamically and show an application architecture that worked for the business.</p></li>
-<li><p>#9 - Implement resource bundles for templates. And this was also an early key requirement: so that we could support Internationalization from day one and perform Localization of each site&rsquo;s content easily.</p></li>
-<li><p>#10 - Display appropriate template for each site. This was our other key requirement: the ability to easily skin each site differently. Like #9, this was an important proof of concept to show we could support multiple sites, in multiple languages, on a single codebase, with easy customization of page layouts, content, and even forms / questions we asked.</p></li>
-</ul>
-
-
-<p>So that&rsquo;s how we got started. Bug tracking, version control, local development environment, continuous integration and the key concepts tackled first!</p>
-
-<p>A reasonable question is to ask what has changed in our approach over the five years since. We&rsquo;re still using Unfuddle (in case you&rsquo;re wondering, we&rsquo;re up to ticket 6537 as I write this!), we&rsquo;re still using Git (and still loving it). Our development stack has changed, as has some of our technology.</p>
-
-<p>Over time we all migrated to Macs for development so maintaining the VM image stopped being important: everyone could have the entire development stack locally. We eventually settled on Railo instead of ColdFusion (we&rsquo;re on Railo 4.2 now), and we added MongoDB to MySQL a couple of years ago. We added some Scala code in 2010 to tackle a problematic long-running process (that did a lot of XML transformation and publishing). We added Clojure code in 2011 for a few key processes and then replaced Scala with Clojure and today Clojure is our primary language for all new development, often running inside Railo. We stopped using Reactor (we wrote a data mapper in Clojure that is very close to the &ldquo;metal&rdquo; of JDBC). Recently we stopped using MXUnit and replaced it with TestBox. We&rsquo;re slowing changing over from Selenium RC tests to WebDriver (powered by Clojure). We have about 20,000 lines of Clojure now and our CFML code base is holding steady at around 39,000 lines of Model and Controller CFCs and 45,000 lines of View cfm files.</p>
 ]]></content>
   </entry>
   
