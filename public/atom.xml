@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-04T17:35:03-08:00</updated>
+  <updated>2016-01-29T22:29:27-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rebooting Clojure]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/"/>
+    <updated>2016-01-29T12:30:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure</id>
+    <content type="html"><![CDATA[<p>We switched from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a>. What is Boot and why did we switched?<!-- more --></p>
+
+<h2>Leiningen</h2>
+
+<p>Before we talk about Boot, let&rsquo;s first talk about Leiningen. Leiningen describes itself as being &ldquo;for automating Clojure projects without setting your hair on fire&rdquo; and claims to be &ldquo;the easiest way to use Clojure&rdquo;. Rightly so. Leiningen hides all of the messy Maven-y dependency stuff, makes it drop-dead simple to package your applications and libraries as JAR files, makes it easy to run Clojure and provides a nice REPL experience, as well as integrating well with all the editors that Clojurians enjoy.</p>
+
+<p>For a long time, Leiningen was the only game in town, and when we started using Clojure at World Singles, it was the fundamental basis of everything we did with parentheses. We started with a 1.x version of Leiningen, we upgraded to 2.x and we constructed a fair bit of our build / deploy / execute chain around it.</p>
+
+<p>We wrote a couple of Leiningen plugins to deal with some &ldquo;interesting&rdquo; use cases in our environment: one to copy just dependencies to a specific target folder, one to set up a browser environment to run multiple <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a> tests in a single browser session.</p>
+
+<p>Over time we evolved a fairly large Ant script and a bunch of shell scripts but we really wanted to do more of that automation with Leiningen &ndash; since it&rsquo;s all about &ldquo;automating Clojure projects&rdquo; &ndash; but the reality of writing Leiningen plugins for general automation doesn&rsquo;t quite live up to the promise. Between the declarative nature of <code>project.clj</code> and overall framework in which plugins must execute, there&rsquo;s a lot more than just &ldquo;writing Clojure&rdquo; and there are evaluation restrictions around the processes. Bottom line, we just didn&rsquo;t get as far as we&rsquo;d have liked with Leiningen.</p>
+
+<h2>Early Boot</h2>
+
+<p>Going back to the second ever <a href="http://www.clojurebridge.org/">ClojureBridge</a> workshop. I was organizing this and at teacher training we were going over the curriculum that had been built for the first workshop and it used an early version of Boot. Unfortunately, it was a very rough experience and virtually unusable on Windows. As my first exposure to Boot, it was less than ideal and it put me off exploring it any further.</p>
+
+<p>Looking back, I&rsquo;m sure Boot was well-designed from the start and the design choices made were all solid &ndash; Boot was created by some very smart people &ndash; but I was less than charitable about Boot and unnecessarily vocal. I didn&rsquo;t take Boot very seriously.</p>
+
+<h2>Boot 2.5.0</h2>
+
+<p>Coming back to the present, Boot 2.5.0 was released in mid-December 2015. I owed it a serious second look. I was impressed. For starters, the installation process had become hella slick and the documentation looked really good. My early exploration was to try Boot on Windows 10, Mac OS X, and Linux for both the REPL experience and the basic project build process. One of the most striking differences from Leiningen was that &ldquo;it&rsquo;s just Clojure&rdquo;: the build script is straightforward executable Clojure, and tasks are just functions, and everything is based on an abstraction of a fileset. Another striking difference is that composability is baked right into the core of Boot: tasks are like Ring middleware and can wrap each other in a pipeline that allows tasks to talk control both before and after other tasks in the pipeline.</p>
+
+<p>After a promising &ldquo;first look&rdquo;, I decided to convert a couple of our core processes to run under Boot so that I could see what a real <code>build.boot</code> would look like in our environment. The only fly in the ointment for us was that Boot uses a single JVM and we were used to being able to compute our JVM options in <code>project.clj</code> (inside the first Leiningen JVM) for use by the application JVM (Leiningen&rsquo;s second JVM). By contrast, Boot uses environment variables to set up a single JVM environment and is a minimal intrusion itself. Boot further mitigates its own intrusion by allowing you execute code in a &ldquo;pod&rdquo; with its own isolated dependencies.</p>
+
+<p>We opted for a wrapper shell script to deal with our JVM environment computation. Once we had that in place, having just a single JVM up and running was a win all round: every process started up faster, our task and automation code was simpler.</p>
+
+<p>We decided on a two week spike to replace Leiningen with Boot across our entire project, and lift all of our executable processes up as Boot tasks. As of January 21st, we have Boot as an integral part of our production infrastructure. We&rsquo;re happy.</p>
+
+<p>In the next blog post, I&rsquo;ll talk about some of the specifics in our Boot infrastructure and the tasks we&rsquo;re writing. As a teaser, you can look at <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> and <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Where Did 2015 Go?]]></title>

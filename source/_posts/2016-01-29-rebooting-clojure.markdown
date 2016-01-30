@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Rebooting Clojure"
-date: 2016-01-29 20:30:00
+date: 2016-01-29 22:30:00
 comments: true
 categories: [clojure]
 ---
-We switched from [Leiningen](http://leiningen.org/) to [Boot](http://boot-clj.com/). What is Boot and why did we switched?<!-- more -->
+We switched from [Leiningen](http://leiningen.org/) to [Boot](http://boot-clj.com/). What is Boot and why did we switch?<!-- more -->
 
 ## Leiningen
 
