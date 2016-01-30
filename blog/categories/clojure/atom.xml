@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-29T22:31:13-08:00</updated>
+  <updated>2016-01-29T22:39:15-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -38,7 +38,7 @@
 
 <h2>Boot 2.5.0</h2>
 
-<p>Coming back to the present, Boot 2.5.0 was released in mid-December 2015. I owed it a serious second look. I was impressed. For starters, the installation process had become hella slick and the documentation looked really good. My early exploration was to try Boot on Windows 10, Mac OS X, and Linux for both the REPL experience and the basic project build process. One of the most striking differences from Leiningen was that &ldquo;it&rsquo;s just Clojure&rdquo;: the build script is straightforward executable Clojure, and tasks are just functions, and everything is based on an abstraction of a fileset. Another striking difference is that composability is baked right into the core of Boot: tasks are like Ring middleware and can wrap each other in a pipeline that allows tasks to talk control both before and after other tasks in the pipeline.</p>
+<p>Coming back to the present, Boot 2.5.0 was released in mid-December 2015. I owed it a serious second look. I was impressed. For starters, the installation process had become hella slick and the documentation looked really good. My early exploration was to try Boot on Windows 10, Mac OS X, and Linux for both the REPL experience and the basic project build process. One of the most striking differences from Leiningen was that &ldquo;it&rsquo;s just Clojure&rdquo;: the build script is straightforward executable Clojure, and tasks are just functions, and everything is based on an abstraction of a fileset. Another striking difference is that composability is baked right into the core of Boot: tasks are like Ring middleware and can wrap each other in a pipeline that allows tasks to take control both before and after other tasks in the pipeline.</p>
 
 <p>After a promising &ldquo;first look&rdquo;, I decided to convert a couple of our core processes to run under Boot so that I could see what a real <code>build.boot</code> would look like in our environment. The only fly in the ointment for us was that Boot uses a single JVM and we were used to being able to compute our JVM options in <code>project.clj</code> (inside the first Leiningen JVM) for use by the application JVM (Leiningen&rsquo;s second JVM). By contrast, Boot uses environment variables to set up a single JVM environment and is a minimal intrusion itself. Boot further mitigates its own intrusion by allowing you execute code in a &ldquo;pod&rdquo; with its own isolated dependencies.</p>
 
