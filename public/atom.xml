@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-29T22:29:27-08:00</updated>
+  <updated>2016-01-29T22:31:13-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -16,9 +16,9 @@
   <entry>
     <title type="html"><![CDATA[Rebooting Clojure]]></title>
     <link href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/"/>
-    <updated>2016-01-29T12:30:00-08:00</updated>
+    <updated>2016-01-29T14:30:00-08:00</updated>
     <id>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure</id>
-    <content type="html"><![CDATA[<p>We switched from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a>. What is Boot and why did we switched?<!-- more --></p>
+    <content type="html"><![CDATA[<p>We switched from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a>. What is Boot and why did we switch?<!-- more --></p>
 
 <h2>Leiningen</h2>
 
