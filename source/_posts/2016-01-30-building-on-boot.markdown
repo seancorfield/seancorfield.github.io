@@ -19,4 +19,4 @@ We also have some CFML applications in the mix. Because history. We had several 
 
 Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we'd able or willing to attempt with Leiningen in a long time.
 
-There were cons too, of course, and the biggest was that several of Leiningen built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I'll cover some of those in my next post.
+There were cons too, of course, and the biggest was that several of Leiningen's built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I'll cover some of those in my next post.
