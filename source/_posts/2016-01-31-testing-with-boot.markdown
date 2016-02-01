@@ -14,7 +14,7 @@ Boot's standard for driving `clojure.test` is [Adzerk's boot-test](https://githu
     (merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
     (require '[adzerk.boot-test :refer [test]])
 
-Now you can do `boot test` and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Boot so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is [boot-expectations](https://github.com/seancorfield/boot-expectations). Add a dependency on `[seancorfield/boot-expectations "1.0.5" :scope "test"]` and then refer in the `expectations` task:
+Now you can do `boot test` and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is [boot-expectations](https://github.com/seancorfield/boot-expectations). Add a dependency on `[seancorfield/boot-expectations "1.0.5" :scope "test"]` and then refer in the `expectations` task:
 
     (merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
     (require '[seancorfield.boot-expectations :refer [expectation]])
