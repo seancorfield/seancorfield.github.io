@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-06-17T22:40:10-07:00</updated>
+  <updated>2016-06-17T22:45:41-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -39,7 +39,7 @@
         (println "\nVerified there are no dependency conflicts.")))))
 </code></pre>
 
-<p>I added this to our build pipeline and <code>Unresolved dependency conflicts.</code> became a very familiar site until I&rsquo;d added enough <code>:exclusions</code> to our dependencies to finally see <code>Verified there are no dependency conflicts.</code>. Was I glad to see <em>that</em> at the end of the day!</p>
+<p>I added this to our build pipeline and <code>Unresolved dependency conflicts.</code> became a very familiar sight until I&rsquo;d added enough <code>:exclusions</code> to our dependencies to finally see <code>Verified there are no dependency conflicts.</code>. Was I glad to see <em>that</em> at the end of the day!</p>
 
 <p>One of the things I noticed was the huge number of libraries that pull in some old version of Clojure itself as a transitive dependency, so I ended up adding a global exclusion to our <code>build.boot</code> file:</p>
 
