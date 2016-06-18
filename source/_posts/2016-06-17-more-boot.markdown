@@ -25,7 +25,7 @@ Something strange was happening for us, however. Instead of the warnings, the us
                             conflicts))
             (println "\nVerified there are no dependency conflicts.")))))
 
-I added this to our build pipeline and `Unresolved dependency conflicts.` became a very familiar site until I'd added enough `:exclusions` to our dependencies to finally see `Verified there are no dependency conflicts.`. Was I glad to see _that_ at the end of the day!
+I added this to our build pipeline and `Unresolved dependency conflicts.` became a very familiar sight until I'd added enough `:exclusions` to our dependencies to finally see `Verified there are no dependency conflicts.`. Was I glad to see _that_ at the end of the day!
 
 One of the things I noticed was the huge number of libraries that pull in some old version of Clojure itself as a transitive dependency, so I ended up adding a global exclusion to our `build.boot` file:
 
