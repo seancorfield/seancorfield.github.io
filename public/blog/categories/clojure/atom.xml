@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-30T23:08:11-08:00</updated>
+  <updated>2016-06-17T19:12:30-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Boot-new]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/02/02/boot-new/"/>
+    <updated>2016-02-02T09:00:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/02/02/boot-new</id>
+    <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
+
+<p>Leiningen has long-supported the generation of new projects from templates and it&rsquo;s pretty slick. Want to get a new <a href="https://github.com/framework/fw1-clj">Framework One</a> application up and running?</p>
+
+<pre><code>lein new fw1 myapp
+cd myapp
+PORT=8123 lein run
+</code></pre>
+
+<p>That&rsquo;s all it takes. No directories and files to create, no editing. Just tell Leiningen to create a new <code>fw1</code> project called <code>myapp</code>, drop into that newly created directory and run the generated skeleton application.</p>
+
+<p>Behind the scenes, Leiningen looks for the most recent release of the <code>fw1/lein-template</code> artifact on Clojars (or Maven Central), downloads it and adds it to the classpath, then it <code>require</code>s the <code>leiningen.new.fw1</code> namespace (assumed to be in that artifact) and calls the <code>fw1</code> function within that namespace. That <code>fw1</code> template project in turn relies on the <code>leiningen.new.templates</code> namespace to provide a number of functions to <code>render</code> new project files from mustache-style templates, using the <a href="https://github.com/davidsantiago/stencil">Stencil library</a>. Leiningen templates may also depend on Leiningen&rsquo;s core code, as well as a few libraries that Leiningen always makes available (such as <a href="https://github.com/scgilardi/slingshot">Slingshot</a>).</p>
+
+<p>I figured that in order to kickstart any <code>boot new</code> functionality, it would make sense for it to be able to render existing Leiningen templates, as well as Boot-specific templates. Since Boot deliberately includes source code directly from other projects so as to minimize the number of dependencies it brings in, and it already had several pieces of Leiningen copied into it, I reached out to <a href="https://github.com/hyPiRion">Leiningen&rsquo;s current maintainer, Jean Niklas L'orange</a> and asked permission to include parts of Leiningen&rsquo;s new/template support. He graciously said yes &ndash; thank you! &ndash; so I created a raw first cut of a <code>new</code> task for Boot, based directly on Leiningen&rsquo;s code, which in turn depended on Bultitude and <code>leiningen-core</code> (and a few other bits and pieces). Because Boot tasks are &ldquo;just Clojure&rdquo;, it was fairly straightforward to get to a [working 0.1.0 version]<a href="https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj">https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj</a>) that had basic parity with <code>lein new</code>.</p>
+
+<p>Since Boot already provided ways to manage dependencies and the classpath, my next goal was <a href="https://github.com/seancorfield/boot-new/blob/v0.2.0/src/boot/new.clj">an 0.2.0 version that didn&rsquo;t rely on Leiningen&rsquo;s core</a>. This version provided the same functionality (well, almost, it had compatibility bugs that took another version to iron out) but no longer needed to bring in <code>leiningen-core</code> as a dependency (unless you were generating a Leiningen template which might itself rely on that).</p>
+
+<p>At this point, I was able to implement built-in templates to match Leiningen&rsquo;s <code>app</code>, <code>default</code> (library), <code>plugin</code>, and <code>template</code>, which would produce Boot-specific versions. The <a href="https://github.com/seancorfield/boot-new/tree/v0.2.1/src/boot/new">0.2.1 version included built-in templates</a> for <code>app</code>, <code>default</code>, <code>task</code> (the Boot equivalent of a plugin), and <code>template</code>.</p>
+
+<p>Boot <code>new</code> had both <code>leiningen.new.templates</code> (adapted to run inside Boot) and <code>boot.new.templates</code> to support Boot templates. A Boot template is just like a Leiningen template, with a couple of important exceptions: the artifact name is of the form <code>foo/boot-template</code> (instead of <code>foo/lein-template</code>) and the template&rsquo;s main namespace is <code>boot.new.foo</code> (instead of <code>leiningen.new.foo</code>). In addition, a Boot template is expected to rely on Boot&rsquo;s internals or explicitly specify its own dependencies &ndash; instead of depending on Leiningen&rsquo;s core library. As a final piece of clean up for this &ldquo;initial&rdquo; version of Boot <code>new</code>, I removed the dependency on Bultitude (which actually hadn&rsquo;t been needed for a while) and deferred the addition of the <code>leiningen-core</code> and <code>slingshot</code> dependencies so they wouldn&rsquo;t be pulled in if you were generating a project from a Boot template.</p>
+
+<p>At this point, I felt Boot <code>new</code> was ready to announce to the world! I could do:</p>
+
+<pre><code>boot -d seancorfield/boot-new -t fw1 -n myapp
+</code></pre>
+
+<p>and get a freshly generated Framework One app, even if that still used Leiningen to actually run the new app. I could do:</p>
+
+<pre><code>boot -d seancorfield/boot-new -t app -n myapp
+</code></pre>
+
+<p>to get a skeleton for an application that was &ldquo;powered by Boot&rdquo;: the generated <code>build.boot</code> file provides tasks for <code>build</code>ing the application uber-JAR and <code>run</code>ing the application itself.</p>
+
+<p><a href="https://github.com/alandipert">Alan Dipert</a> and <a href="https://github.com/pesterhazy">Paulus Esterhazy</a> were the first two people to uncover compatibility bugs with existing Leiningen templates (for Hoplon and Chestnut, respectively). Thank you! And that brought me to Release 0.3.1 of <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
+
+<p>The next thing on my roadmap is to add some sort of &ldquo;generator&rdquo; function (not unlike <a href="https://github.com/weavejester/lein-generate">James Reeves' lein-generate</a>) which will allow you to add new pieces to your existing projects, much Rails/Grails have built-in commands to let you add new models, controllers, and so on. That will be part of 0.4.0 and probably go through a couple of revisions. At some point, I&rsquo;ll feel comfortable declaring a 1.0.0 release and then we&rsquo;ll see about getting Boot <code>new</code> merged into the core of Boot itself.</p>
+
+<p>Boot originally started life as a part of Hoplon and for a long time, you needed Leiningen in order to generate a new Hoplon project, even tho' Hoplon itself was powered-by-Boot. It&rsquo;s nice to see <a href="https://github.com/hoplon/hoplon/wiki/Get-Started#start-from-a-template">Hoplon&rsquo;s Getting Started</a> using <code>boot-new</code> as the recommended way to generate a new Hoplon project (it&rsquo;s still a Leiningen template!).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Testing With Boot]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/"/>
+    <updated>2016-01-31T07:30:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot</id>
+    <content type="html"><![CDATA[<p>In <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
+
+<p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
+
+<p>Boot&rsquo;s standard for driving <code>clojure.test</code> is <a href="https://github.com/adzerk-oss/boot-test">Adzerk&rsquo;s boot-test</a>. Using it in your <code>build.boot</code> file is as simple as adding a dependency on <code>[adzerk/boot-test "1.0.7" :scope "test"]</code> and then referring in the <code>test</code> task:</p>
+
+<pre><code>(merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
+(require '[adzerk.boot-test :refer [test]])
+</code></pre>
+
+<p>Now you can do <code>boot test</code> and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a>. Add a dependency on <code>[seancorfield/boot-expectations "1.0.5" :scope "test"]</code> and then refer in the <code>expectations</code> task:</p>
+
+<pre><code>(merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
+(require '[seancorfield.boot-expectations :refer [expectation]])
+</code></pre>
+
+<p>Now you can do <code>boot expectations</code> to run any Expectations tests in any of the namespaces in your source paths. Do <code>boot expectations -h</code> to see all the options the task provides.</p>
+
+<p>I relied very heavily on two sources for this project: Adzerk&rsquo;s <code>boot-test</code> for the shape of the code and the <a href="https://clojurians.slack.com/messages/boot/">#boot channel</a> on the <a href="http://clojurians.net">Clojurians Slack</a> where Boot&rsquo;s maintainers hang out and are <em>extremely attentive and helpful</em>! In particular, <a href="https://github.com/micha">Micha Niskin</a> was invaluable, answering all my newbie questions and making suggestions. Boot&rsquo;s &ldquo;pods&rdquo; made it easy to specify the version of Clojure to use when running the tests, without affecting the version of Clojure used for anything else in the build process (we have always run our tests against the released version we are actually using as well as the latest snapshot of Clojure&rsquo;s master branch so we don&rsquo;t get surprised by any changes being introduced in the next release). The &ldquo;pod&rdquo; machinery also made it straightforward to have namespaces required into the testing environment, and shutdown functions run after the tests, again without affecting the main build process. And all in a single JVM process that runs for the duration of the build.</p>
+
+<p>As you can see on Boot&rsquo;s wiki, the ecosystem of <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-maintained Boot tasks</a> is already pretty strong and growing all the time.</p>
+
+<p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
+
+<p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building on Boot]]></title>
@@ -119,103 +198,6 @@
 <p>Our other big change, coming at the tail end of year, was a switch from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a> for our primary Clojure build tool. I&rsquo;ll be blogging about this more in due course, but for now I&rsquo;ll just mention the <a href="https://github.com/seancorfield/boot-expectations">Boot task for running Expectations tests</a> and that Leiningen-style templates will be coming to Boot soon&hellip;</p>
 
 <p>Happy 2016!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Frege (and Clojure)]]></title>
-    <link href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/"/>
-    <updated>2015-02-13T02:32:18-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho'!). I also spent some time with Go last year (don&rsquo;t like it).</p>
-
-<p>The Elm language is really nice - and useful for building interactive browser-based applications (and games). I&rsquo;ve been meaning to blog about it for quite a while, and I hope to get around to that in due course. Elm is sort of inspired by Haskell, and that&rsquo;s really what this blog post is about. Sort of.<!-- more --></p>
-
-<p>Haskell and I have a strange relationship. I really liked Haskell when it appeared in the early 90&rsquo;s. I hoped it would finally be the language to help Functional Programming go mainstream (I&rsquo;d been dabbling with FP for about a decade by then). It didn&rsquo;t. Sigh. But I continued to dabble with FP - and Haskell - on and off (mostly off) for another couple of decades. I&rsquo;ve occasionally blogged about Haskell (yes, on my old ColdFusion-focused blog it used to crop up about once a year), and I&rsquo;ve always wanted to be able to <em>use</em> Haskell for something more than just playing around. For a long, long time tho', my programming life has been tied to the JVM, for better or worse, and Haskell&rsquo;s standalone nature has meant that I haven&rsquo;t been able to integrate it into my daily stack.</p>
-
-<p>That tie to the JVM is why I learned Groovy, Scala, Clojure - and took them all to production - but haven&rsquo;t really been able to get deeply into Python (much as I like it)&hellip; or poor old Haskell, despite now decades of toying with it.</p>
-
-<p>Fortunately for me, Ingo Wechsung likes Haskell enough that he created the <a href="http://www.frege-lang.org">Frege programming language</a> which is &ldquo;a <strong>pure</strong> functional programming language for the JVM in the spirit of Haskell&rdquo;. It&rsquo;s sufficiently similar to Haskell - see <a href="https://github.com/Frege/frege/wiki/Differences-between-Frege-and-Haskell">Differences between Frege and Haskell</a> - that many people consider Frege to be &ldquo;Haskell for the JVM&rdquo;. This makes me happy because I can finally start to use Haskell (sort of) as part of my daily stack and therefore <em>really learn it</em>! Finally!</p>
-
-<p>So why is this post titled <strong>Frege (and Clojure)</strong>?</p>
-
-<p>Given that Clojure is my primary language, what I really want is to be able to use Frege alongside Clojure, writing small routines in Frege that I can call from Clojure. That means I need a way to compile and load Frege code via Leiningen, Clojure&rsquo;s build tool. So I created <code>lein-fregec</code>, a <a href="https://github.com/seancorfield/lein-fregec">Frege plugin for Leiningen</a>, that allows you to compile pure Frege projects, as well as compile and run mixed language Frege / Clojure projects.</p>
-
-<p>Today I released version <del>3.22.324</del> <strong>3.22.367-i</strong> (to match the current version of the Frege compiler), along with two example Leiningen projects (in that same repo) to show how to use <code>lein-fregec</code> for pure Frege projects as well as Clojure / Frege projects. Let&rsquo;s take a look at the mixed language one.</p>
-
-<p>Here&rsquo;s the Frege code:</p>
-
-<pre><code>module Fibonacci where
-
--- lazy infinite sequence of Fibonacci numbers starting with a, b:
-fibs a b = a : fibs b (a + b)
-
--- lazy infinite sequence of Fibonacci numbers (0, 1, 1, 2, 3, ...):
-fibonacci = fibs 0 1
-
--- let Frege infer the types here (it'll be Int -&gt; Int):
-fibn n = head $ drop n $ fibonacci
-
--- Clojure uses Long by default so this is our public API:
-fib :: Long -&gt; Long
-fib n = Int.long $ fibn (Long.int n)
-</code></pre>
-
-<p>This declares a module (class in the Java bytecode) called <code>Fibonacci</code> which contains four functions. Even tho' Frege is a (very) strongly typed language, you can often omit the types as it will infer them for you. Starting at the bottom, we have <code>fib</code> which is declared to take a <code>Long</code> and return a <code>Long</code> - and will be compiled down to a static method on the <code>Fibonacci</code> class and therefore easily callable from Clojure (or Java). It casts its argument <code>n</code> to an integer, calls <code>fibn</code> on it, and then casts the result to a <code>Long</code> to return it to Clojure. <code>f $ g x</code> is shorthand for <code>f (g x)</code> that avoids the parentheses. <code>fibn</code>, in turn starts with the (lazy infinite) sequence of fibonacci numbers and drops the first <code>n</code> of them (the sequence starts with zero, but I&rsquo;m treating one as the &ldquo;first&rdquo; number) and then returns the first of what&rsquo;s left (the <code>head</code>). Again <code>$</code> means we don&rsquo;t have to write <code>head (drop n (fibonnaci))</code>. The <code>fibonacci</code> function takes no arguments and just calls <code>fibs</code> with the seed values of zero and one. <code>fibs</code> takes two arguments and returns a sequence with the first argument followed by the fibonacci sequence that starts with the second argument. Frege, like Haskell, is a non-strict (lazy) language so <code>fibs</code> isn&rsquo;t really a recursive call, even tho' it looks like it ought to blow the stack. Instead, when it is called, it returns a list whose first element is (the value of) <code>a</code> and whose remaining elements will be evaluated as needed - or rather <em>if needed</em>. Technically, it doesn&rsquo;t even evaluate <code>a</code> unless you actually refer to the value.</p>
-
-<p>What that means is that when <code>fib</code> is called, the cast (from <code>Int</code> to <code>Long</code>) forces evaluation of the call to <code>fibn</code>, which in turn asks for the <code>head</code> of &hellip; the sequence we get by dropping the first <code>n</code> elements of &hellip; that lazy infinite sequence. So we construct the first <code>n + 1</code> elements of the list and then we look at the last one of those, which forces the calculation of that value (yes, the additions are deferred until the value is needed!). We write simple, obvious code that looks like it might be very inefficient but Frege ensures that only the values we actually need are ever calculated - and because of the way the sequence is constructed from previous elements, it means that once we&rsquo;ve calculated the <em>nth</em> number, all the previous ones are essentially calculated and cached for us. This is possible because our functions are <strong>pure</strong> (no side effects).</p>
-
-<p>What about the Clojure code? Since Frege compiles modules to classes and certain functions (with basic Java type signatures) to static methods, we simply import the compiled class and call the function we want:</p>
-
-<pre><code>(ns example.core
-  (:import Fibonacci))
-
-... (Fibonacci/fib 13) ...
-</code></pre>
-
-<p>We can even play with the code from the REPL:</p>
-
-<pre><code>$ lein do fregec, repl
-...
-example.core=&gt; (Fibonacci/fib 11)
-89
-example.core=&gt; (Fibonacci/fib 42)
-267914296
-example.core=&gt; 
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure in the Enterprise?]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/"/>
-    <updated>2014-09-23T23:05:05-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise</id>
-    <content type="html"><![CDATA[<p><em>This was originally posted on <a href="http://corfield.org/blog/post.cfm/clojure-in-the-enterprise">corfield.org back in April 2013</a> and I noticed it was recently referenced by Eric Normand in his recent blog post <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">Convince your boss to use Clojure</a> so I figured it was time to update the article and bring it onto my new blog.</em></p>
-
-<p>A question was asked in early 2013 on a Clojure group on LinkedIn about reasons to migrate to Clojure for enterprise applications in a Java shop. It&rsquo;s a fairly typical question from people in the Java world when they hear the buzz about Clojure, and of course asking the question on a Clojure group garnered a lot of positive responses about why Clojure is a good choice. I didn&rsquo;t feel anyone had really addressed a core aspect of the original question which was, essentially, &ldquo;Why should I, as a Java web developer, using JPA, JSF etc, choose Clojure instead for an enterprise application?&rdquo;.<!-- more --> The key considerations here are &ldquo;enterprise application&rdquo; and &ldquo;Java web devloper, using JPA, JSF etc&rdquo;. Clojure is rightly praised for big data projects, simplified concurrency due to immutable data, and the conciseness of its solutions. The general advice when introducing Clojure to an organization is to take a grass roots approach: use it for some tooling first, or a small low-risk (but perhaps high-profile) project and show how well it works in a Java-dominated world. Then you get more and more developers trying it out and gradually the organization adopts it for more and more projects. It&rsquo;s good advice, and it&rsquo;s often how Clojure has crept into Java shops so far (as opposed to those fast-moving small shops that already have a tendency toward polyglot development).</p>
-
-<p>I didn&rsquo;t feel anyone had really talked about how radical Clojure seems to a conservative &ldquo;enterprise&rdquo; company that&rsquo;s already bought into the Java way of doing things from top-to-bottom (as indicated by the original poster&rsquo;s references to JPA and JSF). I had a couple of people ask me to turn my <a href="http://www.linkedin.com/groupItem?view=&amp;gid=1058217&amp;item=ANET%3AS%3A228031575&amp;commentID=129649205&amp;trk=NUS_RITM-title#commentID_129649205">(fairly length) response on the group</a> into a blog post, so I did, and here&rsquo;s the updated version for 2014&hellip;</p>
-
-<p>The &ldquo;enterprise&rdquo; in general is extremely conservative about change. Those companies use Java because it&rsquo;s &ldquo;safe&rdquo;: it&rsquo;s pretty much ubiquitous, it&rsquo;s been around for decades, it&rsquo;s easy to hire low-to-mid-range developers, you can outsource it relatively easily. If you have a company that&rsquo;s bought into the whole Java stack and uses Java for &ldquo;everything&rdquo;, you have a deeply entrenched company and it may be extremely difficult to bring Clojure in. You might have some success bringing Scala in - as a &ldquo;better Java&rdquo; - because Scala is less alien to Java developers and the marketing behind Scala is focused on serving the &ldquo;enterprise&rdquo; already.</p>
-
-<p>Having talked to a number of Java developers who work in big &ldquo;enterprise&rdquo; shops, one of the biggest problems is simply that the average skill level in such shops is often pretty mediocre, especially if some of the work is outsourced (and considered acceptable quality). The processes tend to be old-fashioned, the tooling tends to be years behind the bleeding edge. Even bringing Scala in can be very disruptive and the worst part is you might just end up with Java-in-Scala, without a lot of the benefits of moving to a highly expressive, (partly) functional language.</p>
-
-<p>Clojure is very alien to the average Java developer. If you have a shop full of &ldquo;average&rdquo; Java developers who have grown up only knowing &ldquo;OOP in Java&rdquo;, they will struggle really badly with the functional concepts in Clojure (and Scala - which is why you get Java-in-Scala instead of idiomatic Scala). Unlearning all those OOP habits to write effective functional code is really, really hard for a lot of people. Writing high performance idiomatic functional code can be even harder. Don&rsquo;t underestimate that difficulty! Take away objects, mutable state, variables, loops&hellip; a lot of Java developers are immediately all at sea and have no idea how to solve even basic problems. They&rsquo;ll try to bend Clojure to their OOP way of thinking and they&rsquo;ll most likely fail.</p>
-
-<p>Clojure is great for bleeding edge developers and it is also great for new developers who have not yet learned the bad habits of OOP (conflating state and identity, mutability, loss of data history / time concepts).</p>
-
-<p>Everything that everyone said in the original comment thread on LinkedIn is true: Clojure has many wonderful benefits, you can start with a small, eager team and a high profile but relatively low-risk project, and so on. But don&rsquo;t underestimate the difficulty of getting a conservative organization to switch from the COBOL of the modern era (Java) to something as radical as Clojure currently is, nor the difficulty of retraining your army of low-to-med-range Java-only programmers.</p>
-
-<p>At my company, we first took Clojure to production in mid-2011 and cross-training the team - a small group of developers eager to learn new things - is an ongoing process, slow and steady. We&rsquo;re at 22KLOC in Clojure with over 5KLOC in our test suite, and about 1KLOC of ClojureScript now. That&rsquo;s probably the equivalent of at least 80KLOC of Java (and quite likely north of 150KLOC). We&rsquo;re a small company with a very supportive management team. At this point, almost all new development is in Clojure with maintenance still continuing on the &ldquo;legacy&rdquo; code base (another factor to consider, by the way: what about your existing Java code base?). We love Clojure. It&rsquo;s made development a lot more fun. We&rsquo;re able to solve harder problems, make changes faster, leverage multi-core concurrency more effectively, and we have a much smaller code base to maintain. But we are about as far from &ldquo;enterprise&rdquo; as you can imagine, while not actually being a start-up (World Singles has been around for over a decade).</p>
-
-<p>The half dozen paragraphs above are an edited version of what I posted on LinkedIn (and slightly updated from my original blog post) but there&rsquo;s something else I wanted to cover in this post: the mindset of Clojure.</p>
-
-<p>A common question amongst folks new to Clojure, especially those who want to do web development, is &ldquo;Where are the &lsquo;batteries included&rsquo; frameworks?&rdquo;. If you come to Clojure from Ruby on Rails, you&rsquo;ll probably be surprised to see no full-stack web framework. If you come to Clojure from Java, you might be looking for something like Spring (or Hibernate). The Clojure community favors small, composable libraries over opinionated frameworks. If you want to do web development in Clojure, you can pick a library for routing, a library for basic HTTP request/response plumbing, a library for persistence, and so on, and you&rsquo;ll compose those together with your application code to build the solution you like best. For almost every task, Clojure has several libraries, each focused on doing one thing well and an expectation to &ldquo;play nicely with others&rdquo;, mostly through the idiom of building on Clojure&rsquo;s core data structures (mostly maps and vectors, but also sets and the ubiquitous sequence abstraction). For some, this is seen as a lack of structure or a lack of maturity but it&rsquo;s a very deliberate decision by the core of the Clojure community. Instead of just falling into a particular way of doing something, Clojure encourages you to pick'n'mix, focusing on the problem at hand and solving it in the most elegant way, rather than trying to shoehorn your solution into someone else&rsquo;s way of thinking.</p>
-
-<p>A couple of examples from World Singles might illustrate this. We use two different libraries for generating HTML/XML, which have very different approaches. We use <a href="https://github.com/yogthos/Selmer">Selmer</a> to generate HTML emails. We use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate XML documents that we use with 3rd party web services. Selmer takes mustache-style templates with substitutions for data structures and some embedded control structures. Hiccup takes Clojure data structures and renders them to HTML/XML. For our web service interaction, we tend to have data structures that we want to render to XML so it is more natural to annotate the data with more data and let Hiccup take care of the rendering. With our HTML emails, we want something close to HTML with a controlled set of substitutions, for member profile data etc. Similarly we use two different testing libraries for different situations. We use <a href="https://github.com/jaycfields/expectations">Expectations</a> for most of our testing because we like the language it uses: &ldquo;Expect {some conditions} to be true of {our test expression}&rdquo;. It lets us write very natural, expressive tests. However, for our WebDriver based tests (using <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a>), we prefer the more assert-based approach of Clojure&rsquo;s built-in testing library (clojure.test). These end-to-end tests are organized in a much more procedural way, asserting certain things about the state of the UI at various points in each scenario we are testing. Finally, we use two different date/time libraries: <a href="https://github.com/stackoverflow/date-clj">date-clj</a> and <a href="https://github.com/clj-time/clj-time">clj-time</a>. The former is great for interacting with data stores since it uses <code>java.util.Date</code> and supports basic date manipulation (adding / subtracting a number of time units). The latter is great for more complex date/time manipulation (midnight-based instants, periods, intervals, range checking) but is based on Joda Time and needs to be explicitly converted to/from <code>java.util.Date</code> at the boundaries.</p>
-
-<p>Clojure&rsquo;s wealth of choices can be overwhelming but it&rsquo;s also very freeing. The &ldquo;enterprise&rdquo; often wants a more proscribed way to do things, with more consistent solutions across different teams and different abilities. For more ideas on getting Clojure into your &ldquo;enterprise&rdquo; shop, take a look at <a href="http://www.youtube.com/watch?v=2WLgzCkhN2g">Neal Ford&rsquo;s Master Plan for Clojure Enterprise Mindshare Domination</a> presentation from Clojure/conj 2011.</p>
 ]]></content>
   </entry>
   

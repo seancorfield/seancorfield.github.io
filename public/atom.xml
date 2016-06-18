@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-01-30T23:08:11-08:00</updated>
+  <updated>2016-06-17T19:12:30-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Boot-new]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/02/02/boot-new/"/>
+    <updated>2016-02-02T09:00:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/02/02/boot-new</id>
+    <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
+
+<p>Leiningen has long-supported the generation of new projects from templates and it&rsquo;s pretty slick. Want to get a new <a href="https://github.com/framework/fw1-clj">Framework One</a> application up and running?</p>
+
+<pre><code>lein new fw1 myapp
+cd myapp
+PORT=8123 lein run
+</code></pre>
+
+<p>That&rsquo;s all it takes. No directories and files to create, no editing. Just tell Leiningen to create a new <code>fw1</code> project called <code>myapp</code>, drop into that newly created directory and run the generated skeleton application.</p>
+
+<p>Behind the scenes, Leiningen looks for the most recent release of the <code>fw1/lein-template</code> artifact on Clojars (or Maven Central), downloads it and adds it to the classpath, then it <code>require</code>s the <code>leiningen.new.fw1</code> namespace (assumed to be in that artifact) and calls the <code>fw1</code> function within that namespace. That <code>fw1</code> template project in turn relies on the <code>leiningen.new.templates</code> namespace to provide a number of functions to <code>render</code> new project files from mustache-style templates, using the <a href="https://github.com/davidsantiago/stencil">Stencil library</a>. Leiningen templates may also depend on Leiningen&rsquo;s core code, as well as a few libraries that Leiningen always makes available (such as <a href="https://github.com/scgilardi/slingshot">Slingshot</a>).</p>
+
+<p>I figured that in order to kickstart any <code>boot new</code> functionality, it would make sense for it to be able to render existing Leiningen templates, as well as Boot-specific templates. Since Boot deliberately includes source code directly from other projects so as to minimize the number of dependencies it brings in, and it already had several pieces of Leiningen copied into it, I reached out to <a href="https://github.com/hyPiRion">Leiningen&rsquo;s current maintainer, Jean Niklas L'orange</a> and asked permission to include parts of Leiningen&rsquo;s new/template support. He graciously said yes &ndash; thank you! &ndash; so I created a raw first cut of a <code>new</code> task for Boot, based directly on Leiningen&rsquo;s code, which in turn depended on Bultitude and <code>leiningen-core</code> (and a few other bits and pieces). Because Boot tasks are &ldquo;just Clojure&rdquo;, it was fairly straightforward to get to a [working 0.1.0 version]<a href="https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj">https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj</a>) that had basic parity with <code>lein new</code>.</p>
+
+<p>Since Boot already provided ways to manage dependencies and the classpath, my next goal was <a href="https://github.com/seancorfield/boot-new/blob/v0.2.0/src/boot/new.clj">an 0.2.0 version that didn&rsquo;t rely on Leiningen&rsquo;s core</a>. This version provided the same functionality (well, almost, it had compatibility bugs that took another version to iron out) but no longer needed to bring in <code>leiningen-core</code> as a dependency (unless you were generating a Leiningen template which might itself rely on that).</p>
+
+<p>At this point, I was able to implement built-in templates to match Leiningen&rsquo;s <code>app</code>, <code>default</code> (library), <code>plugin</code>, and <code>template</code>, which would produce Boot-specific versions. The <a href="https://github.com/seancorfield/boot-new/tree/v0.2.1/src/boot/new">0.2.1 version included built-in templates</a> for <code>app</code>, <code>default</code>, <code>task</code> (the Boot equivalent of a plugin), and <code>template</code>.</p>
+
+<p>Boot <code>new</code> had both <code>leiningen.new.templates</code> (adapted to run inside Boot) and <code>boot.new.templates</code> to support Boot templates. A Boot template is just like a Leiningen template, with a couple of important exceptions: the artifact name is of the form <code>foo/boot-template</code> (instead of <code>foo/lein-template</code>) and the template&rsquo;s main namespace is <code>boot.new.foo</code> (instead of <code>leiningen.new.foo</code>). In addition, a Boot template is expected to rely on Boot&rsquo;s internals or explicitly specify its own dependencies &ndash; instead of depending on Leiningen&rsquo;s core library. As a final piece of clean up for this &ldquo;initial&rdquo; version of Boot <code>new</code>, I removed the dependency on Bultitude (which actually hadn&rsquo;t been needed for a while) and deferred the addition of the <code>leiningen-core</code> and <code>slingshot</code> dependencies so they wouldn&rsquo;t be pulled in if you were generating a project from a Boot template.</p>
+
+<p>At this point, I felt Boot <code>new</code> was ready to announce to the world! I could do:</p>
+
+<pre><code>boot -d seancorfield/boot-new -t fw1 -n myapp
+</code></pre>
+
+<p>and get a freshly generated Framework One app, even if that still used Leiningen to actually run the new app. I could do:</p>
+
+<pre><code>boot -d seancorfield/boot-new -t app -n myapp
+</code></pre>
+
+<p>to get a skeleton for an application that was &ldquo;powered by Boot&rdquo;: the generated <code>build.boot</code> file provides tasks for <code>build</code>ing the application uber-JAR and <code>run</code>ing the application itself.</p>
+
+<p><a href="https://github.com/alandipert">Alan Dipert</a> and <a href="https://github.com/pesterhazy">Paulus Esterhazy</a> were the first two people to uncover compatibility bugs with existing Leiningen templates (for Hoplon and Chestnut, respectively). Thank you! And that brought me to Release 0.3.1 of <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
+
+<p>The next thing on my roadmap is to add some sort of &ldquo;generator&rdquo; function (not unlike <a href="https://github.com/weavejester/lein-generate">James Reeves' lein-generate</a>) which will allow you to add new pieces to your existing projects, much Rails/Grails have built-in commands to let you add new models, controllers, and so on. That will be part of 0.4.0 and probably go through a couple of revisions. At some point, I&rsquo;ll feel comfortable declaring a 1.0.0 release and then we&rsquo;ll see about getting Boot <code>new</code> merged into the core of Boot itself.</p>
+
+<p>Boot originally started life as a part of Hoplon and for a long time, you needed Leiningen in order to generate a new Hoplon project, even tho' Hoplon itself was powered-by-Boot. It&rsquo;s nice to see <a href="https://github.com/hoplon/hoplon/wiki/Get-Started#start-from-a-template">Hoplon&rsquo;s Getting Started</a> using <code>boot-new</code> as the recommended way to generate a new Hoplon project (it&rsquo;s still a Leiningen template!).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Testing With Boot]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/"/>
+    <updated>2016-01-31T07:30:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot</id>
+    <content type="html"><![CDATA[<p>In <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
+
+<p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
+
+<p>Boot&rsquo;s standard for driving <code>clojure.test</code> is <a href="https://github.com/adzerk-oss/boot-test">Adzerk&rsquo;s boot-test</a>. Using it in your <code>build.boot</code> file is as simple as adding a dependency on <code>[adzerk/boot-test "1.0.7" :scope "test"]</code> and then referring in the <code>test</code> task:</p>
+
+<pre><code>(merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
+(require '[adzerk.boot-test :refer [test]])
+</code></pre>
+
+<p>Now you can do <code>boot test</code> and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a>. Add a dependency on <code>[seancorfield/boot-expectations "1.0.5" :scope "test"]</code> and then refer in the <code>expectations</code> task:</p>
+
+<pre><code>(merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
+(require '[seancorfield.boot-expectations :refer [expectation]])
+</code></pre>
+
+<p>Now you can do <code>boot expectations</code> to run any Expectations tests in any of the namespaces in your source paths. Do <code>boot expectations -h</code> to see all the options the task provides.</p>
+
+<p>I relied very heavily on two sources for this project: Adzerk&rsquo;s <code>boot-test</code> for the shape of the code and the <a href="https://clojurians.slack.com/messages/boot/">#boot channel</a> on the <a href="http://clojurians.net">Clojurians Slack</a> where Boot&rsquo;s maintainers hang out and are <em>extremely attentive and helpful</em>! In particular, <a href="https://github.com/micha">Micha Niskin</a> was invaluable, answering all my newbie questions and making suggestions. Boot&rsquo;s &ldquo;pods&rdquo; made it easy to specify the version of Clojure to use when running the tests, without affecting the version of Clojure used for anything else in the build process (we have always run our tests against the released version we are actually using as well as the latest snapshot of Clojure&rsquo;s master branch so we don&rsquo;t get surprised by any changes being introduced in the next release). The &ldquo;pod&rdquo; machinery also made it straightforward to have namespaces required into the testing environment, and shutdown functions run after the tests, again without affecting the main build process. And all in a single JVM process that runs for the duration of the build.</p>
+
+<p>As you can see on Boot&rsquo;s wiki, the ecosystem of <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-maintained Boot tasks</a> is already pretty strong and growing all the time.</p>
+
+<p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
+
+<p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Building on Boot]]></title>
