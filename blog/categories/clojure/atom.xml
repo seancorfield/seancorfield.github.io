@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-07-18T12:04:54-07:00</updated>
+  <updated>2016-07-18T12:09:23-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -18,7 +18,7 @@
     <link href="http://seancorfield.github.io/blog/2016/07/18/start-your-engine/"/>
     <updated>2016-07-18T04:00:00-07:00</updated>
     <id>http://seancorfield.github.io/blog/2016/07/18/start-your-engine</id>
-    <content type="html"><![CDATA[<p>Today I&rsquo;m inspired my the <a href="http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=56d35f53c5">latest issue of Eric Normand&rsquo;s Clojure
+    <content type="html"><![CDATA[<p>Today I&rsquo;m inspired by the <a href="http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=56d35f53c5">latest issue of Eric Normand&rsquo;s Clojure
 Gazette</a>
 which talks about why his &ldquo;Joy of Programming&rdquo; comes from learning
 and exploration.</p>
@@ -44,7 +44,7 @@ projects in other languages for fun), I sketched out, figuratively on a
 conventions</a>.
 It was intended as an exercise to &ldquo;scratch an itch&rdquo;. It went on to become one
 of the most popular MVC frameworks in the CFML community (and I still
-maintain it to this day, even tho' my work is almost entirely Clojure).</p>
+maintain it to this day, even tho' my work is almost entirely Clojure now).</p>
 
 <p>Again, as an exercise to &ldquo;scratch an itch&rdquo;, while I was still relatively new
 to Clojure, I decided to <a href="http://framework-one.github.io/blog/2011/11/07/fw1-comes-to-clojure/">port the core of that framework to
@@ -84,7 +84,7 @@ encouragement to &ldquo;scratch your itch&rdquo; and to write code as a way of l
 and exploring new ideas. It doesn&rsquo;t matter if that code is ultimately useful
 to anyone other than to you, as a medium for expressing your thoughts: write
 it down, play with it, use it to investigate a new concept or to rethink an
-existing one.</p>
+existing one. Above all, <strong>enjoy</strong> programming!</p>
 ]]></content>
   </entry>
   
