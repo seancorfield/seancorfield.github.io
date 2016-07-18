@@ -5,7 +5,7 @@ date: 2016-07-18 11:00:00
 comments: true
 categories: [clojure]
 ---
-Today I'm inspired my the [latest issue of Eric Normand's Clojure
+Today I'm inspired by the [latest issue of Eric Normand's Clojure
 Gazette](http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&id=56d35f53c5)
 which talks about why his "Joy of Programming" comes from learning
 and exploration.
@@ -31,7 +31,7 @@ projects in other languages for fun), I sketched out, figuratively on a
 conventions](http://framework-one.github.io/blog/2010/02/06/fw1-the-napkin-spec/).
 It was intended as an exercise to "scratch an itch". It went on to become one
 of the most popular MVC frameworks in the CFML community (and I still
-maintain it to this day, even tho' my work is almost entirely Clojure).
+maintain it to this day, even tho' my work is almost entirely Clojure now).
 
 Again, as an exercise to "scratch an itch", while I was still relatively new
 to Clojure, I decided to [port the core of that framework to
@@ -71,4 +71,4 @@ encouragement to "scratch your itch" and to write code as a way of learning,
 and exploring new ideas. It doesn't matter if that code is ultimately useful
 to anyone other than to you, as a medium for expressing your thoughts: write
 it down, play with it, use it to investigate a new concept or to rethink an
-existing one.
+existing one. Above all, **enjoy** programming!
