@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-06-18T14:26:07-07:00</updated>
+  <updated>2016-07-18T12:04:54-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,81 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Start Your Engine]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/07/18/start-your-engine/"/>
+    <updated>2016-07-18T04:00:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/07/18/start-your-engine</id>
+    <content type="html"><![CDATA[<p>Today I&rsquo;m inspired my the <a href="http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=56d35f53c5">latest issue of Eric Normand&rsquo;s Clojure
+Gazette</a>
+which talks about why his &ldquo;Joy of Programming&rdquo; comes from learning
+and exploration.</p>
+
+<p>I got into programming as a child because I was curious about solving puzzles
+and problems: given the (relatively) limited vocabulary of a programming language
+and its input and output features, and some interesting problem that came to
+mind, can I solve it in a usable (and hopefully elegant) way?</p>
+
+<p>Over the years, I&rsquo;ve written a <strong>lot</strong> of fun little programs to solve
+all sorts of interesting puzzles and problems that I&rsquo;ve either run across
+or invented just to amuse myself. I learn different programming languages
+to learn new vocabularies for solving problems, and new ways of looking at
+problems.</p>
+
+<p>Some of those programs become libraries that I&rsquo;ve ended up using at work
+in one form or another, some become open source projects where I&rsquo;m pretty much
+the only user, a very small number become widely used projects.<!-- more --></p>
+
+<p>Back in 2009, when my work was primarily CFML-based (and I wrote side
+projects in other languages for fun), I sketched out, figuratively on a
+<a href="http://framework-one.github.io/blog/2010/02/06/fw1-the-napkin-spec/">napkin, my ideas for a minimal MVC framework, based on
+conventions</a>.
+It was intended as an exercise to &ldquo;scratch an itch&rdquo;. It went on to become one
+of the most popular MVC frameworks in the CFML community (and I still
+maintain it to this day, even tho' my work is almost entirely Clojure).</p>
+
+<p>Again, as an exercise to &ldquo;scratch an itch&rdquo;, while I was still relatively new
+to Clojure, I decided to <a href="http://framework-one.github.io/blog/2011/11/07/fw1-comes-to-clojure/">port the core of that framework to
+Clojure</a>.
+It started as a bundle of <a href="https://github.com/ring-clojure/ring">Ring</a>,
+<a href="https://github.com/cgrand/enlive">Enlive</a>, and a convention-based
+routes-to-namespace-and-function mapping. Along the way, I replaced Enlive
+with <a href="https://github.com/yogthos/Selmer">Selmer</a>, and this &ldquo;fun little
+program&rdquo; now falls into the category of an open source project where I&rsquo;m
+pretty much the only user (we&rsquo;re starting to use it at work).</p>
+
+<p>About a year ago, I had another puzzle in mind: could I create a usable
+library that allowed for a separation of queryable data sources, pure business
+logic, and committable changes (inserts, updates, and deletes). I created
+<a href="https://github.com/seancorfield/engine">Engine</a> purely to scratch that itch
+over a few days at the end of May 2015 and, apart from converting it to use
+Boot at the end of 2015, it&rsquo;s languished on GitHub ever since. Until a few
+weeks ago, when it looked like a solution to a problem at work.</p>
+
+<p>We wanted a clearly delineated idiom where we could refactor our business
+logic out into pure functions, that depended on a set of queryable resources
+(some readonly JDBC and MongoDB data sources, a Component-based &ldquo;system&rdquo;, etc),
+and produce a set of changes that could be applied to a database or sent
+over a message queue to be processed or to update a search engine etc. We
+wanted something that &ldquo;forced&rdquo; this on our code (or at least &ldquo;strongly
+encouraged&rdquo; this separation of concerns).</p>
+
+<p>Using Engine in the real world has caused it to grow and evolve to make it
+more fluent in production code (hence the flurry of changes and new releases
+over the last few weeks) but it&rsquo;s also allowed us to take a long, hard look
+at what shape our code needs to be, in order to support our legacy production
+platform, our new production platform, and our future production platform.</p>
+
+<p>Although it would be nice to get extra eyes on both Engine and FW/1 for Clojure
+and, yes, additional users of both projects, I&rsquo;m posting this mostly as
+encouragement to &ldquo;scratch your itch&rdquo; and to write code as a way of learning,
+and exploring new ideas. It doesn&rsquo;t matter if that code is ultimately useful
+to anyone other than to you, as a medium for expressing your thoughts: write
+it down, play with it, use it to investigate a new concept or to rethink an
+existing one.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[More Boot]]></title>
@@ -196,43 +271,6 @@ PORT=8123 lein run
 <p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we&rsquo;d able or willing to attempt with Leiningen in a long time.</p>
 
 <p>There were cons too, of course, and the biggest was that several of Leiningen&rsquo;s built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I&rsquo;ll cover some of those in my next post.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rebooting Clojure]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/"/>
-    <updated>2016-01-29T14:30:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure</id>
-    <content type="html"><![CDATA[<p>We switched from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a>. What is Boot and why did we switch?<!-- more --></p>
-
-<h2>Leiningen</h2>
-
-<p>Before we talk about Boot, let&rsquo;s first talk about Leiningen. Leiningen describes itself as being &ldquo;for automating Clojure projects without setting your hair on fire&rdquo; and claims to be &ldquo;the easiest way to use Clojure&rdquo;. Rightly so. Leiningen hides all of the messy Maven-y dependency stuff, makes it drop-dead simple to package your applications and libraries as JAR files, makes it easy to run Clojure and provides a nice REPL experience, as well as integrating well with all the editors that Clojurians enjoy.</p>
-
-<p>For a long time, Leiningen was the only game in town, and when we started using Clojure at World Singles, it was the fundamental basis of everything we did with parentheses. We started with a 1.x version of Leiningen, we upgraded to 2.x and we constructed a fair bit of our build / deploy / execute chain around it.</p>
-
-<p>We wrote a couple of Leiningen plugins to deal with some &ldquo;interesting&rdquo; use cases in our environment: one to copy just dependencies to a specific target folder, one to set up a browser environment to run multiple <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a> tests in a single browser session.</p>
-
-<p>Over time we evolved a fairly large Ant script and a bunch of shell scripts but we really wanted to do more of that automation with Leiningen &ndash; since it&rsquo;s all about &ldquo;automating Clojure projects&rdquo; &ndash; but the reality of writing Leiningen plugins for general automation doesn&rsquo;t quite live up to the promise. Between the declarative nature of <code>project.clj</code> and overall framework in which plugins must execute, there&rsquo;s a lot more than just &ldquo;writing Clojure&rdquo; and there are evaluation restrictions around the processes. Bottom line, we just didn&rsquo;t get as far as we&rsquo;d have liked with Leiningen.</p>
-
-<h2>Early Boot</h2>
-
-<p>Going back to the second ever <a href="http://www.clojurebridge.org/">ClojureBridge</a> workshop. I was organizing this and at teacher training we were going over the curriculum that had been built for the first workshop and it used an early version of Boot. Unfortunately, it was a very rough experience and virtually unusable on Windows. As my first exposure to Boot, it was less than ideal and it put me off exploring it any further.</p>
-
-<p>Looking back, I&rsquo;m sure Boot was well-designed from the start and the design choices made were all solid &ndash; Boot was created by some very smart people &ndash; but I was less than charitable about Boot and unnecessarily vocal. I didn&rsquo;t take Boot very seriously.</p>
-
-<h2>Boot 2.5.0</h2>
-
-<p>Coming back to the present, Boot 2.5.0 was released in mid-December 2015. I owed it a serious second look. I was impressed. For starters, the installation process had become hella slick and the documentation looked really good. My early exploration was to try Boot on Windows 10, Mac OS X, and Linux for both the REPL experience and the basic project build process. One of the most striking differences from Leiningen was that &ldquo;it&rsquo;s just Clojure&rdquo;: the build script is straightforward executable Clojure, and tasks are just functions, and everything is based on an abstraction of a fileset. Another striking difference is that composability is baked right into the core of Boot: tasks are like Ring middleware and can wrap each other in a pipeline that allows tasks to take control both before and after other tasks in the pipeline.</p>
-
-<p>After a promising &ldquo;first look&rdquo;, I decided to convert a couple of our core processes to run under Boot so that I could see what a real <code>build.boot</code> would look like in our environment. The only fly in the ointment for us was that Boot uses a single JVM and we were used to being able to compute our JVM options in <code>project.clj</code> (inside the first Leiningen JVM) for use by the application JVM (Leiningen&rsquo;s second JVM). By contrast, Boot uses environment variables to set up a single JVM environment and is a minimal intrusion itself. Boot further mitigates its own intrusion by allowing you execute code in a &ldquo;pod&rdquo; with its own isolated dependencies.</p>
-
-<p>We opted for a wrapper shell script to deal with our JVM environment computation. Once we had that in place, having just a single JVM up and running was a win all round: every process started up faster, our task and automation code was simpler.</p>
-
-<p>We decided on a two week spike to replace Leiningen with Boot across our entire project, and lift all of our executable processes up as Boot tasks. As of January 21st, we have Boot as an integral part of our production infrastructure. We&rsquo;re happy.</p>
-
-<p>In the next blog post, I&rsquo;ll talk about some of the specifics in our Boot infrastructure and the tasks we&rsquo;re writing. As a teaser, you can look at <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> and <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
 ]]></content>
   </entry>
   
