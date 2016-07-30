@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-07-18T20:22:46-07:00</updated>
+  <updated>2016-07-29T20:53:45-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure, New Relic, and Slow Application Startup]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
+    <updated>2016-07-29T13:20:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup</id>
+    <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
+
+<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
+
+<p>Since we really wanted this update, we contacted New Relic Technical Support. Somewhat cryptically, they asked us to try version 3.24.1 &ndash; and that did not exhibit the slow startup &ndash; at which point they acknowledged that they&rsquo;d had reports that, with some applications, some customers had experienced slow startups since the 3.25.0 release. They asked us to set the logging level to &ldquo;finest&rdquo;, start the application up on a test machine, and then send them the log file. It was over 230MB(!) and full of Weave violations that the &ldquo;original bytecode&rdquo; could not be found. They very quickly traced this to how their instrumentation code tries to decide which classes to trace and which to ignore &ndash; and noted that Clojure creates a lot of <code>clojure.lang.DynamicClassLoader</code> instances (about 176,000 warnings in the log files originated from this class!) and, since the instrumentation never finds anything useful to instrument, loaded via those classloaders, they suggested that we tell the Agent to skip them.</p>
+
+<p>As far as I can tell, this is not a documented configuration item (although there is a similar <code>classloader_excludes</code> list):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  class_transformer:
+</span><span class='line'>    classloader_blacklist: clojure.lang.DynamicClassLoader</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This stops the Agent from examining this classloader and/or the code loaded by it and it dramatically cut the application start times. After adding this to <code>newrelic.yml</code>, our applications started up slightly faster than they had with 3.21.0.</p>
+
+<p>So, thank you to Jesse @ New Relic for the swift troubleshooting on this issue! I&rsquo;m posting this because I couldn&rsquo;t find a solution to the problem via Google &ndash; although I could find people complaining about the problem. Hopefully this will help others using New Relic with Clojure (or other languages that hit the same issue).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Start Your Engine]]></title>

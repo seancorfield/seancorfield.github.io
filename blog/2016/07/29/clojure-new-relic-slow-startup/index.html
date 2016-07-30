@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Building on Boot - An Architect's View</title>
+  <title>Clojure, New Relic, and Slow Application Startup - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="In yesterday&rsquo;s blog post, Rebooting Clojure, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I &hellip;">
+  <meta name="description" content="A couple of years ago, I blogged about instrumenting Clojure for New Relic monitoring and we&rsquo;ve generally been pretty happy with New Relic as a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot">
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Building on Boot</h1>
+      <h1 class="entry-title">Clojure, New Relic, and Slow Application Startup</h1>
     
     
       <p class="meta">
@@ -78,7 +78,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-30T12:30:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:30 pm</span></time>
+<time class='entry-date' datetime='2016-07-29T13:20:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://seancorfield.github.io">Comments</a>
@@ -88,21 +88,23 @@
   </header>
 
 
-<div class="entry-content"><p>In yesterday&rsquo;s blog post, <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
+<div class="entry-content"><p>A couple of years ago, I blogged about <a href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
 
-<p>Over the coming weeks, I&rsquo;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
+<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
 
-<p>In this post, I&rsquo;m going to cover some of the pros at a high level as it improved our build / test process.<!-- more --></p>
+<p>Since we really wanted this update, we contacted New Relic Technical Support. Somewhat cryptically, they asked us to try version 3.24.1 &ndash; and that did not exhibit the slow startup &ndash; at which point they acknowledged that they&rsquo;d had reports that, with some applications, some customers had experienced slow startups since the 3.25.0 release. They asked us to set the logging level to &ldquo;finest&rdquo;, start the application up on a test machine, and then send them the log file. It was over 230MB(!) and full of Weave violations that the &ldquo;original bytecode&rdquo; could not be found. They very quickly traced this to how their instrumentation code tries to decide which classes to trace and which to ignore &ndash; and noted that Clojure creates a lot of <code>clojure.lang.DynamicClassLoader</code> instances (about 176,000 warnings in the log files originated from this class!) and, since the instrumentation never finds anything useful to instrument, loaded via those classloaders, they suggested that we tell the Agent to skip them.</p>
 
-<p>I mentioned that we&rsquo;d evolved a fair size Ant script over time that does most of the heavy lifting of our build / test / deploy process. We&rsquo;d gradually been replacing parts of that process with Clojure code but it was easier to stick a <code>-main</code> function in certain namespaces to call into our code than to turn chunks of our code into Leiningen plugins. A case in point was our database and data migration tasks. We have developed a persistence layer in Clojure, built on top of <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a>, that encapsulates our connection pooling strategies and environment settings. Our migration code was built on top of that. Our Ant script invoked Leiningen to run these <code>-main</code> functions at various points. With each of these, we had repeated code to deal with command line arguments, process and environment set up, and then calls to what were, in effect, a series of &ldquo;tasks&rdquo;.</p>
+<p>As far as I can tell, this is not a documented configuration item (although there is a similar <code>classloader_excludes</code> list):</p>
 
-<p>With Boot, we were able to eliminate a lot of that boilerplate. Boot tasks have command line argument parsing built-in. There&rsquo;s no need to create a <code>-main</code> function &ndash; the Boot tasks can call directly into our code. At this point we could easily compose tasks in a pipeline to satisfy any combination of database and data migration scenarios we needed, and we could simplify our Ant script to run a pipeline of Boot tasks as needed: which also meant we only fired up one JVM for that whole part of our build, instead of multiple invocations of Leiningen, each invoking a <code>-main</code> function.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  class_transformer:
+</span><span class='line'>    classloader_blacklist: clojure.lang.DynamicClassLoader</span></code></pre></td></tr></table></div></figure>
 
-<p>We also have some CFML applications in the mix. Because history. We had several tasks accessible via HTTP requests into those CFML applications and those were also invoked by the Ant script because it was easy to do. Over time, we&rsquo;re committed to moving more and more of the CFML functionality down into Clojure (for what I hope are obvious reasons). Some of the tasks we were invoking via HTTP in Ant were already just thin CFML veneers over Clojure functionality, fortunately, so we were easily able to create a Boot task to call that functionality instead of going through CFML via HTTP.</p>
 
-<p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we&rsquo;d able or willing to attempt with Leiningen in a long time.</p>
+<p>This stops the Agent from examining this classloader and/or the code loaded by it and it dramatically cut the application start times. After adding this to <code>newrelic.yml</code>, our applications started up slightly faster than they had with 3.21.0.</p>
 
-<p>There were cons too, of course, and the biggest was that several of Leiningen&rsquo;s built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I&rsquo;ll cover some of those in my next post.</p>
+<p>So, thank you to Jesse @ New Relic for the swift troubleshooting on this issue! I&rsquo;m posting this because I couldn&rsquo;t find a solution to the problem via Google &ndash; although I could find people complaining about the problem. Hopefully this will help others using New Relic with Clojure (or other languages that hit the same issue).</p>
 </div>
 
 
@@ -118,7 +120,7 @@
 
 
 
-<time class='entry-date' datetime='2016-01-30T12:30:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:30 pm</span></time>
+<time class='entry-date' datetime='2016-07-29T13:20:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
       
 
 <span class="categories">
@@ -132,7 +134,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -145,10 +147,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/01/29/rebooting-clojure/" title="Previous Post: Rebooting Clojure">&laquo; Rebooting Clojure</a>
+        <a class="basic-alignment left" href="/blog/2016/07/18/start-your-engine/" title="Previous Post: Start Your Engine">&laquo; Start Your Engine</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2016/01/31/testing-with-boot/" title="Next Post: Testing With Boot">Testing With Boot &raquo;</a>
       
     </p>
   </footer>
@@ -282,8 +282,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://seancorfield.github.io/blog/2016/01/30/building-on-boot/';
-        var disqus_url = 'http://seancorfield.github.io/blog/2016/01/30/building-on-boot/';
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/';
         var disqus_script = 'embed.js';
       
     (function () {

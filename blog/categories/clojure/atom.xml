@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-07-18T20:22:46-07:00</updated>
+  <updated>2016-07-29T20:53:45-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure, New Relic, and Slow Application Startup]]></title>
+    <link href="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
+    <updated>2016-07-29T13:20:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup</id>
+    <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
+
+<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
+
+<p>Since we really wanted this update, we contacted New Relic Technical Support. Somewhat cryptically, they asked us to try version 3.24.1 &ndash; and that did not exhibit the slow startup &ndash; at which point they acknowledged that they&rsquo;d had reports that, with some applications, some customers had experienced slow startups since the 3.25.0 release. They asked us to set the logging level to &ldquo;finest&rdquo;, start the application up on a test machine, and then send them the log file. It was over 230MB(!) and full of Weave violations that the &ldquo;original bytecode&rdquo; could not be found. They very quickly traced this to how their instrumentation code tries to decide which classes to trace and which to ignore &ndash; and noted that Clojure creates a lot of <code>clojure.lang.DynamicClassLoader</code> instances (about 176,000 warnings in the log files originated from this class!) and, since the instrumentation never finds anything useful to instrument, loaded via those classloaders, they suggested that we tell the Agent to skip them.</p>
+
+<p>As far as I can tell, this is not a documented configuration item (although there is a similar <code>classloader_excludes</code> list):
+<code>
+  class_transformer:
+    classloader_blacklist: clojure.lang.DynamicClassLoader
+</code>
+This stops the Agent from examining this classloader and/or the code loaded by it and it dramatically cut the application start times. After adding this to <code>newrelic.yml</code>, our applications started up slightly faster than they had with 3.21.0.</p>
+
+<p>So, thank you to Jesse @ New Relic for the swift troubleshooting on this issue! I&rsquo;m posting this because I couldn&rsquo;t find a solution to the problem via Google &ndash; although I could find people complaining about the problem. Hopefully this will help others using New Relic with Clojure (or other languages that hit the same issue).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Start Your Engine]]></title>
@@ -200,29 +222,6 @@ PORT=8123 lein run
 <p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
 
 <p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Building on Boot]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/"/>
-    <updated>2016-01-30T12:30:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/30/building-on-boot</id>
-    <content type="html"><![CDATA[<p>In yesterday&rsquo;s blog post, <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
-
-<p>Over the coming weeks, I&rsquo;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
-
-<p>In this post, I&rsquo;m going to cover some of the pros at a high level as it improved our build / test process.<!-- more --></p>
-
-<p>I mentioned that we&rsquo;d evolved a fair size Ant script over time that does most of the heavy lifting of our build / test / deploy process. We&rsquo;d gradually been replacing parts of that process with Clojure code but it was easier to stick a <code>-main</code> function in certain namespaces to call into our code than to turn chunks of our code into Leiningen plugins. A case in point was our database and data migration tasks. We have developed a persistence layer in Clojure, built on top of <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a>, that encapsulates our connection pooling strategies and environment settings. Our migration code was built on top of that. Our Ant script invoked Leiningen to run these <code>-main</code> functions at various points. With each of these, we had repeated code to deal with command line arguments, process and environment set up, and then calls to what were, in effect, a series of &ldquo;tasks&rdquo;.</p>
-
-<p>With Boot, we were able to eliminate a lot of that boilerplate. Boot tasks have command line argument parsing built-in. There&rsquo;s no need to create a <code>-main</code> function &ndash; the Boot tasks can call directly into our code. At this point we could easily compose tasks in a pipeline to satisfy any combination of database and data migration scenarios we needed, and we could simplify our Ant script to run a pipeline of Boot tasks as needed: which also meant we only fired up one JVM for that whole part of our build, instead of multiple invocations of Leiningen, each invoking a <code>-main</code> function.</p>
-
-<p>We also have some CFML applications in the mix. Because history. We had several tasks accessible via HTTP requests into those CFML applications and those were also invoked by the Ant script because it was easy to do. Over time, we&rsquo;re committed to moving more and more of the CFML functionality down into Clojure (for what I hope are obvious reasons). Some of the tasks we were invoking via HTTP in Ant were already just thin CFML veneers over Clojure functionality, fortunately, so we were easily able to create a Boot task to call that functionality instead of going through CFML via HTTP.</p>
-
-<p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we&rsquo;d able or willing to attempt with Leiningen in a long time.</p>
-
-<p>There were cons too, of course, and the biggest was that several of Leiningen&rsquo;s built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I&rsquo;ll cover some of those in my next post.</p>
 ]]></content>
   </entry>
   

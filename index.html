@@ -9,7 +9,7 @@
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="Today I&rsquo;m inspired by the latest issue of Eric Normand&rsquo;s Clojure Gazette which talks about why his &ldquo;Joy of Programming&rdquo; comes &hellip;">
+  <meta name="description" content="A couple of years ago, I blogged about instrumenting Clojure for New Relic monitoring and we&rsquo;ve generally been pretty happy with New Relic as a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,43 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Clojure, New Relic, and Slow Application Startup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-07-29T13:20:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+        
+           | <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/#disqus_thread"
+             data-disqus-identifier="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple of years ago, I blogged about <a href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
+
+<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -396,43 +433,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/23/clojure-in-the-enterprise/">Clojure in the Enterprise?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-23T23:05:05-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2014</span></span> <span class='time'>11:05 pm</span></time>
-        
-           | <a href="/blog/2014/09/23/clojure-in-the-enterprise/#disqus_thread"
-             data-disqus-identifier="http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>This was originally posted on <a href="http://corfield.org/blog/post.cfm/clojure-in-the-enterprise">corfield.org back in April 2013</a> and I noticed it was recently referenced by Eric Normand in his recent blog post <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">Convince your boss to use Clojure</a> so I figured it was time to update the article and bring it onto my new blog.</em></p>
-
-<p>A question was asked in early 2013 on a Clojure group on LinkedIn about reasons to migrate to Clojure for enterprise applications in a Java shop. It&rsquo;s a fairly typical question from people in the Java world when they hear the buzz about Clojure, and of course asking the question on a Clojure group garnered a lot of positive responses about why Clojure is a good choice. I didn&rsquo;t feel anyone had really addressed a core aspect of the original question which was, essentially, &ldquo;Why should I, as a Java web developer, using JPA, JSF etc, choose Clojure instead for an enterprise application?&rdquo;.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/09/23/clojure-in-the-enterprise/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -454,6 +454,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Clojure, New Relic, and Slow Application Startup</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2016/07/18/start-your-engine/">Start Your Engine</a>
       </li>
     
@@ -467,10 +471,6 @@
     
       <li class="post">
         <a href="/blog/2016/01/31/testing-with-boot/">Testing With Boot</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/01/30/building-on-boot/">Building on Boot</a>
       </li>
     
   </ul>
