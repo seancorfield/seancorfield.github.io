@@ -7,7 +7,7 @@ categories: [clojure]
 ---
 In my previous three blog posts about [Boot](http://boot-clj.com/) -- [Rebooting Clojure](http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/), [Building On Boot](http://seancorfield.github.io/blog/2016/01/30/building-on-boot/), and [Testing With Boot](http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/) -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had [boot-expectations](https://github.com/seancorfield/boot-expectations) written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more -->
 
-Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new [Framework One](https://github.com/framework/fw1-clj) application up and running?
+Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new [Framework One](https://github.com/framework-one/fw1-clj) application up and running?
 
     lein new fw1 myapp
     cd myapp
@@ -17,7 +17,7 @@ That's all it takes. No directories and files to create, no editing. Just tell L
 
 Behind the scenes, Leiningen looks for the most recent release of the `fw1/lein-template` artifact on Clojars (or Maven Central), downloads it and adds it to the classpath, then it `require`s the `leiningen.new.fw1` namespace (assumed to be in that artifact) and calls the `fw1` function within that namespace. That `fw1` template project in turn relies on the `leiningen.new.templates` namespace to provide a number of functions to `render` new project files from mustache-style templates, using the [Stencil library](https://github.com/davidsantiago/stencil). Leiningen templates may also depend on Leiningen's core code, as well as a few libraries that Leiningen always makes available (such as [Slingshot](https://github.com/scgilardi/slingshot)).
 
-I figured that in order to kickstart any `boot new` functionality, it would make sense for it to be able to render existing Leiningen templates, as well as Boot-specific templates. Since Boot deliberately includes source code directly from other projects so as to minimize the number of dependencies it brings in, and it already had several pieces of Leiningen copied into it, I reached out to [Leiningen's current maintainer, Jean Niklas L'orange](https://github.com/hyPiRion) and asked permission to include parts of Leiningen's new/template support. He graciously said yes -- thank you! -- so I created a raw first cut of a `new` task for Boot, based directly on Leiningen's code, which in turn depended on Bultitude and `leiningen-core` (and a few other bits and pieces). Because Boot tasks are "just Clojure", it was fairly straightforward to get to a [working 0.1.0 version]https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj) that had basic parity with `lein new`.
+I figured that in order to kickstart any `boot new` functionality, it would make sense for it to be able to render existing Leiningen templates, as well as Boot-specific templates. Since Boot deliberately includes source code directly from other projects so as to minimize the number of dependencies it brings in, and it already had several pieces of Leiningen copied into it, I reached out to [Leiningen's current maintainer, Jean Niklas L'orange](https://github.com/hyPiRion) and asked permission to include parts of Leiningen's new/template support. He graciously said yes -- thank you! -- so I created a raw first cut of a `new` task for Boot, based directly on Leiningen's code, which in turn depended on Bultitude and `leiningen-core` (and a few other bits and pieces). Because Boot tasks are "just Clojure", it was fairly straightforward to get to a [working 0.1.0 version](https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj) that had basic parity with `lein new`.
 
 Since Boot already provided ways to manage dependencies and the classpath, my next goal was [an 0.2.0 version that didn't rely on Leiningen's core](https://github.com/seancorfield/boot-new/blob/v0.2.0/src/boot/new.clj). This version provided the same functionality (well, almost, it had compatibility bugs that took another version to iron out) but no longer needed to bring in `leiningen-core` as a dependency (unless you were generating a Leiningen template which might itself rely on that).
 
@@ -27,11 +27,11 @@ Boot `new` had both `leiningen.new.templates` (adapted to run inside Boot) and `
 
 At this point, I felt Boot `new` was ready to announce to the world! I could do:
 
-    boot -d seancorfield/boot-new -t fw1 -n myapp
+    boot -d seancorfield/boot-new new -t fw1 -n myapp
 
 and get a freshly generated Framework One app, even if that still used Leiningen to actually run the new app. I could do:
 
-    boot -d seancorfield/boot-new -t app -n myapp
+    boot -d seancorfield/boot-new new -t app -n myapp
 
 to get a skeleton for an application that was "powered by Boot": the generated `build.boot` file provides tasks for `build`ing the application uber-JAR and `run`ing the application itself.
 
