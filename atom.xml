@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2016-11-14T19:52:52-08:00</updated>
+  <updated>2017-01-19T20:45:55-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,20 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
+    <link href="http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/"/>
+    <updated>2017-01-19T12:40:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2017/01/19/boot-new-moved</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m pleased to announce that the &ldquo;Boot new&rdquo; task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p>
+
+<p>You can use this to easily create a new Boot-based project:</p>
+
+<pre><code>boot -d boot/new new -t app -n my-new-boot-app
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure, New Relic, and Slow Application Startup]]></title>
