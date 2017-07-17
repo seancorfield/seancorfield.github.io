@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-01-19T20:45:55-08:00</updated>
+  <updated>2017-07-17T12:49:50-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,85 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release 0.7.0 of clojure.java.jdbc]]></title>
+    <link href="http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/"/>
+    <updated>2017-07-17T03:40:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0</id>
+    <content type="html"><![CDATA[<p>The stable 0.7.0 release of <code>java.jdbc</code> &ndash; the <a href="https://github.com/clojure/java.jdbc">Clojure Contrib JDBC library</a> &ndash; has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!</p>
+
+<p>While you <em>could</em> read the <a href="https://github.com/clojure/java.jdbc/blob/master/CHANGES.md"><code>java.jdbc</code> Change Log</a> to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more --></p>
+
+<p>I recently ran a <a href="https://www.surveymonkey.com/results/SM-CJY2YMHP/">survey about versions</a> of both Clojure and <code>java.jdbc</code> in use and had nearly 100 responses (thank you to everyone who completed the survey!). Only one respondent is still on Clojure 1.7.0, with about two thirds on 1.8.0, and a full third of respondents on a 1.9.0 alpha build. No one responded that they&rsquo;re on an earlier version of Clojure. That&rsquo;s great news for Clojure library maintainers, as it means we can take advantage of modern features in the language (such as transducers), and it also means that it is worthwhile to offer optional namespaces providing specs. <strong>Accordingly, <code>java.jdbc</code> now requires Clojure 1.7.0 or later.</strong></p>
+
+<p>Also very encouraging was to see that almost a third of <code>java.jdbc</code> users are on alpha builds of what has become 0.7.0, with only a handful of users still on &ldquo;legacy&rdquo; versions (prior to 0.6.1).</p>
+
+<p>Let&rsquo;s look at the major changes in 0.7.0, compared to 0.6.1!</p>
+
+<h2>Reducible Queries</h2>
+
+<p>Now that Clojure 1.7.0 is the minimum supported version, <code>java.jdbc</code> can offer query result collections that work with transducers. Two new functions &ndash; <code>reducible-query</code> and <code>reducible-result-set</code> &ndash; produce collections that implement <code>IReduce</code> and will perform resource management when <code>reduce</code>d. A reducible query will run the specified query only when the result is reduced &ndash; and it will run it each time it is reduced. A reducible result set can be constructed from any <code>ResultSet</code> object and will provide a one-off, managed forward read of the underlying data. Both of these support <code>reduced</code> results, which short-circuit the processing of the result set. They also support both the <code>init</code>-arity <code>reduce</code> and the no-<code>init</code>-arity <code>reduce</code>. Consult the docstring for <code>reduce</code> to see the full implications of this: the function passed into the no-<code>init</code>-arity <code>reduce</code> will be called with no arguments if the result set is empty!</p>
+
+<p><code>reducible-query</code> works by invoking <code>db-query-with-resultset</code> only when it is <code>reduce</code>d, passing in a function that calls <code>reducible-result-set</code> and then <code>reduce</code>s the result. <code>reducible-result-set</code> works by computing metadata and key names only when it is <code>reduce</code>d, and then walking through the rows of the result, calling the supplied function (as specified by <code>reduce</code>), stopping if that function returns a <code>reduced?</code> value.</p>
+
+<h2>Improved Database Vendor Support</h2>
+
+<p>The <code>:dbtype</code> key in a <code>db-spec</code> is the preferred way to specify a database vendor, so you don&rsquo;t have to worry about &ldquo;subprotocols&rdquo; and &ldquo;subnames&rdquo; and so on. Just provide <code>:dbtype</code>, <code>:dbname</code>, <code>:host</code>, <code>:port</code>, <code>:user</code>, and <code>:password</code>, and <code>java.jdbc</code> should be able to connect you to most databases. The full list of supported <code>:dbtype</code> values is:</p>
+
+<ul>
+<li><code>derby</code> &ndash; Apache Derby</li>
+<li><code>h2</code></li>
+<li><code>hsql</code> or <code>hsqldb</code></li>
+<li><code>jtds</code> or <code>jtds:sqlserver</code> &ndash; the jTDS JDBC driver for Microsoft SQL Server</li>
+<li><code>mssql</code> &ndash; an alias for <code>sqlserver</code> below</li>
+<li><code>mysql</code></li>
+<li><code>oracle</code> or <code>oracle:thin</code>, <code>oracle:oci</code> &ndash; for the two main Oracle JDBC drivers (which use <code>@</code> in front of the <code>host</code> name, instead of <code>//</code>)</li>
+<li><code>pgsql</code> &ndash; the Impossibl PostgresSQL JDBC driver</li>
+<li><code>postgres</code> or <code>postgresl</code> &ndash; the standard PostgresSQL JDBC driver</li>
+<li><code>redshift</code> &ndash; Amazon&rsquo;s Red Shift JDBC driver</li>
+<li><code>sqlite</code></li>
+<li><code>sqlserver</code> &ndash; Microsoft&rsquo;s default JDBC driver for SQL Server (they have finally released a version on Maven Central!)</li>
+</ul>
+
+
+<p>If your preferred database is not listed, head on over to <a href="https://dev.clojure.org/jira/browse/JDBC"><code>java.jdbc</code>s JIRA site</a> and create an enhancement issue, with details of the JDBC driver and I&rsquo;ll take a look! Note that you can can specify <code>:classname</code>, along with <code>:dbtype</code> if you want to override just the JDBC driver class name that <code>java.jdbc</code> would deduce from <code>:dbtype</code>.</p>
+
+<h2>Option Handling</h2>
+
+<p>An overall goal of 0.7.0 has been to make the API more consistent, especially in the way options are handled and passed around. The intention is that you can provide a hash map of options, as the last argument to any function, and <code>java.jdbc</code> will pass all of those options through the whole call chain, allowing you to control a lot more of the behavior of lower-level functions that are invoked by the higher-level functions. In addition, defaults for all options can be provided in your <code>db-spec</code>, and those will apply to all API functions. This is especially useful for specifying the <code>:entities</code> and <code>:identifiers</code> functions that control how SQL entity names and Clojure identifiers are constructed, everywhere in <code>java.jdbc</code>.</p>
+
+<p>Here are all the new options available:</p>
+
+<ul>
+<li><code>:auto-commit?</code> &ndash; Can be passed into any API function that might cause a new database connection to be created. This allows you to turn auto-commit off for <em>new connections</em> in databases that use this setting to control whether a query can stream its results. The behavior is inherently vendor-specific, so you may need additional options to fully enable streaming results (setting <code>:fetch-size</code> to a non-zero value is common).</li>
+<li><code>:conditional?</code> &ndash; For the two DDL-generating functions to add an existence check on the table to be created or dropped. May be a simple boolean value, a string (to be inserted between <code>DROP TABLE</code>/<code>CREATE TABLE</code> and the table name), or a function. In the latter case, the DDL string is generated as usual and then that function is called on it. This allows for databases that don&rsquo;t support <code>DROP TABLE IF EXISTS</code> / <code>CREATE TABLE IF NOT EXISTS</code> but instead require the <code>DROP</code> or <code>CREATE</code> statement to be wrapped in a specific existence checking query.</li>
+<li><code>:explain?</code> and <code>:explain-fn</code> &ndash; So you can get the database to explain how it will run your query. Supported by <code>query</code>, <code>find-by-keys</code>, and <code>get-by-id</code>, these options will run the generated SQL with an &ldquo;explain&rdquo; option first, and then for real. <code>:explain?</code> can be <code>true</code> which simply prefixes the SQL with <code>"EXPLAIN "</code> or it can be a string if your database needs a different syntax (such as HSQLDB needing <code>"EXPLAIN PLAN FOR "</code>). The explanation output is processed by the <code>:explain-fn</code>, which defaults to <code>println</code>, but can be used to send explanations to a logging system etc.</li>
+<li><code>:qualifier</code> &ndash; Lets you easily produce namespace-qualified column names from your queries.</li>
+<li><code>:read-columns</code> &ndash; To specify how columns of data are read from a <code>ResultSet</code> object. The default behavior is to call <code>result-set-read-column</code> which implements the <code>IResultSetReadColumn</code> protocol. This allows finer-grained control when you are working with multiple databases in a single application.</li>
+<li><code>:read-only?</code> &ndash; Like <code>:auto-commit?</code> this can be passed into any API function that might cause a new database connection to be created. This allows you to specify that <em>new connections</em> be treated as readonly, which may allow the database driver to perform optimizations on how the connection and its queries behave.</li>
+</ul>
+
+
+<h2>clojure.spec</h2>
+
+<p><code>java.jdbc</code> provides an optional <code>clojure.java.jdbc.spec</code> namespace that is compatible with Clojure 1.9.0 Alpha 17 (it uses <code>clojure.spec.alpha</code>). This namespace provides <code>fdef</code> specs for all of the public functions in <code>clojure.java.jdbc</code> so you can <code>instrument</code> your code and get validation on all your interaction with <code>java.jdbc</code>. Note that you cannot do generative testing against <code>java.jdbc</code> because it uses a lot of Java types and a lot of side effects. <em>I have an experimental branch where I&rsquo;ve been investigating what generators would look like for <code>java.jdbc</code> but don&rsquo;t hold your breath for that becoming part of the <strong>master</strong> branch!</em></p>
+
+<h2>New and Changed API Functions</h2>
+
+<ul>
+<li><code>as-sql-name</code> dropped its single arity (curried) version.</li>
+<li><code>get-isolation-level</code> will return the current isolation level inside a transaction, if any.</li>
+<li><code>quoted</code> dropped its 2-arity version, and now supports certain keywords for common entity-quoting strategies: <code>:ansi</code> (wraps entities in double quotes), <code>:mysql</code> (wraps entities in backticks), <code>:oracle</code> (wraps entities in double quotes), and <code>:sqlserver</code> (wraps entities in square brackets). These match the options in HoneySQL.</li>
+<li><code>reducible-query</code> and <code>reducible-result-set</code> &ndash; see <strong>Reducible Queries</strong> above.</li>
+</ul>
+
+
+<h2>Documentation</h2>
+
+<p>At present, the auto-generated API documentation (on <a href="https://clojure.github.io">https://clojure.github.io</a>) is stale due to some bugs in the toolchain used by the Clojure Build Server, so I recommend reading the <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">community-maintained <code>java.jdbc</code> documentation</a> on clojure-doc.org, in addition to using <code>clojure.repl/doc</code> to review the docstrings for API functions. That community-maintained documentation is currently going through a major overhaul to expand, clarify, and update the information presented &ndash; I encourage users of <code>java.jdbc</code> to get involved by submitting Pull Requests to help improve the documentation for everyone!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
@@ -157,52 +236,6 @@ This stops the Agent from examining this classloader and/or the code loaded by i
 </code></pre>
 
 <p>I&rsquo;ll probably post about Boot again when we&rsquo;ve finally laid Ant to rest, and talk about any interesting things we run into during that last sprint.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Boot-new]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/02/02/boot-new/"/>
-    <updated>2016-02-02T09:00:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/02/02/boot-new</id>
-    <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
-
-<p>Leiningen has long-supported the generation of new projects from templates and it&rsquo;s pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>
-
-<pre><code>lein new fw1 myapp
-cd myapp
-PORT=8123 lein run
-</code></pre>
-
-<p>That&rsquo;s all it takes. No directories and files to create, no editing. Just tell Leiningen to create a new <code>fw1</code> project called <code>myapp</code>, drop into that newly created directory and run the generated skeleton application.</p>
-
-<p>Behind the scenes, Leiningen looks for the most recent release of the <code>fw1/lein-template</code> artifact on Clojars (or Maven Central), downloads it and adds it to the classpath, then it <code>require</code>s the <code>leiningen.new.fw1</code> namespace (assumed to be in that artifact) and calls the <code>fw1</code> function within that namespace. That <code>fw1</code> template project in turn relies on the <code>leiningen.new.templates</code> namespace to provide a number of functions to <code>render</code> new project files from mustache-style templates, using the <a href="https://github.com/davidsantiago/stencil">Stencil library</a>. Leiningen templates may also depend on Leiningen&rsquo;s core code, as well as a few libraries that Leiningen always makes available (such as <a href="https://github.com/scgilardi/slingshot">Slingshot</a>).</p>
-
-<p>I figured that in order to kickstart any <code>boot new</code> functionality, it would make sense for it to be able to render existing Leiningen templates, as well as Boot-specific templates. Since Boot deliberately includes source code directly from other projects so as to minimize the number of dependencies it brings in, and it already had several pieces of Leiningen copied into it, I reached out to <a href="https://github.com/hyPiRion">Leiningen&rsquo;s current maintainer, Jean Niklas L'orange</a> and asked permission to include parts of Leiningen&rsquo;s new/template support. He graciously said yes &ndash; thank you! &ndash; so I created a raw first cut of a <code>new</code> task for Boot, based directly on Leiningen&rsquo;s code, which in turn depended on Bultitude and <code>leiningen-core</code> (and a few other bits and pieces). Because Boot tasks are &ldquo;just Clojure&rdquo;, it was fairly straightforward to get to a <a href="https://github.com/seancorfield/boot-new/blob/v0.1.0/src/boot/new.clj">working 0.1.0 version</a> that had basic parity with <code>lein new</code>.</p>
-
-<p>Since Boot already provided ways to manage dependencies and the classpath, my next goal was <a href="https://github.com/seancorfield/boot-new/blob/v0.2.0/src/boot/new.clj">an 0.2.0 version that didn&rsquo;t rely on Leiningen&rsquo;s core</a>. This version provided the same functionality (well, almost, it had compatibility bugs that took another version to iron out) but no longer needed to bring in <code>leiningen-core</code> as a dependency (unless you were generating a Leiningen template which might itself rely on that).</p>
-
-<p>At this point, I was able to implement built-in templates to match Leiningen&rsquo;s <code>app</code>, <code>default</code> (library), <code>plugin</code>, and <code>template</code>, which would produce Boot-specific versions. The <a href="https://github.com/seancorfield/boot-new/tree/v0.2.1/src/boot/new">0.2.1 version included built-in templates</a> for <code>app</code>, <code>default</code>, <code>task</code> (the Boot equivalent of a plugin), and <code>template</code>.</p>
-
-<p>Boot <code>new</code> had both <code>leiningen.new.templates</code> (adapted to run inside Boot) and <code>boot.new.templates</code> to support Boot templates. A Boot template is just like a Leiningen template, with a couple of important exceptions: the artifact name is of the form <code>foo/boot-template</code> (instead of <code>foo/lein-template</code>) and the template&rsquo;s main namespace is <code>boot.new.foo</code> (instead of <code>leiningen.new.foo</code>). In addition, a Boot template is expected to rely on Boot&rsquo;s internals or explicitly specify its own dependencies &ndash; instead of depending on Leiningen&rsquo;s core library. As a final piece of clean up for this &ldquo;initial&rdquo; version of Boot <code>new</code>, I removed the dependency on Bultitude (which actually hadn&rsquo;t been needed for a while) and deferred the addition of the <code>leiningen-core</code> and <code>slingshot</code> dependencies so they wouldn&rsquo;t be pulled in if you were generating a project from a Boot template.</p>
-
-<p>At this point, I felt Boot <code>new</code> was ready to announce to the world! I could do:</p>
-
-<pre><code>boot -d seancorfield/boot-new new -t fw1 -n myapp
-</code></pre>
-
-<p>and get a freshly generated Framework One app, even if that still used Leiningen to actually run the new app. I could do:</p>
-
-<pre><code>boot -d seancorfield/boot-new new -t app -n myapp
-</code></pre>
-
-<p>to get a skeleton for an application that was &ldquo;powered by Boot&rdquo;: the generated <code>build.boot</code> file provides tasks for <code>build</code>ing the application uber-JAR and <code>run</code>ing the application itself.</p>
-
-<p><a href="https://github.com/alandipert">Alan Dipert</a> and <a href="https://github.com/pesterhazy">Paulus Esterhazy</a> were the first two people to uncover compatibility bugs with existing Leiningen templates (for Hoplon and Chestnut, respectively). Thank you! And that brought me to Release 0.3.1 of <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
-
-<p>The next thing on my roadmap is to add some sort of &ldquo;generator&rdquo; function (not unlike <a href="https://github.com/weavejester/lein-generate">James Reeves' lein-generate</a>) which will allow you to add new pieces to your existing projects, much Rails/Grails have built-in commands to let you add new models, controllers, and so on. That will be part of 0.4.0 and probably go through a couple of revisions. At some point, I&rsquo;ll feel comfortable declaring a 1.0.0 release and then we&rsquo;ll see about getting Boot <code>new</code> merged into the core of Boot itself.</p>
-
-<p>Boot originally started life as a part of Hoplon and for a long time, you needed Leiningen in order to generate a new Hoplon project, even tho' Hoplon itself was powered-by-Boot. It&rsquo;s nice to see <a href="https://github.com/hoplon/hoplon/wiki/Get-Started#start-from-a-template">Hoplon&rsquo;s Getting Started</a> using <code>boot-new</code> as the recommended way to generate a new Hoplon project (it&rsquo;s still a Leiningen template!).</p>
 ]]></content>
   </entry>
   

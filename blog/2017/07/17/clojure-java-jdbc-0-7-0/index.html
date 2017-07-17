@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Release 0.7.0 of clojure.java.jdbc - An Architect's View</title>
+  <meta name="author" content="Sean Corfield">
+
+  
+  <meta name="description" content="The stable 0.7.0 release of java.jdbc &ndash; the Clojure Contrib JDBC library &ndash; has been baking for over a year, across of a trail of alpha &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">An Architect's View</a></h1>
+  
+    <h2>Clojure, Software Design, Frameworks and more...</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:seancorfield.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/presentations">Presentations</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Release 0.7.0 of clojure.java.jdbc</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-07-17T03:40:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>3:40 am</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://seancorfield.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The stable 0.7.0 release of <code>java.jdbc</code> &ndash; the <a href="https://github.com/clojure/java.jdbc">Clojure Contrib JDBC library</a> &ndash; has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!</p>
+
+<p>While you <em>could</em> read the <a href="https://github.com/clojure/java.jdbc/blob/master/CHANGES.md"><code>java.jdbc</code> Change Log</a> to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more --></p>
+
+<p>I recently ran a <a href="https://www.surveymonkey.com/results/SM-CJY2YMHP/">survey about versions</a> of both Clojure and <code>java.jdbc</code> in use and had nearly 100 responses (thank you to everyone who completed the survey!). Only one respondent is still on Clojure 1.7.0, with about two thirds on 1.8.0, and a full third of respondents on a 1.9.0 alpha build. No one responded that they&rsquo;re on an earlier version of Clojure. That&rsquo;s great news for Clojure library maintainers, as it means we can take advantage of modern features in the language (such as transducers), and it also means that it is worthwhile to offer optional namespaces providing specs. <strong>Accordingly, <code>java.jdbc</code> now requires Clojure 1.7.0 or later.</strong></p>
+
+<p>Also very encouraging was to see that almost a third of <code>java.jdbc</code> users are on alpha builds of what has become 0.7.0, with only a handful of users still on &ldquo;legacy&rdquo; versions (prior to 0.6.1).</p>
+
+<p>Let&rsquo;s look at the major changes in 0.7.0, compared to 0.6.1!</p>
+
+<h2>Reducible Queries</h2>
+
+<p>Now that Clojure 1.7.0 is the minimum supported version, <code>java.jdbc</code> can offer query result collections that work with transducers. Two new functions &ndash; <code>reducible-query</code> and <code>reducible-result-set</code> &ndash; produce collections that implement <code>IReduce</code> and will perform resource management when <code>reduce</code>d. A reducible query will run the specified query only when the result is reduced &ndash; and it will run it each time it is reduced. A reducible result set can be constructed from any <code>ResultSet</code> object and will provide a one-off, managed forward read of the underlying data. Both of these support <code>reduced</code> results, which short-circuit the processing of the result set. They also support both the <code>init</code>-arity <code>reduce</code> and the no-<code>init</code>-arity <code>reduce</code>. Consult the docstring for <code>reduce</code> to see the full implications of this: the function passed into the no-<code>init</code>-arity <code>reduce</code> will be called with no arguments if the result set is empty!</p>
+
+<p><code>reducible-query</code> works by invoking <code>db-query-with-resultset</code> only when it is <code>reduce</code>d, passing in a function that calls <code>reducible-result-set</code> and then <code>reduce</code>s the result. <code>reducible-result-set</code> works by computing metadata and key names only when it is <code>reduce</code>d, and then walking through the rows of the result, calling the supplied function (as specified by <code>reduce</code>), stopping if that function returns a <code>reduced?</code> value.</p>
+
+<h2>Improved Database Vendor Support</h2>
+
+<p>The <code>:dbtype</code> key in a <code>db-spec</code> is the preferred way to specify a database vendor, so you don&rsquo;t have to worry about &ldquo;subprotocols&rdquo; and &ldquo;subnames&rdquo; and so on. Just provide <code>:dbtype</code>, <code>:dbname</code>, <code>:host</code>, <code>:port</code>, <code>:user</code>, and <code>:password</code>, and <code>java.jdbc</code> should be able to connect you to most databases. The full list of supported <code>:dbtype</code> values is:</p>
+
+<ul>
+<li><code>derby</code> &ndash; Apache Derby</li>
+<li><code>h2</code></li>
+<li><code>hsql</code> or <code>hsqldb</code></li>
+<li><code>jtds</code> or <code>jtds:sqlserver</code> &ndash; the jTDS JDBC driver for Microsoft SQL Server</li>
+<li><code>mssql</code> &ndash; an alias for <code>sqlserver</code> below</li>
+<li><code>mysql</code></li>
+<li><code>oracle</code> or <code>oracle:thin</code>, <code>oracle:oci</code> &ndash; for the two main Oracle JDBC drivers (which use <code>@</code> in front of the <code>host</code> name, instead of <code>//</code>)</li>
+<li><code>pgsql</code> &ndash; the Impossibl PostgresSQL JDBC driver</li>
+<li><code>postgres</code> or <code>postgresl</code> &ndash; the standard PostgresSQL JDBC driver</li>
+<li><code>redshift</code> &ndash; Amazon&rsquo;s Red Shift JDBC driver</li>
+<li><code>sqlite</code></li>
+<li><code>sqlserver</code> &ndash; Microsoft&rsquo;s default JDBC driver for SQL Server (they have finally released a version on Maven Central!)</li>
+</ul>
+
+
+<p>If your preferred database is not listed, head on over to <a href="https://dev.clojure.org/jira/browse/JDBC"><code>java.jdbc</code>s JIRA site</a> and create an enhancement issue, with details of the JDBC driver and I&rsquo;ll take a look! Note that you can can specify <code>:classname</code>, along with <code>:dbtype</code> if you want to override just the JDBC driver class name that <code>java.jdbc</code> would deduce from <code>:dbtype</code>.</p>
+
+<h2>Option Handling</h2>
+
+<p>An overall goal of 0.7.0 has been to make the API more consistent, especially in the way options are handled and passed around. The intention is that you can provide a hash map of options, as the last argument to any function, and <code>java.jdbc</code> will pass all of those options through the whole call chain, allowing you to control a lot more of the behavior of lower-level functions that are invoked by the higher-level functions. In addition, defaults for all options can be provided in your <code>db-spec</code>, and those will apply to all API functions. This is especially useful for specifying the <code>:entities</code> and <code>:identifiers</code> functions that control how SQL entity names and Clojure identifiers are constructed, everywhere in <code>java.jdbc</code>.</p>
+
+<p>Here are all the new options available:</p>
+
+<ul>
+<li><code>:auto-commit?</code> &ndash; Can be passed into any API function that might cause a new database connection to be created. This allows you to turn auto-commit off for <em>new connections</em> in databases that use this setting to control whether a query can stream its results. The behavior is inherently vendor-specific, so you may need additional options to fully enable streaming results (setting <code>:fetch-size</code> to a non-zero value is common).</li>
+<li><code>:conditional?</code> &ndash; For the two DDL-generating functions to add an existence check on the table to be created or dropped. May be a simple boolean value, a string (to be inserted between <code>DROP TABLE</code>/<code>CREATE TABLE</code> and the table name), or a function. In the latter case, the DDL string is generated as usual and then that function is called on it. This allows for databases that don&rsquo;t support <code>DROP TABLE IF EXISTS</code> / <code>CREATE TABLE IF NOT EXISTS</code> but instead require the <code>DROP</code> or <code>CREATE</code> statement to be wrapped in a specific existence checking query.</li>
+<li><code>:explain?</code> and <code>:explain-fn</code> &ndash; So you can get the database to explain how it will run your query. Supported by <code>query</code>, <code>find-by-keys</code>, and <code>get-by-id</code>, these options will run the generated SQL with an &ldquo;explain&rdquo; option first, and then for real. <code>:explain?</code> can be <code>true</code> which simply prefixes the SQL with <code>"EXPLAIN "</code> or it can be a string if your database needs a different syntax (such as HSQLDB needing <code>"EXPLAIN PLAN FOR "</code>). The explanation output is processed by the <code>:explain-fn</code>, which defaults to <code>println</code>, but can be used to send explanations to a logging system etc.</li>
+<li><code>:qualifier</code> &ndash; Lets you easily produce namespace-qualified column names from your queries.</li>
+<li><code>:read-columns</code> &ndash; To specify how columns of data are read from a <code>ResultSet</code> object. The default behavior is to call <code>result-set-read-column</code> which implements the <code>IResultSetReadColumn</code> protocol. This allows finer-grained control when you are working with multiple databases in a single application.</li>
+<li><code>:read-only?</code> &ndash; Like <code>:auto-commit?</code> this can be passed into any API function that might cause a new database connection to be created. This allows you to specify that <em>new connections</em> be treated as readonly, which may allow the database driver to perform optimizations on how the connection and its queries behave.</li>
+</ul>
+
+
+<h2>clojure.spec</h2>
+
+<p><code>java.jdbc</code> provides an optional <code>clojure.java.jdbc.spec</code> namespace that is compatible with Clojure 1.9.0 Alpha 17 (it uses <code>clojure.spec.alpha</code>). This namespace provides <code>fdef</code> specs for all of the public functions in <code>clojure.java.jdbc</code> so you can <code>instrument</code> your code and get validation on all your interaction with <code>java.jdbc</code>. Note that you cannot do generative testing against <code>java.jdbc</code> because it uses a lot of Java types and a lot of side effects. <em>I have an experimental branch where I&rsquo;ve been investigating what generators would look like for <code>java.jdbc</code> but don&rsquo;t hold your breath for that becoming part of the <strong>master</strong> branch!</em></p>
+
+<h2>New and Changed API Functions</h2>
+
+<ul>
+<li><code>as-sql-name</code> dropped its single arity (curried) version.</li>
+<li><code>get-isolation-level</code> will return the current isolation level inside a transaction, if any.</li>
+<li><code>quoted</code> dropped its 2-arity version, and now supports certain keywords for common entity-quoting strategies: <code>:ansi</code> (wraps entities in double quotes), <code>:mysql</code> (wraps entities in backticks), <code>:oracle</code> (wraps entities in double quotes), and <code>:sqlserver</code> (wraps entities in square brackets). These match the options in HoneySQL.</li>
+<li><code>reducible-query</code> and <code>reducible-result-set</code> &ndash; see <strong>Reducible Queries</strong> above.</li>
+</ul>
+
+
+<h2>Documentation</h2>
+
+<p>At present, the auto-generated API documentation (on <a href="https://clojure.github.io">https://clojure.github.io</a>) is stale due to some bugs in the toolchain used by the Clojure Build Server, so I recommend reading the <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">community-maintained <code>java.jdbc</code> documentation</a> on clojure-doc.org, in addition to using <code>clojure.repl/doc</code> to review the docstrings for API functions. That community-maintained documentation is currently going through a major overhaul to expand, clarify, and update the information presented &ndash; I encourage users of <code>java.jdbc</code> to get involved by submitting Pull Requests to help improve the documentation for everyone!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2017-07-17T03:40:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>3:40 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/" data-via="seancorfield" data-counturl="http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2017/01/19/boot-new-moved/" title="Previous Post: seancorfield/boot-new has moved to boot/new">&laquo; seancorfield/boot-new has moved to boot/new</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+  <p><em>Looking for my old blog at <a href="http://corfield.org/blog/index.cfm">corfield.org</a>
+      or perhaps the <a href="http://framework-one.github.io">Framework One (FW/1)</a> blog?</em></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2017/07/17/clojure-java-jdbc-0-7-0/">Release 0.7.0 of clojure.java.jdbc</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2017/01/19/boot-new-moved/">Seancorfield/boot-new Has Moved to Boot/new</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Clojure, New Relic, and Slow Application Startup</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/07/18/start-your-engine/">Start Your Engine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/06/17/more-boot/">More Boot</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </ul>
+  
+    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+  
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'seancorfield',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+<section>
+  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
+</section>
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://www.linkedin.com/in/seancorfield">
+      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
+    </a>
+  </h1>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2017 - Sean Corfield -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'seancorfield';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/';
+        var disqus_url = 'http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
