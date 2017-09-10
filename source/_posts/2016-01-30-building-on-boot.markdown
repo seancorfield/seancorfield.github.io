@@ -3,7 +3,7 @@ layout: post
 title: "Building On Boot"
 date: 2016-01-30 20:30:00
 comments: true
-categories: [clojure]
+categories: [boot, clojure]
 ---
 In yesterday's blog post, [Rebooting Clojure](http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/), I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.
 

@@ -3,7 +3,7 @@ layout: post
 title: "Testing With Boot"
 date: 2016-01-31 15:30:00
 comments: true
-categories: [clojure]
+categories: [boot, clojure]
 ---
 In [Building On Boot](http://seancorfield.github.io/blog/2016/01/30/building-on-boot/), I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more -->
 
@@ -27,4 +27,4 @@ As you can see on Boot's wiki, the ecosystem of [community-maintained Boot tasks
 
 Back to our build process and one of the key drivers for looking at Boot in the first place: we'd hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to "pin" versions of certain libraries that we depended on across multiple "projects". With Leiningen we'd had multiple `project.clj` files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our `defproject` form. It felt like we were starting to fight the build tool. The declarative nature of `project.clj` didn't feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single `build.boot` file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single `build.boot` file it was much easier to set up execution and test "contexts" as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as "sub-projects" but can treat it as a single project too where that is more convenient.
 
-In the next post, I'll take a diversion from World Singles' use of Boot and look at the [Boot new](https://github.com/seancorfield/boot-new) project I've been working on for a month -- another "missing piece of the ecosystem" that I wanted to help fill! 
+In the next post, I'll take a diversion from World Singles' use of Boot and look at the [Boot new](https://github.com/seancorfield/boot-new) project I've been working on for a month -- another "missing piece of the ecosystem" that I wanted to help fill!
