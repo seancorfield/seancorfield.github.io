@@ -42,7 +42,7 @@
   </url>
   <url>
     <loc>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/</loc>
-    <lastmod>2015-02-13T02:32:18-08:00</lastmod>
+    <lastmod>2015-02-13T03:32:18-07:00</lastmod>
   </url>
   <url>
     <loc>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/</loc>
@@ -101,5 +101,11 @@
   </url>
   <url>
     <loc>http://seancorfield.github.io/blog/categories/frege/</loc>
+  </url>
+  <url>
+    <loc>http://seancorfield.github.io/blog/categories/boot/</loc>
+  </url>
+  <url>
+    <loc>http://seancorfield.github.io/blog/page/2/</loc>
   </url>
 </urlset>

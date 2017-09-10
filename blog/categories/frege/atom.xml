@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Frege | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/frege/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-07-17T12:49:50-07:00</updated>
+  <updated>2017-09-10T12:52:58-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -65,7 +65,7 @@
   <entry>
     <title type="html"><![CDATA[Frege (and Clojure)]]></title>
     <link href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/"/>
-    <updated>2015-02-13T02:32:18-08:00</updated>
+    <updated>2015-02-13T03:32:18-07:00</updated>
     <id>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho'!). I also spent some time with Go last year (don&rsquo;t like it).</p>
 
