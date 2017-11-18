@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boot | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/boot/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-09-10T12:52:58-07:00</updated>
+  <updated>2017-11-17T16:01:02-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Boot Localrepo?]]></title>
+    <link href="http://seancorfield.github.io/blog/2017/11/17/boot-localrepo/"/>
+    <updated>2017-11-17T04:50:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2017/11/17/boot-localrepo</id>
+    <content type="html"><![CDATA[<p>Sometimes you just can&rsquo;t help having a &ldquo;random 3rd part JAR file&rdquo; in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven&rsquo;t gotten around to running your own shared repository.</p>
+
+<p>If you&rsquo;re using Leiningen, you&rsquo;ll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you &ldquo;install&rdquo; your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
+
+<p>What do you do if you&rsquo;re using Boot instead?<!-- more --></p>
+
+<p>Well, you <em>could</em> just keep <code>lein</code> installed and use it for this (with the <code>lein-localrepo</code> plugin dependency in your <code>~/.lein/profiles.clj</code>, for example):</p>
+
+<pre><code class="bash">lein localrepo install foobar.jar foo/bar 1.0.1
+</code></pre>
+
+<p>Or you could run some command line Boot to make that happen:</p>
+
+<pre><code class="bash">boot pom -p foo/bar -v 1.0.1 target \
+    install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
+</code></pre>
+
+<p>What the what? Yeah, that&rsquo;s really kind of ugly. Unfortunately, the <code>install</code> task seems to expect a physical <code>pom.xml</code> file when you specify a physical JAR file. That means we need to drop a <code>target</code> task into the pipeline into order for the generated <code>pom.xml</code> to be written to disk. It would be nice if it would look in the fileset first, because then at least this should work:</p>
+
+<pre><code class="bash"># This does NOT work!
+boot pom -p foo/bar -v 1.0.1 install -f foobar.jar -p foo/bar
+</code></pre>
+
+<p>So what other options do we have with Boot?</p>
+
+<p>Well, it turns out that you can run some Leiningen plugins directly from Boot, from the command line! Boot lets you specify dependencies on the command line, and it lets you &ldquo;call&rdquo; Clojure code from the command line too. Let&rsquo;s start a REPL with <code>lein-localrepo</code> as a dependency:</p>
+
+<pre><code class="bash">boot -d leiningen -d lein-localrepo repl
+</code></pre>
+
+<p>We need Leiningen as well since plugins rely on it as a dependency. Now, in the REPL we can require the main namespace from the plugin, and get information about the entry point:</p>
+
+<pre><code class="clojure">boot.user=&gt; (require '[leiningen.localrepo :as lr])
+nil
+boot.user=&gt; (doc lr/localrepo)
+-------------------------
+leiningen.localrepo/localrepo
+([_] [_ command &amp; args])
+  Work with local Maven repository
+
+Usage: lein localrepo &lt;command&gt; (commands are listed below)
+...
+</code></pre>
+
+<p>For any given plugin, <code>lein-foo</code>, the entry point is <code>leiningen.foo/foo</code>. Note that it is called with an unused argument and then the actual command line arguments. So we can ask for help on the <code>install</code> command:</p>
+
+<pre><code class="clojure">boot.user=&gt; (lr/localrepo nil "help" "install")
+Install artifact to local repository
+  Arguments:
+    [options] &lt;filename&gt; &lt;artifact-id&gt; &lt;version&gt;
+  Options:
+...
+</code></pre>
+
+<p>So we can call that function to perform the JAR install we want:</p>
+
+<pre><code class="clojure">boot.user=&gt; (lr/localrepo nil "install" "foobar.jar" "foo/bar" "1.0.1")
+
+&gt;
+</code></pre>
+
+<p>Oh, that&rsquo;s a bit disappointing &ndash; we exited the REPL and got our command prompt back. I guess that calls <code>(System/exit)</code> which is a bit unfriendly (but, perhaps, not unexpected given the use case for this plugin). But we can verify that the JAR file was installed:</p>
+
+<pre><code class="bash">&gt; ls -R ~/.m2/repository/foo
+bar
+
+/Users/sean/.m2/repository/foo/bar:
+1.0.1               maven-metadata-local.xml
+
+/Users/sean/.m2/repository/foo/bar/1.0.1:
+_remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
+</code></pre>
+
+<p>Now, remember that I said you can &ldquo;call&rdquo; code from the command line with Boot? Since we know the code we need to execute (the <code>require</code> and the call to <code>lr/localrepo</code>), we&rsquo;ll just supply those as command line arguments to the <code>call</code> task:</p>
+
+<pre><code class="bash">boot -d leiningen -d lein-localrepo \
+  call -e "(require '[leiningen.localrepo :as lr])" \
+       -e '(lr/localrepo nil "install" "foobar.jar" "foo/bar" "1.0.1")'
+</code></pre>
+
+<p>Voila!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
@@ -187,29 +276,6 @@ PORT=8123 lein run
 <p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
 
 <p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Building on Boot]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/"/>
-    <updated>2016-01-30T12:30:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/30/building-on-boot</id>
-    <content type="html"><![CDATA[<p>In yesterday&rsquo;s blog post, <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
-
-<p>Over the coming weeks, I&rsquo;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
-
-<p>In this post, I&rsquo;m going to cover some of the pros at a high level as it improved our build / test process.<!-- more --></p>
-
-<p>I mentioned that we&rsquo;d evolved a fair size Ant script over time that does most of the heavy lifting of our build / test / deploy process. We&rsquo;d gradually been replacing parts of that process with Clojure code but it was easier to stick a <code>-main</code> function in certain namespaces to call into our code than to turn chunks of our code into Leiningen plugins. A case in point was our database and data migration tasks. We have developed a persistence layer in Clojure, built on top of <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a>, that encapsulates our connection pooling strategies and environment settings. Our migration code was built on top of that. Our Ant script invoked Leiningen to run these <code>-main</code> functions at various points. With each of these, we had repeated code to deal with command line arguments, process and environment set up, and then calls to what were, in effect, a series of &ldquo;tasks&rdquo;.</p>
-
-<p>With Boot, we were able to eliminate a lot of that boilerplate. Boot tasks have command line argument parsing built-in. There&rsquo;s no need to create a <code>-main</code> function &ndash; the Boot tasks can call directly into our code. At this point we could easily compose tasks in a pipeline to satisfy any combination of database and data migration scenarios we needed, and we could simplify our Ant script to run a pipeline of Boot tasks as needed: which also meant we only fired up one JVM for that whole part of our build, instead of multiple invocations of Leiningen, each invoking a <code>-main</code> function.</p>
-
-<p>We also have some CFML applications in the mix. Because history. We had several tasks accessible via HTTP requests into those CFML applications and those were also invoked by the Ant script because it was easy to do. Over time, we&rsquo;re committed to moving more and more of the CFML functionality down into Clojure (for what I hope are obvious reasons). Some of the tasks we were invoking via HTTP in Ant were already just thin CFML veneers over Clojure functionality, fortunately, so we were easily able to create a Boot task to call that functionality instead of going through CFML via HTTP.</p>
-
-<p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we&rsquo;d able or willing to attempt with Leiningen in a long time.</p>
-
-<p>There were cons too, of course, and the biggest was that several of Leiningen&rsquo;s built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I&rsquo;ll cover some of those in my next post.</p>
 ]]></content>
   </entry>
   

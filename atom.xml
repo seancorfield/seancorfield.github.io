@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-09-10T12:52:58-07:00</updated>
+  <updated>2017-11-17T16:01:02-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,140 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Boot Localrepo?]]></title>
+    <link href="http://seancorfield.github.io/blog/2017/11/17/boot-localrepo/"/>
+    <updated>2017-11-17T04:50:00-08:00</updated>
+    <id>http://seancorfield.github.io/blog/2017/11/17/boot-localrepo</id>
+    <content type="html"><![CDATA[<p>Sometimes you just can&rsquo;t help having a &ldquo;random 3rd part JAR file&rdquo; in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven&rsquo;t gotten around to running your own shared repository.</p>
+
+<p>If you&rsquo;re using Leiningen, you&rsquo;ll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you &ldquo;install&rdquo; your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
+
+<p>What do you do if you&rsquo;re using Boot instead?<!-- more --></p>
+
+<p>Well, you <em>could</em> just keep <code>lein</code> installed and use it for this (with the <code>lein-localrepo</code> plugin dependency in your <code>~/.lein/profiles.clj</code>, for example):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>lein localrepo install foobar.jar foo/bar 1.0.1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or you could run some command line Boot to make that happen:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>boot pom -p foo/bar -v 1.0.1 target <span class="se">\</span>
+</span><span class='line'>    install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What the what? Yeah, that&rsquo;s really kind of ugly. Unfortunately, the <code>install</code> task seems to expect a physical <code>pom.xml</code> file when you specify a physical JAR file. That means we need to drop a <code>target</code> task into the pipeline into order for the generated <code>pom.xml</code> to be written to disk. It would be nice if it would look in the fileset first, because then at least this should work:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># This does NOT work!</span>
+</span><span class='line'>boot pom -p foo/bar -v 1.0.1 install -f foobar.jar -p foo/bar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what other options do we have with Boot?</p>
+
+<p>Well, it turns out that you can run some Leiningen plugins directly from Boot, from the command line! Boot lets you specify dependencies on the command line, and it lets you &ldquo;call&rdquo; Clojure code from the command line too. Let&rsquo;s start a REPL with <code>lein-localrepo</code> as a dependency:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>boot -d leiningen -d lein-localrepo repl
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We need Leiningen as well since plugins rely on it as a dependency. Now, in the REPL we can require the main namespace from the plugin, and get information about the entry point:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nf">require</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">leiningen.localrepo</span> <span class="ss">:as</span> <span class="nv">lr</span><span class="p">])</span>
+</span><span class='line'><span class="nv">nil</span>
+</span><span class='line'><span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nb">doc </span><span class="nv">lr/localrepo</span><span class="p">)</span>
+</span><span class='line'><span class="nv">-------------------------</span>
+</span><span class='line'><span class="nv">leiningen.localrepo/localrepo</span>
+</span><span class='line'><span class="p">([</span><span class="nv">_</span><span class="p">]</span> <span class="p">[</span><span class="nv">_</span> <span class="nv">command</span> <span class="o">&amp;</span> <span class="nv">args</span><span class="p">])</span>
+</span><span class='line'>  <span class="nv">Work</span> <span class="nv">with</span> <span class="nv">local</span> <span class="nv">Maven</span> <span class="nv">repository</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Usage</span><span class="err">:</span> <span class="nv">lein</span> <span class="nv">localrepo</span> <span class="nv">&lt;command&gt;</span> <span class="p">(</span><span class="nf">commands</span> <span class="nv">are</span> <span class="nv">listed</span> <span class="nv">below</span><span class="p">)</span>
+</span><span class='line'><span class="nv">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For any given plugin, <code>lein-foo</code>, the entry point is <code>leiningen.foo/foo</code>. Note that it is called with an unused argument and then the actual command line arguments. So we can ask for help on the <code>install</code> command:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nf">lr/localrepo</span> <span class="nv">nil</span> <span class="s">&quot;help&quot;</span> <span class="s">&quot;install&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Install</span> <span class="nv">artifact</span> <span class="nv">to</span> <span class="nv">local</span> <span class="nv">repository</span>
+</span><span class='line'>  <span class="nv">Arguments</span><span class="err">:</span>
+</span><span class='line'>    <span class="p">[</span><span class="nv">options</span><span class="p">]</span> <span class="nv">&lt;filename&gt;</span> <span class="nv">&lt;artifact-id&gt;</span> <span class="nv">&lt;version&gt;</span>
+</span><span class='line'>  <span class="nv">Options</span><span class="err">:</span>
+</span><span class='line'><span class="nv">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we can call that function to perform the JAR install we want:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">boot.user=&gt;</span> <span class="p">(</span><span class="nf">lr/localrepo</span> <span class="nv">nil</span> <span class="s">&quot;install&quot;</span> <span class="s">&quot;foobar.jar&quot;</span> <span class="s">&quot;foo/bar&quot;</span> <span class="s">&quot;1.0.1&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Oh, that&rsquo;s a bit disappointing &ndash; we exited the REPL and got our command prompt back. I guess that calls <code>(System/exit)</code> which is a bit unfriendly (but, perhaps, not unexpected given the use case for this plugin). But we can verify that the JAR file was installed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&gt; ls -R ~/.m2/repository/foo
+</span><span class='line'>bar
+</span><span class='line'>
+</span><span class='line'>/Users/sean/.m2/repository/foo/bar:
+</span><span class='line'>1.0.1             maven-metadata-local.xml
+</span><span class='line'>
+</span><span class='line'>/Users/sean/.m2/repository/foo/bar/1.0.1:
+</span><span class='line'>_remote.repositories  bar-1.0.1.jar       bar-1.0.1.pom
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, remember that I said you can &ldquo;call&rdquo; code from the command line with Boot? Since we know the code we need to execute (the <code>require</code> and the call to <code>lr/localrepo</code>), we&rsquo;ll just supply those as command line arguments to the <code>call</code> task:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>boot -d leiningen -d lein-localrepo <span class="se">\</span>
+</span><span class='line'>  call -e <span class="s2">&quot;(require &#39;[leiningen.localrepo :as lr])&quot;</span> <span class="se">\</span>
+</span><span class='line'>       -e <span class="s1">&#39;(lr/localrepo nil &quot;install&quot; &quot;foobar.jar&quot; &quot;foo/bar&quot; &quot;1.0.1&quot;)&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Voila!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release 0.7.0 of clojure.java.jdbc]]></title>
