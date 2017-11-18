@@ -22,6 +22,8 @@ Or you could run some command line Boot to make that happen:
 ``` bash
 boot pom -p foo/bar -v 1.0.1 target \
     install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
+# Don't forget to clean up!
+rm -rf target
 ```
 
 What the what? Yeah, that's really kind of ugly. Unfortunately, the `install` task seems to expect a physical `pom.xml` file when you specify a physical JAR file. That means we need to drop a `target` task into the pipeline into order for the generated `pom.xml` to be written to disk. It would be nice if it would look in the fileset first, because then at least this should work:
