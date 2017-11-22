@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-11-17T16:01:02-08:00</updated>
+  <updated>2017-11-22T13:02:52-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -33,6 +33,8 @@
 
 <pre><code class="bash">boot pom -p foo/bar -v 1.0.1 target \
     install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
+# Don't forget to clean up!
+rm -rf target
 </code></pre>
 
 <p>What the what? Yeah, that&rsquo;s really kind of ugly. Unfortunately, the <code>install</code> task seems to expect a physical <code>pom.xml</code> file when you specify a physical JAR file. That means we need to drop a <code>target</code> task into the pipeline into order for the generated <code>pom.xml</code> to be written to disk. It would be nice if it would look in the fileset first, because then at least this should work:</p>
@@ -99,6 +101,13 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
 </code></pre>
 
 <p>Voila!</p>
+
+<p><em>Updated November 22nd, 2017: I published a boot-localrepo task!</em></p>
+
+<p>And if you don&rsquo;t want to type all that, you can now do:</p>
+
+<pre><code class="bash">boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1
+</code></pre>
 ]]></content>
   </entry>
   

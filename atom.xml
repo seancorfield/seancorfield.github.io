@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2017-11-17T16:01:02-08:00</updated>
+  <updated>2017-11-22T13:02:52-08:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -35,8 +35,12 @@
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'>boot pom -p foo/bar -v 1.0.1 target <span class="se">\</span>
 </span><span class='line'>    install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
+</span><span class='line'><span class="c"># Don&#39;t forget to clean up!</span>
+</span><span class='line'>rm -rf target
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -144,6 +148,15 @@
 
 
 <p>Voila!</p>
+
+<p><em>Updated November 22nd, 2017: I published a boot-localrepo task!</em></p>
+
+<p>And if you don&rsquo;t want to type all that, you can now do:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
