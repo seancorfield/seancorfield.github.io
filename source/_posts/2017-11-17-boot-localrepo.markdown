@@ -97,3 +97,11 @@ boot -d leiningen -d lein-localrepo \
 ```
 
 Voila!
+
+_Updated November 22nd, 2017: I published a boot-localrepo task!_
+
+And if you don't want to type all that, you can now do:
+
+``` bash
+boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1
+```
