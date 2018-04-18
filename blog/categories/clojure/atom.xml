@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-04-18T10:55:13-07:00</updated>
+  <updated>2018-04-18T10:59:07-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -82,6 +82,10 @@
 <h2>p.s. Building New Projects</h2>
 
 <p>Another common function that both Leiningen and Boot provide is to generate new projects based on a template. Check out <a href="https://github.com/seancorfield/clj-new">clj-new</a> for <code>clj</code>-based tooling that generates new <code>deps.edn</code>-based projects, as well as leveraging existing <code>lein-template</code> and <code>boot-template</code> projects.</p>
+
+<h2>Credits</h2>
+
+<p>Thank you to Alan Dipert, Alex Miller, Richiardi Andrea, and Rick Moynihan for reviewing a draft of this post and providing feedback and suggestions!</p>
 ]]></content>
   </entry>
   
