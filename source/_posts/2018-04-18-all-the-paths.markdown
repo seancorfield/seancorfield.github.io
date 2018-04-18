@@ -69,3 +69,7 @@ Both `juxt.pack` and `depstar` assume that you know what you're doing with alias
 ## p.s. Building New Projects
 
 Another common function that both Leiningen and Boot provide is to generate new projects based on a template. Check out [clj-new](https://github.com/seancorfield/clj-new) for `clj`-based tooling that generates new `deps.edn`-based projects, as well as leveraging existing `lein-template` and `boot-template` projects.
+
+## Credits
+
+Thank you to Alan Dipert, Alex Miller, Richiardi Andrea, and Rick Moynihan for reviewing a draft of this post and providing feedback and suggestions!
