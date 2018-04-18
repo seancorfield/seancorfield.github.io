@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boot | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/boot/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-04-18T10:59:07-07:00</updated>
+  <updated>2018-04-18T11:55:06-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -34,12 +34,16 @@
 
 <p>The main aspect of Leiningen that is relevant to this blog post is the concept of &ldquo;paths&rdquo;. As noted above, as far as the JVM is concerned, there&rsquo;s really only the classpath: that&rsquo;s how you run your code. The various build tools need to know what else should be packaged up for deployment (e.g., configuration files, HTML/CSS/JS assets), as well as what you need to run tests or other development-related tasks that do not need to be in the deployment artifact.</p>
 
-<p>Leiningen chose the following terminology for these various things:
-* <code>source-paths</code> &ndash; your Clojure code that should be part of every runtime, as well as being packaged up for deployment.
-* <code>java-source-paths</code> &ndash; any Java code in your project that should be compiled, and whose <code>.class</code> files should be packaged up for deployment.
-* <code>test-paths</code> &ndash; your Clojure code needed for development/testing of your application, which should <em>not</em> be part of the deployment artifact.
-* <code>resource-paths</code> &ndash; your non-code files that should be made available at runtime (i.e., on the classpath), as well as being packaged up for deployment.
-* <code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime, and therefore should be packaged up for deployment &ndash; or at least declared in the deployment artifact as being needed for runtime.</p>
+<p>Leiningen chose the following terminology for these various things:</p>
+
+<ul>
+<li><code>source-paths</code> &ndash; your Clojure code that should be part of every runtime, as well as being packaged up for deployment.</li>
+<li><code>java-source-paths</code> &ndash; any Java code in your project that should be compiled, and whose <code>.class</code> files should be packaged up for deployment.</li>
+<li><code>test-paths</code> &ndash; your Clojure code needed for development/testing of your application, which should <em>not</em> be part of the deployment artifact.</li>
+<li><code>resource-paths</code> &ndash; your non-code files that should be made available at runtime (i.e., on the classpath), as well as being packaged up for deployment.</li>
+<li><code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime, and therefore should be packaged up for deployment &ndash; or at least declared in the deployment artifact as being needed for runtime.</li>
+</ul>
+
 
 <p>There&rsquo;s a subtlety here that Leiningen glosses over: there are really two types of files that are not code, that both need to be in the deployment artifact &ndash; those that need to be on the classpath during Leiningen&rsquo;s runtime (configuration files etc) and those that do not (HTML/CSS/JS etc). In Leiningen&rsquo;s world they are all &ldquo;resources&rdquo; and end up on the classpath anyway. This is a harmless convenience, but it&rsquo;s still an important distinction (note: once packaged up, everything in the JAR will be available on that program&rsquo;s runtime and, in general, during development/testing you will usually want your &ldquo;web root&rdquo; to be on your classpath, so that <code>io/resource</code> can find those files).</p>
 
@@ -47,11 +51,15 @@
 
 <p><a href="http://boot-clj.com/">Boot</a> came along later in Clojure&rsquo;s evolution and approached build tools from a different direction. While most build tools (across most languages) are &ldquo;declarative&rdquo;, i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot&rsquo;s website says &ldquo;It&rsquo;s not a build tool - it&rsquo;s build tooling.&rdquo;</p>
 
-<p>I&rsquo;ve <a href="http://seancorfield.github.io/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:
-* <code>resource-paths</code> &ndash; any files that need to both be on the classpath and packaged up for deployment.
-* <code>source-paths</code> &ndash; any files that need to be on the classpath, but not part of the deployment artifact.
-* <code>asset-paths</code> &ndash; any files that do not need to be on the classpath, but should be packaged up for deployment.
-* <code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime (etc).</p>
+<p>I&rsquo;ve <a href="http://seancorfield.github.io/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:</p>
+
+<ul>
+<li><code>resource-paths</code> &ndash; any files that need to both be on the classpath and packaged up for deployment.</li>
+<li><code>source-paths</code> &ndash; any files that need to be on the classpath, but not part of the deployment artifact.</li>
+<li><code>asset-paths</code> &ndash; any files that do not need to be on the classpath, but should be packaged up for deployment.</li>
+<li><code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime (etc).</li>
+</ul>
+
 
 <p>We see that Boot distinguishes between the two types of files that are not code, that both need to be in the deployment artifact, but blurs the lines between code and non-code files that need to be on the classpath. That means that when we move back and forth between Boot and Leiningen, we need to remember that they call certain core concepts by different names. Boot&rsquo;s <code>source-paths</code> are pretty much equivalent to Leiningen&rsquo;s <code>test-paths</code>. Boot&rsquo;s <code>asset-paths</code> are mapped into Leiningen&rsquo;s <code>resource-paths</code> (despite not needing to be on the classpath during the tool&rsquo;s runtime) and Leiningen&rsquo;s <code>source-paths</code> are mapped into Boot&rsquo;s <code>resource-paths</code> (despite being specifically <em>source</em> code). It definitely has potential to be confusing but it&rsquo;s born out of different approaches to how the fileset is managed across the lifecycle of both tools. In particular, Boot has a fileset abstraction that is key to how tasks are written and how various types of files are manipulated during Boot&rsquo;s execution &ndash; see <a href="https://github.com/boot-clj/boot/wiki/Boot-Environment">https://github.com/boot-clj/boot/wiki/Boot-Environment</a> for more detail about this.</p>
 
