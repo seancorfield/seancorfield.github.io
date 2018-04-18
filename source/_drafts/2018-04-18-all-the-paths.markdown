@@ -44,7 +44,7 @@ We see that Boot distinguishes between the two types of files that are not code,
 
 ## clj - Bringing It Back Home
 
-As Clojure 1.9 was being developed, it became important to be able to treat "Clojure core" as a single artifact, even tho' it consisted "core" plus "spec.alpha" plus "core.specs.alpha". Out of that came the `deps.edn` file for specifying dependencies, the `tools.deps.alpha` library for manipulating the `deps.edn` files and the dependencies it declares, and the `clj` and `clojure` command-line scripts that provide a standardized way to run Clojure programs based on dependencies specified in `deps.edn` files.
+As Clojure 1.9 was being developed, it became important to be able to treat "Clojure core" as a single artifact, even tho' it consisted of "core" plus "spec.alpha" plus "core.specs.alpha". Out of that came the `deps.edn` file for specifying dependencies, the `tools.deps.alpha` library for manipulating the `deps.edn` files and the dependencies they declare, and the `clj` and `clojure` command-line scripts that provide a standardized way to run Clojure programs based on dependencies specified in `deps.edn` files.
 
 Just like the underlying Java (JVM) ecosystem, Clojure's new Command-Line Interface (CLI) is primarily about the classpath. It provides a mechanism to specify a set of paths and a set of dependencies, across (typically) three files (the "install" `deps.edn`, your "home" `deps.edn`, and your "project" `deps.edn`). It supports "aliases" for merging in alternative paths and dependencies. It also supports JVM options, and the options already available in `clojure.main`: initial and main options, to specify files to load, code to run, and a main namespace.
 
@@ -64,7 +64,7 @@ Both `juxt.pack` and `depstar` assume that you know what you're doing with alias
 
 ## Looking Forward
 
-`clj` and `deps.edn` and `tools.deps.alpha` provide a core, standardized way of dealing with dependencies and various options that are required to run Clojure programs. Over time, this should become the standard baseline for "installing" and running Clojure code on Linux, Mac, and Windows. Both Leiningen and Boot have a strongly entrenched user base and both provide substantially enhanced behavior above and beyond `clj` and its components -- that's by design. It is reasonable to assume that tooling based on `clj`, `deps.edn`, and `tools.deps.alpha` will become much more commonplace and there will come a day, possibly soon, where developers who pick up Clojure no longer need to consider installing Boot or Leiningen.
+`clj` and `deps.edn` and `tools.deps.alpha` provide a core, standardized way of dealing with dependencies and various options that are required to run Clojure programs. Over time, this should become the standard baseline for "installing" and running Clojure code on Linux, Mac, and Windows. Both Leiningen and Boot have a strongly entrenched user base and both provide substantially enhanced behavior above and beyond `clj` and its components -- that's by design. It is reasonable to assume that tooling based on `clj`, `deps.edn`, and `tools.deps.alpha` will become much more commonplace and there will come a day, possibly soon, where developers who pick up Clojure no longer need to consider installing Boot or Leiningen for their day-to-day work.
 
 ## p.s. Building New Projects
 
