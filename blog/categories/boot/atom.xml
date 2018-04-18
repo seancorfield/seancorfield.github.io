@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Boot | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/boot/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-04-17T23:38:45-07:00</updated>
+  <updated>2018-04-18T10:55:13-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[All the Paths]]></title>
+    <link href="http://seancorfield.github.io/blog/2018/04/18/all-the-paths/"/>
+    <updated>2018-04-18T03:40:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2018/04/18/all-the-paths</id>
+    <content type="html"><![CDATA[<p>With the recent arrival of <a href="https://clojure.org/guides/deps_and_cli"><code>clj</code> and <code>tools.deps.alpha</code></a> as a &ldquo;standard&rdquo; lightweight way to run Clojure programs and the seed for tooling based on <code>deps.edn</code> dependency files, it&rsquo;s time to take a look at the terminology used across Clojure&rsquo;s various tools.<!-- more --></p>
+
+<h2>Running Java/JVM Programs</h2>
+
+<p>Before we dive into Clojure&rsquo;s tools, let&rsquo;s first consider the basics. When you run a compiled Java (or any JVM-based) program, you need two things: a classpath and a <code>main</code> function or, rather, a &ldquo;main class&rdquo;. Everything boils down to <code>java -cp ... MyClass</code> where the <code>...</code> is the &ldquo;classpath&rdquo;: a colon-delimited (or semicolon-delimited on Windows) list of directories or JAR files to search for <code>MyClass</code> and all the classes it needs. A quick look at the many introductory tutorials for Java online shows that the classpath is mostly just glossed over, despite being one of the most important (and, for beginnners, often one of the most perplexing) aspects of running programs on the JVM.</p>
+
+<p>When you are creating deployable versions of programs, you typically use some sort of &ldquo;build&rdquo; tool to gather up all your (compiled) class files and JAR files (dependencies) and put them all together in a single &ldquo;uber&rdquo; JAR file, so that it can be run with just <code>java -jar MyApplication.jar</code>. This is shorthand for specifying <code>MyApplication.jar</code> as the entire classpath and assuming some &ldquo;magic&rdquo; inside the JAR file that specifies how to find the main class (via something called a &ldquo;manifest&rdquo;). The build tools know how to create the manifest (based on some information you provide) as well as managing the assembly of all the component pieces that will make up your complete application.</p>
+
+<p>It&rsquo;s no wonder this can be a minefield for beginners!</p>
+
+<h2>Leiningen</h2>
+
+<p>In the very early days of Clojure, folks relied on the JVM ecosystem for build tools and dealt with all the sharp edges directly. Then along came <a href="https://leiningen.org/">Leiningen</a> with the goal of &ldquo;automating Clojure projects without setting your hair on fire&rdquo; by hiding all the sharp edges of Maven and <code>pom.xml</code> files and manifests and so on. It was so successful that it soon became the de facto standard in the Clojure world and most of the Clojure books out there can safely assume you have Leiningen installed. You can even just type <code>lein new app myapp</code> and you have a nicely structured skeleton of a Clojure project to get you up and running! Leiningen dispensed with all the XML and arcane invocations of the Java world and used a simple <code>project.clj</code> file to declare everything about your program. Your dependencies, your main namespace (class), various different ways of running your program (profiles), and all the tools you needed for development and testing (plugins).</p>
+
+<p>The main aspect of Leiningen that is relevant to this blog post is the concept of &ldquo;paths&rdquo;. As noted above, as far as the JVM is concerned, there&rsquo;s really only the classpath: that&rsquo;s how you run your code. The various build tools need to know what else should be packaged up for deployment (e.g., configuration files, HTML/CSS/JS assets), as well as what you need to run tests or other development-related tasks that do not need to be in the deployment artifact.</p>
+
+<p>Leiningen chose the following terminology for these various things:
+* <code>source-paths</code> &ndash; your Clojure code that should be part of every runtime, as well as being packaged up for deployment.
+* <code>java-source-paths</code> &ndash; any Java code in your project that should be compiled, and whose <code>.class</code> files should be packaged up for deployment.
+* <code>test-paths</code> &ndash; your Clojure code needed for development/testing of your application, which should <em>not</em> be part of the deployment artifact.
+* <code>resource-paths</code> &ndash; your non-code files that should be made available at runtime (i.e., on the classpath), as well as being packaged up for deployment.
+* <code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime, and therefore should be packaged up for deployment &ndash; or at least declared in the deployment artifact as being needed for runtime.</p>
+
+<p>There&rsquo;s a subtlety here that Leiningen glosses over: there are really two types of files that are not code, that both need to be in the deployment artifact &ndash; those that need to be on the classpath during Leiningen&rsquo;s runtime (configuration files etc) and those that do not (HTML/CSS/JS etc). In Leiningen&rsquo;s world they are all &ldquo;resources&rdquo; and end up on the classpath anyway. This is a harmless convenience, but it&rsquo;s still an important distinction (note: once packaged up, everything in the JAR will be available on that program&rsquo;s runtime and, in general, during development/testing you will usually want your &ldquo;web root&rdquo; to be on your classpath, so that <code>io/resource</code> can find those files).</p>
+
+<h2>Boot</h2>
+
+<p><a href="http://boot-clj.com/">Boot</a> came along later in Clojure&rsquo;s evolution and approached build tools from a different direction. While most build tools (across most languages) are &ldquo;declarative&rdquo;, i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot&rsquo;s website says &ldquo;It&rsquo;s not a build tool - it&rsquo;s build tooling.&rdquo;</p>
+
+<p>I&rsquo;ve <a href="http://seancorfield.github.io/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:
+* <code>resource-paths</code> &ndash; any files that need to both be on the classpath and packaged up for deployment.
+* <code>source-paths</code> &ndash; any files that need to be on the classpath, but not part of the deployment artifact.
+* <code>asset-paths</code> &ndash; any files that do not need to be on the classpath, but should be packaged up for deployment.
+* <code>dependencies</code> &ndash; the list of project artifacts (and versions) that your program needs at runtime (etc).</p>
+
+<p>We see that Boot distinguishes between the two types of files that are not code, that both need to be in the deployment artifact, but blurs the lines between code and non-code files that need to be on the classpath. That means that when we move back and forth between Boot and Leiningen, we need to remember that they call certain core concepts by different names. Boot&rsquo;s <code>source-paths</code> are pretty much equivalent to Leiningen&rsquo;s <code>test-paths</code>. Boot&rsquo;s <code>asset-paths</code> are mapped into Leiningen&rsquo;s <code>resource-paths</code> (despite not needing to be on the classpath during the tool&rsquo;s runtime) and Leiningen&rsquo;s <code>source-paths</code> are mapped into Boot&rsquo;s <code>resource-paths</code> (despite being specifically <em>source</em> code). It definitely has potential to be confusing but it&rsquo;s born out of different approaches to how the fileset is managed across the lifecycle of both tools. In particular, Boot has a fileset abstraction that is key to how tasks are written and how various types of files are manipulated during Boot&rsquo;s execution &ndash; see <a href="https://github.com/boot-clj/boot/wiki/Boot-Environment">https://github.com/boot-clj/boot/wiki/Boot-Environment</a> for more detail about this.</p>
+
+<h2>clj - Bringing It Back Home</h2>
+
+<p>As Clojure 1.9 was being developed, it became important to be able to treat &ldquo;Clojure core&rdquo; as a single artifact, even tho' it consisted of &ldquo;core&rdquo; plus &ldquo;spec.alpha&rdquo; plus &ldquo;core.specs.alpha&rdquo;. Out of that came the <code>deps.edn</code> file for specifying dependencies, the <code>tools.deps.alpha</code> library for manipulating the <code>deps.edn</code> files and the dependencies they declare, and the <code>clj</code> and <code>clojure</code> command-line scripts that provide a standardized way to run Clojure programs based on dependencies specified in <code>deps.edn</code> files.</p>
+
+<p>Just like the underlying Java (JVM) ecosystem, Clojure&rsquo;s new Command-Line Interface (CLI) is primarily about the classpath. It provides a mechanism to specify a set of paths and a set of dependencies, across (typically) three files (the &ldquo;install&rdquo; <code>deps.edn</code>, your &ldquo;home&rdquo; <code>deps.edn</code>, and your &ldquo;project&rdquo; <code>deps.edn</code>). It supports &ldquo;aliases&rdquo; for merging in alternative paths and dependencies. It also supports JVM options, and the options already available in <code>clojure.main</code>: initial and main options, to specify files to load, code to run, and a main namespace.</p>
+
+<p>By getting back to basics, <code>clj</code> mirrors the underlying JVM ecosystem that really only cares about the classpath, constructed in appropriate ways for developing, testing, and running your program. It leaves decisions about packaging up to other tools, by design, and through the <code>tools.deps.alpha</code> library it offers a straightforward API for tool authors to build upon.</p>
+
+<p>Late last year (November 2017), I started work on <a href="https://github.com/seancorfield/boot-tools-deps">boot-tools-deps</a> which was intended as a bridge to add Boot-based tooling on top of an existing <code>deps.edn</code> project. There is also <a href="https://github.com/RickMoynihan/lein-tools-deps">lein-tools-deps</a> which takes a slightly different approach but is intended to integrate <code>deps.edn</code> files into a Leiningen project.</p>
+
+<p>We&rsquo;ve also seen the first two &ldquo;build tools&rdquo; based on <code>deps.edn</code> appear: <a href="https://github.com/healthfinch/depstar">depstar</a> and <a href="https://github.com/juxt/pack.alpha">juxt.pack</a> which, like the Boot and Leiningen tools above, take different approaches but are both intended to build (uber) JAR files from projects based on <code>deps.edn</code>.</p>
+
+<p>This means that we need to look closely at the decisions each of these tools make about paths. The recommended approach with <code>clj</code> and <code>deps.edn</code> is to use aliases (liberally) to delineate the different classpaths (and JVM options and main options and so on) that all your various tasks require. The end result in each case is a specific classpath and options to run your code. For build tools, &ldquo;run your code&rdquo; means take the files on the classpath and package them up into a JAR file &ndash; so the entire file selection process is driven by aliases. This is rather different to the Leiningen and Boot build tools outlined above, since they provide explicit categories in which to declare files and folders for consideration in the classpath, non-classpath, packaging, and non-packaging categories.</p>
+
+<p><code>lein-tools-deps</code> is intended primarily to replace your <code>:dependencies</code> vector by dependencies drawn from various <code>deps.edn</code> files. It doesn&rsquo;t (currently) worry about aliases, and it relies on the existing Leiningen infrastructure for all development/testing/packaging decisions. It&rsquo;s a nice, straightforward metaphor: <code>:mvn/version</code> dependencies in <code>deps.edn</code> are mapped into Leiningen&rsquo;s <code>:dependencies</code> and nothing else changes. The project maintainer, Rick Moynihan, intends to expand its functionality over time.</p>
+
+<p>Both <code>juxt.pack</code> and <code>depstar</code> assume that you know what you&rsquo;re doing with aliases and they take whatever you&rsquo;ve decided is your classpath and they turn it into a JAR file. <code>depstar</code> takes the simpler approach, producing just a JAR file with no assumptions built-in &ndash; you need to tell it what main namespace to run and so on. <code>juxt.pack</code> is closer to a standard build tool and targets both AWS Lambda and traditional uber-JAR approaches.</p>
+
+<p><code>boot-tools-deps</code> is intended to be a hybrid that envelops the underlying <code>deps.edn</code> and <code>tools.deps.alpha</code> machinery, exposing most of the same options, and then allows you to either run Boot tasks using the same, underlying classpath, or merge the <code>clj</code> environment back into the Boot environment to support different tooling. Specifically, it assumes that what comes out of <code>deps.edn</code> in the <code>:paths</code> key should be the <code>:resource-paths</code> &ndash; source and non-source, that is intended to be on the classpath and intended to be packaged for deployment. This includes <code>:git/url</code> and <code>:local/root</code> dependencies (since those are source code paths/folders). It also assumes that what comes out of <code>deps.edn</code> in the <code>:extra-paths</code> key should be the <code>:source-paths</code> &ndash; source code that is intended to be on the classpath but not packaged for deployment. While this is a fairly arbitrary interpretation of an artificial divide between entities on the classpath, I believe this is &ldquo;likely&rdquo; in the real world. In any case, this can be modified by Boot&rsquo;s <code>sift</code> task. Finally, it assumes that what comes out of <code>deps.edn</code> as a map of actual libraries and versions should be the <code>:dependencies</code> for Boot itself. This ought to be a straightforward assumption but it can cause problems if the dependencies use <code>:scope</code> extensively since that is not propagated by the Maven/Resolver library behind <code>tools.deps.alpha</code> and is of dubious value in the first place. In particular, transitive dependencies will not have the same scope as the parent that introduced them! Using aliases to assemble your dependencies is a much safer bet.</p>
+
+<h2>Looking Forward</h2>
+
+<p><code>clj</code> and <code>deps.edn</code> and <code>tools.deps.alpha</code> provide a core, standardized way of dealing with dependencies and various options that are required to run Clojure programs. Over time, this should become the standard baseline for &ldquo;installing&rdquo; and running Clojure code on Linux, Mac, and Windows. Both Leiningen and Boot have a strongly entrenched user base and both provide substantially enhanced behavior above and beyond <code>clj</code> and its components &ndash; that&rsquo;s by design. It is reasonable to assume that tooling based on <code>clj</code>, <code>deps.edn</code>, and <code>tools.deps.alpha</code> will become much more commonplace and there will come a day, possibly soon, where developers who pick up Clojure no longer need to consider installing Boot or Leiningen for their day-to-day work.</p>
+
+<h2>p.s. Building New Projects</h2>
+
+<p>Another common function that both Leiningen and Boot provide is to generate new projects based on a template. Check out <a href="https://github.com/seancorfield/clj-new">clj-new</a> for <code>clj</code>-based tooling that generates new <code>deps.edn</code>-based projects, as well as leveraging existing <code>lein-template</code> and <code>boot-template</code> projects.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Boot Localrepo?]]></title>
@@ -252,39 +324,6 @@ PORT=8123 lein run
 <p>The next thing on my roadmap is to add some sort of &ldquo;generator&rdquo; function (not unlike <a href="https://github.com/weavejester/lein-generate">James Reeves' lein-generate</a>) which will allow you to add new pieces to your existing projects, much Rails/Grails have built-in commands to let you add new models, controllers, and so on. That will be part of 0.4.0 and probably go through a couple of revisions. At some point, I&rsquo;ll feel comfortable declaring a 1.0.0 release and then we&rsquo;ll see about getting Boot <code>new</code> merged into the core of Boot itself.</p>
 
 <p>Boot originally started life as a part of Hoplon and for a long time, you needed Leiningen in order to generate a new Hoplon project, even tho' Hoplon itself was powered-by-Boot. It&rsquo;s nice to see <a href="https://github.com/hoplon/hoplon/wiki/Get-Started#start-from-a-template">Hoplon&rsquo;s Getting Started</a> using <code>boot-new</code> as the recommended way to generate a new Hoplon project (it&rsquo;s still a Leiningen template!).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Testing With Boot]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/"/>
-    <updated>2016-01-31T07:30:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot</id>
-    <content type="html"><![CDATA[<p>In <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
-
-<p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
-
-<p>Boot&rsquo;s standard for driving <code>clojure.test</code> is <a href="https://github.com/adzerk-oss/boot-test">Adzerk&rsquo;s boot-test</a>. Using it in your <code>build.boot</code> file is as simple as adding a dependency on <code>[adzerk/boot-test "1.0.7" :scope "test"]</code> and then referring in the <code>test</code> task:</p>
-
-<pre><code>(merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
-(require '[adzerk.boot-test :refer [test]])
-</code></pre>
-
-<p>Now you can do <code>boot test</code> and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a>. Add a dependency on <code>[seancorfield/boot-expectations "1.0.5" :scope "test"]</code> and then refer in the <code>expectations</code> task:</p>
-
-<pre><code>(merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
-(require '[seancorfield.boot-expectations :refer [expectation]])
-</code></pre>
-
-<p>Now you can do <code>boot expectations</code> to run any Expectations tests in any of the namespaces in your source paths. Do <code>boot expectations -h</code> to see all the options the task provides.</p>
-
-<p>I relied very heavily on two sources for this project: Adzerk&rsquo;s <code>boot-test</code> for the shape of the code and the <a href="https://clojurians.slack.com/messages/boot/">#boot channel</a> on the <a href="http://clojurians.net">Clojurians Slack</a> where Boot&rsquo;s maintainers hang out and are <em>extremely attentive and helpful</em>! In particular, <a href="https://github.com/micha">Micha Niskin</a> was invaluable, answering all my newbie questions and making suggestions. Boot&rsquo;s &ldquo;pods&rdquo; made it easy to specify the version of Clojure to use when running the tests, without affecting the version of Clojure used for anything else in the build process (we have always run our tests against the released version we are actually using as well as the latest snapshot of Clojure&rsquo;s master branch so we don&rsquo;t get surprised by any changes being introduced in the next release). The &ldquo;pod&rdquo; machinery also made it straightforward to have namespaces required into the testing environment, and shutdown functions run after the tests, again without affecting the main build process. And all in a single JVM process that runs for the duration of the build.</p>
-
-<p>As you can see on Boot&rsquo;s wiki, the ecosystem of <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-maintained Boot tasks</a> is already pretty strong and growing all the time.</p>
-
-<p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
-
-<p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
 ]]></content>
   </entry>
   
