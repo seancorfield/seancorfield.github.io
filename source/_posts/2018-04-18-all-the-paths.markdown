@@ -22,6 +22,7 @@ In the very early days of Clojure, folks relied on the JVM ecosystem for build t
 The main aspect of Leiningen that is relevant to this blog post is the concept of "paths". As noted above, as far as the JVM is concerned, there's really only the classpath: that's how you run your code. The various build tools need to know what else should be packaged up for deployment (e.g., configuration files, HTML/CSS/JS assets), as well as what you need to run tests or other development-related tasks that do not need to be in the deployment artifact.
 
 Leiningen chose the following terminology for these various things:
+
 * `source-paths` -- your Clojure code that should be part of every runtime, as well as being packaged up for deployment.
 * `java-source-paths` -- any Java code in your project that should be compiled, and whose `.class` files should be packaged up for deployment.
 * `test-paths` -- your Clojure code needed for development/testing of your application, which should _not_ be part of the deployment artifact.
@@ -35,6 +36,7 @@ There's a subtlety here that Leiningen glosses over: there are really two types 
 [Boot](http://boot-clj.com/) came along later in Clojure's evolution and approached build tools from a different direction. While most build tools (across most languages) are "declarative", i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot's website says "It's not a build tool - it's build tooling."
 
 I've [written about Boot](http://seancorfield.github.io/blog/categories/boot/) quite a bit since we made our decision at [World Singles llc](http://worldsinglesnetworks.com/) to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it's composable and "it's just code". Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:
+
 * `resource-paths` -- any files that need to both be on the classpath and packaged up for deployment.
 * `source-paths` -- any files that need to be on the classpath, but not part of the deployment artifact.
 * `asset-paths` -- any files that do not need to be on the classpath, but should be packaged up for deployment.
