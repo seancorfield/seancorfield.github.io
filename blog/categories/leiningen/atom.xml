@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Leiningen | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/leiningen/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-04-30T18:31:51-07:00</updated>
+  <updated>2018-05-01T10:14:47-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -51,7 +51,7 @@
 
 <p><a href="http://boot-clj.com/">Boot</a> came along later in Clojure&rsquo;s evolution and approached build tools from a different direction. While most build tools (across most languages) are &ldquo;declarative&rdquo;, i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot&rsquo;s website says &ldquo;It&rsquo;s not a build tool - it&rsquo;s build tooling.&rdquo;</p>
 
-<p>I&rsquo;ve <a href="http://seancorfield.github.io/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:</p>
+<p>I&rsquo;ve <a href="http://corfield.org/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:</p>
 
 <ul>
 <li><code>resource-paths</code> &ndash; any files that need to both be on the classpath and packaged up for deployment.</li>

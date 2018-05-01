@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://seancorfield.github.io/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-04-30T18:31:51-07:00</updated>
+  <updated>2018-05-01T10:14:47-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -51,7 +51,7 @@
 
 <p><a href="http://boot-clj.com/">Boot</a> came along later in Clojure&rsquo;s evolution and approached build tools from a different direction. While most build tools (across most languages) are &ldquo;declarative&rdquo;, i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot&rsquo;s website says &ldquo;It&rsquo;s not a build tool - it&rsquo;s build tooling.&rdquo;</p>
 
-<p>I&rsquo;ve <a href="http://seancorfield.github.io/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:</p>
+<p>I&rsquo;ve <a href="http://corfield.org/blog/categories/boot/">written about Boot</a> quite a bit since we made our decision at <a href="http://worldsinglesnetworks.com/">World Singles llc</a> to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it&rsquo;s composable and &ldquo;it&rsquo;s just code&rdquo;. Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:</p>
 
 <ul>
 <li><code>resource-paths</code> &ndash; any files that need to both be on the classpath and packaged up for deployment.</li>
@@ -342,7 +342,7 @@
     <link href="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
     <updated>2016-07-29T13:20:00-07:00</updated>
     <id>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup</id>
-    <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
+    <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
 
 <p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
 
@@ -394,7 +394,7 @@
     <link href="http://seancorfield.github.io/blog/2016/06/17/more-boot/"/>
     <updated>2016-06-17T13:00:00-07:00</updated>
     <id>http://seancorfield.github.io/blog/2016/06/17/more-boot</id>
-    <content type="html"><![CDATA[<p>Back in February I talked about <a href="http://seancorfield.github.io/blog/2016/02/02/boot-new/">boot-new</a> and talked about a &ldquo;future 1.0.0 release&rdquo;. We&rsquo;re not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we&rsquo;ve continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot&rsquo;s reach soon. In this post, I want to cover some of the things we&rsquo;ve been doing with Boot recently.<!-- more --></p>
+    <content type="html"><![CDATA[<p>Back in February I talked about <a href="http://corfield.org/blog/2016/02/02/boot-new/">boot-new</a> and talked about a &ldquo;future 1.0.0 release&rdquo;. We&rsquo;re not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we&rsquo;ve continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot&rsquo;s reach soon. In this post, I want to cover some of the things we&rsquo;ve been doing with Boot recently.<!-- more --></p>
 
 <p>I feel I should start with an apology for the &ldquo;radio silence&rdquo; since February &ndash; it&rsquo;s a combination of work being extremely engaging (and busy!) and some aspects of my personal life going somewhat to hell in a handbasket&hellip; But things have improved lately (thankfully!) and I hope to be more regular in my blogging (I certainly have a decent queue of article ideas in my head!).</p>
 
@@ -478,7 +478,7 @@
     <link href="http://seancorfield.github.io/blog/2016/02/02/boot-new/"/>
     <updated>2016-02-02T09:00:00-08:00</updated>
     <id>http://seancorfield.github.io/blog/2016/02/02/boot-new</id>
-    <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
+    <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://corfield.org/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
 
 <p>Leiningen has long-supported the generation of new projects from templates and it&rsquo;s pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>
 
@@ -524,7 +524,7 @@ PORT=8123 lein run
     <link href="http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/"/>
     <updated>2016-01-31T07:30:00-08:00</updated>
     <id>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot</id>
-    <content type="html"><![CDATA[<p>In <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
+    <content type="html"><![CDATA[<p>In <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
 
 <p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
 
@@ -557,7 +557,7 @@ PORT=8123 lein run
     <link href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/"/>
     <updated>2016-01-30T12:30:00-08:00</updated>
     <id>http://seancorfield.github.io/blog/2016/01/30/building-on-boot</id>
-    <content type="html"><![CDATA[<p>In yesterday&rsquo;s blog post, <a href="http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
+    <content type="html"><![CDATA[<p>In yesterday&rsquo;s blog post, <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
 
 <p>Over the coming weeks, I&rsquo;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
 
@@ -621,7 +621,7 @@ PORT=8123 lein run
 
 <p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
 
-<p>Almost a year ago, I <a href="http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/">talked about my Leiningen plugin for Frege</a>. Back then it was version 3.22.367. That plugin is now version 3.23.450 and there&rsquo;s a Leiningen template to go with it, tracking prerelease builds of Frege which I&rsquo;ve been publishing to Sonatype&rsquo;s OSS Snapshots repository.</p>
+<p>Almost a year ago, I <a href="http://corfield.org/blog/2015/02/13/frege-and-clojure/">talked about my Leiningen plugin for Frege</a>. Back then it was version 3.22.367. That plugin is now version 3.23.450 and there&rsquo;s a Leiningen template to go with it, tracking prerelease builds of Frege which I&rsquo;ve been publishing to Sonatype&rsquo;s OSS Snapshots repository.</p>
 
 <pre><code>lein new frege myapp
 </code></pre>
