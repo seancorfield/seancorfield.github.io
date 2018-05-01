@@ -5,7 +5,7 @@ date: 2016-01-30 20:30:00
 comments: true
 categories: [boot, clojure]
 ---
-In yesterday's blog post, [Rebooting Clojure](http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/), I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.
+In yesterday's blog post, [Rebooting Clojure](http://corfield.org/blog/2016/01/29/rebooting-clojure/), I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.
 
 Over the coming weeks, I'll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.
 

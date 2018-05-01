@@ -9,7 +9,7 @@ I did not intend to stop blogging in 2015 but that's certainly what it looks lik
 
 So what kept me so busy that I didn't get around to blogging anything?<!-- more -->
 
-Almost a year ago, I [talked about my Leiningen plugin for Frege](http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/). Back then it was version 3.22.367. That plugin is now version 3.23.450 and there's a Leiningen template to go with it, tracking prerelease builds of Frege which I've been publishing to Sonatype's OSS Snapshots repository.
+Almost a year ago, I [talked about my Leiningen plugin for Frege](http://corfield.org/blog/2015/02/13/frege-and-clojure/). Back then it was version 3.22.367. That plugin is now version 3.23.450 and there's a Leiningen template to go with it, tracking prerelease builds of Frege which I've been publishing to Sonatype's OSS Snapshots repository.
 
     lein new frege myapp
 
