@@ -77,6 +77,10 @@
     <lastmod>2014-06-03T18:42:36-07:00</lastmod>
   </url>
   <url>
+    <loc>http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013/</loc>
+    <lastmod>2013-09-22T11:00:00-07:00</lastmod>
+  </url>
+  <url>
     <loc>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</loc>
     <lastmod>2013-05-01T20:09:04-07:00</lastmod>
   </url>
@@ -93,6 +97,9 @@
     <loc>http://seancorfield.github.io/blog/categories/clojure/</loc>
   </url>
   <url>
+    <loc>http://seancorfield.github.io/blog/categories/conferences/</loc>
+  </url>
+  <url>
     <loc>http://seancorfield.github.io/blog/categories/process/</loc>
   </url>
   <url>
@@ -105,9 +112,6 @@
     <loc>http://seancorfield.github.io/blog/categories/javascript/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/conferences/</loc>
-  </url>
-  <url>
     <loc>http://seancorfield.github.io/blog/categories/frege/</loc>
   </url>
   <url>
@@ -115,8 +119,5 @@
   </url>
   <url>
     <loc>http://seancorfield.github.io/blog/categories/leiningen/</loc>
-  </url>
-  <url>
-    <loc>http://seancorfield.github.io/blog/page/2/</loc>
   </url>
 </urlset>
