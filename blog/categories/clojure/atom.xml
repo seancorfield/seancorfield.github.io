@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://seancorfield.github.io/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://seancorfield.github.io/"/>
-  <updated>2018-08-30T17:29:58-07:00</updated>
+  <updated>2018-10-25T01:23:13-07:00</updated>
   <id>http://seancorfield.github.io/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Excited About Clojure/conj]]></title>
+    <link href="http://seancorfield.github.io/blog/2018/10/25/clojure-conj/"/>
+    <updated>2018-10-25T03:40:00-07:00</updated>
+    <id>http://seancorfield.github.io/blog/2018/10/25/clojure-conj</id>
+    <content type="html"><![CDATA[<p>It has been a crazy busy year, both at work and personally, and it&rsquo;s hard for me to believe my last blog post was in April!</p>
+
+<p><a href="https://2018.clojure-conj.org/">Clojure/conj</a> is coming up fast and the schedule was posted today, which has made me even more excited about it. Here&rsquo;s a run down of the sessions I plan to attend &ndash; I&rsquo;ll write up my thoughts on everything shortly after the conference.
+* Welcome Event &ndash; I&rsquo;m hoping my flight is on time and Lyft can get me there in time to chill and network with all the interesting Clojurians!
+* Stuart Halloway &ndash; In his recent <a href="https://www.youtube.com/watch?v=6ftW8UwwP_4">Apropos podcast</a>, he hinted that this talk would be about new tooling he has been using. Maybe prepl-related?
+* Christopher Small &ndash; Clojure on the cyberpunk frontier of democracy &ndash; This sounds fascinating.
+* Chris Johnson Bidler &ndash; Serverless-ish: Zero to App with Datomic Cloud and GraphQL.
+* Ghadi Shayban &ndash; Java Made (Somewhat) Simple &ndash; Although Ghadi told me this might be a beginner/intermediate-level talk, he&rsquo;s a great speaker and I look forward to hearing his insights about the platform.
+* Boris Kourtoukov &ndash; Machines that Judge Us.
+* Tiago Luchini &ndash; Declarative Domain Modeling for Datomic Ion/Cloud.
+* Lily Goh + Dom Kiva-Meyer &ndash; Robust APIs with clojure.spec &amp; GraphQL &ndash; I&rsquo;m a huge advocate of spec and we&rsquo;re also using GraphQL at work so this should be very applicable.
+* Rich Hickey &ndash; Maybe Not &ndash; Rich is always worth the price of entry!
+* Unsessions &ndash; Looking forward to seeing the schedule for these. Past years' unsessions have included some real diamonds!
+* David Chelimsky &ndash; AWS, meet Clojure.
+* Ben Kamphaus &ndash; AI Systems: Foundations for Artificial Minds or Aaron Cummings &ndash; Making Memories: Clojure For Hardware Engineers (And Others). I&rsquo;m undecided but leaning toward the AI talk.
+* Elena Machkasova &ndash; Babel: middleware for beginner-friendly error messages &ndash; Anything that helps with Clojure&rsquo;s error messages (much improved in Clojure 1.10!) is always worth learning about!
+* Wilker Lucio da Silva &ndash; Scaling Full-Stack Applications Over Hundreds of Microservices or Daniel Gregoire &ndash; Tables Considered Helpful. Undecided again but leaning toward the table talk.
+* Nikolas Göbel &ndash; Reactive Datalog for Datomic or Tyler Hobbs &ndash; Code goes in, Art comes out. Undecided but leaning toward the Datalog talk (because I&rsquo;m not hugely interested in art/computing).
+* Gary Fredericks &ndash; What Are All These Class Files Even About? And Other Stories &ndash; Having been repeatedly bitten by AOT, I&rsquo;m looking forward to this!
+* Tomomi Livingstone + Hans Livingstone &ndash; Party REPL — A multi-player REPL built for pair-programming &ndash; This looks very, very interesting!
+* Rebecca Parsons &ndash; Closing day two keynote.
+* (Party!)
+* Carin Meier &ndash; Can you GAN? &ndash; No idea about the topic but Carin is always an engaging speaker.
+* Dave Fetterman &ndash; Learning and Teaching Clojure on the job at Amperity &ndash; Because coming up to speed (and bringing others up to speed) is important.
+* Vikash Mansinghka &ndash; Probabilistic programming and meta-programming in Clojure &ndash; WAT?
+* Alex Engelberg and Derek Slager &ndash; Every Clojure Talk Ever &ndash; Cryptically enticing&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[All the Paths]]></title>
@@ -285,28 +319,6 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
 
 <pre><code>boot -d boot/new new -t app -n my-new-boot-app
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure, New Relic, and Slow Application Startup]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
-    <updated>2016-07-29T13:20:00-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup</id>
-    <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
-
-<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
-
-<p>Since we really wanted this update, we contacted New Relic Technical Support. Somewhat cryptically, they asked us to try version 3.24.1 &ndash; and that did not exhibit the slow startup &ndash; at which point they acknowledged that they&rsquo;d had reports that, with some applications, some customers had experienced slow startups since the 3.25.0 release. They asked us to set the logging level to &ldquo;finest&rdquo;, start the application up on a test machine, and then send them the log file. It was over 230MB(!) and full of Weave violations that the &ldquo;original bytecode&rdquo; could not be found. They very quickly traced this to how their instrumentation code tries to decide which classes to trace and which to ignore &ndash; and noted that Clojure creates a lot of <code>clojure.lang.DynamicClassLoader</code> instances (about 176,000 warnings in the log files originated from this class!) and, since the instrumentation never finds anything useful to instrument, loaded via those classloaders, they suggested that we tell the Agent to skip them.</p>
-
-<p>As far as I can tell, this is not a documented configuration item (although there is a similar <code>classloader_excludes</code> list):
-<code>
-  class_transformer:
-    classloader_blacklist: clojure.lang.DynamicClassLoader
-</code>
-This stops the Agent from examining this classloader and/or the code loaded by it and it dramatically cut the application start times. After adding this to <code>newrelic.yml</code>, our applications started up slightly faster than they had with 3.21.0.</p>
-
-<p>So, thank you to Jesse @ New Relic for the swift troubleshooting on this issue! I&rsquo;m posting this because I couldn&rsquo;t find a solution to the problem via Google &ndash; although I could find people complaining about the problem. Hopefully this will help others using New Relic with Clojure (or other languages that hit the same issue).</p>
 ]]></content>
   </entry>
   
