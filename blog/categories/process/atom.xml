@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Process | An Architect's View]]></title>
-  <link href="http://seancorfield.github.io/blog/categories/process/atom.xml" rel="self"/>
-  <link href="http://seancorfield.github.io/"/>
-  <updated>2018-10-25T01:28:42-07:00</updated>
-  <id>http://seancorfield.github.io/</id>
+  <link href="http://corfield.org/blog/categories/process/atom.xml" rel="self"/>
+  <link href="http://corfield.org/"/>
+  <updated>2018-10-31T15:02:50-07:00</updated>
+  <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting Started]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/06/03/getting-started/"/>
+    <link href="http://corfield.org/blog/2014/06/03/getting-started/"/>
     <updated>2014-06-03T18:42:36-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/06/03/getting-started</id>
+    <id>http://corfield.org/blog/2014/06/03/getting-started</id>
     <content type="html"><![CDATA[<p>Sometimes it&rsquo;s very enlightening to look back at the beginning of a project to see how things got set up and how we started down the path that led to where we are today. In this post, I&rsquo;m going to talk about the first ten tickets we created at World Singles as we kicked off our green field rewrite project five years ago.<!-- more --></p>
 
 <p>I&rsquo;ve been involved with World Singles for about five years now, about three and a half years as a full-time engineer. The project was a green field rewrite of a dating system the company had evolved over about a decade that, back in 2009, was running on ColdFusion 8 on Windows, and using SQL Server. The new platform soft-launched in late 2011 as we migrated a few small sites across and our full launch - migrating millions of members in the process - was May 2012. At that point we switched from &ldquo;build&rdquo; mode to &ldquo;operations&rdquo; mode, and today we maintain a large codebase that is a combination of CFML and Clojure, running on Railo 4.2 on Linux, and using MySQL and MongoDB, running partly in our East Coast data center and partly on Amazon.</p>

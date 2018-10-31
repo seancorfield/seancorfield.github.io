@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Conferences | An Architect's View]]></title>
-  <link href="http://seancorfield.github.io/blog/categories/conferences/atom.xml" rel="self"/>
-  <link href="http://seancorfield.github.io/"/>
-  <updated>2018-10-25T01:28:42-07:00</updated>
-  <id>http://seancorfield.github.io/</id>
+  <link href="http://corfield.org/blog/categories/conferences/atom.xml" rel="self"/>
+  <link href="http://corfield.org/"/>
+  <updated>2018-10-31T15:02:50-07:00</updated>
+  <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
-    <link href="http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go/"/>
+    <link href="http://corfield.org/blog/2016/01/03/where-did-2015-go/"/>
     <updated>2016-01-03T08:00:00-08:00</updated>
-    <id>http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go</id>
+    <id>http://corfield.org/blog/2016/01/03/where-did-2015-go</id>
     <content type="html"><![CDATA[<p>I did not intend to stop blogging in 2015 but that&rsquo;s certainly what it looks like here!</p>
 
 <p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
@@ -64,9 +64,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Strange Loop 2014]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/"/>
+    <link href="http://corfield.org/blog/2014/09/25/the-strange-loop-2014/"/>
     <updated>2014-09-25T18:32:18-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014</id>
+    <id>http://corfield.org/blog/2014/09/25/the-strange-loop-2014</id>
     <content type="html"><![CDATA[<p>Last week I attended <a href="https://thestrangeloop.com/">The Strange Loop</a> in St Louis. I attended in 2011 and was blown away. I missed 2012 but attended again in 2013 and was blown away once more. I already have 2015&rsquo;s dates in my calendar. How was 2014?<!-- more --></p>
 
 <p>Yup, blown away again. Alex Miller and his team have created an iconic event that crosses technology boundaries and bridges between academia and industry, to bring some of the brightest minds together to share their ideas. And for attendees too, the opportunity to meet a huge variety of our peers - from novice to expert - in all different technologies, creates an atmosphere of excitement, wonder, and enjoyment.</p>
@@ -107,9 +107,9 @@
   
   <entry>
     <title type="html"><![CDATA[Powered by JavaScript]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/"/>
+    <link href="http://corfield.org/blog/2014/09/20/powered-by-javascript/"/>
     <updated>2014-09-20T20:03:15-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript</id>
+    <id>http://corfield.org/blog/2014/09/20/powered-by-javascript</id>
     <content type="html"><![CDATA[<p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&rsquo;t JavaScript?<!-- more --></p>
 
 <p>I&rsquo;m fairly public about my dislike of JavaScript - and it&rsquo;s an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript&rsquo;s flaws have led to so much innovation in both the compile-to-JS (&ldquo;altJS&rdquo;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p>
@@ -139,9 +139,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Strange Loop 2013]]></title>
-    <link href="http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013/"/>
+    <link href="http://corfield.org/blog/2013/09/22/the-strange-loop-2013/"/>
     <updated>2013-09-22T11:00:00-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013</id>
+    <id>http://corfield.org/blog/2013/09/22/the-strange-loop-2013</id>
     <content type="html"><![CDATA[<p>This was my second time at <a href="http://thestrangeloop.com">The Strange Loop</a>. When I attended in 2011, I said that it was one of the best conferences I had ever attended, and I was disappointed that family plans meant I couldn't attend in 2012. That meant my expectations were high. The main hotel for the event was the beautiful DoubleTree Union Station, an historic castle-like building that was once an ornate train station. The conference itself was a short walk away at the Peabody Opera House. Alex Miller, organizer of The Strange Loop, <a href="http://clojurewest.com">Clojure/West</a>, and <a href="http://lambdajam.com">Lambda Jam</a> (new this year), likes to use interesting venues, to make the conferences extra special.</p>
 
 

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Leiningen | An Architect's View]]></title>
-  <link href="http://seancorfield.github.io/blog/categories/leiningen/atom.xml" rel="self"/>
-  <link href="http://seancorfield.github.io/"/>
-  <updated>2018-10-25T01:28:42-07:00</updated>
-  <id>http://seancorfield.github.io/</id>
+  <link href="http://corfield.org/blog/categories/leiningen/atom.xml" rel="self"/>
+  <link href="http://corfield.org/"/>
+  <updated>2018-10-31T15:02:50-07:00</updated>
+  <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[All the Paths]]></title>
-    <link href="http://seancorfield.github.io/blog/2018/04/18/all-the-paths/"/>
+    <link href="http://corfield.org/blog/2018/04/18/all-the-paths/"/>
     <updated>2018-04-18T03:40:00-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2018/04/18/all-the-paths</id>
+    <id>http://corfield.org/blog/2018/04/18/all-the-paths</id>
     <content type="html"><![CDATA[<p>With the recent arrival of <a href="https://clojure.org/guides/deps_and_cli"><code>clj</code> and <code>tools.deps.alpha</code></a> as a &ldquo;standard&rdquo; lightweight way to run Clojure programs and the seed for tooling based on <code>deps.edn</code> dependency files, it&rsquo;s time to take a look at the terminology used across Clojure&rsquo;s various tools.<!-- more --></p>
 
 <h2>Running Java/JVM Programs</h2>

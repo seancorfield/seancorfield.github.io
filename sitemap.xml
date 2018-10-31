@@ -1,210 +1,210 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://seancorfield.github.io/blog/2018/10/25/clojure-conj/</loc>
+    <loc>http://corfield.org/blog/2018/10/25/clojure-conj/</loc>
     <lastmod>2018-10-25T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2018/04/18/all-the-paths/</loc>
+    <loc>http://corfield.org/blog/2018/04/18/all-the-paths/</loc>
     <lastmod>2018-04-18T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2017/11/17/boot-localrepo/</loc>
+    <loc>http://corfield.org/blog/2017/11/17/boot-localrepo/</loc>
     <lastmod>2017-11-17T04:50:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/</loc>
+    <loc>http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/</loc>
     <lastmod>2017-07-17T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/</loc>
+    <loc>http://corfield.org/blog/2017/01/19/boot-new-moved/</loc>
     <lastmod>2017-01-19T12:40:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/</loc>
+    <loc>http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/</loc>
     <lastmod>2016-07-29T13:20:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/07/18/start-your-engine/</loc>
+    <loc>http://corfield.org/blog/2016/07/18/start-your-engine/</loc>
     <lastmod>2016-07-18T04:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/06/17/more-boot/</loc>
+    <loc>http://corfield.org/blog/2016/06/17/more-boot/</loc>
     <lastmod>2016-06-17T13:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/02/02/boot-new/</loc>
+    <loc>http://corfield.org/blog/2016/02/02/boot-new/</loc>
     <lastmod>2016-02-02T09:00:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/</loc>
+    <loc>http://corfield.org/blog/2016/01/31/testing-with-boot/</loc>
     <lastmod>2016-01-31T07:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/01/30/building-on-boot/</loc>
+    <loc>http://corfield.org/blog/2016/01/30/building-on-boot/</loc>
     <lastmod>2016-01-30T12:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/</loc>
+    <loc>http://corfield.org/blog/2016/01/29/rebooting-clojure/</loc>
     <lastmod>2016-01-29T14:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go/</loc>
+    <loc>http://corfield.org/blog/2016/01/03/where-did-2015-go/</loc>
     <lastmod>2016-01-03T08:00:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/</loc>
+    <loc>http://corfield.org/blog/2015/02/13/frege-and-clojure/</loc>
     <lastmod>2015-02-13T03:32:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/</loc>
+    <loc>http://corfield.org/blog/2014/09/25/the-strange-loop-2014/</loc>
     <lastmod>2014-09-25T18:32:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/</loc>
+    <loc>http://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/</loc>
     <lastmod>2014-09-23T23:05:05-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/</loc>
+    <loc>http://corfield.org/blog/2014/09/20/powered-by-javascript/</loc>
     <lastmod>2014-09-20T20:03:15-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/06/21/clojurebridge/</loc>
+    <loc>http://corfield.org/blog/2014/06/21/clojurebridge/</loc>
     <lastmod>2014-06-21T19:39:03-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/</loc>
+    <loc>http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/</loc>
     <lastmod>2014-06-20T17:58:34-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2014/06/03/getting-started/</loc>
+    <loc>http://corfield.org/blog/2014/06/03/getting-started/</loc>
     <lastmod>2014-06-03T18:42:36-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013/</loc>
+    <loc>http://corfield.org/blog/2013/09/22/the-strange-loop-2013/</loc>
     <lastmod>2013-09-22T11:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</loc>
+    <loc>http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</loc>
     <lastmod>2013-05-01T20:09:04-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/archives/</loc>
+    <loc>http://corfield.org/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/</loc>
+    <loc>http://corfield.org/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/presentations/</loc>
+    <loc>http://corfield.org/presentations/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/clojure/</loc>
+    <loc>http://corfield.org/blog/categories/clojure/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/conferences/</loc>
+    <loc>http://corfield.org/blog/categories/conferences/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/process/</loc>
+    <loc>http://corfield.org/blog/categories/process/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/java/</loc>
+    <loc>http://corfield.org/blog/categories/java/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/diversity/</loc>
+    <loc>http://corfield.org/blog/categories/diversity/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/javascript/</loc>
+    <loc>http://corfield.org/blog/categories/javascript/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/frege/</loc>
+    <loc>http://corfield.org/blog/categories/frege/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/boot/</loc>
+    <loc>http://corfield.org/blog/categories/boot/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/leiningen/</loc>
+    <loc>http://corfield.org/blog/categories/leiningen/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/blog/categories/conj/</loc>
+    <loc>http://corfield.org/blog/categories/conj/</loc>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/celtic.html</loc>
+    <loc>http://corfield.org/bodyart/celtic.html</loc>
     <lastmod>2018-04-30T17:24:59-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/daith.html</loc>
+    <loc>http://corfield.org/bodyart/daith.html</loc>
     <lastmod>2018-04-30T17:25:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/diary.html</loc>
+    <loc>http://corfield.org/bodyart/diary.html</loc>
     <lastmod>2018-04-30T18:31:22-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/dunstable.html</loc>
+    <loc>http://corfield.org/bodyart/dunstable.html</loc>
     <lastmod>2018-04-30T17:47:14-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/earclaw.html</loc>
+    <loc>http://corfield.org/bodyart/earclaw.html</loc>
     <lastmod>2018-04-30T17:47:27-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/earclawface.html</loc>
+    <loc>http://corfield.org/bodyart/earclawface.html</loc>
     <lastmod>2018-04-30T17:25:03-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/funky.html</loc>
+    <loc>http://corfield.org/bodyart/funky.html</loc>
     <lastmod>2018-04-30T17:25:07-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/index.html</loc>
+    <loc>http://corfield.org/bodyart/index.html</loc>
     <lastmod>2018-04-30T18:28:50-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/nip.html</loc>
+    <loc>http://corfield.org/bodyart/nip.html</loc>
     <lastmod>2018-04-30T17:25:13-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/personal.html</loc>
+    <loc>http://corfield.org/bodyart/personal.html</loc>
     <lastmod>2018-04-30T18:30:08-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/pro.html</loc>
+    <loc>http://corfield.org/bodyart/pro.html</loc>
     <lastmod>2018-04-30T18:00:46-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/rabpa.html</loc>
+    <loc>http://corfield.org/bodyart/rabpa.html</loc>
     <lastmod>2018-04-30T17:25:16-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/rabrnip2.html</loc>
+    <loc>http://corfield.org/bodyart/rabrnip2.html</loc>
     <lastmod>2018-04-30T17:25:17-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/rabrpa.html</loc>
+    <loc>http://corfield.org/bodyart/rabrpa.html</loc>
     <lastmod>2018-04-30T17:25:17-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/rabsep.html</loc>
+    <loc>http://corfield.org/bodyart/rabsep.html</loc>
     <lastmod>2018-04-30T17:25:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/rabtat.html</loc>
+    <loc>http://corfield.org/bodyart/rabtat.html</loc>
     <lastmod>2018-04-30T17:25:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/reverse.html</loc>
+    <loc>http://corfield.org/bodyart/reverse.html</loc>
     <lastmod>2018-04-30T17:48:26-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/bodyart/septum.html</loc>
+    <loc>http://corfield.org/bodyart/septum.html</loc>
     <lastmod>2018-04-30T17:25:20-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/camera/index.html</loc>
+    <loc>http://corfield.org/camera/index.html</loc>
     <lastmod>2018-04-30T17:25:04-07:00</lastmod>
   </url>
   <url>
-    <loc>http://seancorfield.github.io/googlefeef20a0595d13ad.html</loc>
+    <loc>http://corfield.org/googlefeef20a0595d13ad.html</loc>
     <lastmod>2018-04-30T17:23:39-07:00</lastmod>
   </url>
 </urlset>

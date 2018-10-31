@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Javascript | An Architect's View]]></title>
-  <link href="http://seancorfield.github.io/blog/categories/javascript/atom.xml" rel="self"/>
-  <link href="http://seancorfield.github.io/"/>
-  <updated>2018-10-25T01:28:42-07:00</updated>
-  <id>http://seancorfield.github.io/</id>
+  <link href="http://corfield.org/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://corfield.org/"/>
+  <updated>2018-10-31T15:02:50-07:00</updated>
+  <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Powered by JavaScript]]></title>
-    <link href="http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/"/>
+    <link href="http://corfield.org/blog/2014/09/20/powered-by-javascript/"/>
     <updated>2014-09-20T20:03:15-07:00</updated>
-    <id>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript</id>
+    <id>http://corfield.org/blog/2014/09/20/powered-by-javascript</id>
     <content type="html"><![CDATA[<p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&rsquo;t JavaScript?<!-- more --></p>
 
 <p>I&rsquo;m fairly public about my dislike of JavaScript - and it&rsquo;s an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript&rsquo;s flaws have led to so much innovation in both the compile-to-JS (&ldquo;altJS&rdquo;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p>
