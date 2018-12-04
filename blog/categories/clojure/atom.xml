@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-10-31T15:02:50-07:00</updated>
+  <updated>2018-12-03T18:06:29-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojure 1.10's Datafy and Nav]]></title>
+    <link href="http://corfield.org/blog/2018/12/03/datafy-nav/"/>
+    <updated>2018-12-03T09:20:00-08:00</updated>
+    <id>http://corfield.org/blog/2018/12/03/datafy-nav</id>
+    <content type="html"><![CDATA[<p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as &ldquo;generalized laziness&rdquo;: <code>datafy</code> produces a &ldquo;data representation&rdquo; of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p>
+
+<p>The <a href="http://rebl.cognitect.com/">REBL</a> &ldquo;is a graphical, interactive tool for browsing Clojure data&rdquo;. And in Clojure we&rsquo;re used to the concept of &ldquo;it&rsquo;s just data&rdquo; so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu&rsquo;s claim of &ldquo;generalized laziness&rdquo; is well made but a little hard to grok until you actually build something with the new protocols and functions.</p>
+
+<p>Since I&rsquo;ve done exactly that &ndash; with experimental support for <a href="https://github.com/clojure/java.jdbc/blob/master/src/main/clojure/clojure/java/jdbc/datafy.clj">lazy navigation of related records in <code>java.jdbc</code></a> &ndash; and spent some time on Slack today explaining how it all works, I figured it would be worth writing down in a more permanent place, as a blog post.</p>
+
+<p>The <code>Datafiable</code> protocol (new in <code>clojure.core.protocols</code>) is defined for <code>nil</code> and <code>Object</code> to just return those values as-is, and then extended in <code>clojure.datafy</code> to cover:
+* <code>Throwable</code> &ndash; producing a simple hash map by calling <code>Throwable-&gt;map</code>
+* <code>clojure.lang.IRef</code> &ndash; producing a vector containing the dereferenced value, with the original metadata from the reference attached to that vector
+* <code>clojure.lang.Namespace</code> &ndash; producing a hash map that is the data representation of the namespace (<code>:name</code>, <code>:publics</code>, <code>:imports</code>, and <code>:interns</code>) with the metadata of the namespace attached
+* <code>java.lang.Class</code> &ndash; producing the <code>clojure.reflect/reflect</code> representation of the class, with an additional member <code>:name</code>, and the <code>:members</code> of the class grouped by name and sorted</p>
+
+<p>The <code>Navigable</code> protocol (new in <code>clojure.core.protocols</code>) is defined just for <code>Object</code> and, given some sort of object or collection, some sort of &ldquo;key&rdquo;, and a value, it will just return the value itself.</p>
+
+<p>Based on that, it may not be clear how to implement the protocols or use the functions. The key thing that may not be obvious here is that <code>datafy</code> is intended to convert an arbitrary &ldquo;thing&rdquo; of any type into a pure Clojure data representation and, from that starting point, you can then use <code>nav</code> to &ldquo;navigate&rdquo; to a value derived from the original &ldquo;thing&rdquo;, which you would then process with <code>datafy</code> to get a pure Clojure data representation again. Those data representations may contain pieces that satisfy the <code>Navigable</code> protocol so that navigation (via <code>nav</code>) provides more than just a simple data-level lookup.</p>
+
+<p>Using the <code>clojure.java.jdbc.datafy</code> code as an example, you would call <code>query</code> (from that new namespace) and get back a result set. That looks like a sequence of hash maps (rows) but adds metadata to the rows that provides an implementation of <code>Datafiable</code> (<a href="https://github.com/clojure/clojure/blob/master/changes.md#22-protocol-extension-by-metadata">protocol extension via metadata</a> is also new in Clojure 1.10). The row is the &ldquo;arbitrary thing&rdquo; that we are starting with. One or more of the columns in that row may be a foreign key into another table. When you turn the row into a pure Clojure data representation &ndash; by calling <code>datafy</code> on it &ndash; it still looks like a hash map but now it has metadata that provides an implementation of <code>Navigable</code>. That supports calling <code>(nav row column value)</code> and, if the column is considered to be a foreign key to another table, it will fetch the relevant row(s) from that table and return that as the next &ldquo;arbitrary thing&rdquo;, otherwise it will just return the column&rsquo;s value as passed in. The cycle of converting that to data (via <code>datafy</code>) and navigating through it (by navigating the Clojure data and then calling <code>nav</code> on that) can be continued indefinitely, until you bottom out to simple values.</p>
+
+<p>You can sum this up as:
+* Starting with a &ldquo;thing&rdquo;&hellip;
+* &hellip;you convert it to data (with <code>datafy</code>)&hellip;
+* &hellip;and walk it with simple Clojure data access&hellip;
+* &hellip;and, at each stage, you can navigate to the corresponding &ldquo;new thing&rdquo; by calling <code>nav</code>&hellip;
+* &hellip;which may return just that value or may do something more complex&hellip;
+* &hellip;and from that &ldquo;new thing&rdquo; you convert it to data (with <code>datafy</code>) and continue the process.</p>
+
+<p>Relating this back to REBL, it works by taking some arbitrary value produced in the REPL and converting it to data (via <code>datafy</code>) so that it can be displayed in the UI. With any part of that data highlighted you can &ldquo;drill down&rdquo;, at which point REBL calls <code>nav</code> to perform the (potentially lazy, complex) navigation and then converts that to data (via <code>datafy</code>) and displays that as the next &ldquo;level&rdquo; of data. Given an associative data representation, it does <code>(get coll k)</code> first to get <code>v</code>, and then it calls <code>(nav coll k v)</code> to allow the underlying navigation to return an updated value.</p>
+
+<p>You go from &ldquo;thing&rdquo; to &ldquo;data representation&rdquo; of &ldquo;thing&rdquo; (via <code>datafy</code>), and then you can do the simple associative lookup <em>in the data representation, not the original thing</em>, and then you use <code>nav</code> to get back to the relevant equivalent part of the &ldquo;thing&rdquo;, and then you <code>datafy</code> that again to get pure data. For built-in Clojure data types that are already pure data, <code>datafy</code> does nothing and <code>nav</code> just returns the selected value. For hash maps, navigation is just simple key lookup. For vectors, navigation is also simple key (index) lookup. This new machinery only starts to shine in more complex situations.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Excited About Clojure/conj]]></title>
@@ -309,20 +346,6 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
 <h2>Documentation</h2>
 
 <p>At present, the auto-generated API documentation (on <a href="https://clojure.github.io">https://clojure.github.io</a>) is stale due to some bugs in the toolchain used by the Clojure Build Server, so I recommend reading the <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">community-maintained <code>java.jdbc</code> documentation</a> on clojure-doc.org, in addition to using <code>clojure.repl/doc</code> to review the docstrings for API functions. That community-maintained documentation is currently going through a major overhaul to expand, clarify, and update the information presented &ndash; I encourage users of <code>java.jdbc</code> to get involved by submitting Pull Requests to help improve the documentation for everyone!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
-    <link href="http://corfield.org/blog/2017/01/19/boot-new-moved/"/>
-    <updated>2017-01-19T12:40:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/01/19/boot-new-moved</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m pleased to announce that the &ldquo;Boot new&rdquo; task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p>
-
-<p>You can use this to easily create a new Boot-based project:</p>
-
-<pre><code>boot -d boot/new new -t app -n my-new-boot-app
-</code></pre>
 ]]></content>
   </entry>
   
