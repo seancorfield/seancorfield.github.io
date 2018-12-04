@@ -12,6 +12,7 @@ The [REBL](http://rebl.cognitect.com/) "is a graphical, interactive tool for bro
 Since I've done exactly that -- with experimental support for [lazy navigation of related records in `java.jdbc`](https://github.com/clojure/java.jdbc/blob/master/src/main/clojure/clojure/java/jdbc/datafy.clj) -- and spent some time on Slack today explaining how it all works, I figured it would be worth writing down in a more permanent place, as a blog post.
 
 The `Datafiable` protocol (new in `clojure.core.protocols`) is defined for `nil` and `Object` to just return those values as-is, and then extended in `clojure.datafy` to cover:
+
 * `Throwable` -- producing a simple hash map by calling `Throwable->map`
 * `clojure.lang.IRef` -- producing a vector containing the dereferenced value, with the original metadata from the reference attached to that vector
 * `clojure.lang.Namespace` -- producing a hash map that is the data representation of the namespace (`:name`, `:publics`, `:imports`, and `:interns`) with the metadata of the namespace attached
@@ -24,6 +25,7 @@ Based on that, it may not be clear how to implement the protocols or use the fun
 Using the `clojure.java.jdbc.datafy` code as an example, you would call `query` (from that new namespace) and get back a result set. That looks like a sequence of hash maps (rows) but adds metadata to the rows that provides an implementation of `Datafiable` ([protocol extension via metadata](https://github.com/clojure/clojure/blob/master/changes.md#22-protocol-extension-by-metadata) is also new in Clojure 1.10). The row is the "arbitrary thing" that we are starting with. One or more of the columns in that row may be a foreign key into another table. When you turn the row into a pure Clojure data representation -- by calling `datafy` on it -- it still looks like a hash map but now it has metadata that provides an implementation of `Navigable`. That supports calling `(nav row column value)` and, if the column is considered to be a foreign key to another table, it will fetch the relevant row(s) from that table and return that as the next "arbitrary thing", otherwise it will just return the column's value as passed in. The cycle of converting that to data (via `datafy`) and navigating through it (by navigating the Clojure data and then calling `nav` on that) can be continued indefinitely, until you bottom out to simple values.
 
 You can sum this up as:
+
 * Starting with a "thing"...
 * ...you convert it to data (with `datafy`)...
 * ...and walk it with simple Clojure data access...
