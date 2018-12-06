@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-12-03T18:08:22-08:00</updated>
+  <updated>2018-12-06T12:40:03-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL NULL, S/nilable, and Optionality]]></title>
+    <link href="http://corfield.org/blog/2018/12/06/null-nilable-optionality/"/>
+    <updated>2018-12-06T03:30:00-08:00</updated>
+    <id>http://corfield.org/blog/2018/12/06/null-nilable-optionality</id>
+    <content type="html"><![CDATA[<p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
+on optionality and how we represent the absence of a value.<!-- more --></p>
+
+<p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
+triggered an &ldquo;ah-ha!&rdquo; moment for me.</p>
+
+<p>At <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we deal with a lot
+of data in SQL (specifically in Percona&rsquo;s fork of MySQL) and, in SQL, you represent
+the absence of a value with <code>NULL</code> in a column. Columns that represent optional
+data must be declared as nullable and when you read data from them with
+<a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a> you get hash map
+entries in the rows that have <code>nil</code> values. If you&rsquo;re using <code>clojure.spec</code> to
+describe your tables, rows, and columns, then you are going to have lots of
+<code>s/nilable</code> specs &ndash; and now your &ldquo;optionality&rdquo; has been reified into <code>nil</code>
+values, cast in the stone of your specs&hellip; which is clearly not an ideal situation!</p>
+
+<p>This made me realize that <code>java.jdbc</code> probably should just omit keys whose
+values represent SQL <code>NULL</code>. They are, after all, <em>optional</em> values rather than
+truly <em>nilable</em> values.</p>
+
+<p>That would be a potentially breaking change in behavior for <code>java.jdbc</code> users.
+Sure, in most cases, if you have a hash map representing a row in a database
+table, you&rsquo;re not really going to care whether <code>(:col row)</code> gives you <code>nil</code>
+because <code>:col</code> maps to <code>nil</code> or because <code>row</code> doesn&rsquo;t contain <code>:col</code>. There are
+use cases where it matters: <code>contains?</code>, row/column specs, tabular printing.</p>
+
+<p>Along with changing the behavior of <code>NULL</code> columns and
+<a href="http://corfield.org/blog/2018/12/03/datafy-nav/">supporting <code>datafy</code> and <code>nav</code></a>,
+I have a lot of other changes that I&rsquo;d like to apply to <code>java.jdbc</code>, such as
+automatically qualifying column keys with the table from which they came,
+improving overall performance (by no longer converting <code>ResultSet</code> objects to
+sequences of hash maps), dramatically simplifying and streamlining the options
+that are available (since many of them are very rarely used), and focusing on a
+reducible-first API. All of which would be breaking changes.</p>
+
+<p>I&rsquo;ve learned a lot &ndash; about Clojure, idioms, and databases &ndash; over the seven
+years that I&rsquo;ve been maintaining <code>org.clojure/java.jdbc</code>, and it is time for a
+new namespace or perhaps even a completely new project, that offers a better
+way to deal with SQL databases from Clojure! I&rsquo;ll be writing a series of blog
+posts about the differences I envisage between the current de facto standard
+JDBC wrapper and where I&rsquo;d like to go with this, so that I can get community
+feedback on what should stay, what should change, and what should go. Stay tuned!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure 1.10's Datafy and Nav]]></title>
@@ -948,39 +1001,6 @@ example.core=&gt;
 <p>A common question is: why the focus on women? The answer is that there are already plenty of ways guys can learn a new programming language in an environment that is comfortable for them. The whole of IT is a comfortable space for men (and it is particularly so for white cis-het men). Since many male-dominated environments are not comfortable spaces for many women - and many other underrepresented groups - it&rsquo;s important to create a safe, friendly environment in which to encourage new people to learn technology. ClojureBridge has chosen to follow the RailsBridge model in starting out with a focus on workshops for women. I recently spoke with Dr. Kortney Ziegler, founder of <a href="http://www.transhack.org/">Trans*H4CK</a>, about the possibility of a joint workshop with ClojureBridge aimed at the transgender community. I hope to see ClojureBridge workshops run jointly with other groups that advocate for underrepresented groups in technology.</p>
 
 <p>If you&rsquo;re interested in improving diversity in IT, reach out to a group like ClojureBridge and get involved. Help organize events in your area. Together we can change the face of IT, and our community will grow and our teams will be more productive and more creative!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Some Thoughts on Java 8]]></title>
-    <link href="http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/"/>
-    <updated>2014-06-20T17:58:34-07:00</updated>
-    <id>http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8</id>
-    <content type="html"><![CDATA[<p><em>Originally posted on <a href="https://plus.google.com/u/0/+SeanCorfield_A/posts/dTiYLDXV5AV">Google Plus</a> on June 14th, 2014.</em></p>
-
-<p><strong>Why Java 8 might win me back&hellip;</strong></p>
-
-<p>I first started doing Java development in 1997. I was pretty invested in this &ldquo;new&rdquo; technology after being initially skeptical with my strong C++ background. I even wrote an editorial in a C++ journal about &ldquo;the new kid on the block&rdquo;, casting aspersions as to whether it had what it would take to become popular. Over time, Java became the juggernaut of corporate development and I actually found it quite refreshing after C++&rsquo;s somewhat obtuse syntax and complexities: Java was a simple language by comparison, with a well-structured, modular library.</p>
-
-<p>At least, it started out that way.<!-- more --></p>
-
-<p>Java and I parted ways around Java 5. I felt the changes were making it more complex without appropriate benefits. I thought generics and metadata were a disaster. I thought autoboxing would lead to sloppy code instead of forcing developers to think carefully about crossing the primitive/object boundary. I was ambivalent about varargs. I quite liked the new for loop and type-safe enums tho'. Java 6 and Java 7 left me cold (sure, the collection stuff was a step in the right direction, but most of the rest just piled complexity on complexity).</p>
-
-<p>As far as I was concerned, Java had lost its way and become a bloated, verbose language that acted as a nursemaid to mediocre enterprise developers. I vowed I&rsquo;d never write Java again and took every opportunity to tell recruiters that whenever they contacted me with great opportunities for Java architect roles.</p>
-
-<p>I went off to Groovy, then Scala, then Clojure. And there I&rsquo;ve stayed for the last three or four years.</p>
-
-<p>When Java 8 was first getting press, I was very skeptical: how could they bring the elegance and ease of functional programming to a language so buried in boilerplate and a verbose, simplistic type system? I liked the simplicity of Groovy (and its dynamic approach to typing), I liked the elegance of Scala (even tho' I found the quirks of its type system and slow compilation to be significant drawbacks), and I really liked Clojure&rsquo;s combination of elegance, simplicity, and dynamic typing.</p>
-
-<p>But, at World Singles, we run our dating platform on the JVM and so an upgrade to Java 8 was inevitable to take advantage of the improvements in heap management and garbage collection. Since I was testing everything on the new JVM, I figured I might as well take a look at Java&rsquo;s new language features&hellip;</p>
-
-<p>And I was pleasantly surprised! Streams providing lazy/efficient map, filter, and reduce. Optional providing a way out of the null-checking tar pit of typical Java code. Lambda expressions providing a huge improvement in expressiveness and conciseness - compared to the ugly anonymous classes and single-method interfaces we&rsquo;d had to put up with before. All those new functional interfaces. Method references. A lot of improvements in the type system and type inference.</p>
-
-<p>In many ways, Java 8 is a whole new language. It&rsquo;s still fairly verbose but its support for functional programming is actually not bad at all. There are still no immutable collections - maybe Java 9 will address that - but streams, lambdas, etc make a huge difference in what you can do with relative ease.</p>
-
-<p>I think I can safely say that I would no longer rather fall on a sword than program in Java - as long as it&rsquo;s Java 8!</p>
-
-<p><em>p.s. No, I&rsquo;m not switching from Clojure, but now I view Java as &ldquo;palatable&rdquo; rather than &ldquo;hideous&rdquo;.</em></p>
 ]]></content>
   </entry>
   

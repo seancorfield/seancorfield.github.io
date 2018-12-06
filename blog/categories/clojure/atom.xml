@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-12-03T18:08:22-08:00</updated>
+  <updated>2018-12-06T12:40:03-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SQL NULL, S/nilable, and Optionality]]></title>
+    <link href="http://corfield.org/blog/2018/12/06/null-nilable-optionality/"/>
+    <updated>2018-12-06T03:30:00-08:00</updated>
+    <id>http://corfield.org/blog/2018/12/06/null-nilable-optionality</id>
+    <content type="html"><![CDATA[<p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
+on optionality and how we represent the absence of a value.<!-- more --></p>
+
+<p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
+triggered an &ldquo;ah-ha!&rdquo; moment for me.</p>
+
+<p>At <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we deal with a lot
+of data in SQL (specifically in Percona&rsquo;s fork of MySQL) and, in SQL, you represent
+the absence of a value with <code>NULL</code> in a column. Columns that represent optional
+data must be declared as nullable and when you read data from them with
+<a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a> you get hash map
+entries in the rows that have <code>nil</code> values. If you&rsquo;re using <code>clojure.spec</code> to
+describe your tables, rows, and columns, then you are going to have lots of
+<code>s/nilable</code> specs &ndash; and now your &ldquo;optionality&rdquo; has been reified into <code>nil</code>
+values, cast in the stone of your specs&hellip; which is clearly not an ideal situation!</p>
+
+<p>This made me realize that <code>java.jdbc</code> probably should just omit keys whose
+values represent SQL <code>NULL</code>. They are, after all, <em>optional</em> values rather than
+truly <em>nilable</em> values.</p>
+
+<p>That would be a potentially breaking change in behavior for <code>java.jdbc</code> users.
+Sure, in most cases, if you have a hash map representing a row in a database
+table, you&rsquo;re not really going to care whether <code>(:col row)</code> gives you <code>nil</code>
+because <code>:col</code> maps to <code>nil</code> or because <code>row</code> doesn&rsquo;t contain <code>:col</code>. There are
+use cases where it matters: <code>contains?</code>, row/column specs, tabular printing.</p>
+
+<p>Along with changing the behavior of <code>NULL</code> columns and
+<a href="http://corfield.org/blog/2018/12/03/datafy-nav/">supporting <code>datafy</code> and <code>nav</code></a>,
+I have a lot of other changes that I&rsquo;d like to apply to <code>java.jdbc</code>, such as
+automatically qualifying column keys with the table from which they came,
+improving overall performance (by no longer converting <code>ResultSet</code> objects to
+sequences of hash maps), dramatically simplifying and streamlining the options
+that are available (since many of them are very rarely used), and focusing on a
+reducible-first API. All of which would be breaking changes.</p>
+
+<p>I&rsquo;ve learned a lot &ndash; about Clojure, idioms, and databases &ndash; over the seven
+years that I&rsquo;ve been maintaining <code>org.clojure/java.jdbc</code>, and it is time for a
+new namespace or perhaps even a completely new project, that offers a better
+way to deal with SQL databases from Clojure! I&rsquo;ll be writing a series of blog
+posts about the differences I envisage between the current de facto standard
+JDBC wrapper and where I&rsquo;d like to go with this, so that I can get community
+feedback on what should stay, what should change, and what should go. Stay tuned!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojure 1.10's Datafy and Nav]]></title>
@@ -275,85 +328,6 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
 
 <pre><code class="bash">boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Release 0.7.0 of clojure.java.jdbc]]></title>
-    <link href="http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/"/>
-    <updated>2017-07-17T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0</id>
-    <content type="html"><![CDATA[<p>The stable 0.7.0 release of <code>java.jdbc</code> &ndash; the <a href="https://github.com/clojure/java.jdbc">Clojure Contrib JDBC library</a> &ndash; has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!</p>
-
-<p>While you <em>could</em> read the <a href="https://github.com/clojure/java.jdbc/blob/master/CHANGES.md"><code>java.jdbc</code> Change Log</a> to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more --></p>
-
-<p>I recently ran a <a href="https://www.surveymonkey.com/results/SM-CJY2YMHP/">survey about versions</a> of both Clojure and <code>java.jdbc</code> in use and had nearly 100 responses (thank you to everyone who completed the survey!). Only one respondent is still on Clojure 1.7.0, with about two thirds on 1.8.0, and a full third of respondents on a 1.9.0 alpha build. No one responded that they&rsquo;re on an earlier version of Clojure. That&rsquo;s great news for Clojure library maintainers, as it means we can take advantage of modern features in the language (such as transducers), and it also means that it is worthwhile to offer optional namespaces providing specs. <strong>Accordingly, <code>java.jdbc</code> now requires Clojure 1.7.0 or later.</strong></p>
-
-<p>Also very encouraging was to see that almost a third of <code>java.jdbc</code> users are on alpha builds of what has become 0.7.0, with only a handful of users still on &ldquo;legacy&rdquo; versions (prior to 0.6.1).</p>
-
-<p>Let&rsquo;s look at the major changes in 0.7.0, compared to 0.6.1!</p>
-
-<h2>Reducible Queries</h2>
-
-<p>Now that Clojure 1.7.0 is the minimum supported version, <code>java.jdbc</code> can offer query result collections that work with transducers. Two new functions &ndash; <code>reducible-query</code> and <code>reducible-result-set</code> &ndash; produce collections that implement <code>IReduce</code> and will perform resource management when <code>reduce</code>d. A reducible query will run the specified query only when the result is reduced &ndash; and it will run it each time it is reduced. A reducible result set can be constructed from any <code>ResultSet</code> object and will provide a one-off, managed forward read of the underlying data. Both of these support <code>reduced</code> results, which short-circuit the processing of the result set. They also support both the <code>init</code>-arity <code>reduce</code> and the no-<code>init</code>-arity <code>reduce</code>. Consult the docstring for <code>reduce</code> to see the full implications of this: the function passed into the no-<code>init</code>-arity <code>reduce</code> will be called with no arguments if the result set is empty!</p>
-
-<p><code>reducible-query</code> works by invoking <code>db-query-with-resultset</code> only when it is <code>reduce</code>d, passing in a function that calls <code>reducible-result-set</code> and then <code>reduce</code>s the result. <code>reducible-result-set</code> works by computing metadata and key names only when it is <code>reduce</code>d, and then walking through the rows of the result, calling the supplied function (as specified by <code>reduce</code>), stopping if that function returns a <code>reduced?</code> value.</p>
-
-<h2>Improved Database Vendor Support</h2>
-
-<p>The <code>:dbtype</code> key in a <code>db-spec</code> is the preferred way to specify a database vendor, so you don&rsquo;t have to worry about &ldquo;subprotocols&rdquo; and &ldquo;subnames&rdquo; and so on. Just provide <code>:dbtype</code>, <code>:dbname</code>, <code>:host</code>, <code>:port</code>, <code>:user</code>, and <code>:password</code>, and <code>java.jdbc</code> should be able to connect you to most databases. The full list of supported <code>:dbtype</code> values is:</p>
-
-<ul>
-<li><code>derby</code> &ndash; Apache Derby</li>
-<li><code>h2</code></li>
-<li><code>hsql</code> or <code>hsqldb</code></li>
-<li><code>jtds</code> or <code>jtds:sqlserver</code> &ndash; the jTDS JDBC driver for Microsoft SQL Server</li>
-<li><code>mssql</code> &ndash; an alias for <code>sqlserver</code> below</li>
-<li><code>mysql</code></li>
-<li><code>oracle</code> or <code>oracle:thin</code>, <code>oracle:oci</code> &ndash; for the two main Oracle JDBC drivers (which use <code>@</code> in front of the <code>host</code> name, instead of <code>//</code>)</li>
-<li><code>pgsql</code> &ndash; the Impossibl PostgresSQL JDBC driver</li>
-<li><code>postgres</code> or <code>postgresl</code> &ndash; the standard PostgresSQL JDBC driver</li>
-<li><code>redshift</code> &ndash; Amazon&rsquo;s Red Shift JDBC driver</li>
-<li><code>sqlite</code></li>
-<li><code>sqlserver</code> &ndash; Microsoft&rsquo;s default JDBC driver for SQL Server (they have finally released a version on Maven Central!)</li>
-</ul>
-
-
-<p>If your preferred database is not listed, head on over to <a href="https://dev.clojure.org/jira/browse/JDBC"><code>java.jdbc</code>s JIRA site</a> and create an enhancement issue, with details of the JDBC driver and I&rsquo;ll take a look! Note that you can can specify <code>:classname</code>, along with <code>:dbtype</code> if you want to override just the JDBC driver class name that <code>java.jdbc</code> would deduce from <code>:dbtype</code>.</p>
-
-<h2>Option Handling</h2>
-
-<p>An overall goal of 0.7.0 has been to make the API more consistent, especially in the way options are handled and passed around. The intention is that you can provide a hash map of options, as the last argument to any function, and <code>java.jdbc</code> will pass all of those options through the whole call chain, allowing you to control a lot more of the behavior of lower-level functions that are invoked by the higher-level functions. In addition, defaults for all options can be provided in your <code>db-spec</code>, and those will apply to all API functions. This is especially useful for specifying the <code>:entities</code> and <code>:identifiers</code> functions that control how SQL entity names and Clojure identifiers are constructed, everywhere in <code>java.jdbc</code>.</p>
-
-<p>Here are all the new options available:</p>
-
-<ul>
-<li><code>:auto-commit?</code> &ndash; Can be passed into any API function that might cause a new database connection to be created. This allows you to turn auto-commit off for <em>new connections</em> in databases that use this setting to control whether a query can stream its results. The behavior is inherently vendor-specific, so you may need additional options to fully enable streaming results (setting <code>:fetch-size</code> to a non-zero value is common).</li>
-<li><code>:conditional?</code> &ndash; For the two DDL-generating functions to add an existence check on the table to be created or dropped. May be a simple boolean value, a string (to be inserted between <code>DROP TABLE</code>/<code>CREATE TABLE</code> and the table name), or a function. In the latter case, the DDL string is generated as usual and then that function is called on it. This allows for databases that don&rsquo;t support <code>DROP TABLE IF EXISTS</code> / <code>CREATE TABLE IF NOT EXISTS</code> but instead require the <code>DROP</code> or <code>CREATE</code> statement to be wrapped in a specific existence checking query.</li>
-<li><code>:explain?</code> and <code>:explain-fn</code> &ndash; So you can get the database to explain how it will run your query. Supported by <code>query</code>, <code>find-by-keys</code>, and <code>get-by-id</code>, these options will run the generated SQL with an &ldquo;explain&rdquo; option first, and then for real. <code>:explain?</code> can be <code>true</code> which simply prefixes the SQL with <code>"EXPLAIN "</code> or it can be a string if your database needs a different syntax (such as HSQLDB needing <code>"EXPLAIN PLAN FOR "</code>). The explanation output is processed by the <code>:explain-fn</code>, which defaults to <code>println</code>, but can be used to send explanations to a logging system etc.</li>
-<li><code>:qualifier</code> &ndash; Lets you easily produce namespace-qualified column names from your queries.</li>
-<li><code>:read-columns</code> &ndash; To specify how columns of data are read from a <code>ResultSet</code> object. The default behavior is to call <code>result-set-read-column</code> which implements the <code>IResultSetReadColumn</code> protocol. This allows finer-grained control when you are working with multiple databases in a single application.</li>
-<li><code>:read-only?</code> &ndash; Like <code>:auto-commit?</code> this can be passed into any API function that might cause a new database connection to be created. This allows you to specify that <em>new connections</em> be treated as readonly, which may allow the database driver to perform optimizations on how the connection and its queries behave.</li>
-</ul>
-
-
-<h2>clojure.spec</h2>
-
-<p><code>java.jdbc</code> provides an optional <code>clojure.java.jdbc.spec</code> namespace that is compatible with Clojure 1.9.0 Alpha 17 (it uses <code>clojure.spec.alpha</code>). This namespace provides <code>fdef</code> specs for all of the public functions in <code>clojure.java.jdbc</code> so you can <code>instrument</code> your code and get validation on all your interaction with <code>java.jdbc</code>. Note that you cannot do generative testing against <code>java.jdbc</code> because it uses a lot of Java types and a lot of side effects. <em>I have an experimental branch where I&rsquo;ve been investigating what generators would look like for <code>java.jdbc</code> but don&rsquo;t hold your breath for that becoming part of the <strong>master</strong> branch!</em></p>
-
-<h2>New and Changed API Functions</h2>
-
-<ul>
-<li><code>as-sql-name</code> dropped its single arity (curried) version.</li>
-<li><code>get-isolation-level</code> will return the current isolation level inside a transaction, if any.</li>
-<li><code>quoted</code> dropped its 2-arity version, and now supports certain keywords for common entity-quoting strategies: <code>:ansi</code> (wraps entities in double quotes), <code>:mysql</code> (wraps entities in backticks), <code>:oracle</code> (wraps entities in double quotes), and <code>:sqlserver</code> (wraps entities in square brackets). These match the options in HoneySQL.</li>
-<li><code>reducible-query</code> and <code>reducible-result-set</code> &ndash; see <strong>Reducible Queries</strong> above.</li>
-</ul>
-
-
-<h2>Documentation</h2>
-
-<p>At present, the auto-generated API documentation (on <a href="https://clojure.github.io">https://clojure.github.io</a>) is stale due to some bugs in the toolchain used by the Clojure Build Server, so I recommend reading the <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">community-maintained <code>java.jdbc</code> documentation</a> on clojure-doc.org, in addition to using <code>clojure.repl/doc</code> to review the docstrings for API functions. That community-maintained documentation is currently going through a major overhaul to expand, clarify, and update the information presented &ndash; I encourage users of <code>java.jdbc</code> to get involved by submitting Pull Requests to help improve the documentation for everyone!</p>
 ]]></content>
   </entry>
   
