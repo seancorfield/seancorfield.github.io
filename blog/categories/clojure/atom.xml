@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-12-06T12:40:03-08:00</updated>
+  <updated>2018-12-19T23:34:19-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Chlorine: Clojure Integration for Atom]]></title>
+    <link href="http://corfield.org/blog/2018/12/19/atom-chlorine/"/>
+    <updated>2018-12-19T22:45:00-08:00</updated>
+    <id>http://corfield.org/blog/2018/12/19/atom-chlorine</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using the <a href="https://atom.io">Atom</a> editor for about two years now.
+I switched from Emacs after Clojure/conj 2016, having seen <a href="https://youtu.be/buPPGxOnBnk">Jason Gilman&rsquo;s talk
+about ProtoREPL</a> [video]. It may sound like
+heresy, but I&rsquo;d never been happy with Emacs<!-- more --> &ndash; not 17.x back when I first
+started using it, not 18.x, not 19.x when I first stopped using it, nor 24.x onward
+when I came back to it after learning Clojure a few decades later. I built
+several configurations from scratch, I tried several &ldquo;curated&rdquo; configurations,
+none of them felt like &ldquo;home&rdquo;. Emacs just leeched too much of my development
+time for my tastes. I wanted a simple, modern text editor, that offered a wide
+variety of &ldquo;plugins&rdquo; and supported all the languages I used, with a sane set of
+defaults. Atom &ndash; with ProtoREPL &ndash; seemed to be exactly what I was looking for!</p>
+
+<p>And for two years, it has been my day-to-day development environment.</p>
+
+<p>But it has been frustrating that ProtoREPL hasn&rsquo;t been getting a huge amount of
+love lately. Two releases immediately after that Conj, eleven in the first
+half of 2017, and just three since then. With the advent of Clojure 1.10 and
+<a href="https://github.com/cognitect-labs/REBL-distro">REBL</a>, I wanted to extend
+ProtoREPL so I could integrate REBL into my workflow, so I forked it and
+hacked in <code>inspect-block</code> and <code>inspect-top-block</code> functionality (see the
+<a href="https://github.com/seancorfield/proto-repl/compare/4b13ebf9d0f1e228ab7800c4bc54fe071bacf29e...master">commit log</a>). But it&rsquo;s written in
+CoffeeScript and that made me sad.</p>
+
+<p>I&rsquo;ve also had a bit of a long-running love/hate relationship with
+<a href="https://github.com/nrepl/nrepl">nREPL</a> over its lifetime. Something about the
+wire protocol and overall architecture of it just bothered me and I longed for
+tooling built on what Clojure provides out-of-the-box. When I saw <code>prepl</code> drop
+in the Clojure 1.10 development cycle, I was very excited: built-in support for
+future tooling, on top of the Socket REPL we&rsquo;ve had for a few releases!</p>
+
+<p>I&rsquo;d previously used <a href="https://github.com/Unrepl/unravel">Unravel</a> to interact
+with several of our processes at work that spawn a Socket REPL and found that a
+very pleasant experience (side-loading <a href="https://github.com/Unrepl/unravel">Compliment</a>
+to provide auto-completion while typing).</p>
+
+<blockquote><p>Unravel is a simple command-line client for Clojure REPLs. It is based on the unrepl protocol, so instead of relying on nREPL, unravel communicates with your Clojure process through a Socket Server REPL.</p></blockquote>
+
+<p>&ldquo;instead of relying on nREPL&rdquo; was music to my ears &ndash; I wanted editor integration
+that worked this way!</p>
+
+<p>A few days ago, in a side-thread in the <code>#off-topic</code> channel on the
+<a href="https://clojurians.slack.com">Clojurians Slack</a> (<a href="http://clojurians.net/">sign up here</a>),
+that had started with a question about <a href="https://cursive-ide.com/">Cursive</a> vs
+Emacs/CIDER, Maurício Szabo mentioned &ldquo;a (very experimental) package for Atom
+that &hellip; uses socket repl&rdquo;. I was intrigued. Could this be what I&rsquo;d been
+looking for?</p>
+
+<p>That package is <a href="https://atom.io/packages/chlorine">Chlorine for Atom</a>.
+I installed it immediately (and disabled ProtoREPL) so I could take it for a
+spin! It&rsquo;s written in ClojureScript. It only needs a Socket REPL. It uses
+Unravel to &ldquo;upgrade&rdquo; the REPL as needed. It uses Compliment for auto-completion.
+I could connect it directly to various running processes and I could start
+REBL up from the command-line with a Socket REPL and connect to that as well.
+<strong>This</strong> was exactly the workflow I&rsquo;d been looking for!</p>
+
+<p>Maurício has been awesome to work with and over the last few days he&rsquo;s added
+the first version of &ldquo;go to definition&rdquo; as well as merging pull requests from
+me to add support for running tests in a namespace or an individual test. I
+have pull requests in for adding &ldquo;load file&rdquo; (it already had evaluate selection,
+so you could &ldquo;select all + evaluate selection&rdquo; but I was used to &ldquo;load file&rdquo;
+from ProtoREPL), and &ldquo;show source&rdquo;.</p>
+
+<p>I&rsquo;ve also ported across my &ldquo;inspect&rdquo; functions from ProtoREPL so my entire,
+day-to-day workflow with ProtoREPL is now possible with Chlorine, REBL, <code>clj</code>, and
+a couple of aliases &ndash; and I have an eminently hackable editor plugin, written
+in ClojureScript with a slick auto-compile, auto-reload workflow (thank you
+Maurício!).</p>
+
+<p>I&rsquo;m still looking forward to tooling based on <code>prepl</code> so the client libraries
+can be even simpler and smaller but, for now, I&rsquo;m a very happy developer and
+I&rsquo;m very pleased to see how the Clojure community continues to innovate around
+tooling (which, yes, has needed a lot of love over the years!).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SQL NULL, S/nilable, and Optionality]]></title>
@@ -230,104 +310,6 @@ feedback on what should stay, what should change, and what should go. Stay tuned
 <h2>Credits</h2>
 
 <p>Thank you to Alan Dipert, Alex Miller, Richiardi Andrea, and Rick Moynihan for reviewing a draft of this post and providing feedback and suggestions!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Boot Localrepo?]]></title>
-    <link href="http://corfield.org/blog/2017/11/17/boot-localrepo/"/>
-    <updated>2017-11-17T04:50:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/11/17/boot-localrepo</id>
-    <content type="html"><![CDATA[<p>Sometimes you just can&rsquo;t help having a &ldquo;random 3rd part JAR file&rdquo; in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven&rsquo;t gotten around to running your own shared repository.</p>
-
-<p>If you&rsquo;re using Leiningen, you&rsquo;ll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you &ldquo;install&rdquo; your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
-
-<p>What do you do if you&rsquo;re using Boot instead?<!-- more --></p>
-
-<p>Well, you <em>could</em> just keep <code>lein</code> installed and use it for this (with the <code>lein-localrepo</code> plugin dependency in your <code>~/.lein/profiles.clj</code>, for example):</p>
-
-<pre><code class="bash">lein localrepo install foobar.jar foo/bar 1.0.1
-</code></pre>
-
-<p>Or you could run some command line Boot to make that happen:</p>
-
-<pre><code class="bash">boot pom -p foo/bar -v 1.0.1 target \
-    install -f foobar.jar -p target/META-INF/maven/foo/bar/pom.xml
-# Don't forget to clean up!
-rm -rf target
-</code></pre>
-
-<p>What the what? Yeah, that&rsquo;s really kind of ugly. Unfortunately, the <code>install</code> task seems to expect a physical <code>pom.xml</code> file when you specify a physical JAR file. That means we need to drop a <code>target</code> task into the pipeline into order for the generated <code>pom.xml</code> to be written to disk. It would be nice if it would look in the fileset first, because then at least this should work:</p>
-
-<pre><code class="bash"># This does NOT work!
-boot pom -p foo/bar -v 1.0.1 install -f foobar.jar -p foo/bar
-</code></pre>
-
-<p>So what other options do we have with Boot?</p>
-
-<p>Well, it turns out that you can run some Leiningen plugins directly from Boot, from the command line! Boot lets you specify dependencies on the command line, and it lets you &ldquo;call&rdquo; Clojure code from the command line too. Let&rsquo;s start a REPL with <code>lein-localrepo</code> as a dependency:</p>
-
-<pre><code class="bash">boot -d leiningen -d lein-localrepo repl
-</code></pre>
-
-<p>We need Leiningen as well since plugins rely on it as a dependency. Now, in the REPL we can require the main namespace from the plugin, and get information about the entry point:</p>
-
-<pre><code class="clojure">boot.user=&gt; (require '[leiningen.localrepo :as lr])
-nil
-boot.user=&gt; (doc lr/localrepo)
--------------------------
-leiningen.localrepo/localrepo
-([_] [_ command &amp; args])
-  Work with local Maven repository
-
-Usage: lein localrepo &lt;command&gt; (commands are listed below)
-...
-</code></pre>
-
-<p>For any given plugin, <code>lein-foo</code>, the entry point is <code>leiningen.foo/foo</code>. Note that it is called with an unused argument and then the actual command line arguments. So we can ask for help on the <code>install</code> command:</p>
-
-<pre><code class="clojure">boot.user=&gt; (lr/localrepo nil "help" "install")
-Install artifact to local repository
-  Arguments:
-    [options] &lt;filename&gt; &lt;artifact-id&gt; &lt;version&gt;
-  Options:
-...
-</code></pre>
-
-<p>So we can call that function to perform the JAR install we want:</p>
-
-<pre><code class="clojure">boot.user=&gt; (lr/localrepo nil "install" "foobar.jar" "foo/bar" "1.0.1")
-
-&gt;
-</code></pre>
-
-<p>Oh, that&rsquo;s a bit disappointing &ndash; we exited the REPL and got our command prompt back. I guess that calls <code>(System/exit)</code> which is a bit unfriendly (but, perhaps, not unexpected given the use case for this plugin). But we can verify that the JAR file was installed:</p>
-
-<pre><code class="bash">&gt; ls -R ~/.m2/repository/foo
-bar
-
-/Users/sean/.m2/repository/foo/bar:
-1.0.1               maven-metadata-local.xml
-
-/Users/sean/.m2/repository/foo/bar/1.0.1:
-_remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
-</code></pre>
-
-<p>Now, remember that I said you can &ldquo;call&rdquo; code from the command line with Boot? Since we know the code we need to execute (the <code>require</code> and the call to <code>lr/localrepo</code>), we&rsquo;ll just supply those as command line arguments to the <code>call</code> task:</p>
-
-<pre><code class="bash">boot -d leiningen -d lein-localrepo \
-  call -e "(require '[leiningen.localrepo :as lr])" \
-       -e '(lr/localrepo nil "install" "foobar.jar" "foo/bar" "1.0.1")'
-</code></pre>
-
-<p>Voila!</p>
-
-<p><em>Updated November 22nd, 2017: I published a boot-localrepo task!</em></p>
-
-<p>And if you don&rsquo;t want to type all that, you can now do:</p>
-
-<pre><code class="bash">boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1
-</code></pre>
 ]]></content>
   </entry>
   
