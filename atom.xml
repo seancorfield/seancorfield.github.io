@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-12-19T23:34:19-08:00</updated>
+  <updated>2018-12-20T00:07:14-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -19,8 +19,9 @@
     <updated>2018-12-19T22:45:00-08:00</updated>
     <id>http://corfield.org/blog/2018/12/19/atom-chlorine</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been using the <a href="https://atom.io">Atom</a> editor for about two years now.
-I switched from Emacs after Clojure/conj 2016, having seen <a href="https://youtu.be/buPPGxOnBnk">Jason Gilman&rsquo;s talk
-about ProtoREPL</a> [video]. It may sound like
+I switched from Emacs after Clojure/conj 2016, having seen
+<a href="https://youtu.be/buPPGxOnBnk">Jason Gilman&rsquo;s talk about ProtoREPL</a> [video].
+It may sound like
 heresy, but I&rsquo;d never been happy with Emacs<!-- more --> &ndash; not 17.x back when I first
 started using it, not 18.x, not 19.x when I first stopped using it, nor 24.x onward
 when I came back to it after learning Clojure a few decades later. I built
@@ -34,7 +35,8 @@ defaults. Atom &ndash; with ProtoREPL &ndash; seemed to be exactly what I was lo
 
 <p>But it has been frustrating that ProtoREPL hasn&rsquo;t been getting a huge amount of
 love lately. Two releases immediately after that Conj, eleven in the first
-half of 2017, and just three since then. With the advent of Clojure 1.10 and
+half of 2017, and just three since then (in a year and a half).
+With the advent of Clojure 1.10 and
 <a href="https://github.com/cognitect-labs/REBL-distro">REBL</a>, I wanted to extend
 ProtoREPL so I could integrate REBL into my workflow, so I forked it and
 hacked in <code>inspect-block</code> and <code>inspect-top-block</code> functionality (see the
@@ -80,7 +82,7 @@ have pull requests in for adding &ldquo;load file&rdquo; (it already had evaluat
 so you could &ldquo;select all + evaluate selection&rdquo; but I was used to &ldquo;load file&rdquo;
 from ProtoREPL), and &ldquo;show source&rdquo;.</p>
 
-<p>I&rsquo;ve also ported across my &ldquo;inspect&rdquo; functions from ProtoREPL so my entire,
+<p>I&rsquo;ve also <a href="https://github.com/seancorfield/atom-chlorine/commit/b5c4ec4fbe2572a97882e595f6280fec15592114">ported across my &ldquo;inspect&rdquo; functions</a> from ProtoREPL so my entire,
 day-to-day workflow with ProtoREPL is now possible with Chlorine, REBL, <code>clj</code>, and
 a couple of aliases &ndash; and I have an eminently hackable editor plugin, written
 in ClojureScript with a slick auto-compile, auto-reload workflow (thank you
