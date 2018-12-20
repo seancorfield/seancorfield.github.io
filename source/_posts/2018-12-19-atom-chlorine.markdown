@@ -6,8 +6,9 @@ comments: true
 categories: [clojure]
 ---
 I've been using the [Atom](https://atom.io) editor for about two years now.
-I switched from Emacs after Clojure/conj 2016, having seen [Jason Gilman's talk
-about ProtoREPL](https://youtu.be/buPPGxOnBnk) [video]. It may sound like
+I switched from Emacs after Clojure/conj 2016, having seen
+[Jason Gilman's talk about ProtoREPL](https://youtu.be/buPPGxOnBnk) [video].
+It may sound like
 heresy, but I'd never been happy with Emacs<!-- more --> -- not 17.x back when I first
 started using it, not 18.x, not 19.x when I first stopped using it, nor 24.x onward
 when I came back to it after learning Clojure a few decades later. I built
@@ -21,7 +22,8 @@ And for two years, it has been my day-to-day development environment.
 
 But it has been frustrating that ProtoREPL hasn't been getting a huge amount of
 love lately. Two releases immediately after that Conj, eleven in the first
-half of 2017, and just three since then. With the advent of Clojure 1.10 and
+half of 2017, and just three since then (in a year and a half).
+With the advent of Clojure 1.10 and
 [REBL](https://github.com/cognitect-labs/REBL-distro), I wanted to extend
 ProtoREPL so I could integrate REBL into my workflow, so I forked it and
 hacked in `inspect-block` and `inspect-top-block` functionality (see the
@@ -67,7 +69,7 @@ have pull requests in for adding "load file" (it already had evaluate selection,
 so you could "select all + evaluate selection" but I was used to "load file"
 from ProtoREPL), and "show source".
 
-I've also ported across my "inspect" functions from ProtoREPL so my entire,
+I've also [ported across my "inspect" functions](https://github.com/seancorfield/atom-chlorine/commit/b5c4ec4fbe2572a97882e595f6280fec15592114) from ProtoREPL so my entire,
 day-to-day workflow with ProtoREPL is now possible with Chlorine, REBL, `clj`, and
 a couple of aliases -- and I have an eminently hackable editor plugin, written
 in ClojureScript with a slick auto-compile, auto-reload workflow (thank you
