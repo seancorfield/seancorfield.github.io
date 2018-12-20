@@ -57,7 +57,7 @@ looking for?
 That package is [Chlorine for Atom](https://atom.io/packages/chlorine).
 I installed it immediately (and disabled ProtoREPL) so I could take it for a
 spin! It's written in ClojureScript. It only needs a Socket REPL. It uses
-Unravel to "upgrade" the REPL as needed. It uses Compliment for auto-completion.
+unrepl to "upgrade" the REPL as needed. It uses Compliment for auto-completion.
 I could connect it directly to various running processes and I could start
 REBL up from the command-line with a Socket REPL and connect to that as well.
 **This** was exactly the workflow I'd been looking for!
