@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2018-12-20T08:20:20-08:00</updated>
+  <updated>2019-01-22T21:53:58-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,44 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Atom, Chlorine, and Windows]]></title>
+    <link href="http://corfield.org/blog/2019/01/22/atom-chlorine-windows/"/>
+    <updated>2019-01-22T12:15:00-08:00</updated>
+    <id>http://corfield.org/blog/2019/01/22/atom-chlorine-windows</id>
+    <content type="html"><![CDATA[<p>About a month ago, I was <a href="http://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
+Atom</a> and I&rsquo;ve been using
+it, day-in, day-out, for all my Clojure development. On a Mac, that&rsquo;s
+straightforward because I start a Socket REPL on the Mac and I run Atom on the
+Mac so when I connect via Chlorine and issue the <code>Chlorine: Load File</code>
+command (via <code>Ctrl-, f</code> in my keymap), it sends <code>(load-file "/path/to/file.clj")</code>
+to the REPL, for the file being edited, and that is evaluated and loads the
+source from disk and compiles it. On Windows&hellip;<!-- more --> Well, on Windows
+there are a few obstacles to this workflow.</p>
+
+<p>The first obstacle (for me) is that <code>clj</code> doesn&rsquo;t run on Windows and that&rsquo;s
+what I use for everything Clojure on a Mac and on Linux now. There&rsquo;s a
+PowerShell implementation in progress but Windows has always been a bit of a
+second-class citizen so it&rsquo;s still a ways off. But Windows has WSL (Windows
+Subsystem for Linux) so I can
+and do run (user-mode) Ubuntu on my Windows laptop and I do all of my Clojure
+work on that&hellip;</p>
+
+<p>&hellip;but that brings the second obstacle: file paths on Windows look like
+<code>C:\path\to\file.clj</code> and under WSL they look like <code>/mnt/c/path/to/file.clj</code>.
+That means your editor on Windows and your REPL on Linux don&rsquo;t quite speak the
+same language.</p>
+
+<p>Fortunately, the latest release of Chlorine, 0.0.8, has a &ldquo;smart&rdquo; <code>Load File</code>
+command that will work with both a Windows-based Socket REPL and a WSL-based
+Socket REPL! It wraps the call to <code>load-file</code> in logic that looks at the
+requested file path and also at the
+<code>user.dir</code> JVM property and if the former starts with a drive identifier and <code>:</code>,
+and the latter does not, it assumes the REPL is running on WSL on Windows and
+maps the file path appropriately.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Chlorine: Clojure Integration for Atom]]></title>
@@ -1016,38 +1054,6 @@ example.core=&gt;
 <p>A couple of examples from World Singles might illustrate this. We use two different libraries for generating HTML/XML, which have very different approaches. We use <a href="https://github.com/yogthos/Selmer">Selmer</a> to generate HTML emails. We use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate XML documents that we use with 3rd party web services. Selmer takes mustache-style templates with substitutions for data structures and some embedded control structures. Hiccup takes Clojure data structures and renders them to HTML/XML. For our web service interaction, we tend to have data structures that we want to render to XML so it is more natural to annotate the data with more data and let Hiccup take care of the rendering. With our HTML emails, we want something close to HTML with a controlled set of substitutions, for member profile data etc. Similarly we use two different testing libraries for different situations. We use <a href="https://github.com/jaycfields/expectations">Expectations</a> for most of our testing because we like the language it uses: &ldquo;Expect {some conditions} to be true of {our test expression}&rdquo;. It lets us write very natural, expressive tests. However, for our WebDriver based tests (using <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a>), we prefer the more assert-based approach of Clojure&rsquo;s built-in testing library (clojure.test). These end-to-end tests are organized in a much more procedural way, asserting certain things about the state of the UI at various points in each scenario we are testing. Finally, we use two different date/time libraries: <a href="https://github.com/stackoverflow/date-clj">date-clj</a> and <a href="https://github.com/clj-time/clj-time">clj-time</a>. The former is great for interacting with data stores since it uses <code>java.util.Date</code> and supports basic date manipulation (adding / subtracting a number of time units). The latter is great for more complex date/time manipulation (midnight-based instants, periods, intervals, range checking) but is based on Joda Time and needs to be explicitly converted to/from <code>java.util.Date</code> at the boundaries.</p>
 
 <p>Clojure&rsquo;s wealth of choices can be overwhelming but it&rsquo;s also very freeing. The &ldquo;enterprise&rdquo; often wants a more proscribed way to do things, with more consistent solutions across different teams and different abilities. For more ideas on getting Clojure into your &ldquo;enterprise&rdquo; shop, take a look at <a href="http://www.youtube.com/watch?v=2WLgzCkhN2g">Neal Ford&rsquo;s Master Plan for Clojure Enterprise Mindshare Domination</a> presentation from Clojure/conj 2011.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Powered by JavaScript]]></title>
-    <link href="http://corfield.org/blog/2014/09/20/powered-by-javascript/"/>
-    <updated>2014-09-20T20:03:15-07:00</updated>
-    <id>http://corfield.org/blog/2014/09/20/powered-by-javascript</id>
-    <content type="html"><![CDATA[<p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&rsquo;t JavaScript?<!-- more --></p>
-
-<p>I&rsquo;m fairly public about my dislike of JavaScript - and it&rsquo;s an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript&rsquo;s flaws have led to so much innovation in both the compile-to-JS (&ldquo;altJS&rdquo;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p>
-
-<p>The conference opened with keynotes from Dan Shaw about Node.js and Tomomi Imura about the state of the mobile web. Tomomi&rsquo;s keynote was particularly interesting, as she went through the evolution of mobile browsers in detail, looking at features and releases of Chrome, Firefox, Opera, Safari, and Internet Explorer, as well as some of the politics behind the modern &ldquo;browser wars&rdquo;. I always enjoy a keynote that teaches me something practical I can use as well as providing inspiration, and Tomomi scored on both.</p>
-
-<p>Since this was the first year of the conference, I had signed up long before I knew how the schedule would pan out and as the number of speakers announced continued to grow, I was wondering how they would fit everyone into a one day event. The answer turned out to be three tracks of seven sessions each, which made for a lot of difficult choices. Here&rsquo;s what I chose to attend:</p>
-
-<ul>
-<li>Steven Luscher - Decomplexifying UI Code with React. Steven did a great job of explaining the motivations and concepts behind React.js. We&rsquo;re just starting to use React.js at World Singles, for an internal application, albeit wrapped up in a ClojureScript framework and I haven&rsquo;t had to suffer through the pain of large-scale JS development, so it was very interesting to hear <em>why</em> this approach helps - declarative and reactive.</li>
-<li>Josh Powell - Unravelling the Knot: Client &amp; Testable Client Side Code. One of the authors of &ldquo;<a href="http://www.manning.com/mikowski/">Single Page Web Applications</a>&rdquo;, Josh walked us through a relatively simple example that showed how data dependencies quickly build up and can lead to bugs and offered us a design pattern to address this: a central data store that is updated by all components and which shifts dependencies from a web of component-to-component to a hub'n'spoke architecture of component-to-data. For me it was a nice follow-on from Steven&rsquo;s talk which also dealt with the complexity of dependencies.</li>
-<li>Sarah Groff-Palermo - Art.js: Transfigure Data to Create 21st Century Art. Time for a complete shift of gears with a talk that covered emotion and whimsy and what can be grown out of fragmented data with a variety of JS tools and frameworks and some creativity. It was a very engaging talk and it inspires me to be more experimental with some of the visualization tools that I&rsquo;d like to play with but have previously been intimidated by.</li>
-<li>Brian Lonsdorf - Fact, Fiction, &amp; Functional Programming. After lunch, Brian took us on a whirlwind tour of monads, functors, and point-free programming in JavaScript, using a web application written in a nearly pure functional style. I was impressed at how far this sort of thing has come in JS, with things like <a href="https://github.com/CrossEye/ramda">Project Ramda</a>!</li>
-<li>Mike Mikowksi - Dump Less and SASS: Dynamic CSS Manipulation with JavaScript. This was the real dud of the day. The other author of Single Page Web Applications, Mike was far more interested in telling us how clever he was and how lucky we were to have chosen his session (seriously dude?) than actually showing us anything useful. He made at least one sexist joke, and several other very dodgy comments, and came off as an arrogant jerk. I&rsquo;d heard complaints about his arrogant, sexist behavior in the bar the previous night but was still intrigued by the topic - unfortunately it was a waste of time.</li>
-<li>Trek Glowacki - Single Page Applications: The Web&rsquo;s Horseless Carriage. After the break, the conference got back on track with a fascinating look at the evolution of web applications and how we talk about them, positing that &ldquo;Single Page Web Application&rdquo; is a term that indicates we don&rsquo;t really have a handle on what this space is really about - and what it will become.</li>
-<li>Marcus Kobler - React.js and the Importance of Isomorphic SPAs. For the last session of the day, I chose another React.js session and it was another good choice. Marcus dug into React.js in more detail than Steven so it was a good progression and I hadn&rsquo;t heard about &ldquo;Isomorphic JavaScript&rdquo; before so that was yet another topic to Google and add pages to <a href="http://getpocket.com/">Pocket</a> for later reading!</li>
-</ul>
-
-
-<p>Manning made an excellent choice to close out the conference with a roundtable of JavaScript experts playing what turned out to be a hilarious version of The Newlywed Game which touched on the good and the bad in JavaScript.</p>
-
-<p>In addition, Manning set up a comprehensive library of their books in the lobby of the conference and selected various tweets they liked throughout the day to award free books. I picked up &ldquo;Java 8 in Action&rdquo; for one of my tweets - and I&rsquo;d signed up early enough to get &ldquo;Single Page Web Applications&rdquo; as well as a registration gift so I was very happy with that.</p>
-
-<p>Watch out for Powered by JavaScript 2015!</p>
 ]]></content>
   </entry>
   

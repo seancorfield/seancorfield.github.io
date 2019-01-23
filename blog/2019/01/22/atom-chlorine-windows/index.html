@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Javascript - An Architect's View</title>
+  <title>Atom, Chlorine, and Windows - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="Category: javascript">
+  <meta name="description" content="About a month ago, I was praising Chlorine, the new Clojure package for
+Atom and I&rsquo;ve been using
+it, day-in, day-out, for all my Clojure &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://corfield.org/blog/categories/javascript">
+  <link rel="canonical" href="http://corfield.org/blog/2019/01/22/atom-chlorine-windows">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -65,36 +67,113 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Javascript</h1>
+    
+      <h1 class="entry-title">Atom, Chlorine, and Windows</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-01-22T12:15:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2019</span></span> <span class='time'>12:15 pm</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://corfield.org">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>About a month ago, I was <a href="http://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
+Atom</a> and I&rsquo;ve been using
+it, day-in, day-out, for all my Clojure development. On a Mac, that&rsquo;s
+straightforward because I start a Socket REPL on the Mac and I run Atom on the
+Mac so when I connect via Chlorine and issue the <code>Chlorine: Load File</code>
+command (via <code>Ctrl-, f</code> in my keymap), it sends <code>(load-file "/path/to/file.clj")</code>
+to the REPL, for the file being edited, and that is evaluated and loads the
+source from disk and compiles it. On Windows&hellip;<!-- more --> Well, on Windows
+there are a few obstacles to this workflow.</p>
 
-  
-  <h2>2014</h2>
+<p>The first obstacle (for me) is that <code>clj</code> doesn&rsquo;t run on Windows and that&rsquo;s
+what I use for everything Clojure on a Mac and on Linux now. There&rsquo;s a
+PowerShell implementation in progress but Windows has always been a bit of a
+second-class citizen so it&rsquo;s still a ways off. But Windows has WSL (Windows
+Subsystem for Linux) so I can
+and do run (user-mode) Ubuntu on my Windows laptop and I do all of my Clojure
+work on that&hellip;</p>
 
-<article>
-  
-<h1><a href="/blog/2014/09/20/powered-by-javascript/">Powered by JavaScript</a></h1>
-<time datetime="2014-09-20T20:03:15-07:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2014</span></time>
+<p>&hellip;but that brings the second obstacle: file paths on Windows look like
+<code>C:\path\to\file.clj</code> and under WSL they look like <code>/mnt/c/path/to/file.clj</code>.
+That means your editor on Windows and your REPL on Linux don&rsquo;t quite speak the
+same language.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/conferences/'>conferences</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a></span>
-</footer>
-
-
-</article>
-
+<p>Fortunately, the latest release of Chlorine, 0.0.8, has a &ldquo;smart&rdquo; <code>Load File</code>
+command that will work with both a Windows-based Socket REPL and a WSL-based
+Socket REPL! It wraps the call to <code>load-file</code> in logic that looks at the
+requested file path and also at the
+<code>user.dir</code> JVM property and if the former starts with a drive identifier and <code>:</code>,
+and the latter does not, it assumes the REPL is running on WSL on Windows and
+maps the file path appropriately.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2019-01-22T12:15:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2019</span></span> <span class='time'>12:15 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2019/01/22/atom-chlorine-windows/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2019/01/22/atom-chlorine-windows/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2018/12/19/atom-chlorine/" title="Previous Post: Chlorine: Clojure integration for Atom">&laquo; Chlorine: Clojure integration for Atom</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -215,7 +294,10 @@
       var disqus_shortname = 'seancorfield';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://corfield.org/blog/2019/01/22/atom-chlorine-windows/';
+        var disqus_url = 'http://corfield.org/blog/2019/01/22/atom-chlorine-windows/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
