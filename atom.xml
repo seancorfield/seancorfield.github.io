@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-01-22T21:53:58-08:00</updated>
+  <updated>2019-02-11T13:01:17-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojurians Slack Alternatives]]></title>
+    <link href="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/"/>
+    <updated>2019-02-11T04:10:00-08:00</updated>
+    <id>http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives</id>
+    <content type="html"><![CDATA[<p>Daniel Compton has continued his excellent trend of
+<a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
+and one of the comments in his <strong>Community</strong> section stood out for me:</p>
+
+<blockquote><p>&ldquo;I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose.&rdquo;</p></blockquote>
+
+<!-- more -->
+
+
+<p>The <a href="https://clojurians.slack.com/">Clojurians Slack</a> <em>[sign up <a href="http://clojurians.net/">here</a>]</em>
+started as a small experiment about four years ago and has been far more
+successful than anyone could have imagined, with around 15K members signed up
+and around 1,700 members considered &ldquo;active&rdquo; on a weekly basis (which means it
+would cost almost $9K per month to run this as a paid service!).</p>
+
+<p>A perennial complaint about Slack&rsquo;s free plan is that it limits the accessible
+message history to just the most recent 10K messages. In a busy Slack like
+Clojurians that limit is hit after three or four days, heavily limiting the
+ability to refer back to conversations or to use the massive amount of
+&ldquo;knowledge&rdquo; shared there for reference &ndash; exactly as noted in the comment above.</p>
+
+<p>Why that comment inspired me to write this post is that most of the suggested
+communities already exist, and have been around for quite some time. Two of
+them are linked from the right hand column of the <a href="https://www.reddit.com/r/Clojure/">Clojure sub-Reddit</a>
+but here&rsquo;s the list directly:</p>
+
+<ul>
+<li><a href="https://discordapp.com/invite/v9QMy9D">Discord</a></li>
+<li><a href="https://gitter.im/clojure/general">Gitter</a> &ndash; there are several Clojure rooms on Gitter, most of them are linked to open source projects on GitHub</li>
+<li><a href="https://riot.im/app/#/room/#clojure:matrix.org">Matrix/Riot</a></li>
+<li>Mattermost &ndash; I&rsquo;m not sure if anyone has set up a Clojure community on Mattermost but several people have advocated for it</li>
+</ul>
+
+
+<p>The &ldquo;original&rdquo; online Clojure community still exists and is still active on IRC
+(freenode), of course, and there&rsquo;s also <a href="https://braid.chat/">Braid</a> (written in
+Clojure/ClojureScript!).</p>
+
+<p>I was a bit surprised that the commenter did not mention <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+because that community, started back in early November 2018, already has five hundred
+members and seems, to me, like the most capable alternative to Slack. It&rsquo;s open
+source, <a href="https://zulipchat.com/for/open-source/">hosted for free to open source communities</a>,
+and &ldquo;has a significantly larger and more active development community than other
+modern open source group chat solutions like Mattermost, Rocket.Chat, and matrix.org.&rdquo;
+Read their <a href="https://zulipchat.com/why-zulip/">Why Zulip? page</a> for more
+information about the service and how it compares (specifically to Slack).</p>
+
+<p>One-way bridging between select Slack channels and Zulip streams has been in
+place for a while and currently about fifty of the most popular channels on
+Slack are available to read in Zulip streams, along with many other active
+streams in Zulip. This means you can try Zulip without missing out on Slack
+conversations &ndash; some people prefer Zulip&rsquo;s UI just for reading Slack messages!</p>
+
+<p>Clojurians on Slack isn&rsquo;t going away &ndash; a lot of people love the UI and don&rsquo;t
+consider the message history limit to be a big deal &ndash; and if you&rsquo;re already
+using Slack for work, then it makes perfect sense to also use that for your
+Clojure community fix (since you only need one chat client open). The Slack
+community isn&rsquo;t &ldquo;official&rdquo; in any way, and you&rsquo;re all welcome to try other
+chat clients, but if you feel strongly about open source and unlimited search
+history, check out <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+and if you like it, promote it and encourage other Clojurians to join you
+there.</p>
+
+<p>Me? I&rsquo;m one of the long-time admins/moderators of Clojurians on Slack, but I&rsquo;ve
+also tried each and every one of the alternatives that various community members
+have set up over the last four years. <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+is the one I&rsquo;ve found myself most active in and the only alternative chat client
+that I always have open at this point!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Atom, Chlorine, and Windows]]></title>
@@ -1021,39 +1097,6 @@ example.core=&gt;
 <p>One final note on the conference: I picked topics that interested / intrigued me without paying much attention to the speakers (because, with a handful of exceptions, I don&rsquo;t recognize most of the speakers listed anyway!) and now I see that over half of the sessions I attended had women speakers. As I noted last year, Alex Miller and his team did a terrific job of <a href="http://corfield.org/blog/2013/09/22/the-strange-loop-2013/">ensuring a diverse speaker lineup</a> - and did it again this year! I&rsquo;ve been reading some great blog posts from people who attended the conference this year on the <a href="https://thestrangeloop.com/news/doubling-down-on-diversity">diversity scholarships</a> that were set up. It shows that we <em>can</em> change things if we try. We still have a long way to go for equality in tech, but The Strange Loop is a great model for us in that area.</p>
 
 <p>You can watch all of these sessions for free now, on <a href="https://www.youtube.com/channel/UC_QIfHvN9auy2CoOdSfMWDw">The Strange Loop 2014 YouTube channel</a>!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Clojure in the Enterprise?]]></title>
-    <link href="http://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/"/>
-    <updated>2014-09-23T23:05:05-07:00</updated>
-    <id>http://corfield.org/blog/2014/09/23/clojure-in-the-enterprise</id>
-    <content type="html"><![CDATA[<p><em>This was originally posted on corfield.org back in April 2013 and I noticed it was recently referenced by Eric Normand in his recent blog post <a href="http://www.lispcast.com/convince-your-boss-to-use-clojure">Convince your boss to use Clojure</a> so I figured it was time to update the article and bring it onto my new blog.</em></p>
-
-<p>A question was asked in early 2013 on a Clojure group on LinkedIn about reasons to migrate to Clojure for enterprise applications in a Java shop. It&rsquo;s a fairly typical question from people in the Java world when they hear the buzz about Clojure, and of course asking the question on a Clojure group garnered a lot of positive responses about why Clojure is a good choice. I didn&rsquo;t feel anyone had really addressed a core aspect of the original question which was, essentially, &ldquo;Why should I, as a Java web developer, using JPA, JSF etc, choose Clojure instead for an enterprise application?&rdquo;.<!-- more --> The key considerations here are &ldquo;enterprise application&rdquo; and &ldquo;Java web devloper, using JPA, JSF etc&rdquo;. Clojure is rightly praised for big data projects, simplified concurrency due to immutable data, and the conciseness of its solutions. The general advice when introducing Clojure to an organization is to take a grass roots approach: use it for some tooling first, or a small low-risk (but perhaps high-profile) project and show how well it works in a Java-dominated world. Then you get more and more developers trying it out and gradually the organization adopts it for more and more projects. It&rsquo;s good advice, and it&rsquo;s often how Clojure has crept into Java shops so far (as opposed to those fast-moving small shops that already have a tendency toward polyglot development).</p>
-
-<p>I didn&rsquo;t feel anyone had really talked about how radical Clojure seems to a conservative &ldquo;enterprise&rdquo; company that&rsquo;s already bought into the Java way of doing things from top-to-bottom (as indicated by the original poster&rsquo;s references to JPA and JSF). I had a couple of people ask me to turn my <a href="http://www.linkedin.com/groupItem?view=&amp;gid=1058217&amp;item=ANET%3AS%3A228031575&amp;commentID=129649205&amp;trk=NUS_RITM-title#commentID_129649205">(fairly length) response on the group</a> into a blog post, so I did, and here&rsquo;s the updated version for 2014&hellip;</p>
-
-<p>The &ldquo;enterprise&rdquo; in general is extremely conservative about change. Those companies use Java because it&rsquo;s &ldquo;safe&rdquo;: it&rsquo;s pretty much ubiquitous, it&rsquo;s been around for decades, it&rsquo;s easy to hire low-to-mid-range developers, you can outsource it relatively easily. If you have a company that&rsquo;s bought into the whole Java stack and uses Java for &ldquo;everything&rdquo;, you have a deeply entrenched company and it may be extremely difficult to bring Clojure in. You might have some success bringing Scala in - as a &ldquo;better Java&rdquo; - because Scala is less alien to Java developers and the marketing behind Scala is focused on serving the &ldquo;enterprise&rdquo; already.</p>
-
-<p>Having talked to a number of Java developers who work in big &ldquo;enterprise&rdquo; shops, one of the biggest problems is simply that the average skill level in such shops is often pretty mediocre, especially if some of the work is outsourced (and considered acceptable quality). The processes tend to be old-fashioned, the tooling tends to be years behind the bleeding edge. Even bringing Scala in can be very disruptive and the worst part is you might just end up with Java-in-Scala, without a lot of the benefits of moving to a highly expressive, (partly) functional language.</p>
-
-<p>Clojure is very alien to the average Java developer. If you have a shop full of &ldquo;average&rdquo; Java developers who have grown up only knowing &ldquo;OOP in Java&rdquo;, they will struggle really badly with the functional concepts in Clojure (and Scala - which is why you get Java-in-Scala instead of idiomatic Scala). Unlearning all those OOP habits to write effective functional code is really, really hard for a lot of people. Writing high performance idiomatic functional code can be even harder. Don&rsquo;t underestimate that difficulty! Take away objects, mutable state, variables, loops&hellip; a lot of Java developers are immediately all at sea and have no idea how to solve even basic problems. They&rsquo;ll try to bend Clojure to their OOP way of thinking and they&rsquo;ll most likely fail.</p>
-
-<p>Clojure is great for bleeding edge developers and it is also great for new developers who have not yet learned the bad habits of OOP (conflating state and identity, mutability, loss of data history / time concepts).</p>
-
-<p>Everything that everyone said in the original comment thread on LinkedIn is true: Clojure has many wonderful benefits, you can start with a small, eager team and a high profile but relatively low-risk project, and so on. But don&rsquo;t underestimate the difficulty of getting a conservative organization to switch from the COBOL of the modern era (Java) to something as radical as Clojure currently is, nor the difficulty of retraining your army of low-to-med-range Java-only programmers.</p>
-
-<p>At my company, we first took Clojure to production in mid-2011 and cross-training the team - a small group of developers eager to learn new things - is an ongoing process, slow and steady. We&rsquo;re at 22KLOC in Clojure with over 5KLOC in our test suite, and about 1KLOC of ClojureScript now. That&rsquo;s probably the equivalent of at least 80KLOC of Java (and quite likely north of 150KLOC). We&rsquo;re a small company with a very supportive management team. At this point, almost all new development is in Clojure with maintenance still continuing on the &ldquo;legacy&rdquo; code base (another factor to consider, by the way: what about your existing Java code base?). We love Clojure. It&rsquo;s made development a lot more fun. We&rsquo;re able to solve harder problems, make changes faster, leverage multi-core concurrency more effectively, and we have a much smaller code base to maintain. But we are about as far from &ldquo;enterprise&rdquo; as you can imagine, while not actually being a start-up (World Singles has been around for over a decade).</p>
-
-<p>The half dozen paragraphs above are an edited version of what I posted on LinkedIn (and slightly updated from my original blog post) but there&rsquo;s something else I wanted to cover in this post: the mindset of Clojure.</p>
-
-<p>A common question amongst folks new to Clojure, especially those who want to do web development, is &ldquo;Where are the &lsquo;batteries included&rsquo; frameworks?&rdquo;. If you come to Clojure from Ruby on Rails, you&rsquo;ll probably be surprised to see no full-stack web framework. If you come to Clojure from Java, you might be looking for something like Spring (or Hibernate). The Clojure community favors small, composable libraries over opinionated frameworks. If you want to do web development in Clojure, you can pick a library for routing, a library for basic HTTP request/response plumbing, a library for persistence, and so on, and you&rsquo;ll compose those together with your application code to build the solution you like best. For almost every task, Clojure has several libraries, each focused on doing one thing well and an expectation to &ldquo;play nicely with others&rdquo;, mostly through the idiom of building on Clojure&rsquo;s core data structures (mostly maps and vectors, but also sets and the ubiquitous sequence abstraction). For some, this is seen as a lack of structure or a lack of maturity but it&rsquo;s a very deliberate decision by the core of the Clojure community. Instead of just falling into a particular way of doing something, Clojure encourages you to pick'n'mix, focusing on the problem at hand and solving it in the most elegant way, rather than trying to shoehorn your solution into someone else&rsquo;s way of thinking.</p>
-
-<p>A couple of examples from World Singles might illustrate this. We use two different libraries for generating HTML/XML, which have very different approaches. We use <a href="https://github.com/yogthos/Selmer">Selmer</a> to generate HTML emails. We use <a href="https://github.com/weavejester/hiccup">Hiccup</a> to generate XML documents that we use with 3rd party web services. Selmer takes mustache-style templates with substitutions for data structures and some embedded control structures. Hiccup takes Clojure data structures and renders them to HTML/XML. For our web service interaction, we tend to have data structures that we want to render to XML so it is more natural to annotate the data with more data and let Hiccup take care of the rendering. With our HTML emails, we want something close to HTML with a controlled set of substitutions, for member profile data etc. Similarly we use two different testing libraries for different situations. We use <a href="https://github.com/jaycfields/expectations">Expectations</a> for most of our testing because we like the language it uses: &ldquo;Expect {some conditions} to be true of {our test expression}&rdquo;. It lets us write very natural, expressive tests. However, for our WebDriver based tests (using <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a>), we prefer the more assert-based approach of Clojure&rsquo;s built-in testing library (clojure.test). These end-to-end tests are organized in a much more procedural way, asserting certain things about the state of the UI at various points in each scenario we are testing. Finally, we use two different date/time libraries: <a href="https://github.com/stackoverflow/date-clj">date-clj</a> and <a href="https://github.com/clj-time/clj-time">clj-time</a>. The former is great for interacting with data stores since it uses <code>java.util.Date</code> and supports basic date manipulation (adding / subtracting a number of time units). The latter is great for more complex date/time manipulation (midnight-based instants, periods, intervals, range checking) but is based on Joda Time and needs to be explicitly converted to/from <code>java.util.Date</code> at the boundaries.</p>
-
-<p>Clojure&rsquo;s wealth of choices can be overwhelming but it&rsquo;s also very freeing. The &ldquo;enterprise&rdquo; often wants a more proscribed way to do things, with more consistent solutions across different teams and different abilities. For more ideas on getting Clojure into your &ldquo;enterprise&rdquo; shop, take a look at <a href="http://www.youtube.com/watch?v=2WLgzCkhN2g">Neal Ford&rsquo;s Master Plan for Clojure Enterprise Mindshare Domination</a> presentation from Clojure/conj 2011.</p>
 ]]></content>
   </entry>
   

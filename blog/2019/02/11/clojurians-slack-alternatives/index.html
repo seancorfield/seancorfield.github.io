@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Powered by JavaScript - An Architect's View</title>
+  <title>Clojurians Slack Alternatives - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="The first annual Powered by JavaScript conference, organized by Manning Books, took place in St Louis this past week. How did this inaugural event &hellip;">
+  <meta name="description" content="Daniel Compton has continued his excellent trend of
+writing an analysis of the State of Clojure survey comments
+and one of the comments in his &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://corfield.org/blog/2014/09/20/powered-by-javascript">
+  <link rel="canonical" href="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -69,7 +71,7 @@
   
   <header>
     
-      <h1 class="entry-title">Powered by JavaScript</h1>
+      <h1 class="entry-title">Clojurians Slack Alternatives</h1>
     
     
       <p class="meta">
@@ -78,7 +80,7 @@
 
 
 
-<time class='entry-date' datetime='2014-09-20T20:03:15-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:03 pm</span></time>
+<time class='entry-date' datetime='2019-02-11T04:10:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:10 am</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://corfield.org">Comments</a>
@@ -88,30 +90,74 @@
   </header>
 
 
-<div class="entry-content"><p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&rsquo;t JavaScript?<!-- more --></p>
+<div class="entry-content"><p>Daniel Compton has continued his excellent trend of
+<a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
+and one of the comments in his <strong>Community</strong> section stood out for me:</p>
 
-<p>I&rsquo;m fairly public about my dislike of JavaScript - and it&rsquo;s an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript&rsquo;s flaws have led to so much innovation in both the compile-to-JS (&ldquo;altJS&rdquo;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p>
+<blockquote><p>&ldquo;I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose.&rdquo;</p></blockquote>
 
-<p>The conference opened with keynotes from Dan Shaw about Node.js and Tomomi Imura about the state of the mobile web. Tomomi&rsquo;s keynote was particularly interesting, as she went through the evolution of mobile browsers in detail, looking at features and releases of Chrome, Firefox, Opera, Safari, and Internet Explorer, as well as some of the politics behind the modern &ldquo;browser wars&rdquo;. I always enjoy a keynote that teaches me something practical I can use as well as providing inspiration, and Tomomi scored on both.</p>
+<!-- more -->
 
-<p>Since this was the first year of the conference, I had signed up long before I knew how the schedule would pan out and as the number of speakers announced continued to grow, I was wondering how they would fit everyone into a one day event. The answer turned out to be three tracks of seven sessions each, which made for a lot of difficult choices. Here&rsquo;s what I chose to attend:</p>
+
+<p>The <a href="https://clojurians.slack.com/">Clojurians Slack</a> <em>[sign up <a href="http://clojurians.net/">here</a>]</em>
+started as a small experiment about four years ago and has been far more
+successful than anyone could have imagined, with around 15K members signed up
+and around 1,700 members considered &ldquo;active&rdquo; on a weekly basis (which means it
+would cost almost $9K per month to run this as a paid service!).</p>
+
+<p>A perennial complaint about Slack&rsquo;s free plan is that it limits the accessible
+message history to just the most recent 10K messages. In a busy Slack like
+Clojurians that limit is hit after three or four days, heavily limiting the
+ability to refer back to conversations or to use the massive amount of
+&ldquo;knowledge&rdquo; shared there for reference &ndash; exactly as noted in the comment above.</p>
+
+<p>Why that comment inspired me to write this post is that most of the suggested
+communities already exist, and have been around for quite some time. Two of
+them are linked from the right hand column of the <a href="https://www.reddit.com/r/Clojure/">Clojure sub-Reddit</a>
+but here&rsquo;s the list directly:</p>
 
 <ul>
-<li>Steven Luscher - Decomplexifying UI Code with React. Steven did a great job of explaining the motivations and concepts behind React.js. We&rsquo;re just starting to use React.js at World Singles, for an internal application, albeit wrapped up in a ClojureScript framework and I haven&rsquo;t had to suffer through the pain of large-scale JS development, so it was very interesting to hear <em>why</em> this approach helps - declarative and reactive.</li>
-<li>Josh Powell - Unravelling the Knot: Client &amp; Testable Client Side Code. One of the authors of &ldquo;<a href="http://www.manning.com/mikowski/">Single Page Web Applications</a>&rdquo;, Josh walked us through a relatively simple example that showed how data dependencies quickly build up and can lead to bugs and offered us a design pattern to address this: a central data store that is updated by all components and which shifts dependencies from a web of component-to-component to a hub'n'spoke architecture of component-to-data. For me it was a nice follow-on from Steven&rsquo;s talk which also dealt with the complexity of dependencies.</li>
-<li>Sarah Groff-Palermo - Art.js: Transfigure Data to Create 21st Century Art. Time for a complete shift of gears with a talk that covered emotion and whimsy and what can be grown out of fragmented data with a variety of JS tools and frameworks and some creativity. It was a very engaging talk and it inspires me to be more experimental with some of the visualization tools that I&rsquo;d like to play with but have previously been intimidated by.</li>
-<li>Brian Lonsdorf - Fact, Fiction, &amp; Functional Programming. After lunch, Brian took us on a whirlwind tour of monads, functors, and point-free programming in JavaScript, using a web application written in a nearly pure functional style. I was impressed at how far this sort of thing has come in JS, with things like <a href="https://github.com/CrossEye/ramda">Project Ramda</a>!</li>
-<li>Mike Mikowksi - Dump Less and SASS: Dynamic CSS Manipulation with JavaScript. This was the real dud of the day. The other author of Single Page Web Applications, Mike was far more interested in telling us how clever he was and how lucky we were to have chosen his session (seriously dude?) than actually showing us anything useful. He made at least one sexist joke, and several other very dodgy comments, and came off as an arrogant jerk. I&rsquo;d heard complaints about his arrogant, sexist behavior in the bar the previous night but was still intrigued by the topic - unfortunately it was a waste of time.</li>
-<li>Trek Glowacki - Single Page Applications: The Web&rsquo;s Horseless Carriage. After the break, the conference got back on track with a fascinating look at the evolution of web applications and how we talk about them, positing that &ldquo;Single Page Web Application&rdquo; is a term that indicates we don&rsquo;t really have a handle on what this space is really about - and what it will become.</li>
-<li>Marcus Kobler - React.js and the Importance of Isomorphic SPAs. For the last session of the day, I chose another React.js session and it was another good choice. Marcus dug into React.js in more detail than Steven so it was a good progression and I hadn&rsquo;t heard about &ldquo;Isomorphic JavaScript&rdquo; before so that was yet another topic to Google and add pages to <a href="http://getpocket.com/">Pocket</a> for later reading!</li>
+<li><a href="https://discordapp.com/invite/v9QMy9D">Discord</a></li>
+<li><a href="https://gitter.im/clojure/general">Gitter</a> &ndash; there are several Clojure rooms on Gitter, most of them are linked to open source projects on GitHub</li>
+<li><a href="https://riot.im/app/#/room/#clojure:matrix.org">Matrix/Riot</a></li>
+<li>Mattermost &ndash; I&rsquo;m not sure if anyone has set up a Clojure community on Mattermost but several people have advocated for it</li>
 </ul>
 
 
-<p>Manning made an excellent choice to close out the conference with a roundtable of JavaScript experts playing what turned out to be a hilarious version of The Newlywed Game which touched on the good and the bad in JavaScript.</p>
+<p>The &ldquo;original&rdquo; online Clojure community still exists and is still active on IRC
+(freenode), of course, and there&rsquo;s also <a href="https://braid.chat/">Braid</a> (written in
+Clojure/ClojureScript!).</p>
 
-<p>In addition, Manning set up a comprehensive library of their books in the lobby of the conference and selected various tweets they liked throughout the day to award free books. I picked up &ldquo;Java 8 in Action&rdquo; for one of my tweets - and I&rsquo;d signed up early enough to get &ldquo;Single Page Web Applications&rdquo; as well as a registration gift so I was very happy with that.</p>
+<p>I was a bit surprised that the commenter did not mention <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+because that community, started back in early November 2018, already has five hundred
+members and seems, to me, like the most capable alternative to Slack. It&rsquo;s open
+source, <a href="https://zulipchat.com/for/open-source/">hosted for free to open source communities</a>,
+and &ldquo;has a significantly larger and more active development community than other
+modern open source group chat solutions like Mattermost, Rocket.Chat, and matrix.org.&rdquo;
+Read their <a href="https://zulipchat.com/why-zulip/">Why Zulip? page</a> for more
+information about the service and how it compares (specifically to Slack).</p>
 
-<p>Watch out for Powered by JavaScript 2015!</p>
+<p>One-way bridging between select Slack channels and Zulip streams has been in
+place for a while and currently about fifty of the most popular channels on
+Slack are available to read in Zulip streams, along with many other active
+streams in Zulip. This means you can try Zulip without missing out on Slack
+conversations &ndash; some people prefer Zulip&rsquo;s UI just for reading Slack messages!</p>
+
+<p>Clojurians on Slack isn&rsquo;t going away &ndash; a lot of people love the UI and don&rsquo;t
+consider the message history limit to be a big deal &ndash; and if you&rsquo;re already
+using Slack for work, then it makes perfect sense to also use that for your
+Clojure community fix (since you only need one chat client open). The Slack
+community isn&rsquo;t &ldquo;official&rdquo; in any way, and you&rsquo;re all welcome to try other
+chat clients, but if you feel strongly about open source and unlimited search
+history, check out <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+and if you like it, promote it and encourage other Clojurians to join you
+there.</p>
+
+<p>Me? I&rsquo;m one of the long-time admins/moderators of Clojurians on Slack, but I&rsquo;ve
+also tried each and every one of the alternatives that various community members
+have set up over the last four years. <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+is the one I&rsquo;ve found myself most active in and the only alternative chat client
+that I always have open at this point!</p>
 </div>
 
 
@@ -127,12 +173,12 @@
 
 
 
-<time class='entry-date' datetime='2014-09-20T20:03:15-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:03 pm</span></time>
+<time class='entry-date' datetime='2019-02-11T04:10:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:10 am</span></time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/conferences/'>conferences</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/community/'>community</a>
   
 </span>
 
@@ -141,7 +187,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2014/09/20/powered-by-javascript/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2014/09/20/powered-by-javascript/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -154,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/21/clojurebridge/" title="Previous Post: ClojureBridge">&laquo; ClojureBridge</a>
+        <a class="basic-alignment left" href="/blog/2019/01/22/atom-chlorine-windows/" title="Previous Post: Atom, Chlorine, and Windows">&laquo; Atom, Chlorine, and Windows</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/23/clojure-in-the-enterprise/" title="Next Post: Clojure in the Enterprise?">Clojure in the Enterprise? &raquo;</a>
       
     </p>
   </footer>
@@ -289,8 +333,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://corfield.org/blog/2014/09/20/powered-by-javascript/';
-        var disqus_url = 'http://corfield.org/blog/2014/09/20/powered-by-javascript/';
+        var disqus_identifier = 'http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/';
+        var disqus_url = 'http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/';
         var disqus_script = 'embed.js';
       
     (function () {

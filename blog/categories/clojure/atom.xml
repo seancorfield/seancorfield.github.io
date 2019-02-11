@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-01-22T21:53:58-08:00</updated>
+  <updated>2019-02-11T13:01:17-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,82 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clojurians Slack Alternatives]]></title>
+    <link href="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/"/>
+    <updated>2019-02-11T04:10:00-08:00</updated>
+    <id>http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives</id>
+    <content type="html"><![CDATA[<p>Daniel Compton has continued his excellent trend of
+<a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
+and one of the comments in his <strong>Community</strong> section stood out for me:</p>
+
+<blockquote><p>&ldquo;I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose.&rdquo;</p></blockquote>
+
+<!-- more -->
+
+
+<p>The <a href="https://clojurians.slack.com/">Clojurians Slack</a> <em>[sign up <a href="http://clojurians.net/">here</a>]</em>
+started as a small experiment about four years ago and has been far more
+successful than anyone could have imagined, with around 15K members signed up
+and around 1,700 members considered &ldquo;active&rdquo; on a weekly basis (which means it
+would cost almost $9K per month to run this as a paid service!).</p>
+
+<p>A perennial complaint about Slack&rsquo;s free plan is that it limits the accessible
+message history to just the most recent 10K messages. In a busy Slack like
+Clojurians that limit is hit after three or four days, heavily limiting the
+ability to refer back to conversations or to use the massive amount of
+&ldquo;knowledge&rdquo; shared there for reference &ndash; exactly as noted in the comment above.</p>
+
+<p>Why that comment inspired me to write this post is that most of the suggested
+communities already exist, and have been around for quite some time. Two of
+them are linked from the right hand column of the <a href="https://www.reddit.com/r/Clojure/">Clojure sub-Reddit</a>
+but here&rsquo;s the list directly:</p>
+
+<ul>
+<li><a href="https://discordapp.com/invite/v9QMy9D">Discord</a></li>
+<li><a href="https://gitter.im/clojure/general">Gitter</a> &ndash; there are several Clojure rooms on Gitter, most of them are linked to open source projects on GitHub</li>
+<li><a href="https://riot.im/app/#/room/#clojure:matrix.org">Matrix/Riot</a></li>
+<li>Mattermost &ndash; I&rsquo;m not sure if anyone has set up a Clojure community on Mattermost but several people have advocated for it</li>
+</ul>
+
+
+<p>The &ldquo;original&rdquo; online Clojure community still exists and is still active on IRC
+(freenode), of course, and there&rsquo;s also <a href="https://braid.chat/">Braid</a> (written in
+Clojure/ClojureScript!).</p>
+
+<p>I was a bit surprised that the commenter did not mention <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+because that community, started back in early November 2018, already has five hundred
+members and seems, to me, like the most capable alternative to Slack. It&rsquo;s open
+source, <a href="https://zulipchat.com/for/open-source/">hosted for free to open source communities</a>,
+and &ldquo;has a significantly larger and more active development community than other
+modern open source group chat solutions like Mattermost, Rocket.Chat, and matrix.org.&rdquo;
+Read their <a href="https://zulipchat.com/why-zulip/">Why Zulip? page</a> for more
+information about the service and how it compares (specifically to Slack).</p>
+
+<p>One-way bridging between select Slack channels and Zulip streams has been in
+place for a while and currently about fifty of the most popular channels on
+Slack are available to read in Zulip streams, along with many other active
+streams in Zulip. This means you can try Zulip without missing out on Slack
+conversations &ndash; some people prefer Zulip&rsquo;s UI just for reading Slack messages!</p>
+
+<p>Clojurians on Slack isn&rsquo;t going away &ndash; a lot of people love the UI and don&rsquo;t
+consider the message history limit to be a big deal &ndash; and if you&rsquo;re already
+using Slack for work, then it makes perfect sense to also use that for your
+Clojure community fix (since you only need one chat client open). The Slack
+community isn&rsquo;t &ldquo;official&rdquo; in any way, and you&rsquo;re all welcome to try other
+chat clients, but if you feel strongly about open source and unlimited search
+history, check out <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+and if you like it, promote it and encourage other Clojurians to join you
+there.</p>
+
+<p>Me? I&rsquo;m one of the long-time admins/moderators of Clojurians on Slack, but I&rsquo;ve
+also tried each and every one of the alternatives that various community members
+have set up over the last four years. <a href="https://clojurians.zulipchat.com/">Clojurians on Zulip</a>
+is the one I&rsquo;ve found myself most active in and the only alternative chat client
+that I always have open at this point!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Atom, Chlorine, and Windows]]></title>
@@ -228,44 +304,6 @@ feedback on what should stay, what should change, and what should go. Stay tuned
 <p>Relating this back to REBL, it works by taking some arbitrary value produced in the REPL and converting it to data (via <code>datafy</code>) so that it can be displayed in the UI. With any part of that data highlighted you can &ldquo;drill down&rdquo;, at which point REBL calls <code>nav</code> to perform the (potentially lazy, complex) navigation and then converts that to data (via <code>datafy</code>) and displays that as the next &ldquo;level&rdquo; of data. Given an associative data representation, it does <code>(get coll k)</code> first to get <code>v</code>, and then it calls <code>(nav coll k v)</code> to allow the underlying navigation to return an updated value.</p>
 
 <p>You go from &ldquo;thing&rdquo; to &ldquo;data representation&rdquo; of &ldquo;thing&rdquo; (via <code>datafy</code>), and then you can do the simple associative lookup <em>in the data representation, not the original thing</em>, and then you use <code>nav</code> to get back to the relevant equivalent part of the &ldquo;thing&rdquo;, and then you <code>datafy</code> that again to get pure data. For built-in Clojure data types that are already pure data, <code>datafy</code> does nothing and <code>nav</code> just returns the selected value. For hash maps, navigation is just simple key lookup. For vectors, navigation is also simple key (index) lookup. This new machinery only starts to shine in more complex situations.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Excited About Clojure/conj]]></title>
-    <link href="http://corfield.org/blog/2018/10/25/clojure-conj/"/>
-    <updated>2018-10-25T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2018/10/25/clojure-conj</id>
-    <content type="html"><![CDATA[<p>It has been a crazy busy year, both at work and personally, and it&rsquo;s hard for me to believe my last blog post was in April!</p>
-
-<p><a href="https://2018.clojure-conj.org/">Clojure/conj</a> is coming up fast and the schedule was posted today, which has made me even more excited about it. Here&rsquo;s a run down of the sessions I plan to attend &ndash; I&rsquo;ll write up my thoughts on everything shortly after the conference.</p>
-
-<ul>
-<li>Welcome Event &ndash; I&rsquo;m hoping my flight is on time and Lyft can get me there in time to chill and network with all the interesting Clojurians!</li>
-<li>Stuart Halloway &ndash; In his recent <a href="https://www.youtube.com/watch?v=6ftW8UwwP_4">Apropos podcast</a>, he hinted that this talk would be about new tooling he has been using. Maybe prepl-related?</li>
-<li>Christopher Small &ndash; Clojure on the cyberpunk frontier of democracy &ndash; This sounds fascinating.</li>
-<li>Chris Johnson Bidler &ndash; Serverless-ish: Zero to App with Datomic Cloud and GraphQL.</li>
-<li>Ghadi Shayban &ndash; Java Made (Somewhat) Simple &ndash; Although Ghadi told me this might be a beginner/intermediate-level talk, he&rsquo;s a great speaker and I look forward to hearing his insights about the platform.</li>
-<li>Boris Kourtoukov &ndash; Machines that Judge Us.</li>
-<li>Tiago Luchini &ndash; Declarative Domain Modeling for Datomic Ion/Cloud.</li>
-<li>Lily Goh + Dom Kiva-Meyer &ndash; Robust APIs with clojure.spec &amp; GraphQL &ndash; I&rsquo;m a huge advocate of spec and we&rsquo;re also using GraphQL at work so this should be very applicable.</li>
-<li>Rich Hickey &ndash; Maybe Not &ndash; Rich is always worth the price of entry!</li>
-<li>Unsessions &ndash; Looking forward to seeing the schedule for these. Past years' unsessions have included some real diamonds!</li>
-<li>David Chelimsky &ndash; AWS, meet Clojure.</li>
-<li>Ben Kamphaus &ndash; AI Systems: Foundations for Artificial Minds or Aaron Cummings &ndash; Making Memories: Clojure For Hardware Engineers (And Others). I&rsquo;m undecided but leaning toward the AI talk.</li>
-<li>Elena Machkasova &ndash; Babel: middleware for beginner-friendly error messages &ndash; Anything that helps with Clojure&rsquo;s error messages (much improved in Clojure 1.10!) is always worth learning about!</li>
-<li>Wilker Lucio da Silva &ndash; Scaling Full-Stack Applications Over Hundreds of Microservices or Daniel Gregoire &ndash; Tables Considered Helpful. Undecided again but leaning toward the table talk.</li>
-<li>Nikolas Göbel &ndash; Reactive Datalog for Datomic or Tyler Hobbs &ndash; Code goes in, Art comes out. Undecided but leaning toward the Datalog talk (because I&rsquo;m not hugely interested in art/computing).</li>
-<li>Gary Fredericks &ndash; What Are All These Class Files Even About? And Other Stories &ndash; Having been repeatedly bitten by AOT, I&rsquo;m looking forward to this!</li>
-<li>Tomomi Livingstone + Hans Livingstone &ndash; Party REPL — A multi-player REPL built for pair-programming &ndash; This looks very, very interesting!</li>
-<li>Rebecca Parsons &ndash; Closing day two keynote.</li>
-<li>(Party!)</li>
-<li>Carin Meier &ndash; Can you GAN? &ndash; No idea about the topic but Carin is always an engaging speaker.</li>
-<li>Dave Fetterman &ndash; Learning and Teaching Clojure on the job at Amperity &ndash; Because coming up to speed (and bringing others up to speed) is important.</li>
-<li>Vikash Mansinghka &ndash; Probabilistic programming and meta-programming in Clojure &ndash; WAT?</li>
-<li>Alex Engelberg and Derek Slager &ndash; Every Clojure Talk Ever &ndash; Cryptically enticing&hellip;</li>
-</ul>
-
 ]]></content>
   </entry>
   
