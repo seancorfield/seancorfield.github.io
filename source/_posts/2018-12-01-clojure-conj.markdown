@@ -4,7 +4,7 @@ title: "Clojure/conj Was Great!"
 date: 2018-12-01 13:40:00
 comments: true
 published: false
-categories: [clojure, conj]
+categories: [clojure, conj, jdbc]
 ---
 [Clojure/conj](https://2018.clojure-conj.org/) is over for another year and, as always, it was a great experience. Lots of interesting and inspiring talks (which are probably all up on [ClojureTV](https://www.youtube.com/user/ClojureTV)
 by now!) and of course the ever important "hallway track" which is the real value-add of attending the conference in person.

@@ -3,7 +3,7 @@ layout: post
 title: "SQL NULL, s/nilable, and optionality"
 date: 2018-12-06 11:30:00
 comments: true
-categories: [clojure]
+categories: [clojure, jdbc]
 ---
 Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
 called [Maybe Not](https://www.youtube.com/watch?v=YR5WdGrpoug&list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&index=2), where he mused

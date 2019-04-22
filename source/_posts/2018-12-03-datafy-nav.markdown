@@ -3,7 +3,7 @@ layout: post
 title: "Clojure 1.10's datafy and nav"
 date: 2018-12-03 17:20:00
 comments: true
-categories: [clojure]
+categories: [clojure, jdbc]
 ---
 One of the more mysterious new features in Clojure 1.10 seems to be the pairing of [`datafy` and `nav`](https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav) (and their underlying protocols, `Datafiable` and `Navigable`). Interest in these new functions has been piqued after Stuart Halloway showed off [REBL at Clojure/conj](https://www.youtube.com/watch?v=c52QhiXsmyI&list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&index=3) (video). Stu presented this functionality as "generalized laziness": `datafy` produces a "data representation" of things and `nav` lets you (lazily) navigate around that data.<!-- more -->
 

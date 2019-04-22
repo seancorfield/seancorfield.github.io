@@ -3,7 +3,7 @@ layout: post
 title: "Release 0.7.0 of clojure.java.jdbc"
 date: 2017-07-17 10:40:00
 comments: true
-categories: [clojure]
+categories: [clojure, jdbc]
 ---
 The stable 0.7.0 release of `java.jdbc` -- the [Clojure Contrib JDBC library](https://github.com/clojure/java.jdbc) -- has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!
 
