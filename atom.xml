@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-02-11T13:01:17-08:00</updated>
+  <updated>2019-04-21T23:07:26-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Next.JDBC]]></title>
+    <link href="http://corfield.org/blog/2019/04/21/next-jdbc/"/>
+    <updated>2019-04-21T16:00:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/04/21/next-jdbc</id>
+    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-alpha8</h1>
+
+<p>I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
+
+<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme</a></p>
+
+<p><em>The next generation of <code>clojure.java.jdbc</code>: a new low-level Clojure wrapper for JDBC-based access to databases.</em>  It&rsquo;s intended to be both faster and simpler than <code>clojure.java.jdbc</code> and it&rsquo;s where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!</p>
+
+<p>At this point, I&rsquo;m looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
+
+<p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clojurians Slack Alternatives]]></title>
@@ -1054,49 +1073,6 @@ example.core=&gt; (Fibonacci/fib 42)
 267914296
 example.core=&gt; 
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Strange Loop 2014]]></title>
-    <link href="http://corfield.org/blog/2014/09/25/the-strange-loop-2014/"/>
-    <updated>2014-09-25T18:32:18-07:00</updated>
-    <id>http://corfield.org/blog/2014/09/25/the-strange-loop-2014</id>
-    <content type="html"><![CDATA[<p>Last week I attended <a href="https://thestrangeloop.com/">The Strange Loop</a> in St Louis. I attended in 2011 and was blown away. I missed 2012 but attended again in 2013 and was blown away once more. I already have 2015&rsquo;s dates in my calendar. How was 2014?<!-- more --></p>
-
-<p>Yup, blown away again. Alex Miller and his team have created an iconic event that crosses technology boundaries and bridges between academia and industry, to bring some of the brightest minds together to share their ideas. And for attendees too, the opportunity to meet a huge variety of our peers - from novice to expert - in all different technologies, creates an atmosphere of excitement, wonder, and enjoyment.</p>
-
-<p>All the sessions were recorded and have been posted to YouTube. Link at the bottom of this post!</p>
-
-<p>Here are the sessions I attended with brief notes so you can see why I love this conference:</p>
-
-<ul>
-<li>Joe Armstrong - The Mess We&rsquo;re In. The creator of Erlang focused on the overwhelming complexity of the systems we are building today, and how they got that way, with a good dose of humor and some quantum mechanics.</li>
-<li>Jessica Kerr - Concurrency Options on the JVM. Jessica took us on a whirlwind tour of Clojure, Scala, Java and what they offer the developer (futures, agents, actors, parallel streams, channels, executors etc), with a whimsical (but consistent) analogy of traffic patterns in JVM-town. A great overview with enough detail to be very useful!</li>
-<li>Ambrose Bonnaire-Sargeant - Typed Clojure in Practice. We&rsquo;re using core.typed a little at work so I wanted to hear how others were using it in a production environment. After starting out with a practical example of eliminating bugs through gradual typing, Ambrose walked through a case study of CircleCI which has applied core.typed to a substantial amount of their code. It greatly encouraged me!</li>
-<li>Julie Lavoie - Analyzing Rap Lyrics with Python. This sounded so off-the-wall I was intrigued - and I&rsquo;m actually a huge fan of early West Coast rap music (although I find the misogyny very hard to take which, again, was something that intrigued me about the talk). Julie&rsquo;s talk looked at numerous pitfalls in the process end-to-end as well as the difficulties in establishing good metrics of sexism. Musical excerpts, lots of data, lots of questions. A fascinating topic!</li>
-<li>Amanda Laucher, Paul Snively - Type Systems: The Good, Bad, and Ugly. Honest, opinionated, and somewhat controversial, Amanda and Paul took us on a tour of type systems available in current and future languages. My takeaway: if you don&rsquo;t like static typing, you have probably only used languages with bad or ugly type systems - but we&rsquo;re not quite there yet in terms of capabilities&hellip;</li>
-<li>Brian McKenna - Idris: Practical Dependent Types With Practical Examples. &hellip;which was a nice segue into Brian&rsquo;s talk which showed us some of the things that a truly powerful type system can do for us. Idris isn&rsquo;t production-ready yet but it&rsquo;s an exciting glimpse into a future where type systems are powerful, really useful, and relatively painless to use. I&rsquo;ll need to watch this one a few more times, I think.</li>
-<li>Leah Hanson - How Julia Goes Fast. I&rsquo;m currently reading <a href="https://pragprog.com/book/7lang/seven-more-languages-in-seven-weeks">Seven More Languages in Seven Weeks</a> and one of those seven is Julia. I haven&rsquo;t gotten to that chapter yet but I wanted to hear more about how it achieves near-C level performance. Leah took us through various implementation details, showing what Julia was capable of. Her passion for Julia was contagious and I&rsquo;m really looking forward to that chapter now!</li>
-<li>Stefanie Schirmer - Dynamic Programming at Ease: with Grammars, Algebras, Products. Stefanie showed us a very powerful set of abstractions that can tame a very difficult type of programming algorithm, with reference to real-world analysis of RNA molecules. Like Brian&rsquo;s talk on Idris, I&rsquo;ll need to watch this a few more times to soak it all in.</li>
-<li>Stephen Wolfram - Inside the Wolfram Language. Wolfram is a system that has grown to encompass a huge amount of knowledge across many different disciplines, and Stephen was able to give us a preview of their brand new &ldquo;programming language&rdquo; that can query their (very impressive) knowledge engine. Highly entertaining - make sure you watch the video!</li>
-<li>Eleanor McHugh - Fun with Go (Unsession). Several friends have raved about Go so, before the conference, I installed it and worked through the built-in &ldquo;Tour of Go&rdquo; and learned a little of the language. In fifty minutes of fun and increasingly wild and wacky code, Eleanor taught me a lot more of Go than the official tour. I found myself repeatedly thinking &ldquo;Wow! I didn&rsquo;t know Go could do that!&rdquo;.</li>
-<li>Nada Amin - Programming Should Eat Itself. Meta-turtles, all the way down. Nada explored reflective metaprogramming. I wasn&rsquo;t sure of the &ldquo;why&rdquo; behind this talk, but she proved that the way to really understand an academic computer science paper is to implement the ideas in it yourself.</li>
-<li>Evan Czaplicki - Controlling Space and Time: understanding the many formulations of FRP. Evan created the <a href="http://elm-lang.org">Elm programming language</a> as an embodiment of Functional Reactive Programming &ldquo;done right&rdquo;, so I was very interested to get the &ldquo;big picture&rdquo; on this space. Great background for the different types of FRP out there.</li>
-<li>Bodil Stokke - PureScript (Maybe This Time We Get JavaScript Right). Bodil was highly entertaining as always, this time live programming a game in PureScript, a Haskell-like language that compiled down to JavaScript. Although it has many surface similarities to Elm, it is a much more lightweight system, which she needed for her use case. Interestingly, she has built a library in PureScript that provides some of Elm&rsquo;s elegant Signal semantics (which she will hopefully open source soon!).</li>
-<li>Rich Hickey - Transducers. Drawing parallels with how we describe processes in the real world - as a series of steps to be performed together - Rich showed how transducers allow us to describe processes in Clojure, without needing to specify the format of inputs, outputs, or intermediate results. Coming soon to a Clojure release near you (it&rsquo;s in 1.7.0-alpha2 already).</li>
-<li>Ian Davis - The challenges and benefits of a functional reactive frontend. Ian described Prismatic&rsquo;s experiences with a large-scale interactive web application that is built with ClojureScript and Om on top of Facebook&rsquo;s React.js framework. Real world FRP at scale.</li>
-<li>Heather Miller - Function Passing Style: Typed, Distributed Functional Programming. The actor model allows use to perform distributed processing by sending data to nodes and getting results back. Heather talk looked at a different model where the data is distributed (rather than the processing) and you send your functions out to the data instead. Having played with distributed function execution in a cluster of Hazelcast nodes, I was left thinking &ldquo;So?&rdquo; but the emphasis on type systems and immutability means I probably missed something important in her talk so I&rsquo;ll have to watch it again.</li>
-<li>Elise Huard - Writing a Game in Haskell. I hadn&rsquo;t considered Haskell as a language for writing games but Elise used it to showcase Functional Reactive Programming as the core of her game&rsquo;s engine. She had embarked on the project for a bit of fun and she shared the whole journey with us, from initial curiosity about games, to design, to multiple implementations and the challenges and paths not taken along the way, to the finished game - and a <a href="https://leanpub.com/gameinhaskell">forthcoming book about her experiences</a>.</li>
-<li>Aditya Siram - Shen: A Sufficiently Advanced Lisp. Aditya showed us some of Shen&rsquo;s power - building on traditional Lisp values with a powerful macro system and a powerful type system - producing very elegant solutions.</li>
-</ul>
-
-
-<p>Big trends this year? Functional Reactive Programming (in the real world), and Advanced Type Systems (coming soon?).</p>
-
-<p>One final note on the conference: I picked topics that interested / intrigued me without paying much attention to the speakers (because, with a handful of exceptions, I don&rsquo;t recognize most of the speakers listed anyway!) and now I see that over half of the sessions I attended had women speakers. As I noted last year, Alex Miller and his team did a terrific job of <a href="http://corfield.org/blog/2013/09/22/the-strange-loop-2013/">ensuring a diverse speaker lineup</a> - and did it again this year! I&rsquo;ve been reading some great blog posts from people who attended the conference this year on the <a href="https://thestrangeloop.com/news/doubling-down-on-diversity">diversity scholarships</a> that were set up. It shows that we <em>can</em> change things if we try. We still have a long way to go for equality in tech, but The Strange Loop is a great model for us in that area.</p>
-
-<p>You can watch all of these sessions for free now, on <a href="https://www.youtube.com/channel/UC_QIfHvN9auy2CoOdSfMWDw">The Strange Loop 2014 YouTube channel</a>!</p>
 ]]></content>
   </entry>
   

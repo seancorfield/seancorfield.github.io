@@ -9,9 +9,7 @@
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="Daniel Compton has continued his excellent trend of
-writing an analysis of the State of Clojure survey comments
-and one of the comments in his &hellip;">
+  <meta name="description" content="seancorfield/next.jdbc 1.0.0-alpha8 I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,6 +66,48 @@ and one of the comments in his &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/04/21/next-jdbc/">Next.JDBC</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-04-21T16:00:00-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2019</span></span> <span class='time'>4:00 pm</span></time>
+        
+           | <a href="/blog/2019/04/21/next-jdbc/#disqus_thread"
+             data-disqus-identifier="http://corfield.org/blog/2019/04/21/next-jdbc/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>seancorfield/next.jdbc 1.0.0-alpha8</h1>
+
+<p>I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
+
+<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme</a></p>
+
+<p><em>The next generation of <code>clojure.java.jdbc</code>: a new low-level Clojure wrapper for JDBC-based access to databases.</em>  It&rsquo;s intended to be both faster and simpler than <code>clojure.java.jdbc</code> and it&rsquo;s where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!</p>
+
+<p>At this point, I&rsquo;m looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
+
+<p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -435,43 +475,6 @@ on optionality and how we represent the absence of a value.</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/01/19/boot-new-moved/">Seancorfield/boot-new Has Moved to Boot/new</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-01-19T12:40:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>12:40 pm</span></time>
-        
-           | <a href="/blog/2017/01/19/boot-new-moved/#disqus_thread"
-             data-disqus-identifier="http://corfield.org/blog/2017/01/19/boot-new-moved/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;m pleased to announce that the &ldquo;Boot new&rdquo; task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p>
-
-<p>You can use this to easily create a new Boot-based project:</p>
-
-<pre><code>boot -d boot/new new -t app -n my-new-boot-app
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2">&larr; Older</a>
@@ -491,6 +494,10 @@ on optionality and how we represent the absence of a value.</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/04/21/next-jdbc/">Next.JDBC</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/02/11/clojurians-slack-alternatives/">Clojurians Slack Alternatives</a>
       </li>
     
@@ -504,10 +511,6 @@ on optionality and how we represent the absence of a value.</div>
     
       <li class="post">
         <a href="/blog/2018/12/06/null-nilable-optionality/">SQL NULL, S/nilable, and Optionality</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2018/12/03/datafy-nav/">Clojure 1.10's Datafy and Nav</a>
       </li>
     
   </ul>
