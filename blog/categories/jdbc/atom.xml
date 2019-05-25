@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jdbc | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-04-21T23:07:26-07:00</updated>
+  <updated>2019-05-25T15:12:39-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
+    <link href="http://corfield.org/blog/2019/05/25/next-jdbc/"/>
+    <updated>2019-05-25T08:00:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/05/25/next-jdbc</id>
+    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-beta1</h1>
+
+<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. Beta 1 is now available to test &ndash; only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
+
+<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme</a></p>
+
+<p>The group and artifact ID will remain <code>seancorfield/next.jdbc</code>, the namespace structure will remain <code>next.jdbc.*</code>. With auto-generated documentation hosted on cljdoc.org and Continuous Integration testing hosted on circleci.com, I have decided to continue work on <code>next.jdbc</code> outside Clojure Contrib, rather than merge it into <code>clojure.java.jdbc</code> as new namespaces there. I have updated the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CONTRIBUTING.md">Contributing page on GitHub</a> to reflect that Pull Requests can now be submitted.</p>
+
+<h2>Changes since Alpha 13</h2>
+
+<ul>
+<li>Set up CircleCI testing (just local DBs for now).</li>
+<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/21">#21</a> by adding <code>next.jdbc.specs</code> and documenting basic usage.</li>
+<li>Fix <a href="https://github.com/seancorfield/next-jdbc/issues/19">#19</a> by caching loaded database driver classes.</li>
+<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/16">#16</a> by renaming <code>reducible!</code> to <code>plan</code> (this is a <strong>BREAKING CHANGE!</strong> from Alpha 13 &ndash; the naming of this function was the blocker for moving from Alpha to Beta).</li>
+<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/3">#3</a> by deciding to maintain this library outside Clojure Contrib.</li>
+</ul>
+
+
+<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC]]></title>
