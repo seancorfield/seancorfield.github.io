@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-05-25T15:12:39-07:00</updated>
+  <updated>2019-06-04T18:29:06-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
+    <link href="http://corfield.org/blog/2019/06/04/next-jdbc/"/>
+    <updated>2019-06-04T11:30:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/06/04/next-jdbc</id>
+    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-rc1</h1>
+
+<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test &ndash; containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
+
+<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme</a></p>
+
+<p>The focus of this release is providing more flexibility in result set builders, so that it is easier to implement your own naming strategies, via new builders that accept <code>:label-fn</code> and <code>:qualifier-fn</code> options. These mirror the <code>:column-fn</code> and <code>:table-fn</code> options used in <code>next.jdbc.sql</code> &ndash; which are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:entities</code> option. These new builder options are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:identifiers</code> option.</p>
+
+<h2>Changes since Beta 1</h2>
+
+<ul>
+<li>Fix #24 by adding return type hints to <code>next.jdbc</code> functions.</li>
+<li>Fix #22 by adding <code>next.jdbc.optional</code> with six map builders that omit <code>NULL</code> columns from the row hash maps.</li>
+<li>Documentation improvements (#27, #28, and #29), including changing &ldquo;connectable&rdquo; to &ldquo;transactable&rdquo; for the <code>transact</code> function and the <code>with-transaction</code> macro (for consistency with the name of the underlying protocol).</li>
+<li>Fix #30 by adding <code>modified</code> variants of column name functions and builders. The <code>lower</code> variants have been rewritten in terms of these new <code>modified</code> variants. This adds <code>:label-fn</code> and <code>:qualifier-fn</code> options that mirror <code>:column-fn</code> and <code>:table-fn</code> for row builders.</li>
+</ul>
+
+
+<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
@@ -988,55 +1015,6 @@ PORT=8123 lein run
 <p>We decided on a two week spike to replace Leiningen with Boot across our entire project, and lift all of our executable processes up as Boot tasks. As of January 21st, we have Boot as an integral part of our production infrastructure. We&rsquo;re happy.</p>
 
 <p>In the next blog post, I&rsquo;ll talk about some of the specifics in our Boot infrastructure and the tasks we&rsquo;re writing. As a teaser, you can look at <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> and <a href="https://github.com/seancorfield/boot-new">boot-new</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
-    <link href="http://corfield.org/blog/2016/01/03/where-did-2015-go/"/>
-    <updated>2016-01-03T08:00:00-08:00</updated>
-    <id>http://corfield.org/blog/2016/01/03/where-did-2015-go</id>
-    <content type="html"><![CDATA[<p>I did not intend to stop blogging in 2015 but that&rsquo;s certainly what it looks like here!</p>
-
-<p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
-
-<p>Almost a year ago, I <a href="http://corfield.org/blog/2015/02/13/frege-and-clojure/">talked about my Leiningen plugin for Frege</a>. Back then it was version 3.22.367. That plugin is now version 3.23.450 and there&rsquo;s a Leiningen template to go with it, tracking prerelease builds of Frege which I&rsquo;ve been publishing to Sonatype&rsquo;s OSS Snapshots repository.</p>
-
-<pre><code>lein new frege myapp
-</code></pre>
-
-<p>That will generate a new, pure Frege project for you to build on. If you want a mixed Frege and Clojure project, like the original concept:</p>
-
-<pre><code>lein new frege myapp -- :with-clojure
-</code></pre>
-
-<p>I haven&rsquo;t gotten to work with Frege as much as I&rsquo;d hoped but I managed to contribute ports of two very small Haskell 2010 libraries (<code>System.Environment</code> and <code>System.Exit</code>) as well as exposing a few more pieces of Java&rsquo;s <code>Runtime</code> class in Frege&rsquo;s <code>java.lang.System</code> data type. I hope 2016 will bring a lot more Frege to my life!</p>
-
-<p>In that blog post, I also talked about learning a new language every year. I mentioned <a href="http://elm-lang.org/">Elm</a>: I&rsquo;d experimented with it quite a bit in its early days and I&rsquo;d hoped to continue experimenting, but work and life distracted me from front end concerns and I lost touch with Elm&rsquo;s evolution. All I can say is that Elm continues to go from strength to strength, and it is gaining more press inches and more visibility at conferences, which is all good. It&rsquo;s truly innovative and I want to see it succeed! I did however spend quite a bit of time learning a little <a href="https://www.rust-lang.org">Rust</a> and it makes me wish I did a lot more close-to-the-metal programming: it&rsquo;s a <em>really</em> nice language and the &ldquo;borrowing&rdquo; system is very impressive (even if you find yourself fighting with it a lot at first!).</p>
-
-<p>In the past, I&rsquo;ve also blogged about almost every conference I&rsquo;ve attended so you would be forgiven for thinking I didn&rsquo;t attend any events in 2015. I was able to attend The Strange Loop and Clojure/conj this past year. I would have loved to have attended Clojure/West as <a href="http://clojurewest.org/speakers#fhanreich">my colleague Fumiko gave a talk about HoneySQL</a>. That link will evaporate when this year&rsquo;s conference comes around but you can <a href="https://www.youtube.com/watch?v=alkcjyhesjI">watch Fumiko&rsquo;s talk about HoneySQL</a> on ClojureTV. It was her first ever conference talk and she did a great job &ndash; I&rsquo;m very proud of her! Oh, she also likes Elm.</p>
-
-<p>Fumiko and I worked on a project with ClojureScript, <a href="http://reagent-project.github.io/">Reagent</a> &ndash; a ClojureScript wrapper for <a href="http://facebook.github.io/react/">React.js</a>, and <a href="https://github.com/ptaoussanis/sente">Sente</a> &ndash; core.async over WebSockets. It was a lot of fun and very interesting. It was a proof of concept but, in the end, our company decided to go with JavaScript as being more mainstream (but still with React.js so, win!).</p>
-
-<p><a href="http://www.thestrangeloop.com/">The Strange Loop</a> was its usual amazing self. Alex Miller and his team manage to excel themselves, year-on-year. The keynote talks were <em>phenomenal</em> this year with Idalin Bob&eacute;&rsquo;s inspiring talk about activism and Morgan Marquis-Boire&rsquo;s terrifying security and espionage talk as the highlights of the whole conference. The &ldquo;theme&rdquo; this year was distributed systems. I think this image sums it up well:</p>
-
-<p><img class="center" src="http://corfield.org/images/distributed.jpg" width="600" height="450" title="image" alt="images"></p>
-
-<p>The other highlight for me was a social event: the <a href="http://lgbtq.technology/">LGBTQ in Technology Slack</a> dinner, generously sponsored by <a href="https://codeclimate.com/">Code Climate</a>. The Strange Loop team work hard to ensure the conference is a diverse, welcoming, safe space for everyone and I was excited to be able to organize this dinner with the support of the conference organizers.</p>
-
-<p>That social theme continued at <a href="http://clojure-conj.org/">Clojure/conj</a> in Philadelphia where I was able to spend time with more folks from the LGBTQ in Technology Slack community (and had a lovely dinner at <a href="http://www.thetwistedtail.com/">The Twisted Tail</a> with my friend <a href="https://twitter.com/quephird">Danielle</a>. If you&rsquo;re ever in Philly, <em>go to that restaurant</em>!!).</p>
-
-<p>As usual, Clojure/conj was an incredible mix of real world Clojure, academic research, and bleeding edge exploration in industry. One talk made the entire conference worth the cost for me: Bobby Calderwood&rsquo;s <a href="https://www.youtube.com/watch?v=qDNPQo9UmJA">From REST to CQRS</a> with Clojure, Kafka (and Samza), and Datomic. The &ldquo;hallway track&rdquo; that followed this talk caused me to miss the last two talks but it was oh so valuable! Fast forward two months and we&rsquo;re starting down the path of Kafka and distributed systems at work. Priceless, as they say. Other highlights were the father and son Engelbergs on Automata, Ram Krishnan&rsquo;s &ldquo;Clojure for Business Teams&rdquo;, Stuart Halloway&rsquo;s keynote &ldquo;Debugging with the Scientific Method&rdquo; (<em>everyone</em> should watch <a href="https://www.youtube.com/watch?v=FihU5JxmnBg">this talk</a>), Lee Spector&rsquo;s &ldquo;Genetic Programming&rdquo; talk, and Benjamin Pierce&rsquo;s keynote about formal specifications and generative testing.</p>
-
-<p>And then there was work&hellip;</p>
-
-<p>I love my job, I love my team, and we get to solve some fascinating problems at <a href="http://worldsinglesnetworks.com/">World Singles</a>. The company has a history of using <a href="http://www.adobe.com/products/coldfusion-family.html">ColdFusion</a>, although we switched to a Free Open Source Software alternative in 2009 and we&rsquo;ve been running on <a href="http://lucee.org/">Lucee</a> for most of 2015. We started using Clojure in production almost five years ago now (with Clojure 1.3 Alpha 7 or Alpha 8) and we declared it our &ldquo;primary language&rdquo; about a year ago. Since then we&rsquo;ve systematically rewritten code in Clojure as we&rsquo;ve needed to enhance functionality &ndash; definitely a situation where &ldquo;refactor&rdquo; really does mean &ldquo;rewrite&rdquo;. I created a bridge project that allows Cloure to be loaded and run easily inside CFML engines about five years ago and that&rsquo;s continued to evolve. The MVC framework I created in 2009 has continued to evolve as well, with 2015 seeing release 3.1 and 3.5 &ndash; the latter has integrated the Clojure bridge, to enable seamless mixed language projects. We rely heavily on this. Release 4.0 is almost ready for Alpha 1, and focuses on enhancing REST API capabilities.</p>
-
-<p>In addition, we created an OAuth 2 server, mostly in Clojure, to support our REST API, and we&rsquo;ve worked hard to move all of our persistence from CFML&rsquo;s &ldquo;query&rdquo; functionality to a Clojure &ldquo;<a href="https://github.com/seancorfield/datamapper">data mapper</a>&rdquo; based on <a href="http://clojure-doc.org/articles/ecosystem/java_jdbc/home.html">clojure.java.jdbc</a>. We closed out 2015 with <em>all</em> of our persistence handled by Clojure, a big win for performance and maintainability!</p>
-
-<p>Our other big change, coming at the tail end of year, was a switch from <a href="http://leiningen.org/">Leiningen</a> to <a href="http://boot-clj.com/">Boot</a> for our primary Clojure build tool. I&rsquo;ll be blogging about this more in due course, but for now I&rsquo;ll just mention the <a href="https://github.com/seancorfield/boot-expectations">Boot task for running Expectations tests</a> and that Leiningen-style templates will be coming to Boot soon&hellip;</p>
-
-<p>Happy 2016!</p>
 ]]></content>
   </entry>
   

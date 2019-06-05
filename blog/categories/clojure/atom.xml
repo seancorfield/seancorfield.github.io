@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-05-25T15:12:39-07:00</updated>
+  <updated>2019-06-04T18:29:06-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
+    <link href="http://corfield.org/blog/2019/06/04/next-jdbc/"/>
+    <updated>2019-06-04T11:30:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/06/04/next-jdbc</id>
+    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-rc1</h1>
+
+<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test &ndash; containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
+
+<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme</a></p>
+
+<p>The focus of this release is providing more flexibility in result set builders, so that it is easier to implement your own naming strategies, via new builders that accept <code>:label-fn</code> and <code>:qualifier-fn</code> options. These mirror the <code>:column-fn</code> and <code>:table-fn</code> options used in <code>next.jdbc.sql</code> &ndash; which are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:entities</code> option. These new builder options are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:identifiers</code> option.</p>
+
+<h2>Changes since Beta 1</h2>
+
+<ul>
+<li>Fix #24 by adding return type hints to <code>next.jdbc</code> functions.</li>
+<li>Fix #22 by adding <code>next.jdbc.optional</code> with six map builders that omit <code>NULL</code> columns from the row hash maps.</li>
+<li>Documentation improvements (#27, #28, and #29), including changing &ldquo;connectable&rdquo; to &ldquo;transactable&rdquo; for the <code>transact</code> function and the <code>with-transaction</code> macro (for consistency with the name of the underlying protocol).</li>
+<li>Fix #30 by adding <code>modified</code> variants of column name functions and builders. The <code>lower</code> variants have been rewritten in terms of these new <code>modified</code> variants. This adds <code>:label-fn</code> and <code>:qualifier-fn</code> options that mirror <code>:column-fn</code> and <code>:table-fn</code> for row builders.</li>
+</ul>
+
+
+<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
@@ -171,88 +198,6 @@ requested file path and also at the
 <code>user.dir</code> JVM property and if the former starts with a drive identifier and <code>:</code>,
 and the latter does not, it assumes the REPL is running on WSL on Windows and
 maps the file path appropriately.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Chlorine: Clojure Integration for Atom]]></title>
-    <link href="http://corfield.org/blog/2018/12/19/atom-chlorine/"/>
-    <updated>2018-12-19T22:45:00-08:00</updated>
-    <id>http://corfield.org/blog/2018/12/19/atom-chlorine</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been using the <a href="https://atom.io">Atom</a> editor for about two years now.
-I switched from Emacs after Clojure/conj 2016, having seen
-<a href="https://youtu.be/buPPGxOnBnk">Jason Gilman&rsquo;s talk about ProtoREPL</a> [video].
-It may sound like
-heresy, but I&rsquo;d never been happy with Emacs<!-- more --> &ndash; not 17.x back when I first
-started using it, not 18.x, not 19.x when I first stopped using it, nor 24.x onward
-when I came back to it after learning Clojure a few decades later. I built
-several configurations from scratch, I tried several &ldquo;curated&rdquo; configurations,
-none of them felt like &ldquo;home&rdquo;. Emacs just leeched too much of my development
-time for my tastes. I wanted a simple, modern text editor, that offered a wide
-variety of &ldquo;plugins&rdquo; and supported all the languages I used, with a sane set of
-defaults. Atom &ndash; with ProtoREPL &ndash; seemed to be exactly what I was looking for!</p>
-
-<p>And for two years, it has been my day-to-day development environment.</p>
-
-<p>But it has been frustrating that ProtoREPL hasn&rsquo;t been getting a huge amount of
-love lately. Two releases immediately after that Conj, eleven in the first
-half of 2017, and just three since then (in a year and a half).
-With the advent of Clojure 1.10 and
-<a href="https://github.com/cognitect-labs/REBL-distro">REBL</a>, I wanted to extend
-ProtoREPL so I could integrate REBL into my workflow, so I forked it and
-hacked in <code>inspect-block</code> and <code>inspect-top-block</code> functionality (see the
-<a href="https://github.com/seancorfield/proto-repl/compare/4b13ebf9d0f1e228ab7800c4bc54fe071bacf29e...master">commit log</a>). But it&rsquo;s written in
-CoffeeScript and that made me sad.</p>
-
-<p>I&rsquo;ve also had a bit of a long-running love/hate relationship with
-<a href="https://github.com/nrepl/nrepl">nREPL</a> over its lifetime. Something about the
-wire protocol and overall architecture of it just bothered me and I longed for
-tooling built on what Clojure provides out-of-the-box. When I saw <code>prepl</code> drop
-in the Clojure 1.10 development cycle, I was very excited: built-in support for
-future tooling, on top of the Socket REPL we&rsquo;ve had for a few releases!</p>
-
-<p>I&rsquo;d previously used <a href="https://github.com/Unrepl/unravel">Unravel</a> to interact
-with several of our processes at work that spawn a Socket REPL and found that a
-very pleasant experience (side-loading <a href="https://github.com/Unrepl/unravel">Compliment</a>
-to provide auto-completion while typing).</p>
-
-<blockquote><p>Unravel is a simple command-line client for Clojure REPLs. It is based on the unrepl protocol, so instead of relying on nREPL, unravel communicates with your Clojure process through a Socket Server REPL.</p></blockquote>
-
-<p>&ldquo;instead of relying on nREPL&rdquo; was music to my ears &ndash; I wanted editor integration
-that worked this way!</p>
-
-<p>A few days ago, in a side-thread in the <code>#off-topic</code> channel on the
-<a href="https://clojurians.slack.com">Clojurians Slack</a> (<a href="http://clojurians.net/">sign up here</a>),
-that had started with a question about <a href="https://cursive-ide.com/">Cursive</a> vs
-Emacs/CIDER, Maurício Szabo mentioned &ldquo;a (very experimental) package for Atom
-that &hellip; uses socket repl&rdquo;. I was intrigued. Could this be what I&rsquo;d been
-looking for?</p>
-
-<p>That package is <a href="https://atom.io/packages/chlorine">Chlorine for Atom</a>.
-I installed it immediately (and disabled ProtoREPL) so I could take it for a
-spin! It&rsquo;s written in ClojureScript. It only needs a Socket REPL. It uses
-unrepl to &ldquo;upgrade&rdquo; the REPL as needed. It uses Compliment for auto-completion.
-I could connect it directly to various running processes and I could start
-REBL up from the command-line with a Socket REPL and connect to that as well.
-<strong>This</strong> was exactly the workflow I&rsquo;d been looking for!</p>
-
-<p>Maurício has been awesome to work with and over the last few days he&rsquo;s added
-the first version of &ldquo;go to definition&rdquo; as well as merging pull requests from
-me to add support for running tests in a namespace or an individual test. I
-have pull requests in for adding &ldquo;load file&rdquo; (it already had evaluate selection,
-so you could &ldquo;select all + evaluate selection&rdquo; but I was used to &ldquo;load file&rdquo;
-from ProtoREPL), and &ldquo;show source&rdquo;.</p>
-
-<p>I&rsquo;ve also <a href="https://github.com/seancorfield/atom-chlorine/commit/b5c4ec4fbe2572a97882e595f6280fec15592114">ported across my &ldquo;inspect&rdquo; functions</a> from ProtoREPL so my entire,
-day-to-day workflow with ProtoREPL is now possible with Chlorine, REBL, <code>clj</code>, and
-a couple of aliases &ndash; and I have an eminently hackable editor plugin, written
-in ClojureScript with a slick auto-compile, auto-reload workflow (thank you
-Maurício!).</p>
-
-<p>I&rsquo;m still looking forward to tooling based on <code>prepl</code> so the client libraries
-can be even simpler and smaller but, for now, I&rsquo;m a very happy developer and
-I&rsquo;m very pleased to see how the Clojure community continues to innovate around
-tooling (which, yes, has needed a lot of love over the years!).</p>
 ]]></content>
   </entry>
   
