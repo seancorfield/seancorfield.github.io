@@ -1,12 +1,14 @@
 ---
 layout: page
 title: "presentations"
-date: 2014-06-20 17:53
+date: 2019-06-27 10:40
 comments: true
 sharing: true
 footer: true
 ---
-This is a selection of talks that I've given over recent years, roughly in reverse date order. Most of my talks have been aimed at a CFML audience, even when discussing Clojure. I used to list about two dozen talks on my site, but a lot of those are outdated now, and even that list only went back to about 2008.
+This is a selection my conference and user group talks, from 2011 to 2013, roughly in reverse date order. Most of my talks have been aimed at a CFML audience, even when discussing Clojure. I used to list about two dozen talks on my site, but a lot of those are outdated now, and even that list only went back to about 2008.
+
+I stopped speaking at conferences after 2013, preferring to just enjoy attending them, without the stress and effort involved in creating talks. I figured I'd been a regular conference speaker for about a decade by that point -- I deserved a break.
 
 Learn You a What for Great Good
 ---
