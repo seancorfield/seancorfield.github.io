@@ -9,7 +9,7 @@
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="1.0.0 and Beyond First off, seancorfield/next.jdbc 1.0.0 was released on June 13th, 2019 (and I announced it on ClojureVerse but did not blog about &hellip;">
+  <meta name="description" content="next.jdbc 1.0.0 and 1.0.1 First off, seancorfield/next.jdbc 1.0.0 was released on June 13th, 2019 (and I announced it on ClojureVerse but did not &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -88,7 +88,7 @@
   </header>
 
 
-<div class="entry-content"><h1>1.0.0 and Beyond</h1>
+<div class="entry-content"><h1>next.jdbc 1.0.0 and 1.0.1</h1>
 
 <p>First off, <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0">seancorfield/next.jdbc 1.0.0</a> was released on June 13th, 2019 (and I <a href="https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379">announced it on ClojureVerse</a> but did not blog about it), and yesterday I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1">seancorfield/next.jdbc 1.0.1</a> which is mostly documentation improvements.</p>
 
@@ -124,7 +124,7 @@
 
 <p>It was in this environment that I continued to think about what a 1.0.0 release of <code>clojure.java.jdbc</code> should be. At Clojure/conj (2018), I was excited about <a href="https://github.com/cognitect-labs/REBL-distro">REBL</a> and <code>datafy</code>/<code>nav</code>, and I introduced <a href="https://corfield.org/blog/2018/12/03/datafy-nav/">experimental support for all that in <code>clojure.java.jdbc</code></a>. I was also thinking about <code>clojure.spec</code> and the shift to qualified keywords and the increased use of transducers and the focus on simplicity and consistency&hellip;</p>
 
-<h2>The Birth of <code>next.jdbc</code></h2>
+<h2>The Birth of next.jdbc</h2>
 
 <p>It was around that point that I realized that I wouldn&rsquo;t really be comfortable declaring a 1.0.0 release on <code>clojure.java.jdbc</code>: there was no natural &ldquo;end state&rdquo; and it had become large and complex (and slow in places) &ndash; and I couldn&rsquo;t realistically change that without making a whole &lsquo;nother round of breaking changes. But this time I heeded <a href="https://www.youtube.com/watch?v=oyLBGkS5ICk">Rich&rsquo;s advice about accretion and fixation</a> and started to design the &ldquo;next&rdquo; version of <code>clojure.java.jdbc</code> not as a series of (breaking) changes to what already existed but as a completely new set of functions built on a completely new set of implementations, based on what I&rsquo;d learned from nearly eight years of maintaining <code>clojure.java.jdbc</code>.</p>
 
