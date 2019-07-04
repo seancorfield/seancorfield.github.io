@@ -5,7 +5,7 @@ date: 2019-07-04 10:00:00
 comments: true
 categories: [clojure, jdbc]
 ---
-# 1.0.0 and Beyond
+# next.jdbc 1.0.0 and 1.0.1
 
 First off, [seancorfield/next.jdbc 1.0.0](https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0) was released on June 13th, 2019 (and I [announced it on ClojureVerse](https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379) but did not blog about it), and yesterday I released [seancorfield/next.jdbc 1.0.1](https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1) which is mostly documentation improvements.
 
@@ -41,7 +41,7 @@ It's good to read [Stuart Sierra's post from 2012](https://clojure.org/news/2012
 
 It was in this environment that I continued to think about what a 1.0.0 release of `clojure.java.jdbc` should be. At Clojure/conj (2018), I was excited about [REBL](https://github.com/cognitect-labs/REBL-distro) and `datafy`/`nav`, and I introduced [experimental support for all that in `clojure.java.jdbc`](https://corfield.org/blog/2018/12/03/datafy-nav/). I was also thinking about `clojure.spec` and the shift to qualified keywords and the increased use of transducers and the focus on simplicity and consistency...
 
-## The Birth of `next.jdbc`
+## The Birth of next.jdbc
 
 It was around that point that I realized that I wouldn't really be comfortable declaring a 1.0.0 release on `clojure.java.jdbc`: there was no natural "end state" and it had become large and complex (and slow in places) -- and I couldn't realistically change that without making a whole 'nother round of breaking changes. But this time I heeded [Rich's advice about accretion and fixation](https://www.youtube.com/watch?v=oyLBGkS5ICk) and started to design the "next" version of `clojure.java.jdbc` not as a series of (breaking) changes to what already existed but as a completely new set of functions built on a completely new set of implementations, based on what I'd learned from nearly eight years of maintaining `clojure.java.jdbc`.
 
