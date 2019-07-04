@@ -3,7 +3,6 @@ layout: post
 title: "Next.JDBC to 1.0.0 and Beyond!"
 date: 2019-07-04 10:00:00
 comments: true
-published: false
 categories: [clojure, jdbc]
 ---
 # 1.0.0 and Beyond
