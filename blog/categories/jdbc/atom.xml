@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jdbc | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-07-04T10:46:54-07:00</updated>
+  <updated>2019-08-07T15:47:21-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Release! Release! Release!]]></title>
+    <link href="http://corfield.org/blog/2019/08/07/releases/"/>
+    <updated>2019-08-07T08:30:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/08/07/releases</id>
+    <content type="html"><![CDATA[<h1>Lots of Releases</h1>
+
+<p>Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
+
+<h2>clj-time 0.15.2</h2>
+
+<p>Add type hints, fix a bug in <code>overlaps?</code>, improve tests and documentation.</p>
+
+<p>See the <a href="https://github.com/clj-time/clj-time/blob/master/ChangeLog.md">change log</a> for more details.</p>
+
+<h2>jkk/honeysql 0.9.5</h2>
+
+<p>Support JDK11 for dev/test, support Turkish language users, enhance <code>format-predicate</code> to match <code>format</code> (<code>parameterizer</code>).</p>
+
+<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
+
+<h2>seancorfield/clj-new 0.7.7</h2>
+
+<p>Pin Clojure (and <code>test.check</code>) version in generated projects instead of using <code>"RELEASE"</code>.</p>
+
+<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+
+<h2>seancorfield/depstar 0.3.1</h2>
+
+<p>Add <code>-m</code> / <code>--main</code> option to override <code>Main-Class</code> in generated manifest.</p>
+
+<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
+
+<h2>seancorfield/next.jdbc 1.0.5</h2>
+
+<p><code>plan</code>&rsquo;s &ldquo;mapified&rdquo; <code>ResultSet</code> is now a full <code>IPersistentMap</code> implementation which adds support for <code>cons</code>, <code>count</code>, <code>dissoc</code>, <code>empty</code>, etc. Continued improvements to documentation.</p>
+
+<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC to 1.0.0 and Beyond!]]></title>
@@ -156,59 +197,6 @@
 <p>At this point, I&rsquo;m looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
 
 <p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[SQL NULL, S/nilable, and Optionality]]></title>
-    <link href="http://corfield.org/blog/2018/12/06/null-nilable-optionality/"/>
-    <updated>2018-12-06T03:30:00-08:00</updated>
-    <id>http://corfield.org/blog/2018/12/06/null-nilable-optionality</id>
-    <content type="html"><![CDATA[<p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
-called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
-on optionality and how we represent the absence of a value.<!-- more --></p>
-
-<p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
-complects both structure and optionality (and his thoughts on fixing that
-in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
-triggered an &ldquo;ah-ha!&rdquo; moment for me.</p>
-
-<p>At <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we deal with a lot
-of data in SQL (specifically in Percona&rsquo;s fork of MySQL) and, in SQL, you represent
-the absence of a value with <code>NULL</code> in a column. Columns that represent optional
-data must be declared as nullable and when you read data from them with
-<a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a> you get hash map
-entries in the rows that have <code>nil</code> values. If you&rsquo;re using <code>clojure.spec</code> to
-describe your tables, rows, and columns, then you are going to have lots of
-<code>s/nilable</code> specs &ndash; and now your &ldquo;optionality&rdquo; has been reified into <code>nil</code>
-values, cast in the stone of your specs&hellip; which is clearly not an ideal situation!</p>
-
-<p>This made me realize that <code>java.jdbc</code> probably should just omit keys whose
-values represent SQL <code>NULL</code>. They are, after all, <em>optional</em> values rather than
-truly <em>nilable</em> values.</p>
-
-<p>That would be a potentially breaking change in behavior for <code>java.jdbc</code> users.
-Sure, in most cases, if you have a hash map representing a row in a database
-table, you&rsquo;re not really going to care whether <code>(:col row)</code> gives you <code>nil</code>
-because <code>:col</code> maps to <code>nil</code> or because <code>row</code> doesn&rsquo;t contain <code>:col</code>. There are
-use cases where it matters: <code>contains?</code>, row/column specs, tabular printing.</p>
-
-<p>Along with changing the behavior of <code>NULL</code> columns and
-<a href="http://corfield.org/blog/2018/12/03/datafy-nav/">supporting <code>datafy</code> and <code>nav</code></a>,
-I have a lot of other changes that I&rsquo;d like to apply to <code>java.jdbc</code>, such as
-automatically qualifying column keys with the table from which they came,
-improving overall performance (by no longer converting <code>ResultSet</code> objects to
-sequences of hash maps), dramatically simplifying and streamlining the options
-that are available (since many of them are very rarely used), and focusing on a
-reducible-first API. All of which would be breaking changes.</p>
-
-<p>I&rsquo;ve learned a lot &ndash; about Clojure, idioms, and databases &ndash; over the seven
-years that I&rsquo;ve been maintaining <code>org.clojure/java.jdbc</code>, and it is time for a
-new namespace or perhaps even a completely new project, that offers a better
-way to deal with SQL databases from Clojure! I&rsquo;ll be writing a series of blog
-posts about the differences I envisage between the current de facto standard
-JDBC wrapper and where I&rsquo;d like to go with this, so that I can get community
-feedback on what should stay, what should change, and what should go. Stay tuned!</p>
 ]]></content>
   </entry>
   

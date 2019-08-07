@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Conferences - An Architect's View</title>
+  <title>Release! Release! Release! - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="Category: conferences">
+  <meta name="description" content="Lots of Releases Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://corfield.org/blog/categories/conferences">
+  <link rel="canonical" href="http://corfield.org/blog/2019/08/07/releases">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -65,84 +65,116 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Conferences</h1>
+    
+      <h1 class="entry-title">Release! Release! Release!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-08-07T08:30:00-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>8:30 am</span></time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://corfield.org">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><h1>Lots of Releases</h1>
 
-  
-  <h2>2016</h2>
+<p>Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
 
-<article>
-  
-<h1><a href="/blog/2016/01/03/where-did-2015-go/">Where Did 2015 Go?</a></h1>
-<time datetime="2016-01-03T08:00:00-08:00" pubdate><span class='month'>Jan</span> <span class='day'>03</span> <span class='year'>2016</span></time>
+<h2>clj-time 0.15.2</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/conferences/'>conferences</a>, <a class='category' href='/blog/categories/diversity/'>diversity</a>, <a class='category' href='/blog/categories/frege/'>frege</a></span>
-</footer>
+<p>Add type hints, fix a bug in <code>overlaps?</code>, improve tests and documentation.</p>
 
+<p>See the <a href="https://github.com/clj-time/clj-time/blob/master/ChangeLog.md">change log</a> for more details.</p>
 
-</article>
+<h2>jkk/honeysql 0.9.5</h2>
 
+<p>Support JDK11 for dev/test, support Turkish language users, enhance <code>format-predicate</code> to match <code>format</code> (<code>parameterizer</code>).</p>
 
+<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
 
-  
-  <h2>2014</h2>
+<h2>seancorfield/clj-new 0.7.7</h2>
 
-<article>
-  
-<h1><a href="/blog/2014/09/25/the-strange-loop-2014/">The Strange Loop 2014</a></h1>
-<time datetime="2014-09-25T18:32:18-07:00" pubdate><span class='month'>Sep</span> <span class='day'>25</span> <span class='year'>2014</span></time>
+<p>Pin Clojure (and <code>test.check</code>) version in generated projects instead of using <code>"RELEASE"</code>.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/conferences/'>conferences</a></span>
-</footer>
+<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
 
+<h2>seancorfield/depstar 0.3.1</h2>
 
-</article>
+<p>Add <code>-m</code> / <code>--main</code> option to override <code>Main-Class</code> in generated manifest.</p>
 
+<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
 
+<h2>seancorfield/next.jdbc 1.0.5</h2>
 
-<article>
-  
-<h1><a href="/blog/2014/09/20/powered-by-javascript/">Powered by JavaScript</a></h1>
-<time datetime="2014-09-20T20:03:15-07:00" pubdate><span class='month'>Sep</span> <span class='day'>20</span> <span class='year'>2014</span></time>
+<p><code>plan</code>&rsquo;s &ldquo;mapified&rdquo; <code>ResultSet</code> is now a full <code>IPersistentMap</code> implementation which adds support for <code>cons</code>, <code>count</code>, <code>dissoc</code>, <code>empty</code>, etc. Continued improvements to documentation.</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/conferences/'>conferences</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/09/22/the-strange-loop-2013/">The Strange Loop 2013</a></h1>
-<time datetime="2013-09-22T11:00:00-07:00" pubdate><span class='month'>Sep</span> <span class='day'>22</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/conferences/'>conferences</a></span>
-</footer>
-
-
-</article>
-
+<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2019-08-07T08:30:00-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>8:30 am</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/jdbc/'>jdbc</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2019/08/07/releases/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2019/08/07/releases/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2019/07/04/next-jdbc/" title="Previous Post: Next.JDBC to 1.0.0 and Beyond!">&laquo; Next.JDBC to 1.0.0 and Beyond!</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -263,7 +295,10 @@
       var disqus_shortname = 'seancorfield';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://corfield.org/blog/2019/08/07/releases/';
+        var disqus_url = 'http://corfield.org/blog/2019/08/07/releases/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
