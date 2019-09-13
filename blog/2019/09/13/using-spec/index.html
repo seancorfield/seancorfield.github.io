@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Clojure, New Relic, and Slow Application Startup - An Architect's View</title>
+  <title>How Do You Use clojure.spec - An Architect's View</title>
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="A couple of years ago, I blogged about instrumenting Clojure for New Relic monitoring and we&rsquo;ve generally been pretty happy with New Relic as a &hellip;">
+  <meta name="description" content="An interesting Clojure question came up on Quora recently and I decided that my answer to &ldquo;how do you use clojure.spec&rdquo; there should &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup">
+  <link rel="canonical" href="http://corfield.org/blog/2019/09/13/using-spec">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Clojure, New Relic, and Slow Application Startup</h1>
+      <h1 class="entry-title">How Do You Use clojure.spec</h1>
     
     
       <p class="meta">
@@ -78,7 +78,7 @@
 
 
 
-<time class='entry-date' datetime='2016-07-29T13:20:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+<time class='entry-date' datetime='2019-09-13T04:00:00-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:00 am</span></time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://corfield.org">Comments</a>
@@ -88,23 +88,43 @@
   </header>
 
 
-<div class="entry-content"><p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
+<div class="entry-content"><p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p>
 
-<p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
+<p>The original question on Quora was:</p>
 
-<p>Since we really wanted this update, we contacted New Relic Technical Support. Somewhat cryptically, they asked us to try version 3.24.1 &ndash; and that did not exhibit the slow startup &ndash; at which point they acknowledged that they&rsquo;d had reports that, with some applications, some customers had experienced slow startups since the 3.25.0 release. They asked us to set the logging level to &ldquo;finest&rdquo;, start the application up on a test machine, and then send them the log file. It was over 230MB(!) and full of Weave violations that the &ldquo;original bytecode&rdquo; could not be found. They very quickly traced this to how their instrumentation code tries to decide which classes to trace and which to ignore &ndash; and noted that Clojure creates a lot of <code>clojure.lang.DynamicClassLoader</code> instances (about 176,000 warnings in the log files originated from this class!) and, since the instrumentation never finds anything useful to instrument, loaded via those classloaders, they suggested that we tell the Agent to skip them.</p>
+<blockquote><p>If you use Clojure Spec, how do you use it? Do you tend to put all your specs in one place or distribute them through the &ldquo;modules&rdquo; of your program?</p></blockquote>
 
-<p>As far as I can tell, this is not a documented configuration item (although there is a similar <code>classloader_excludes</code> list):</p>
+<p>Here&rsquo;s what I wrote, back in August 2019:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  class_transformer:
-</span><span class='line'>    classloader_blacklist: clojure.lang.DynamicClassLoader</span></code></pre></td></tr></table></div></figure>
+<p>We&rsquo;ve been using Spec very heavily at work since the first alpha builds appeared. We use Spec in a number of ways: we use it for data validation (production), we use it for test data generation for example tests and for generative testing of functions (as well as generative scenario testing &ndash; more below), we use it at dev time as a checker for function calls (instrumentation) as well as for deriving code from the specs of data structures.</p>
 
+<p><strong>Data validation</strong></p>
 
-<p>This stops the Agent from examining this classloader and/or the code loaded by it and it dramatically cut the application start times. After adding this to <code>newrelic.yml</code>, our applications started up slightly faster than they had with 3.21.0.</p>
+<p>We write specs for our API inputs and these specs live in their own namespace, along with the predicates needed for the specs. We <code>s/conform</code> the inputs against the specs and test the result with <code>s/invalid?</code> If the inputs conformed, we process the conformed data, else we use <code>s/explain-data</code> and then a heuristic algorithm to turn the explained failure back into an error code and message for API consumers. Note that we actually do some coercion of string inputs into basic data types via some of these specs &ndash; this is not considered good practice by some people but we&rsquo;ve found it very convenient for this use case.</p>
 
-<p>So, thank you to Jesse @ New Relic for the swift troubleshooting on this issue! I&rsquo;m posting this because I couldn&rsquo;t find a solution to the problem via Google &ndash; although I could find people complaining about the problem. Hopefully this will help others using New Relic with Clojure (or other languages that hit the same issue).</p>
+<p>We make sure nearly all of these API input specs will generate so that we can use them to generate test data for example-based tests (next section) or generative testing of some APIs (this isn&rsquo;t practical for a lot of API endpoints but it can help in a few cases).</p>
+
+<p><strong>Test data generation</strong></p>
+
+<p>As noted above, we use the API input specs &ndash; and other specs &ndash; to generate some test data for example-based tests. We use this approach where we want a certain amount of random &ldquo;good&rdquo; data to throw at functions in general, when we only need to control a couple of the arguments or a couple of fields in those arguments &ndash; the randomly-generated data tends to be fairly &ldquo;edge case&rdquo; so it&rsquo;s a good test of robustness (e.g., strings that include Unicode characters, generated from a regex using Gary Fredericks' test.chuck library).</p>
+
+<p><strong>Generative testing of functions</strong></p>
+
+<p>For some &ldquo;key&rdquo; functions, we&rsquo;ll write specs that include <code>:ret</code> and/or <code>:fn</code> and we&rsquo;ll test these generatively. The specs live in the same namespace as the functions, usually immediately above the function they are for. Some of these generative checks are run as part of our main test suite (so they are run every time). Some are too slow for that and the <code>check</code> calls live in <code>(comment ,,,)</code> to be run manually when we&rsquo;ve been working on the function in question (we use Rich Comment Forms a lot for code that is convenient for our development workflow but does not really constitute test code).</p>
+
+<p><strong>Generative scenario testing</strong></p>
+
+<p>This might be an unusual use of specs but I think it&rsquo;s potentially an important one. If you have an interactive application, you will have a number of paths through it that your users can take to get to certain known states. If you think of the paths as collections of user-generated events then you can write a spec for those (valid) paths through the application and you can then rely on spec to generate events that you can use to drive your application and then verify the end state. These specs live in the tests where they are needed.</p>
+
+<p><strong>Development time checking</strong></p>
+
+<p>This is a pretty basic, standard use of spec. Write specs for data structures and some functions. The latter live with the functions (<code>s/fdef</code> immediately above <code>defn</code>). The former may live with the functions if they are tightly coupled to them or in their own namespace if they are more concerned with data structures used by various namespaces. Then you instrument those functions while you are working in the REPL, doing day-to-day development.</p>
+
+<p>Another use of specs in development/testing is within the tests where we want to verify that results from functions are the expected &ldquo;shape&rdquo; in example-based tests. In this case we write specs for &ldquo;good&rdquo; results and &ldquo;bad&rdquo; results and we use <a href="https://github.com/clojure-expectations/clojure-test">clojure-expectations/clojure-test</a> as an add-on for <code>clojure.test</code> so that we can <code>(expect ::some-spec (a-function call here))</code> &ndash; a more expressive form of <code>clojure.test/is</code>.</p>
+
+<p><strong>Deriving code from specs</strong></p>
+
+<p>In this case we write specs for data structures, such as rows in database tables, and then we generate named CRUD operations and supporting functionality from the specs themselves &ndash; using macros that take specs as input with some control parameters and expand into a number of <code>defn</code> and other forms. The important aspect of this is that the spec is the &ldquo;system of record&rdquo; for the data structure: it can be used for validation, test data generation, and as the source for the keys and &ldquo;types&rdquo; that shape the functions needed to operate on them.</p>
 </div>
 
 
@@ -120,7 +140,7 @@
 
 
 
-<time class='entry-date' datetime='2016-07-29T13:20:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>1:20 pm</span></time>
+<time class='entry-date' datetime='2019-09-13T04:00:00-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:00 am</span></time>
       
 
 <span class="categories">
@@ -134,7 +154,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://corfield.org/blog/2019/09/13/using-spec/" data-via="seancorfield" data-counturl="http://corfield.org/blog/2019/09/13/using-spec/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -147,10 +167,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2016/07/18/start-your-engine/" title="Previous Post: Start Your Engine">&laquo; Start Your Engine</a>
+        <a class="basic-alignment left" href="/blog/2019/08/07/releases/" title="Previous Post: Release! Release! Release!">&laquo; Release! Release! Release!</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2017/01/19/boot-new-moved/" title="Next Post: seancorfield/boot-new has moved to boot/new">seancorfield/boot-new has moved to boot/new &raquo;</a>
       
     </p>
   </footer>
@@ -282,8 +300,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/';
-        var disqus_url = 'http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/';
+        var disqus_identifier = 'http://corfield.org/blog/2019/09/13/using-spec/';
+        var disqus_url = 'http://corfield.org/blog/2019/09/13/using-spec/';
         var disqus_script = 'embed.js';
       
     (function () {

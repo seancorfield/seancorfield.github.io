@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-08-07T15:47:21-07:00</updated>
+  <updated>2019-09-13T11:55:29-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How Do You Use clojure.spec]]></title>
+    <link href="http://corfield.org/blog/2019/09/13/using-spec/"/>
+    <updated>2019-09-13T04:00:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/09/13/using-spec</id>
+    <content type="html"><![CDATA[<p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p>
+
+<p>The original question on Quora was:</p>
+
+<blockquote><p>If you use Clojure Spec, how do you use it? Do you tend to put all your specs in one place or distribute them through the &ldquo;modules&rdquo; of your program?</p></blockquote>
+
+<p>Here&rsquo;s what I wrote, back in August 2019:</p>
+
+<p>We&rsquo;ve been using Spec very heavily at work since the first alpha builds appeared. We use Spec in a number of ways: we use it for data validation (production), we use it for test data generation for example tests and for generative testing of functions (as well as generative scenario testing &ndash; more below), we use it at dev time as a checker for function calls (instrumentation) as well as for deriving code from the specs of data structures.</p>
+
+<p><strong>Data validation</strong></p>
+
+<p>We write specs for our API inputs and these specs live in their own namespace, along with the predicates needed for the specs. We <code>s/conform</code> the inputs against the specs and test the result with <code>s/invalid?</code> If the inputs conformed, we process the conformed data, else we use <code>s/explain-data</code> and then a heuristic algorithm to turn the explained failure back into an error code and message for API consumers. Note that we actually do some coercion of string inputs into basic data types via some of these specs &ndash; this is not considered good practice by some people but we&rsquo;ve found it very convenient for this use case.</p>
+
+<p>We make sure nearly all of these API input specs will generate so that we can use them to generate test data for example-based tests (next section) or generative testing of some APIs (this isn&rsquo;t practical for a lot of API endpoints but it can help in a few cases).</p>
+
+<p><strong>Test data generation</strong></p>
+
+<p>As noted above, we use the API input specs &ndash; and other specs &ndash; to generate some test data for example-based tests. We use this approach where we want a certain amount of random &ldquo;good&rdquo; data to throw at functions in general, when we only need to control a couple of the arguments or a couple of fields in those arguments &ndash; the randomly-generated data tends to be fairly &ldquo;edge case&rdquo; so it&rsquo;s a good test of robustness (e.g., strings that include Unicode characters, generated from a regex using Gary Fredericks' test.chuck library).</p>
+
+<p><strong>Generative testing of functions</strong></p>
+
+<p>For some &ldquo;key&rdquo; functions, we&rsquo;ll write specs that include <code>:ret</code> and/or <code>:fn</code> and we&rsquo;ll test these generatively. The specs live in the same namespace as the functions, usually immediately above the function they are for. Some of these generative checks are run as part of our main test suite (so they are run every time). Some are too slow for that and the <code>check</code> calls live in <code>(comment ,,,)</code> to be run manually when we&rsquo;ve been working on the function in question (we use Rich Comment Forms a lot for code that is convenient for our development workflow but does not really constitute test code).</p>
+
+<p><strong>Generative scenario testing</strong></p>
+
+<p>This might be an unusual use of specs but I think it&rsquo;s potentially an important one. If you have an interactive application, you will have a number of paths through it that your users can take to get to certain known states. If you think of the paths as collections of user-generated events then you can write a spec for those (valid) paths through the application and you can then rely on spec to generate events that you can use to drive your application and then verify the end state. These specs live in the tests where they are needed.</p>
+
+<p><strong>Development time checking</strong></p>
+
+<p>This is a pretty basic, standard use of spec. Write specs for data structures and some functions. The latter live with the functions (<code>s/fdef</code> immediately above <code>defn</code>). The former may live with the functions if they are tightly coupled to them or in their own namespace if they are more concerned with data structures used by various namespaces. Then you instrument those functions while you are working in the REPL, doing day-to-day development.</p>
+
+<p>Another use of specs in development/testing is within the tests where we want to verify that results from functions are the expected &ldquo;shape&rdquo; in example-based tests. In this case we write specs for &ldquo;good&rdquo; results and &ldquo;bad&rdquo; results and we use <a href="https://github.com/clojure-expectations/clojure-test">clojure-expectations/clojure-test</a> as an add-on for <code>clojure.test</code> so that we can <code>(expect ::some-spec (a-function call here))</code> &ndash; a more expressive form of <code>clojure.test/is</code>.</p>
+
+<p><strong>Deriving code from specs</strong></p>
+
+<p>In this case we write specs for data structures, such as rows in database tables, and then we generate named CRUD operations and supporting functionality from the specs themselves &ndash; using macros that take specs as input with some control parameters and expand into a number of <code>defn</code> and other forms. The important aspect of this is that the spec is the &ldquo;system of record&rdquo; for the data structure: it can be used for validation, test data generation, and as the source for the keys and &ldquo;types&rdquo; that shape the functions needed to operate on them.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release! Release! Release!]]></title>
@@ -1035,39 +1080,6 @@ PORT=8123 lein run
 <p>The next thing on my roadmap is to add some sort of &ldquo;generator&rdquo; function (not unlike <a href="https://github.com/weavejester/lein-generate">James Reeves' lein-generate</a>) which will allow you to add new pieces to your existing projects, much Rails/Grails have built-in commands to let you add new models, controllers, and so on. That will be part of 0.4.0 and probably go through a couple of revisions. At some point, I&rsquo;ll feel comfortable declaring a 1.0.0 release and then we&rsquo;ll see about getting Boot <code>new</code> merged into the core of Boot itself.</p>
 
 <p>Boot originally started life as a part of Hoplon and for a long time, you needed Leiningen in order to generate a new Hoplon project, even tho' Hoplon itself was powered-by-Boot. It&rsquo;s nice to see <a href="https://github.com/hoplon/hoplon/wiki/Get-Started#start-from-a-template">Hoplon&rsquo;s Getting Started</a> using <code>boot-new</code> as the recommended way to generate a new Hoplon project (it&rsquo;s still a Leiningen template!).</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Testing With Boot]]></title>
-    <link href="http://corfield.org/blog/2016/01/31/testing-with-boot/"/>
-    <updated>2016-01-31T07:30:00-08:00</updated>
-    <id>http://corfield.org/blog/2016/01/31/testing-with-boot</id>
-    <content type="html"><![CDATA[<p>In <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we&rsquo;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&rsquo;s what I&rsquo;m going to cover here, since that was the first real obstacle we encountered.<!-- more --></p>
-
-<p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
-
-<p>Boot&rsquo;s standard for driving <code>clojure.test</code> is <a href="https://github.com/adzerk-oss/boot-test">Adzerk&rsquo;s boot-test</a>. Using it in your <code>build.boot</code> file is as simple as adding a dependency on <code>[adzerk/boot-test "1.0.7" :scope "test"]</code> and then referring in the <code>test</code> task:</p>
-
-<pre><code>(merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
-(require '[adzerk.boot-test :refer [test]])
-</code></pre>
-
-<p>Now you can do <code>boot test</code> and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a>. Add a dependency on <code>[seancorfield/boot-expectations "1.0.5" :scope "test"]</code> and then refer in the <code>expectations</code> task:</p>
-
-<pre><code>(merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
-(require '[seancorfield.boot-expectations :refer [expectation]])
-</code></pre>
-
-<p>Now you can do <code>boot expectations</code> to run any Expectations tests in any of the namespaces in your source paths. Do <code>boot expectations -h</code> to see all the options the task provides.</p>
-
-<p>I relied very heavily on two sources for this project: Adzerk&rsquo;s <code>boot-test</code> for the shape of the code and the <a href="https://clojurians.slack.com/messages/boot/">#boot channel</a> on the <a href="http://clojurians.net">Clojurians Slack</a> where Boot&rsquo;s maintainers hang out and are <em>extremely attentive and helpful</em>! In particular, <a href="https://github.com/micha">Micha Niskin</a> was invaluable, answering all my newbie questions and making suggestions. Boot&rsquo;s &ldquo;pods&rdquo; made it easy to specify the version of Clojure to use when running the tests, without affecting the version of Clojure used for anything else in the build process (we have always run our tests against the released version we are actually using as well as the latest snapshot of Clojure&rsquo;s master branch so we don&rsquo;t get surprised by any changes being introduced in the next release). The &ldquo;pod&rdquo; machinery also made it straightforward to have namespaces required into the testing environment, and shutdown functions run after the tests, again without affecting the main build process. And all in a single JVM process that runs for the duration of the build.</p>
-
-<p>As you can see on Boot&rsquo;s wiki, the ecosystem of <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-maintained Boot tasks</a> is already pretty strong and growing all the time.</p>
-
-<p>Back to our build process and one of the key drivers for looking at Boot in the first place: we&rsquo;d hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to &ldquo;pin&rdquo; versions of certain libraries that we depended on across multiple &ldquo;projects&rdquo;. With Leiningen we&rsquo;d had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn&rsquo;t feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test &ldquo;contexts&rdquo; as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as &ldquo;sub-projects&rdquo; but can treat it as a single project too where that is more convenient.</p>
-
-<p>In the next post, I&rsquo;ll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I&rsquo;ve been working on for a month &ndash; another &ldquo;missing piece of the ecosystem&rdquo; that I wanted to help fill!</p>
 ]]></content>
   </entry>
   

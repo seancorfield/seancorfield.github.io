@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-08-07T15:47:21-07:00</updated>
+  <updated>2019-09-13T11:55:29-07:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How Do You Use clojure.spec]]></title>
+    <link href="http://corfield.org/blog/2019/09/13/using-spec/"/>
+    <updated>2019-09-13T04:00:00-07:00</updated>
+    <id>http://corfield.org/blog/2019/09/13/using-spec</id>
+    <content type="html"><![CDATA[<p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p>
+
+<p>The original question on Quora was:</p>
+
+<blockquote><p>If you use Clojure Spec, how do you use it? Do you tend to put all your specs in one place or distribute them through the &ldquo;modules&rdquo; of your program?</p></blockquote>
+
+<p>Here&rsquo;s what I wrote, back in August 2019:</p>
+
+<p>We&rsquo;ve been using Spec very heavily at work since the first alpha builds appeared. We use Spec in a number of ways: we use it for data validation (production), we use it for test data generation for example tests and for generative testing of functions (as well as generative scenario testing &ndash; more below), we use it at dev time as a checker for function calls (instrumentation) as well as for deriving code from the specs of data structures.</p>
+
+<p><strong>Data validation</strong></p>
+
+<p>We write specs for our API inputs and these specs live in their own namespace, along with the predicates needed for the specs. We <code>s/conform</code> the inputs against the specs and test the result with <code>s/invalid?</code> If the inputs conformed, we process the conformed data, else we use <code>s/explain-data</code> and then a heuristic algorithm to turn the explained failure back into an error code and message for API consumers. Note that we actually do some coercion of string inputs into basic data types via some of these specs &ndash; this is not considered good practice by some people but we&rsquo;ve found it very convenient for this use case.</p>
+
+<p>We make sure nearly all of these API input specs will generate so that we can use them to generate test data for example-based tests (next section) or generative testing of some APIs (this isn&rsquo;t practical for a lot of API endpoints but it can help in a few cases).</p>
+
+<p><strong>Test data generation</strong></p>
+
+<p>As noted above, we use the API input specs &ndash; and other specs &ndash; to generate some test data for example-based tests. We use this approach where we want a certain amount of random &ldquo;good&rdquo; data to throw at functions in general, when we only need to control a couple of the arguments or a couple of fields in those arguments &ndash; the randomly-generated data tends to be fairly &ldquo;edge case&rdquo; so it&rsquo;s a good test of robustness (e.g., strings that include Unicode characters, generated from a regex using Gary Fredericks' test.chuck library).</p>
+
+<p><strong>Generative testing of functions</strong></p>
+
+<p>For some &ldquo;key&rdquo; functions, we&rsquo;ll write specs that include <code>:ret</code> and/or <code>:fn</code> and we&rsquo;ll test these generatively. The specs live in the same namespace as the functions, usually immediately above the function they are for. Some of these generative checks are run as part of our main test suite (so they are run every time). Some are too slow for that and the <code>check</code> calls live in <code>(comment ,,,)</code> to be run manually when we&rsquo;ve been working on the function in question (we use Rich Comment Forms a lot for code that is convenient for our development workflow but does not really constitute test code).</p>
+
+<p><strong>Generative scenario testing</strong></p>
+
+<p>This might be an unusual use of specs but I think it&rsquo;s potentially an important one. If you have an interactive application, you will have a number of paths through it that your users can take to get to certain known states. If you think of the paths as collections of user-generated events then you can write a spec for those (valid) paths through the application and you can then rely on spec to generate events that you can use to drive your application and then verify the end state. These specs live in the tests where they are needed.</p>
+
+<p><strong>Development time checking</strong></p>
+
+<p>This is a pretty basic, standard use of spec. Write specs for data structures and some functions. The latter live with the functions (<code>s/fdef</code> immediately above <code>defn</code>). The former may live with the functions if they are tightly coupled to them or in their own namespace if they are more concerned with data structures used by various namespaces. Then you instrument those functions while you are working in the REPL, doing day-to-day development.</p>
+
+<p>Another use of specs in development/testing is within the tests where we want to verify that results from functions are the expected &ldquo;shape&rdquo; in example-based tests. In this case we write specs for &ldquo;good&rdquo; results and &ldquo;bad&rdquo; results and we use <a href="https://github.com/clojure-expectations/clojure-test">clojure-expectations/clojure-test</a> as an add-on for <code>clojure.test</code> so that we can <code>(expect ::some-spec (a-function call here))</code> &ndash; a more expressive form of <code>clojure.test/is</code>.</p>
+
+<p><strong>Deriving code from specs</strong></p>
+
+<p>In this case we write specs for data structures, such as rows in database tables, and then we generate named CRUD operations and supporting functionality from the specs themselves &ndash; using macros that take specs as input with some control parameters and expand into a number of <code>defn</code> and other forms. The important aspect of this is that the spec is the &ldquo;system of record&rdquo; for the data structure: it can be used for validation, test data generation, and as the source for the keys and &ldquo;types&rdquo; that shape the functions needed to operate on them.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Release! Release! Release!]]></title>
@@ -178,25 +223,6 @@
 
 
 <p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Next.JDBC]]></title>
-    <link href="http://corfield.org/blog/2019/04/21/next-jdbc/"/>
-    <updated>2019-04-21T16:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/04/21/next-jdbc</id>
-    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-alpha8</h1>
-
-<p>I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme</a></p>
-
-<p><em>The next generation of <code>clojure.java.jdbc</code>: a new low-level Clojure wrapper for JDBC-based access to databases.</em>  It&rsquo;s intended to be both faster and simpler than <code>clojure.java.jdbc</code> and it&rsquo;s where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!</p>
-
-<p>At this point, I&rsquo;m looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-
-<p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
 ]]></content>
   </entry>
   
