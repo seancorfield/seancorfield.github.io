@@ -69,4 +69,4 @@ See the [change log](https://github.com/seancorfield/next-jdbc/blob/master/CHANG
 
 ## seancorfield/dot-clojure
 
-If you getting started with the [Clojure CLI and `deps.edn`](https://clojure.org/guides/deps_and_cli) then you might want to check out my [.clojure/deps.edn file](https://github.com/seancorfield/dot-clojure) which contains a lot of useful aliases and hints & tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests -- against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!
+If you are getting started with the [Clojure CLI and `deps.edn`](https://clojure.org/guides/deps_and_cli) then you might want to check out my [.clojure/deps.edn file](https://github.com/seancorfield/dot-clojure) which contains a lot of useful aliases and hints & tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests -- against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!
