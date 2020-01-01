@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
   <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-09-13T11:55:29-07:00</updated>
+  <updated>2019-12-31T20:49:45-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Happy New Releases!]]></title>
+    <link href="http://corfield.org/blog/2019/12/31/releases/"/>
+    <updated>2019-12-31T15:59:59-08:00</updated>
+    <id>http://corfield.org/blog/2019/12/31/releases</id>
+    <content type="html"><![CDATA[<h1>Wrapping Up 2019</h1>
+
+<p>It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to provide an update!</p>
+
+<h2>jkk/honeysql 0.9.8</h2>
+
+<p>Lots of bug fixes, some enhancements (<code>composite</code>, <code>truncate</code>), and some documentation enhancements.</p>
+
+<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
+
+<h2>org.clojure/core.cache 0.8.2</h2>
+
+<p>Add <code>clojure.core.cache.wrapped</code> to make using the library easier!</p>
+
+<p>See the <a href="https://github.com/clojure/core.cache/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/core.memoize 0.8.2</h2>
+
+<p>Bug fixes and a new <code>memoizer</code> function that makes it easier to define custom function caches.</p>
+
+<p>See the <a href="https://github.com/clojure/core.memoize/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/java.data 0.1.5</h2>
+
+<p>Yup, I took over maintenance of this in October!</p>
+
+<p><code>set-properties</code> to set arbitrary properties post-construction, constructor argument support, numerous bug fixes and reflection warnings addressed.</p>
+
+<p>See the <a href="https://github.com/clojure/java.data/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/java.jdbc 0.7.11</h2>
+
+<p>This library is officially &ldquo;stable&rdquo; and no longer being actively maintained beyond critical bug fixes &ndash; please consider migrating to <code>seancorfield/next.jdbc</code> (see below).</p>
+
+<p>That said, this got the same transaction rollback exception edge case fix and Turkish locale fix that <code>next.jdbc</code> already had.</p>
+
+<p>See the <a href="https://github.com/clojure/java.jdbc/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>seancorfield/clj-new 0.8.2</h2>
+
+<p>AOT compilation in <code>app</code> uberjar, <code>pom.xml</code> generation, <code>:uberjar</code> in <code>app</code> and <code>:jar</code> in <code>lib</code> and <code>template</code> projects, <code>-?</code> / <code>--query</code> option to explain what <code>clj-new</code> will attempt to do, <code>-e</code> / <code>--env</code> option to define &ldquo;environment&rdquo; variables that set substitution values in project templates, dependency updates, documentation improvements.</p>
+
+<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+
+<h2>seancorfield/depstar 0.4.2</h2>
+
+<p>Support for Multi-Release JARs, AOT compilation for uberjars (with <code>pom.xml</code>), JDK 11 support, better handling of unknown file types.</p>
+
+<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
+
+<h2>seancorfield/next.jdbc 1.0.13</h2>
+
+<p><code>next.jdbc.prepare/statement</code> and support for <code>java.sql.Statement</code>, arbitrary <code>Connection</code> and <code>Statement</code> property support, fix transaction rollback exception edge case (thank you Jepsen!), expose SQL builders, now tested against MS SQL Server and MySQL (formally), provide additional date/time/timestamp conversion support, CLOB support, <code>:jdbcUrl</code> support, HugSQL quick start guide, result set builder adapters, expanded Tips &amp; Tricks, lots of documentation enhancements!</p>
+
+<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+
+<h2>seancorfield/dot-clojure</h2>
+
+<p>If you getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests &ndash; against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How Do You Use clojure.spec]]></title>
@@ -191,34 +258,6 @@
 <li>Fix #22 by adding <code>next.jdbc.optional</code> with six map builders that omit <code>NULL</code> columns from the row hash maps.</li>
 <li>Documentation improvements (#27, #28, and #29), including changing &ldquo;connectable&rdquo; to &ldquo;transactable&rdquo; for the <code>transact</code> function and the <code>with-transaction</code> macro (for consistency with the name of the underlying protocol).</li>
 <li>Fix #30 by adding <code>modified</code> variants of column name functions and builders. The <code>lower</code> variants have been rewritten in terms of these new <code>modified</code> variants. This adds <code>:label-fn</code> and <code>:qualifier-fn</code> options that mirror <code>:column-fn</code> and <code>:table-fn</code> for row builders.</li>
-</ul>
-
-
-<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
-    <link href="http://corfield.org/blog/2019/05/25/next-jdbc/"/>
-    <updated>2019-05-25T08:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/05/25/next-jdbc</id>
-    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-beta1</h1>
-
-<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. Beta 1 is now available to test &ndash; only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme</a></p>
-
-<p>The group and artifact ID will remain <code>seancorfield/next.jdbc</code>, the namespace structure will remain <code>next.jdbc.*</code>. With auto-generated documentation hosted on cljdoc.org and Continuous Integration testing hosted on circleci.com, I have decided to continue work on <code>next.jdbc</code> outside Clojure Contrib, rather than merge it into <code>clojure.java.jdbc</code> as new namespaces there. I have updated the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CONTRIBUTING.md">Contributing page on GitHub</a> to reflect that Pull Requests can now be submitted.</p>
-
-<h2>Changes since Alpha 13</h2>
-
-<ul>
-<li>Set up CircleCI testing (just local DBs for now).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/21">#21</a> by adding <code>next.jdbc.specs</code> and documenting basic usage.</li>
-<li>Fix <a href="https://github.com/seancorfield/next-jdbc/issues/19">#19</a> by caching loaded database driver classes.</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/16">#16</a> by renaming <code>reducible!</code> to <code>plan</code> (this is a <strong>BREAKING CHANGE!</strong> from Alpha 13 &ndash; the naming of this function was the blocker for moving from Alpha to Beta).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/3">#3</a> by deciding to maintain this library outside Clojure Contrib.</li>
 </ul>
 
 

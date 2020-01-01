@@ -9,7 +9,7 @@
   <meta name="author" content="Sean Corfield">
 
   
-  <meta name="description" content="An interesting Clojure question came up on Quora recently and I decided that my answer to &ldquo;how do you use clojure.spec&rdquo; there should &hellip;">
+  <meta name="description" content="Wrapping Up 2019 It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-12-31T15:59:59-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2019</span></span> <span class='time'>3:59 pm</span></time>
+        
+           | <a href="/blog/2019/12/31/releases/#disqus_thread"
+             data-disqus-identifier="http://corfield.org/blog/2019/12/31/releases/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Wrapping Up 2019</h1>
+
+<p>It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to provide an update!</p>
+
+<h2>jkk/honeysql 0.9.8</h2>
+
+<p>Lots of bug fixes, some enhancements (<code>composite</code>, <code>truncate</code>), and some documentation enhancements.</p>
+
+<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
+
+<h2>org.clojure/core.cache 0.8.2</h2>
+
+<p>Add <code>clojure.core.cache.wrapped</code> to make using the library easier!</p>
+
+<p>See the <a href="https://github.com/clojure/core.cache/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/core.memoize 0.8.2</h2>
+
+<p>Bug fixes and a new <code>memoizer</code> function that makes it easier to define custom function caches.</p>
+
+<p>See the <a href="https://github.com/clojure/core.memoize/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/java.data 0.1.5</h2>
+
+<p>Yup, I took over maintenance of this in October!</p>
+
+<p><code>set-properties</code> to set arbitrary properties post-construction, constructor argument support, numerous bug fixes and reflection warnings addressed.</p>
+
+<p>See the <a href="https://github.com/clojure/java.data/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>org.clojure/java.jdbc 0.7.11</h2>
+
+<p>This library is officially &ldquo;stable&rdquo; and no longer being actively maintained beyond critical bug fixes &ndash; please consider migrating to <code>seancorfield/next.jdbc</code> (see below).</p>
+
+<p>That said, this got the same transaction rollback exception edge case fix and Turkish locale fix that <code>next.jdbc</code> already had.</p>
+
+<p>See the <a href="https://github.com/clojure/java.jdbc/blob/master/README.md#change-log">change log</a> for more details.</p>
+
+<h2>seancorfield/clj-new 0.8.2</h2>
+
+<p>AOT compilation in <code>app</code> uberjar, <code>pom.xml</code> generation, <code>:uberjar</code> in <code>app</code> and <code>:jar</code> in <code>lib</code> and <code>template</code> projects, <code>-?</code> / <code>--query</code> option to explain what <code>clj-new</code> will attempt to do, <code>-e</code> / <code>--env</code> option to define &ldquo;environment&rdquo; variables that set substitution values in project templates, dependency updates, documentation improvements.</p>
+
+<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+
+<h2>seancorfield/depstar 0.4.2</h2>
+
+<p>Support for Multi-Release JARs, AOT compilation for uberjars (with <code>pom.xml</code>), JDK 11 support, better handling of unknown file types.</p>
+
+<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
+
+<h2>seancorfield/next.jdbc 1.0.13</h2>
+
+<p><code>next.jdbc.prepare/statement</code> and support for <code>java.sql.Statement</code>, arbitrary <code>Connection</code> and <code>Statement</code> property support, fix transaction rollback exception edge case (thank you Jepsen!), expose SQL builders, now tested against MS SQL Server and MySQL (formally), provide additional date/time/timestamp conversion support, CLOB support, <code>:jdbcUrl</code> support, HugSQL quick start guide, result set builder adapters, expanded Tips &amp; Tricks, lots of documentation enhancements!</p>
+
+<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
+
+<h2>seancorfield/dot-clojure</h2>
+
+<p>If you getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests &ndash; against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -470,43 +560,6 @@ heresy, but I&rsquo;d never been happy with Emacs</div>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/12/06/null-nilable-optionality/">SQL NULL, S/nilable, and Optionality</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-12-06T03:30:00-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>3:30 am</span></time>
-        
-           | <a href="/blog/2018/12/06/null-nilable-optionality/#disqus_thread"
-             data-disqus-identifier="http://corfield.org/blog/2018/12/06/null-nilable-optionality/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
-called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
-on optionality and how we represent the absence of a value.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2018/12/06/null-nilable-optionality/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2">&larr; Older</a>
@@ -526,6 +579,10 @@ on optionality and how we represent the absence of a value.</div>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a>
       </li>
     
@@ -539,10 +596,6 @@ on optionality and how we represent the absence of a value.</div>
     
       <li class="post">
         <a href="/blog/2019/06/04/next-jdbc/">Next.JDBC Release Candidate 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/05/25/next-jdbc/">Next.JDBC Beta 1</a>
       </li>
     
   </ul>
