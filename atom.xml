@@ -4,7 +4,7 @@
   <title><![CDATA[An Architect's View]]></title>
   <link href="http://corfield.org/atom.xml" rel="self"/>
   <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:07:23-08:00</updated>
+  <updated>2019-12-31T21:44:50-08:00</updated>
   <id>http://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -82,7 +82,7 @@
 
 <h2>seancorfield/dot-clojure</h2>
 
-<p>If you getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests &ndash; against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
+<p>If you are getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests &ndash; against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
 ]]></content>
   </entry>
   
