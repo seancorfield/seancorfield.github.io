@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://corfield.org
+url: https://corfield.org
 title: An Architect's View
 subtitle: Clojure, Software Design, Frameworks and more...
 author: Sean Corfield
