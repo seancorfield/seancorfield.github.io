@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[An Architect's View]]></title>
-  <link href="http://corfield.org/atom.xml" rel="self"/>
-  <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:44:50-08:00</updated>
-  <id>http://corfield.org/</id>
+  <link href="https://corfield.org/atom.xml" rel="self"/>
+  <link href="https://corfield.org/"/>
+  <updated>2020-04-06T13:16:55-07:00</updated>
+  <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Happy New Releases!]]></title>
-    <link href="http://corfield.org/blog/2019/12/31/releases/"/>
+    <link href="https://corfield.org/blog/2019/12/31/releases/"/>
     <updated>2019-12-31T15:59:59-08:00</updated>
-    <id>http://corfield.org/blog/2019/12/31/releases</id>
+    <id>https://corfield.org/blog/2019/12/31/releases</id>
     <content type="html"><![CDATA[<h1>Wrapping Up 2019</h1>
 
 <p>It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to provide an update!</p>
@@ -88,9 +88,9 @@
   
   <entry>
     <title type="html"><![CDATA[How Do You Use clojure.spec]]></title>
-    <link href="http://corfield.org/blog/2019/09/13/using-spec/"/>
+    <link href="https://corfield.org/blog/2019/09/13/using-spec/"/>
     <updated>2019-09-13T04:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/09/13/using-spec</id>
+    <id>https://corfield.org/blog/2019/09/13/using-spec</id>
     <content type="html"><![CDATA[<p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p>
 
 <p>The original question on Quora was:</p>
@@ -133,9 +133,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release! Release! Release!]]></title>
-    <link href="http://corfield.org/blog/2019/08/07/releases/"/>
+    <link href="https://corfield.org/blog/2019/08/07/releases/"/>
     <updated>2019-08-07T08:30:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/08/07/releases</id>
+    <id>https://corfield.org/blog/2019/08/07/releases</id>
     <content type="html"><![CDATA[<h1>Lots of Releases</h1>
 
 <p>Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
@@ -174,9 +174,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC to 1.0.0 and Beyond!]]></title>
-    <link href="http://corfield.org/blog/2019/07/04/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/07/04/next-jdbc/"/>
     <updated>2019-07-04T03:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/07/04/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/07/04/next-jdbc</id>
     <content type="html"><![CDATA[<h1>next.jdbc 1.0.0 and 1.0.1</h1>
 
 <p>First off, <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0">seancorfield/next.jdbc 1.0.0</a> was released on June 13th, 2019 (and I <a href="https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379">announced it on ClojureVerse</a> but did not blog about it), and yesterday I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1">seancorfield/next.jdbc 1.0.1</a> which is mostly documentation improvements.</p>
@@ -246,9 +246,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC Release Candidate 1]]></title>
-    <link href="http://corfield.org/blog/2019/06/04/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/06/04/next-jdbc/"/>
     <updated>2019-06-04T11:30:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/06/04/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/06/04/next-jdbc</id>
     <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-rc1</h1>
 
 <p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test &ndash; containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
@@ -273,9 +273,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
-    <link href="http://corfield.org/blog/2019/05/25/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/05/25/next-jdbc/"/>
     <updated>2019-05-25T08:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/05/25/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/05/25/next-jdbc</id>
     <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-beta1</h1>
 
 <p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. Beta 1 is now available to test &ndash; only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
@@ -301,9 +301,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC]]></title>
-    <link href="http://corfield.org/blog/2019/04/21/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/04/21/next-jdbc/"/>
     <updated>2019-04-21T16:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/04/21/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/04/21/next-jdbc</id>
     <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-alpha8</h1>
 
 <p>I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
@@ -320,9 +320,9 @@
   
   <entry>
     <title type="html"><![CDATA[Clojurians Slack Alternatives]]></title>
-    <link href="http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/"/>
+    <link href="https://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/"/>
     <updated>2019-02-11T04:10:00-08:00</updated>
-    <id>http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives</id>
+    <id>https://corfield.org/blog/2019/02/11/clojurians-slack-alternatives</id>
     <content type="html"><![CDATA[<p>Daniel Compton has continued his excellent trend of
 <a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
 and one of the comments in his <strong>Community</strong> section stood out for me:</p>
@@ -396,9 +396,9 @@ that I always have open at this point!</p>
   
   <entry>
     <title type="html"><![CDATA[Atom, Chlorine, and Windows]]></title>
-    <link href="http://corfield.org/blog/2019/01/22/atom-chlorine-windows/"/>
+    <link href="https://corfield.org/blog/2019/01/22/atom-chlorine-windows/"/>
     <updated>2019-01-22T12:15:00-08:00</updated>
-    <id>http://corfield.org/blog/2019/01/22/atom-chlorine-windows</id>
+    <id>https://corfield.org/blog/2019/01/22/atom-chlorine-windows</id>
     <content type="html"><![CDATA[<p>About a month ago, I was <a href="http://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
 Atom</a> and I&rsquo;ve been using
 it, day-in, day-out, for all my Clojure development. On a Mac, that&rsquo;s
@@ -434,9 +434,9 @@ maps the file path appropriately.</p>
   
   <entry>
     <title type="html"><![CDATA[Chlorine: Clojure Integration for Atom]]></title>
-    <link href="http://corfield.org/blog/2018/12/19/atom-chlorine/"/>
+    <link href="https://corfield.org/blog/2018/12/19/atom-chlorine/"/>
     <updated>2018-12-19T22:45:00-08:00</updated>
-    <id>http://corfield.org/blog/2018/12/19/atom-chlorine</id>
+    <id>https://corfield.org/blog/2018/12/19/atom-chlorine</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve been using the <a href="https://atom.io">Atom</a> editor for about two years now.
 I switched from Emacs after Clojure/conj 2016, having seen
 <a href="https://youtu.be/buPPGxOnBnk">Jason Gilman&rsquo;s talk about ProtoREPL</a> [video].
@@ -516,9 +516,9 @@ tooling (which, yes, has needed a lot of love over the years!).</p>
   
   <entry>
     <title type="html"><![CDATA[SQL NULL, S/nilable, and Optionality]]></title>
-    <link href="http://corfield.org/blog/2018/12/06/null-nilable-optionality/"/>
+    <link href="https://corfield.org/blog/2018/12/06/null-nilable-optionality/"/>
     <updated>2018-12-06T03:30:00-08:00</updated>
-    <id>http://corfield.org/blog/2018/12/06/null-nilable-optionality</id>
+    <id>https://corfield.org/blog/2018/12/06/null-nilable-optionality</id>
     <content type="html"><![CDATA[<p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
 called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
 on optionality and how we represent the absence of a value.<!-- more --></p>
@@ -569,9 +569,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Clojure 1.10's Datafy and Nav]]></title>
-    <link href="http://corfield.org/blog/2018/12/03/datafy-nav/"/>
+    <link href="https://corfield.org/blog/2018/12/03/datafy-nav/"/>
     <updated>2018-12-03T09:20:00-08:00</updated>
-    <id>http://corfield.org/blog/2018/12/03/datafy-nav</id>
+    <id>https://corfield.org/blog/2018/12/03/datafy-nav</id>
     <content type="html"><![CDATA[<p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as &ldquo;generalized laziness&rdquo;: <code>datafy</code> produces a &ldquo;data representation&rdquo; of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p>
 
 <p>The <a href="http://rebl.cognitect.com/">REBL</a> &ldquo;is a graphical, interactive tool for browsing Clojure data&rdquo;. And in Clojure we&rsquo;re used to the concept of &ldquo;it&rsquo;s just data&rdquo; so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu&rsquo;s claim of &ldquo;generalized laziness&rdquo; is well made but a little hard to grok until you actually build something with the new protocols and functions.</p>
@@ -614,9 +614,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Excited About Clojure/conj]]></title>
-    <link href="http://corfield.org/blog/2018/10/25/clojure-conj/"/>
+    <link href="https://corfield.org/blog/2018/10/25/clojure-conj/"/>
     <updated>2018-10-25T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2018/10/25/clojure-conj</id>
+    <id>https://corfield.org/blog/2018/10/25/clojure-conj</id>
     <content type="html"><![CDATA[<p>It has been a crazy busy year, both at work and personally, and it&rsquo;s hard for me to believe my last blog post was in April!</p>
 
 <p><a href="https://2018.clojure-conj.org/">Clojure/conj</a> is coming up fast and the schedule was posted today, which has made me even more excited about it. Here&rsquo;s a run down of the sessions I plan to attend &ndash; I&rsquo;ll write up my thoughts on everything shortly after the conference.</p>
@@ -652,9 +652,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[All the Paths]]></title>
-    <link href="http://corfield.org/blog/2018/04/18/all-the-paths/"/>
+    <link href="https://corfield.org/blog/2018/04/18/all-the-paths/"/>
     <updated>2018-04-18T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2018/04/18/all-the-paths</id>
+    <id>https://corfield.org/blog/2018/04/18/all-the-paths</id>
     <content type="html"><![CDATA[<p>With the recent arrival of <a href="https://clojure.org/guides/deps_and_cli"><code>clj</code> and <code>tools.deps.alpha</code></a> as a &ldquo;standard&rdquo; lightweight way to run Clojure programs and the seed for tooling based on <code>deps.edn</code> dependency files, it&rsquo;s time to take a look at the terminology used across Clojure&rsquo;s various tools.<!-- more --></p>
 
 <h2>Running Java/JVM Programs</h2>
@@ -736,9 +736,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Boot Localrepo?]]></title>
-    <link href="http://corfield.org/blog/2017/11/17/boot-localrepo/"/>
+    <link href="https://corfield.org/blog/2017/11/17/boot-localrepo/"/>
     <updated>2017-11-17T04:50:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/11/17/boot-localrepo</id>
+    <id>https://corfield.org/blog/2017/11/17/boot-localrepo</id>
     <content type="html"><![CDATA[<p>Sometimes you just can&rsquo;t help having a &ldquo;random 3rd part JAR file&rdquo; in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven&rsquo;t gotten around to running your own shared repository.</p>
 
 <p>If you&rsquo;re using Leiningen, you&rsquo;ll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you &ldquo;install&rdquo; your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
@@ -883,9 +883,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Release 0.7.0 of clojure.java.jdbc]]></title>
-    <link href="http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/"/>
+    <link href="https://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/"/>
     <updated>2017-07-17T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0</id>
+    <id>https://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0</id>
     <content type="html"><![CDATA[<p>The stable 0.7.0 release of <code>java.jdbc</code> &ndash; the <a href="https://github.com/clojure/java.jdbc">Clojure Contrib JDBC library</a> &ndash; has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!</p>
 
 <p>While you <em>could</em> read the <a href="https://github.com/clojure/java.jdbc/blob/master/CHANGES.md"><code>java.jdbc</code> Change Log</a> to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more --></p>
@@ -962,9 +962,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
-    <link href="http://corfield.org/blog/2017/01/19/boot-new-moved/"/>
+    <link href="https://corfield.org/blog/2017/01/19/boot-new-moved/"/>
     <updated>2017-01-19T12:40:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/01/19/boot-new-moved</id>
+    <id>https://corfield.org/blog/2017/01/19/boot-new-moved</id>
     <content type="html"><![CDATA[<p>I&rsquo;m pleased to announce that the &ldquo;Boot new&rdquo; task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p>
 
 <p>You can use this to easily create a new Boot-based project:</p>
@@ -976,9 +976,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Clojure, New Relic, and Slow Application Startup]]></title>
-    <link href="http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
+    <link href="https://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/"/>
     <updated>2016-07-29T13:20:00-07:00</updated>
-    <id>http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup</id>
+    <id>https://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup</id>
     <content type="html"><![CDATA[<p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we&rsquo;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p>
 
 <p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 &ndash; an order of magnitude slower!<!-- more --></p>
@@ -1001,9 +1001,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[Start Your Engine]]></title>
-    <link href="http://corfield.org/blog/2016/07/18/start-your-engine/"/>
+    <link href="https://corfield.org/blog/2016/07/18/start-your-engine/"/>
     <updated>2016-07-18T04:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2016/07/18/start-your-engine</id>
+    <id>https://corfield.org/blog/2016/07/18/start-your-engine</id>
     <content type="html"><![CDATA[<p>Today I&rsquo;m inspired by the <a href="http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=56d35f53c5">latest issue of Eric Normand&rsquo;s Clojure Gazette</a> which talks about why his &ldquo;Joy of Programming&rdquo; comes from learning and exploration.</p>
 
 <p>I got into programming as a child because I was curious about solving puzzles and problems: given the (relatively) limited vocabulary of a programming language and its input and output features, and some interesting problem that came to mind, can I solve it in a usable (and hopefully elegant) way?</p>
@@ -1028,9 +1028,9 @@ feedback on what should stay, what should change, and what should go. Stay tuned
   
   <entry>
     <title type="html"><![CDATA[More Boot]]></title>
-    <link href="http://corfield.org/blog/2016/06/17/more-boot/"/>
+    <link href="https://corfield.org/blog/2016/06/17/more-boot/"/>
     <updated>2016-06-17T13:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2016/06/17/more-boot</id>
+    <id>https://corfield.org/blog/2016/06/17/more-boot</id>
     <content type="html"><![CDATA[<p>Back in February I talked about <a href="http://corfield.org/blog/2016/02/02/boot-new/">boot-new</a> and talked about a &ldquo;future 1.0.0 release&rdquo;. We&rsquo;re not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we&rsquo;ve continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot&rsquo;s reach soon. In this post, I want to cover some of the things we&rsquo;ve been doing with Boot recently.<!-- more --></p>
 
 <p>I feel I should start with an apology for the &ldquo;radio silence&rdquo; since February &ndash; it&rsquo;s a combination of work being extremely engaging (and busy!) and some aspects of my personal life going somewhat to hell in a handbasket&hellip; But things have improved lately (thankfully!) and I hope to be more regular in my blogging (I certainly have a decent queue of article ideas in my head!).</p>

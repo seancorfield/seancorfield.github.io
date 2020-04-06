@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Boot | An Architect's View]]></title>
-  <link href="http://corfield.org/blog/categories/boot/atom.xml" rel="self"/>
-  <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:44:50-08:00</updated>
-  <id>http://corfield.org/</id>
+  <link href="https://corfield.org/blog/categories/boot/atom.xml" rel="self"/>
+  <link href="https://corfield.org/"/>
+  <updated>2020-04-06T13:16:55-07:00</updated>
+  <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[All the Paths]]></title>
-    <link href="http://corfield.org/blog/2018/04/18/all-the-paths/"/>
+    <link href="https://corfield.org/blog/2018/04/18/all-the-paths/"/>
     <updated>2018-04-18T03:40:00-07:00</updated>
-    <id>http://corfield.org/blog/2018/04/18/all-the-paths</id>
+    <id>https://corfield.org/blog/2018/04/18/all-the-paths</id>
     <content type="html"><![CDATA[<p>With the recent arrival of <a href="https://clojure.org/guides/deps_and_cli"><code>clj</code> and <code>tools.deps.alpha</code></a> as a &ldquo;standard&rdquo; lightweight way to run Clojure programs and the seed for tooling based on <code>deps.edn</code> dependency files, it&rsquo;s time to take a look at the terminology used across Clojure&rsquo;s various tools.<!-- more --></p>
 
 <h2>Running Java/JVM Programs</h2>
@@ -99,9 +99,9 @@
   
   <entry>
     <title type="html"><![CDATA[Boot Localrepo?]]></title>
-    <link href="http://corfield.org/blog/2017/11/17/boot-localrepo/"/>
+    <link href="https://corfield.org/blog/2017/11/17/boot-localrepo/"/>
     <updated>2017-11-17T04:50:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/11/17/boot-localrepo</id>
+    <id>https://corfield.org/blog/2017/11/17/boot-localrepo</id>
     <content type="html"><![CDATA[<p>Sometimes you just can&rsquo;t help having a &ldquo;random 3rd part JAR file&rdquo; in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven&rsquo;t gotten around to running your own shared repository.</p>
 
 <p>If you&rsquo;re using Leiningen, you&rsquo;ll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you &ldquo;install&rdquo; your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
@@ -197,9 +197,9 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
   
   <entry>
     <title type="html"><![CDATA[Seancorfield/boot-new Has Moved to Boot/new]]></title>
-    <link href="http://corfield.org/blog/2017/01/19/boot-new-moved/"/>
+    <link href="https://corfield.org/blog/2017/01/19/boot-new-moved/"/>
     <updated>2017-01-19T12:40:00-08:00</updated>
-    <id>http://corfield.org/blog/2017/01/19/boot-new-moved</id>
+    <id>https://corfield.org/blog/2017/01/19/boot-new-moved</id>
     <content type="html"><![CDATA[<p>I&rsquo;m pleased to announce that the &ldquo;Boot new&rdquo; task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p>
 
 <p>You can use this to easily create a new Boot-based project:</p>
@@ -211,9 +211,9 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
   
   <entry>
     <title type="html"><![CDATA[More Boot]]></title>
-    <link href="http://corfield.org/blog/2016/06/17/more-boot/"/>
+    <link href="https://corfield.org/blog/2016/06/17/more-boot/"/>
     <updated>2016-06-17T13:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2016/06/17/more-boot</id>
+    <id>https://corfield.org/blog/2016/06/17/more-boot</id>
     <content type="html"><![CDATA[<p>Back in February I talked about <a href="http://corfield.org/blog/2016/02/02/boot-new/">boot-new</a> and talked about a &ldquo;future 1.0.0 release&rdquo;. We&rsquo;re not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we&rsquo;ve continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot&rsquo;s reach soon. In this post, I want to cover some of the things we&rsquo;ve been doing with Boot recently.<!-- more --></p>
 
 <p>I feel I should start with an apology for the &ldquo;radio silence&rdquo; since February &ndash; it&rsquo;s a combination of work being extremely engaging (and busy!) and some aspects of my personal life going somewhat to hell in a handbasket&hellip; But things have improved lately (thankfully!) and I hope to be more regular in my blogging (I certainly have a decent queue of article ideas in my head!).</p>
@@ -295,9 +295,9 @@ _remote.repositories    bar-1.0.1.jar       bar-1.0.1.pom
   
   <entry>
     <title type="html"><![CDATA[Boot-new]]></title>
-    <link href="http://corfield.org/blog/2016/02/02/boot-new/"/>
+    <link href="https://corfield.org/blog/2016/02/02/boot-new/"/>
     <updated>2016-02-02T09:00:00-08:00</updated>
-    <id>http://corfield.org/blog/2016/02/02/boot-new</id>
+    <id>https://corfield.org/blog/2016/02/02/boot-new</id>
     <content type="html"><![CDATA[<p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> &ndash; <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://corfield.org/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> &ndash; I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p>
 
 <p>Leiningen has long-supported the generation of new projects from templates and it&rsquo;s pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>

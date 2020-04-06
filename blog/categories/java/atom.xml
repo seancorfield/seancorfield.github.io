@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Java | An Architect's View]]></title>
-  <link href="http://corfield.org/blog/categories/java/atom.xml" rel="self"/>
-  <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:44:50-08:00</updated>
-  <id>http://corfield.org/</id>
+  <link href="https://corfield.org/blog/categories/java/atom.xml" rel="self"/>
+  <link href="https://corfield.org/"/>
+  <updated>2020-04-06T13:16:55-07:00</updated>
+  <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Some Thoughts on Java 8]]></title>
-    <link href="http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/"/>
+    <link href="https://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/"/>
     <updated>2014-06-20T17:58:34-07:00</updated>
-    <id>http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8</id>
+    <id>https://corfield.org/blog/2014/06/20/some-thoughts-on-java-8</id>
     <content type="html"><![CDATA[<p><em>Originally posted on <a href="https://plus.google.com/u/0/+SeanCorfield_A/posts/dTiYLDXV5AV">Google Plus</a> on June 14th, 2014.</em></p>
 
 <p><strong>Why Java 8 might win me back&hellip;</strong></p>

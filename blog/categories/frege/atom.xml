@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Frege | An Architect's View]]></title>
-  <link href="http://corfield.org/blog/categories/frege/atom.xml" rel="self"/>
-  <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:44:50-08:00</updated>
-  <id>http://corfield.org/</id>
+  <link href="https://corfield.org/blog/categories/frege/atom.xml" rel="self"/>
+  <link href="https://corfield.org/"/>
+  <updated>2020-04-06T13:16:55-07:00</updated>
+  <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Where Did 2015 Go?]]></title>
-    <link href="http://corfield.org/blog/2016/01/03/where-did-2015-go/"/>
+    <link href="https://corfield.org/blog/2016/01/03/where-did-2015-go/"/>
     <updated>2016-01-03T08:00:00-08:00</updated>
-    <id>http://corfield.org/blog/2016/01/03/where-did-2015-go</id>
+    <id>https://corfield.org/blog/2016/01/03/where-did-2015-go</id>
     <content type="html"><![CDATA[<p>I did not intend to stop blogging in 2015 but that&rsquo;s certainly what it looks like here!</p>
 
 <p>So what kept me so busy that I didn&rsquo;t get around to blogging anything?<!-- more --></p>
@@ -64,9 +64,9 @@
   
   <entry>
     <title type="html"><![CDATA[Frege (and Clojure)]]></title>
-    <link href="http://corfield.org/blog/2015/02/13/frege-and-clojure/"/>
+    <link href="https://corfield.org/blog/2015/02/13/frege-and-clojure/"/>
     <updated>2015-02-13T03:32:18-07:00</updated>
-    <id>http://corfield.org/blog/2015/02/13/frege-and-clojure</id>
+    <id>https://corfield.org/blog/2015/02/13/frege-and-clojure</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve often said that I try to follow <a href="https://pragprog.com/the-pragmatic-programmer">The Pragmatic Programmer&rsquo;s</a> advice to learn a new language every year. I don&rsquo;t always achieve it, but I try. As I&rsquo;ve settled into Clojure as my primary language over the last several years, I&rsquo;ve made a fair attempt to learn Python, Ruby, Racket/Scheme, Standard ML and more recently <a href="http://elm-lang.org">Elm</a>. I learned that I like Python, I don&rsquo;t like Ruby, Racket/Scheme is &ldquo;just another Lisp&rdquo; (I already have Clojure) and SML is very interesting but not really widely useful these days (it&rsquo;s a great language for learning Functional Programming concepts tho'!). I also spent some time with Go last year (don&rsquo;t like it).</p>
 
 <p>The Elm language is really nice - and useful for building interactive browser-based applications (and games). I&rsquo;ve been meaning to blog about it for quite a while, and I hope to get around to that in due course. Elm is sort of inspired by Haskell, and that&rsquo;s really what this blog post is about. Sort of.<!-- more --></p>

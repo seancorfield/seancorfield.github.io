@@ -1,264 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://corfield.org/blog/2019/12/31/releases/</loc>
+    <loc>https://corfield.org/blog/2019/12/31/releases/</loc>
     <lastmod>2019-12-31T15:59:59-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/09/13/using-spec/</loc>
+    <loc>https://corfield.org/blog/2019/09/13/using-spec/</loc>
     <lastmod>2019-09-13T04:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/08/07/releases/</loc>
+    <loc>https://corfield.org/blog/2019/08/07/releases/</loc>
     <lastmod>2019-08-07T08:30:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/07/04/next-jdbc/</loc>
+    <loc>https://corfield.org/blog/2019/07/04/next-jdbc/</loc>
     <lastmod>2019-07-04T03:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/06/04/next-jdbc/</loc>
+    <loc>https://corfield.org/blog/2019/06/04/next-jdbc/</loc>
     <lastmod>2019-06-04T11:30:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/05/25/next-jdbc/</loc>
+    <loc>https://corfield.org/blog/2019/05/25/next-jdbc/</loc>
     <lastmod>2019-05-25T08:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/04/21/next-jdbc/</loc>
+    <loc>https://corfield.org/blog/2019/04/21/next-jdbc/</loc>
     <lastmod>2019-04-21T16:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/</loc>
+    <loc>https://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/</loc>
     <lastmod>2019-02-11T04:10:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2019/01/22/atom-chlorine-windows/</loc>
+    <loc>https://corfield.org/blog/2019/01/22/atom-chlorine-windows/</loc>
     <lastmod>2019-01-22T12:15:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2018/12/19/atom-chlorine/</loc>
+    <loc>https://corfield.org/blog/2018/12/19/atom-chlorine/</loc>
     <lastmod>2018-12-19T22:45:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2018/12/06/null-nilable-optionality/</loc>
+    <loc>https://corfield.org/blog/2018/12/06/null-nilable-optionality/</loc>
     <lastmod>2018-12-06T03:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2018/12/03/datafy-nav/</loc>
+    <loc>https://corfield.org/blog/2018/12/03/datafy-nav/</loc>
     <lastmod>2018-12-03T09:20:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2018/10/25/clojure-conj/</loc>
+    <loc>https://corfield.org/blog/2018/10/25/clojure-conj/</loc>
     <lastmod>2018-10-25T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2018/04/18/all-the-paths/</loc>
+    <loc>https://corfield.org/blog/2018/04/18/all-the-paths/</loc>
     <lastmod>2018-04-18T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2017/11/17/boot-localrepo/</loc>
+    <loc>https://corfield.org/blog/2017/11/17/boot-localrepo/</loc>
     <lastmod>2017-11-17T04:50:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/</loc>
+    <loc>https://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/</loc>
     <lastmod>2017-07-17T03:40:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2017/01/19/boot-new-moved/</loc>
+    <loc>https://corfield.org/blog/2017/01/19/boot-new-moved/</loc>
     <lastmod>2017-01-19T12:40:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/</loc>
+    <loc>https://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/</loc>
     <lastmod>2016-07-29T13:20:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/07/18/start-your-engine/</loc>
+    <loc>https://corfield.org/blog/2016/07/18/start-your-engine/</loc>
     <lastmod>2016-07-18T04:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/06/17/more-boot/</loc>
+    <loc>https://corfield.org/blog/2016/06/17/more-boot/</loc>
     <lastmod>2016-06-17T13:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/02/02/boot-new/</loc>
+    <loc>https://corfield.org/blog/2016/02/02/boot-new/</loc>
     <lastmod>2016-02-02T09:00:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/01/31/testing-with-boot/</loc>
+    <loc>https://corfield.org/blog/2016/01/31/testing-with-boot/</loc>
     <lastmod>2016-01-31T07:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/01/30/building-on-boot/</loc>
+    <loc>https://corfield.org/blog/2016/01/30/building-on-boot/</loc>
     <lastmod>2016-01-30T12:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/01/29/rebooting-clojure/</loc>
+    <loc>https://corfield.org/blog/2016/01/29/rebooting-clojure/</loc>
     <lastmod>2016-01-29T14:30:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2016/01/03/where-did-2015-go/</loc>
+    <loc>https://corfield.org/blog/2016/01/03/where-did-2015-go/</loc>
     <lastmod>2016-01-03T08:00:00-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2015/02/13/frege-and-clojure/</loc>
+    <loc>https://corfield.org/blog/2015/02/13/frege-and-clojure/</loc>
     <lastmod>2015-02-13T03:32:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/09/25/the-strange-loop-2014/</loc>
+    <loc>https://corfield.org/blog/2014/09/25/the-strange-loop-2014/</loc>
     <lastmod>2014-09-25T18:32:18-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/</loc>
+    <loc>https://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/</loc>
     <lastmod>2014-09-23T23:05:05-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/09/20/powered-by-javascript/</loc>
+    <loc>https://corfield.org/blog/2014/09/20/powered-by-javascript/</loc>
     <lastmod>2014-09-20T20:03:15-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/06/21/clojurebridge/</loc>
+    <loc>https://corfield.org/blog/2014/06/21/clojurebridge/</loc>
     <lastmod>2014-06-21T19:39:03-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/</loc>
+    <loc>https://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/</loc>
     <lastmod>2014-06-20T17:58:34-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2014/06/03/getting-started/</loc>
+    <loc>https://corfield.org/blog/2014/06/03/getting-started/</loc>
     <lastmod>2014-06-03T18:42:36-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2013/09/22/the-strange-loop-2013/</loc>
+    <loc>https://corfield.org/blog/2013/09/22/the-strange-loop-2013/</loc>
     <lastmod>2013-09-22T11:00:00-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</loc>
+    <loc>https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</loc>
     <lastmod>2013-05-01T20:09:04-07:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/blog/archives/</loc>
+    <loc>https://corfield.org/blog/archives/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/</loc>
+    <loc>https://corfield.org/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/presentations/</loc>
+    <loc>https://corfield.org/presentations/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/clojure/</loc>
+    <loc>https://corfield.org/blog/categories/clojure/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/conferences/</loc>
+    <loc>https://corfield.org/blog/categories/conferences/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/process/</loc>
+    <loc>https://corfield.org/blog/categories/process/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/java/</loc>
+    <loc>https://corfield.org/blog/categories/java/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/diversity/</loc>
+    <loc>https://corfield.org/blog/categories/diversity/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/javascript/</loc>
+    <loc>https://corfield.org/blog/categories/javascript/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/frege/</loc>
+    <loc>https://corfield.org/blog/categories/frege/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/boot/</loc>
+    <loc>https://corfield.org/blog/categories/boot/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/jdbc/</loc>
+    <loc>https://corfield.org/blog/categories/jdbc/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/leiningen/</loc>
+    <loc>https://corfield.org/blog/categories/leiningen/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/conj/</loc>
+    <loc>https://corfield.org/blog/categories/conj/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/blog/categories/community/</loc>
+    <loc>https://corfield.org/blog/categories/community/</loc>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/celtic.html</loc>
+    <loc>https://corfield.org/bodyart/celtic.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/daith.html</loc>
+    <loc>https://corfield.org/bodyart/daith.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/diary.html</loc>
+    <loc>https://corfield.org/bodyart/diary.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/dunstable.html</loc>
+    <loc>https://corfield.org/bodyart/dunstable.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/earclaw.html</loc>
+    <loc>https://corfield.org/bodyart/earclaw.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/earclawface.html</loc>
+    <loc>https://corfield.org/bodyart/earclawface.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/funky.html</loc>
+    <loc>https://corfield.org/bodyart/funky.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/index.html</loc>
+    <loc>https://corfield.org/bodyart/index.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/nip.html</loc>
+    <loc>https://corfield.org/bodyart/nip.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/personal.html</loc>
+    <loc>https://corfield.org/bodyart/personal.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/pro.html</loc>
+    <loc>https://corfield.org/bodyart/pro.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/rabpa.html</loc>
+    <loc>https://corfield.org/bodyart/rabpa.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/rabrnip2.html</loc>
+    <loc>https://corfield.org/bodyart/rabrnip2.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/rabrpa.html</loc>
+    <loc>https://corfield.org/bodyart/rabrpa.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/rabsep.html</loc>
+    <loc>https://corfield.org/bodyart/rabsep.html</loc>
     <lastmod>2019-12-31T21:05:21-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/rabtat.html</loc>
+    <loc>https://corfield.org/bodyart/rabtat.html</loc>
     <lastmod>2019-12-31T21:05:22-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/reverse.html</loc>
+    <loc>https://corfield.org/bodyart/reverse.html</loc>
     <lastmod>2019-12-31T21:05:22-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/bodyart/septum.html</loc>
+    <loc>https://corfield.org/bodyart/septum.html</loc>
     <lastmod>2019-12-31T21:05:22-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/camera/index.html</loc>
+    <loc>https://corfield.org/camera/index.html</loc>
     <lastmod>2019-12-31T21:05:23-08:00</lastmod>
   </url>
   <url>
-    <loc>http://corfield.org/googlefeef20a0595d13ad.html</loc>
+    <loc>https://corfield.org/googlefeef20a0595d13ad.html</loc>
     <lastmod>2018-04-30T17:23:39-07:00</lastmod>
   </url>
 </urlset>

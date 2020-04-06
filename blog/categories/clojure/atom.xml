@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Clojure | An Architect's View]]></title>
-  <link href="http://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
-  <link href="http://corfield.org/"/>
-  <updated>2019-12-31T21:44:50-08:00</updated>
-  <id>http://corfield.org/</id>
+  <link href="https://corfield.org/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="https://corfield.org/"/>
+  <updated>2020-04-06T13:16:55-07:00</updated>
+  <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Happy New Releases!]]></title>
-    <link href="http://corfield.org/blog/2019/12/31/releases/"/>
+    <link href="https://corfield.org/blog/2019/12/31/releases/"/>
     <updated>2019-12-31T15:59:59-08:00</updated>
-    <id>http://corfield.org/blog/2019/12/31/releases</id>
+    <id>https://corfield.org/blog/2019/12/31/releases</id>
     <content type="html"><![CDATA[<h1>Wrapping Up 2019</h1>
 
 <p>It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to provide an update!</p>
@@ -88,9 +88,9 @@
   
   <entry>
     <title type="html"><![CDATA[How Do You Use clojure.spec]]></title>
-    <link href="http://corfield.org/blog/2019/09/13/using-spec/"/>
+    <link href="https://corfield.org/blog/2019/09/13/using-spec/"/>
     <updated>2019-09-13T04:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/09/13/using-spec</id>
+    <id>https://corfield.org/blog/2019/09/13/using-spec</id>
     <content type="html"><![CDATA[<p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p>
 
 <p>The original question on Quora was:</p>
@@ -133,9 +133,9 @@
   
   <entry>
     <title type="html"><![CDATA[Release! Release! Release!]]></title>
-    <link href="http://corfield.org/blog/2019/08/07/releases/"/>
+    <link href="https://corfield.org/blog/2019/08/07/releases/"/>
     <updated>2019-08-07T08:30:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/08/07/releases</id>
+    <id>https://corfield.org/blog/2019/08/07/releases</id>
     <content type="html"><![CDATA[<h1>Lots of Releases</h1>
 
 <p>Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
@@ -174,9 +174,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC to 1.0.0 and Beyond!]]></title>
-    <link href="http://corfield.org/blog/2019/07/04/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/07/04/next-jdbc/"/>
     <updated>2019-07-04T03:00:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/07/04/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/07/04/next-jdbc</id>
     <content type="html"><![CDATA[<h1>next.jdbc 1.0.0 and 1.0.1</h1>
 
 <p>First off, <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0">seancorfield/next.jdbc 1.0.0</a> was released on June 13th, 2019 (and I <a href="https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379">announced it on ClojureVerse</a> but did not blog about it), and yesterday I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1">seancorfield/next.jdbc 1.0.1</a> which is mostly documentation improvements.</p>
@@ -246,9 +246,9 @@
   
   <entry>
     <title type="html"><![CDATA[Next.JDBC Release Candidate 1]]></title>
-    <link href="http://corfield.org/blog/2019/06/04/next-jdbc/"/>
+    <link href="https://corfield.org/blog/2019/06/04/next-jdbc/"/>
     <updated>2019-06-04T11:30:00-07:00</updated>
-    <id>http://corfield.org/blog/2019/06/04/next-jdbc</id>
+    <id>https://corfield.org/blog/2019/06/04/next-jdbc</id>
     <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-rc1</h1>
 
 <p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test &ndash; containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
