@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jdbc | An Architect's View]]></title>
   <link href="https://corfield.org/blog/categories/jdbc/atom.xml" rel="self"/>
   <link href="https://corfield.org/"/>
-  <updated>2020-04-06T13:16:55-07:00</updated>
+  <updated>2020-05-23T14:54:33-07:00</updated>
   <id>https://corfield.org/</id>
   <author>
     <name><![CDATA[Sean Corfield]]></name>
@@ -12,6 +12,116 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[next.jdbc Compendium]]></title>
+    <link href="https://corfield.org/blog/2020/05/23/next-jdbc/"/>
+    <updated>2020-05-23T13:55:00-07:00</updated>
+    <id>https://corfield.org/blog/2020/05/23/next-jdbc</id>
+    <content type="html"><![CDATA[<h2>seancorfield/next.jdbc 1.0.445</h2>
+
+<p>This morning I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.445">1.0.445</a> and realized it&rsquo;s the sixth release since I last mentioned it in a blog post, so I thought it would be helpful to summarize all of the changes made so far in 2020. 1.0.13 came out at the end of December and I decided to switch from MAJOR.MINOR.PATCH versioning to MAJOR.MINOR.COMMITS versioning since I&rsquo;d already made the commitment to no breaking changes &ndash; only fixative/accretive changes &ndash; when the library originally moved from Alpha to Beta a year ago.</p>
+
+<p>Unlike the change log and release notes which are chronological, this post is organized into fixative changes, accretive changes, and documentation improvements, with each section organized by functionality or by database as appropriate.<!-- more --></p>
+
+<h3>Bug Fixes</h3>
+
+<ul>
+<li><code>next.jdbc.result-set</code>
+
+<ul>
+<li>Fixed an edge case in how qualified column names are constructed when either the table name is unavailable or the <code>:qualifier-fn</code> results <code>nil</code> or an empty string.</li>
+<li>Fixed how <code>:qualifier-fn</code> is used when the table name is unavailable so that <code>:qualifier-fn (constantly "qual")</code> works the same way as <code>clojure.java.jdbc</code>&rsquo;s <code>:qualifier "qual"</code> option, which makes migration easier, as well as making use of <code>:qualifier-fn</code> more consistent.</li>
+<li>Improved performance of some result set building code (poor performance is a bug!).</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Enhancements</h3>
+
+<ul>
+<li><code>next.jdbc/plan</code>
+
+<ul>
+<li>Added <code>InspectableMapifiedResultSet</code> protocol that provides &ldquo;meta&rdquo; information access from the abstract row that is passed into the reducing function used on the <code>IReduceInit</code> produced by <code>plan</code>. Currently, this exposes the current <code>row-number</code> (from the underlying <code>ResultSet</code>) and the <code>column-names</code> &ndash; a vector of column name keywords, in &ldquo;natural&rdquo; order based on the SQL query, produced by the builder function passed into <code>plan</code>. These functions are only available from <code>plan</code> (or a <code>datafiable-row</code> produced from <code>plan</code>) &ndash; they are not available on the results of <code>execute!</code> or <code>execute-one!</code> &ndash; and additional functions will probably be added over time.</li>
+<li>Use of <code>plan</code> with array-based builders has been made easier by adding support for numeric <code>Associative</code> keys and <code>Indexed</code> access (<code>nth</code>) to read column values by index, instead of by label.</li>
+</ul>
+</li>
+<li><code>next.jdbc/with-transaction</code>
+
+<ul>
+<li>If you call this with an existing <code>Connection</code>, it is mutated to set up and commit (or rollback) the transaction. This made concurrent execution unpredictable so this is now synchronized via <code>locking</code>. It is recommended to use <code>with-transaction</code> on a <code>DataSource</code> anyway, but this makes the <code>Connection</code> case more predictable.</li>
+</ul>
+</li>
+<li><code>next.jdbc.connection</code>
+
+<ul>
+<li>Improved the error messages when an unknown <code>:dbtype</code> is used and clarified how to use <code>:classname</code>.</li>
+<li>Added <code>component</code> function for built-in support of the <a href="https://github.com/stuartsierra/component">Component library</a> when creating a connection pooled datasource. Note that Component is not a dependency so you can simply ignore this feature if you don&rsquo;t use Component.</li>
+<li>The result of calling <code>get-datasource</code> on a db-spec hash map now supports <code>.getLoginTimeout</code> and <code>.setLoginTimeout</code> to match <code>javax.sql.DataSource</code> and improve <code>next.jdbc</code>&rsquo;s support for timeouts.</li>
+<li>MariaDB is supported out of the box.</li>
+</ul>
+</li>
+<li><code>next.jdbc.date-time</code>
+
+<ul>
+<li>Add <code>read-as-instant</code> and <code>read-as-local</code> functions to extend <code>ReadableColumn</code> so that SQL <code>DATE</code> and <code>TIMESTAMP</code> columns can be read as Java Time types.</li>
+</ul>
+</li>
+<li><code>next.jdbc.specs</code>
+
+<ul>
+<li>The Spec for JDBC URL strings explicitly requires that they start with <code>jdbc:</code> to match the behavior of the code (and the JDBC specification), which can improve error messages when you use <code>instrument</code>.</li>
+</ul>
+</li>
+<li>Options:
+
+<ul>
+<li><code>:return-keys</code> now accepts both keywords and strings in the vector of keys to return (the documentation, code, and Spec were in conflict so allowing both was the safest choice).</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Documentation</h3>
+
+<p>I try to improve the documentation in each release, based on feedback via Slack and GitHub. The bullet points below are what I consider to be just the most notable improvements.</p>
+
+<ul>
+<li><strong>README</strong>
+
+<ul>
+<li>Promote the stable documentation on <a href="https://cljdoc.org/d/seancorfield/next.jdbc">cljdoc.org</a> and make it clear the GitHub documentation is for changes made since the last release.</li>
+</ul>
+</li>
+<li><strong>Getting Started</strong>
+
+<ul>
+<li>Make it clearer that <code>plan</code> requires <code>reduce</code> or some sort of reduction process.</li>
+<li>Shows how to work with database metadata (this information was previously only mentioned in the <code>clojure.java.jdbc</code> migration guide).</li>
+</ul>
+</li>
+<li><strong>Tips &amp; Tricks</strong>
+
+<ul>
+<li>This has been split out from <strong>Friendly SQL Functions</strong> and now contains a lot more information.</li>
+<li>Timeouts: Four different types of timeout are explained, along with how <code>next.jdbc</code> supports them.</li>
+<li>MySQL: How to stream result sets; <code>BLOB</code> columns are returned as <code>byte[]</code>, not <code>java.sql.Blob</code>.</li>
+<li>PostgreSQL: How to stream result sets; Examples of how to work with SQL array types; Clarify the need for <code>next.jdbc.date-time</code> for <code>java.util.Date</code> conversion (this is also mentioned in <strong>Getting Started</strong>).</li>
+</ul>
+</li>
+<li><code>next.jdbc.prepare/execute-batch!</code> now has an example of how to get generated keys from a batch insert.</li>
+</ul>
+
+
+<h2>Thanks!</h2>
+
+<p>As always, thanks to everyone who uses <code>next.jdbc</code>, thanks to everyone who has provided feedback (especially on the documentation), reported bugs, suggested improvements, or sent pull requests. <code>next.jdbc</code> wouldn&rsquo;t be what it is today without all that input!</p>
+
+<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for all the changes in release order and <a href="https://cljdoc.org/d/seancorfield/next.jdbc">cljdoc.org</a> for overall documentation of the latest release.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Happy New Releases!]]></title>
@@ -219,34 +329,6 @@
 <li>Fix #22 by adding <code>next.jdbc.optional</code> with six map builders that omit <code>NULL</code> columns from the row hash maps.</li>
 <li>Documentation improvements (#27, #28, and #29), including changing &ldquo;connectable&rdquo; to &ldquo;transactable&rdquo; for the <code>transact</code> function and the <code>with-transaction</code> macro (for consistency with the name of the underlying protocol).</li>
 <li>Fix #30 by adding <code>modified</code> variants of column name functions and builders. The <code>lower</code> variants have been rewritten in terms of these new <code>modified</code> variants. This adds <code>:label-fn</code> and <code>:qualifier-fn</code> options that mirror <code>:column-fn</code> and <code>:table-fn</code> for row builders.</li>
-</ul>
-
-
-<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Next.JDBC Beta 1]]></title>
-    <link href="https://corfield.org/blog/2019/05/25/next-jdbc/"/>
-    <updated>2019-05-25T08:00:00-07:00</updated>
-    <id>https://corfield.org/blog/2019/05/25/next-jdbc</id>
-    <content type="html"><![CDATA[<h1>seancorfield/next.jdbc 1.0.0-beta1</h1>
-
-<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. Beta 1 is now available to test &ndash; only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme</a></p>
-
-<p>The group and artifact ID will remain <code>seancorfield/next.jdbc</code>, the namespace structure will remain <code>next.jdbc.*</code>. With auto-generated documentation hosted on cljdoc.org and Continuous Integration testing hosted on circleci.com, I have decided to continue work on <code>next.jdbc</code> outside Clojure Contrib, rather than merge it into <code>clojure.java.jdbc</code> as new namespaces there. I have updated the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CONTRIBUTING.md">Contributing page on GitHub</a> to reflect that Pull Requests can now be submitted.</p>
-
-<h2>Changes since Alpha 13</h2>
-
-<ul>
-<li>Set up CircleCI testing (just local DBs for now).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/21">#21</a> by adding <code>next.jdbc.specs</code> and documenting basic usage.</li>
-<li>Fix <a href="https://github.com/seancorfield/next-jdbc/issues/19">#19</a> by caching loaded database driver classes.</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/16">#16</a> by renaming <code>reducible!</code> to <code>plan</code> (this is a <strong>BREAKING CHANGE!</strong> from Alpha 13 &ndash; the naming of this function was the blocker for moving from Alpha to Beta).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/3">#3</a> by deciding to maintain this library outside Clojure Contrib.</li>
 </ul>
 
 
