@@ -1,6 +1,7 @@
 {:title "How do you use clojure.spec",
  :date "2019-09-13 11:00:00",
  :tags ["clojure"]}
+
 An interesting Clojure question came up on Quora recently and I decided that [my answer to "how do you use clojure.spec"](https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN) there should probably be a blog post so that folks without a Quora account can still read it. _[If you do have a Quora account, feel free to read it there instead and upvote it!]_<!-- more -->
 
 The original question on Quora was:

@@ -18,7 +18,7 @@
  :sass-src                     []
  :sass-path                    "sass"
  :theme                        "coit"
- :resources                    ["articles" "bodyart" "camera" "img" "CNAME"]
+ :resources                    ["articles" "bodyart" "camera" "img" "js" "CNAME"]
  :keep-files                   [".git"]
  :disqus?                      true
  :disqus-shortname             "seancorfield"
@@ -30,5 +30,15 @@
  :collapse-subdirs?            false
  :hide-future-posts?           true
  :klipse                       {}
+ :github_user                  "seancorfield"
+ :github_show_profile_link     true
+ :github_repo_count            6
+ :github_skip_forks            true
+ :twitter_user                 "seancorfield"
+ :twitter_tweet_count          4
+ :twitter_tweet_button         true
+ :twitter_follow_button        true
+ :twitter_show_follower_count  true
+ :twitter_widget_id            "480131406987673601"
  :description-include-elements #{:p :h1 :h2 :h3 :h4 :h5 :h6}
  :debug?                       false}
