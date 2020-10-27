@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View</title>
+    
+    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
+    <meta name="keywords" content="">
+    
+    <link rel="canonical" href="https://corfield.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/01/22/atom-chlorine-windows/">Atom, Chlorine, and Windows</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">January 22, 2019</div>
+        </div>
+    </div>
+    <p>About a month ago, I was <a href="http://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
+Atom</a> and I've been using
+it, day-in, day-out, for all my Clojure development. On a Mac, that's
+straightforward because I start a Socket REPL on the Mac and I run Atom on the
+Mac so when I connect via Chlorine and issue the <code>Chlorine: Load File</code>
+command (via <code>Ctrl-, f</code> in my keymap), it sends <code>(load-file "/path/to/file.clj")</code>
+to the REPL, for the file being edited, and that is evaluated and loads the
+source from disk and compiles it. On Windows...<!-- more --> Well, on Windows
+there are a few obstacles to this workflow.</p><p>The first obstacle (for me) is that <code>clj</code> doesn't run on Windows and that's
+what I use for everything Clojure on a Mac and on Linux now. There's a
+PowerShell implementation in progress but Windows has always been a bit of a
+second-class citizen so it's still a ways off. But Windows has WSL (Windows
+Subsystem for Linux) so I can
+and do run (user-mode) Ubuntu on my Windows laptop and I do all of my Clojure
+work on that...</p>
+    <a href="/blog/2019/01/22/atom-chlorine-windows/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2018/12/19/atom-chlorine/">Chlorine: Clojure integration for Atom</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 19, 2018</div>
+        </div>
+    </div>
+    <p>I've been using the <a href="https://atom.io">Atom</a> editor for about two years now.
+I switched from Emacs after Clojure/conj 2016, having seen
+<a href="https://youtu.be/buPPGxOnBnk">Jason Gilman's talk about ProtoREPL</a> [video].
+It may sound like
+heresy, but I'd never been happy with Emacs<!-- more --> -- not 17.x back when I first
+started using it, not 18.x, not 19.x when I first stopped using it, nor 24.x onward
+when I came back to it after learning Clojure a few decades later. I built
+several configurations from scratch, I tried several "curated" configurations,
+none of them felt like "home". Emacs just leeched too much of my development
+time for my tastes. I wanted a simple, modern text editor, that offered a wide
+variety of "plugins" and supported all the languages I used, with a sane set of
+defaults. Atom -- with ProtoREPL -- seemed to be exactly what I was looking for!</p><p>And for two years, it has been my day-to-day development environment.</p>
+    <a href="/blog/2018/12/19/atom-chlorine/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2018/12/06/null-nilable-optionality/">SQL NULL, s/nilable, and optionality</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 6, 2018</div>
+        </div>
+    </div>
+    <p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
+on optionality and how we represent the absence of a value.<!-- more --></p><p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
+triggered an "ah-ha!" moment for me.</p>
+    <a href="/blog/2018/12/06/null-nilable-optionality/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2018/12/03/datafy-nav/">Clojure 1.10&#39;s datafy and nav</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 3, 2018</div>
+        </div>
+    </div>
+    <p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as "generalized laziness": <code>datafy</code> produces a "data representation" of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p><p>The <a href="http://rebl.cognitect.com/">REBL</a> "is a graphical, interactive tool for browsing Clojure data". And in Clojure we're used to the concept of "it's just data" so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu's claim of "generalized laziness" is well made but a little hard to grok until you actually build something with the new protocols and functions.</p>
+    <a href="/blog/2018/12/03/datafy-nav/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2018/10/25/clojure-conj/">Excited About Clojure/conj</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">October 25, 2018</div>
+        </div>
+    </div>
+    <p>It has been a crazy busy year, both at work and personally, and it's hard for me to believe my last blog post was in April!</p><p><a href="https://2018.clojure-conj.org/">Clojure/conj</a> is coming up fast and the schedule was posted today, which has made me even more excited about it. Here's a run down of the sessions I plan to attend -- I'll write up my thoughts on everything shortly after the conference.</p>
+    <a href="/blog/2018/10/25/clojure-conj/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2018/04/18/all-the-paths/">All The Paths</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">April 18, 2018</div>
+        </div>
+    </div>
+    <p>With the recent arrival of <a href="https://clojure.org/guides/deps_and_cli"><code>clj</code> and <code>tools.deps.alpha</code></a> as a "standard" lightweight way to run Clojure programs and the seed for tooling based on <code>deps.edn</code> dependency files, it's time to take a look at the terminology used across Clojure's various tools.<!-- more --></p><h2 id="running-javajvm-programs">Running Java/JVM Programs</h2>
+    <a href="/blog/2018/04/18/all-the-paths/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2017/11/17/boot-localrepo/">Boot localrepo?</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">November 17, 2017</div>
+        </div>
+    </div>
+    <p>Sometimes you just can't help having a "random 3rd part JAR file" in your project. The best practice is, of course, to upload it to your preferred Maven-compatible repository via whatever service or software you use for all your in-house shared artifacts. But sometimes you just want to play with that JAR file locally, or you haven't gotten around to running your own shared repository.</p><p>If you're using Leiningen, you'll probably reach for the excellent <a href="https://github.com/kumarshantanu/lein-localrepo"><code>lein-localrepo</code></a> which lets you "install" your random JAR file into your local Maven cache (in <code>~/.m2/repository</code>).</p>
+    <a href="/blog/2017/11/17/boot-localrepo/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2017/07/17/clojure-java-jdbc-0-7-0/">Release 0.7.0 of clojure.java.jdbc</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">July 17, 2017</div>
+        </div>
+    </div>
+    <p>The stable 0.7.0 release of <code>java.jdbc</code> -- the <a href="https://github.com/clojure/java.jdbc">Clojure Contrib JDBC library</a> -- has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!</p><p>While you <em>could</em> read the <a href="https://github.com/clojure/java.jdbc/blob/master/CHANGES.md"><code>java.jdbc</code> Change Log</a> to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more --></p>
+    <a href="/blog/2017/07/17/clojure-java-jdbc-0-7-0/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2017/01/19/boot-new-moved/">seancorfield/boot-new has moved to boot/new</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">January 19, 2017</div>
+        </div>
+    </div>
+    <p>I'm pleased to announce that the "Boot new" task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p><p>You can use this to easily create a new Boot-based project:</p>
+    <a href="/blog/2017/01/19/boot-new-moved/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Clojure, New Relic, and Slow Application Startup</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">July 29, 2016</div>
+        </div>
+    </div>
+    <p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we've generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p><p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 -- an order of magnitude slower!<!-- more --></p>
+    <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Continue reading &#8594;</a>
+    <hr>
+    
+
+    <div id="prev-next">
+        
+        <a class="left" href="/">&laquo; Prev</a>
+        
+        
+        <a class="right" href="/p/3/">Next &raquo;</a>
+        
+    </div>
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>

@@ -1,739 +1,254 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>An Architect's View</title>
-  <meta name="author" content="Sean Corfield">
-
-  
-  <meta name="description" content="seancorfield/next.jdbc 1.0.445 This morning I released 1.0.445 and realized it&rsquo;s the sixth release since I last mentioned it in a blog post, so &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="https://corfield.org">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View</title>
+    
+    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
+    <meta name="keywords" content="">
+    
+    <link rel="canonical" href="https://corfield.org">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">An Architect's View</a></h1>
-  
-    <h2>Clojure, Software Design, Frameworks and more...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:corfield.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/presentations">Presentations</a></li>
-</ul>
-
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li  class="active" ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
     
-      <h1 class="entry-title"><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2020-05-23T13:55:00-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2020</span></span> <span class='time'>1:55 pm</span></time>
-        
-           | <a href="/blog/2020/05/23/next-jdbc/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2020/05/23/next-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>seancorfield/next.jdbc 1.0.445</h2>
-
-<p>This morning I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.445">1.0.445</a> and realized it&rsquo;s the sixth release since I last mentioned it in a blog post, so I thought it would be helpful to summarize all of the changes made so far in 2020. 1.0.13 came out at the end of December and I decided to switch from MAJOR.MINOR.PATCH versioning to MAJOR.MINOR.COMMITS versioning since I&rsquo;d already made the commitment to no breaking changes &ndash; only fixative/accretive changes &ndash; when the library originally moved from Alpha to Beta a year ago.</p>
-
-<p>Unlike the change log and release notes which are chronological, this post is organized into fixative changes, accretive changes, and documentation improvements, with each section organized by functionality or by database as appropriate.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2020/05/23/next-jdbc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-12-31T15:59:59-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2019</span></span> <span class='time'>3:59 pm</span></time>
-        
-           | <a href="/blog/2019/12/31/releases/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/12/31/releases/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>Wrapping Up 2019</h1>
-
-<p>It&rsquo;s been a while since I blogged about the projects I maintain so I figured New Year&rsquo;s Eve 2019 was a good time to provide an update!</p>
-
-<h2>expectations/clojure-test 1.2.1</h2>
-
-<p>Mocking in <code>side-effects</code>, optional message argument in <code>expect</code> (like <code>is</code>), <code>between</code> predicate, official support for Clojure 1.8 onward, lots of documentation improvements!</p>
-
-<p>See the <a href="https://github.com/clojure-expectations/clojure-test/blob/master/CHANGELOG.md">change log</a> for more details.</p>
-
-<h2>jkk/honeysql 0.9.8</h2>
-
-<p>Lots of bug fixes, some enhancements (<code>composite</code>, <code>truncate</code>), and some documentation enhancements.</p>
-
-<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
-
-<h2>org.clojure/core.cache 0.8.2</h2>
-
-<p>Add <code>clojure.core.cache.wrapped</code> to make using the library easier!</p>
-
-<p>See the <a href="https://github.com/clojure/core.cache/blob/master/README.md#change-log">change log</a> for more details.</p>
-
-<h2>org.clojure/core.memoize 0.8.2</h2>
-
-<p>Bug fixes and a new <code>memoizer</code> function that makes it easier to define custom function caches.</p>
-
-<p>See the <a href="https://github.com/clojure/core.memoize/blob/master/README.md#change-log">change log</a> for more details.</p>
-
-<h2>org.clojure/java.data 0.1.5</h2>
-
-<p>Yup, I took over maintenance of this in October!</p>
-
-<p><code>set-properties</code> to set arbitrary properties post-construction, constructor argument support, numerous bug fixes and reflection warnings addressed.</p>
-
-<p>See the <a href="https://github.com/clojure/java.data/blob/master/README.md#change-log">change log</a> for more details.</p>
-
-<h2>org.clojure/java.jdbc 0.7.11</h2>
-
-<p>This library is officially &ldquo;stable&rdquo; and no longer being actively maintained beyond critical bug fixes &ndash; please consider migrating to <code>seancorfield/next.jdbc</code> (see below).</p>
-
-<p>That said, this got the same transaction rollback exception edge case fix and Turkish locale fix that <code>next.jdbc</code> already had.</p>
-
-<p>See the <a href="https://github.com/clojure/java.jdbc/blob/master/README.md#change-log">change log</a> for more details.</p>
-
-<h2>seancorfield/clj-new 0.8.2</h2>
-
-<p>AOT compilation in <code>app</code> uberjar, <code>pom.xml</code> generation, <code>:uberjar</code> in <code>app</code> and <code>:jar</code> in <code>lib</code> and <code>template</code> projects, <code>-?</code> / <code>--query</code> option to explain what <code>clj-new</code> will attempt to do, <code>-e</code> / <code>--env</code> option to define &ldquo;environment&rdquo; variables that set substitution values in project templates, dependency updates, documentation improvements.</p>
-
-<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
-
-<h2>seancorfield/depstar 0.4.2</h2>
-
-<p>Support for Multi-Release JARs, AOT compilation for uberjars (with <code>pom.xml</code>), JDK 11 support, better handling of unknown file types.</p>
-
-<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
-
-<h2>seancorfield/next.jdbc 1.0.13</h2>
-
-<p><code>next.jdbc.prepare/statement</code> and support for <code>java.sql.Statement</code>, arbitrary <code>Connection</code> and <code>Statement</code> property support, fix transaction rollback exception edge case (thank you Jepsen!), expose SQL builders, now tested against MS SQL Server and MySQL (formally), provide additional date/time/timestamp conversion support, CLOB support, <code>:jdbcUrl</code> support, HugSQL quick start guide, result set builder adapters, expanded Tips &amp; Tricks, lots of documentation enhancements!</p>
-
-<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
-
-<h2>seancorfield/dot-clojure</h2>
-
-<p>If you are getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests &ndash; against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-09-13T04:00:00-07:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:00 am</span></time>
-        
-           | <a href="/blog/2019/09/13/using-spec/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/09/13/using-spec/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to &ldquo;how do you use clojure.spec&rdquo;</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em></div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2019/09/13/using-spec/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-08-07T08:30:00-07:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>8:30 am</span></time>
-        
-           | <a href="/blog/2019/08/07/releases/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/08/07/releases/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>Lots of Releases</h1>
-
-<p>Over the last week or so I&rsquo;ve released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
-
-<h2>clj-time 0.15.2</h2>
-
-<p>Add type hints, fix a bug in <code>overlaps?</code>, improve tests and documentation.</p>
-
-<p>See the <a href="https://github.com/clj-time/clj-time/blob/master/ChangeLog.md">change log</a> for more details.</p>
-
-<h2>jkk/honeysql 0.9.5</h2>
-
-<p>Support JDK11 for dev/test, support Turkish language users, enhance <code>format-predicate</code> to match <code>format</code> (<code>parameterizer</code>).</p>
-
-<p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p>
-
-<h2>seancorfield/clj-new 0.7.7</h2>
-
-<p>Pin Clojure (and <code>test.check</code>) version in generated projects instead of using <code>"RELEASE"</code>.</p>
-
-<p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p>
-
-<h2>seancorfield/depstar 0.3.1</h2>
-
-<p>Add <code>-m</code> / <code>--main</code> option to override <code>Main-Class</code> in generated manifest.</p>
-
-<p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p>
-
-<h2>seancorfield/next.jdbc 1.0.5</h2>
-
-<p><code>plan</code>&rsquo;s &ldquo;mapified&rdquo; <code>ResultSet</code> is now a full <code>IPersistentMap</code> implementation which adds support for <code>cons</code>, <code>count</code>, <code>dissoc</code>, <code>empty</code>, etc. Continued improvements to documentation.</p>
-
-<p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-07-04T03:00:00-07:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>3:00 am</span></time>
-        
-           | <a href="/blog/2019/07/04/next-jdbc/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/07/04/next-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>next.jdbc 1.0.0 and 1.0.1</h1>
-
-<p>First off, <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0">seancorfield/next.jdbc 1.0.0</a> was released on June 13th, 2019 (and I <a href="https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379">announced it on ClojureVerse</a> but did not blog about it), and yesterday I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1">seancorfield/next.jdbc 1.0.1</a> which is mostly documentation improvements.</p>
-
-<p>Someone recently commented that this blog had the <a href="https://corfield.org/blog/2019/06/04/next-jdbc/">Release Candidate announcement</a> on June 4th and was surprised I didn&rsquo;t &ldquo;make a big deal&rdquo; about the &ldquo;gold&rdquo; release. The 1.0.0 release is a <strong>big deal</strong> and this blog post is about that &ndash; what it&rsquo;s taken to get here and what&rsquo;s to come.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2019/07/04/next-jdbc/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/06/04/next-jdbc/">Next.JDBC Release Candidate 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-06-04T11:30:00-07:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>11:30 am</span></time>
-        
-           | <a href="/blog/2019/06/04/next-jdbc/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/06/04/next-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>seancorfield/next.jdbc 1.0.0-rc1</h1>
-
-<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test &ndash; containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme</a></p>
-
-<p>The focus of this release is providing more flexibility in result set builders, so that it is easier to implement your own naming strategies, via new builders that accept <code>:label-fn</code> and <code>:qualifier-fn</code> options. These mirror the <code>:column-fn</code> and <code>:table-fn</code> options used in <code>next.jdbc.sql</code> &ndash; which are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:entities</code> option. These new builder options are updated versions of <code>clojure.java.jdbc</code>&rsquo;s <code>:identifiers</code> option.</p>
-
-<h2>Changes since Beta 1</h2>
-
-<ul>
-<li>Fix #24 by adding return type hints to <code>next.jdbc</code> functions.</li>
-<li>Fix #22 by adding <code>next.jdbc.optional</code> with six map builders that omit <code>NULL</code> columns from the row hash maps.</li>
-<li>Documentation improvements (#27, #28, and #29), including changing &ldquo;connectable&rdquo; to &ldquo;transactable&rdquo; for the <code>transact</code> function and the <code>with-transaction</code> macro (for consistency with the name of the underlying protocol).</li>
-<li>Fix #30 by adding <code>modified</code> variants of column name functions and builders. The <code>lower</code> variants have been rewritten in terms of these new <code>modified</code> variants. This adds <code>:label-fn</code> and <code>:qualifier-fn</code> options that mirror <code>:column-fn</code> and <code>:table-fn</code> for row builders.</li>
-</ul>
-
-
-<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/05/25/next-jdbc/">Next.JDBC Beta 1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-05-25T08:00:00-07:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>8:00 am</span></time>
-        
-           | <a href="/blog/2019/05/25/next-jdbc/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/05/25/next-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>seancorfield/next.jdbc 1.0.0-beta1</h1>
-
-<p><code>next.jdbc</code> &ndash; the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; is a modern Clojure wrapper for JDBC. Beta 1 is now available to test &ndash; only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme</a></p>
-
-<p>The group and artifact ID will remain <code>seancorfield/next.jdbc</code>, the namespace structure will remain <code>next.jdbc.*</code>. With auto-generated documentation hosted on cljdoc.org and Continuous Integration testing hosted on circleci.com, I have decided to continue work on <code>next.jdbc</code> outside Clojure Contrib, rather than merge it into <code>clojure.java.jdbc</code> as new namespaces there. I have updated the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CONTRIBUTING.md">Contributing page on GitHub</a> to reflect that Pull Requests can now be submitted.</p>
-
-<h2>Changes since Alpha 13</h2>
-
-<ul>
-<li>Set up CircleCI testing (just local DBs for now).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/21">#21</a> by adding <code>next.jdbc.specs</code> and documenting basic usage.</li>
-<li>Fix <a href="https://github.com/seancorfield/next-jdbc/issues/19">#19</a> by caching loaded database driver classes.</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/16">#16</a> by renaming <code>reducible!</code> to <code>plan</code> (this is a <strong>BREAKING CHANGE!</strong> from Alpha 13 &ndash; the naming of this function was the blocker for moving from Alpha to Beta).</li>
-<li>Address <a href="https://github.com/seancorfield/next-jdbc/issues/3">#3</a> by deciding to maintain this library outside Clojure Contrib.</li>
-</ul>
-
-
-<p>Please take it for a test drive and let me know if you run into any problems via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/04/21/next-jdbc/">Next.JDBC</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-04-21T16:00:00-07:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2019</span></span> <span class='time'>4:00 pm</span></time>
-        
-           | <a href="/blog/2019/04/21/next-jdbc/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/04/21/next-jdbc/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>seancorfield/next.jdbc 1.0.0-alpha8</h1>
-
-<p>I&rsquo;ve talked about this in a few groups &ndash; it&rsquo;s been a long time coming. This is the &ldquo;next generation&rdquo; of <code>clojure.java.jdbc</code> &ndash; a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
-
-<p><a href="https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme">https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme</a></p>
-
-<p><em>The next generation of <code>clojure.java.jdbc</code>: a new low-level Clojure wrapper for JDBC-based access to databases.</em>  It&rsquo;s intended to be both faster and simpler than <code>clojure.java.jdbc</code> and it&rsquo;s where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!</p>
-
-<p>At this point, I&rsquo;m looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p>
-
-<p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/02/11/clojurians-slack-alternatives/">Clojurians Slack Alternatives</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-02-11T04:10:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:10 am</span></time>
-        
-           | <a href="/blog/2019/02/11/clojurians-slack-alternatives/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Daniel Compton has continued his excellent trend of
-<a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
-and one of the comments in his <strong>Community</strong> section stood out for me:</p>
-
-<blockquote><p>&ldquo;I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose.&rdquo;</p></blockquote>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2019/02/11/clojurians-slack-alternatives/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/01/22/atom-chlorine-windows/">Atom, Chlorine, and Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-01-22T12:15:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2019</span></span> <span class='time'>12:15 pm</span></time>
-        
-           | <a href="/blog/2019/01/22/atom-chlorine-windows/#disqus_thread"
-             data-disqus-identifier="https://corfield.org/blog/2019/01/22/atom-chlorine-windows/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>About a month ago, I was <a href="http://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
-Atom</a> and I&rsquo;ve been using
-it, day-in, day-out, for all my Clojure development. On a Mac, that&rsquo;s
-straightforward because I start a Socket REPL on the Mac and I run Atom on the
-Mac so when I connect via Chlorine and issue the <code>Chlorine: Load File</code>
-command (via <code>Ctrl-, f</code> in my keymap), it sends <code>(load-file "/path/to/file.clj")</code>
-to the REPL, for the file being edited, and that is evaluated and loads the
-source from disk and compiles it. On Windows&hellip;</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2019/01/22/atom-chlorine-windows/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/07/releases/">Release! Release! Release!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </ul>
-  
-    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
-  
-</section>
-
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'seancorfield',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-<section>
-  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://www.linkedin.com/in/seancorfield">
-      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
-    </a>
-  </h1>
-</section>
-
-
-  
-</aside>
-
+    <div class="post-header">
+        <h2><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">October 24, 2020</div>
+        </div>
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - Sean Corfield -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <h2 id="seancorfieldnextjdbc-11610">seancorfield/next.jdbc 1.1.610</h2><p>I recently released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.1.610">1.1.610</a> and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.</p>
+    <a href="/blog/2020/10/25/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">May 23, 2020</div>
+        </div>
+    </div>
+    <h2 id="seancorfieldnextjdbc-10445">seancorfield/next.jdbc 1.0.445</h2><p>This morning I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.445">1.0.445</a> and realized it's the sixth release since I last mentioned it in a blog post, so I thought it would be helpful to summarize all of the changes made so far in 2020. 1.0.13 came out at the end of December and I decided to switch from MAJOR.MINOR.PATCH versioning to MAJOR.MINOR.COMMITS versioning since I'd already made the commitment to no breaking changes -- only fixative/accretive changes -- when the library originally moved from Alpha to Beta a year ago.</p>
+    <a href="/blog/2020/05/23/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 31, 2019</div>
+        </div>
+    </div>
+    <h2 id="wrapping-up-2019">Wrapping Up 2019</h2><p>It's been a while since I blogged about the projects I maintain so I figured New Year's Eve 2019 was a good time to provide an update!</p>
+    <a href="/blog/2019/12/31/releases/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">September 13, 2019</div>
+        </div>
+    </div>
+    <p>An interesting Clojure question came up on Quora recently and I decided that <a href="https://www.quora.com/If-you-use-Clojure-Spec-how-do-you-use-it-Do-you-tend-to-put-all-your-specs-in-one-place-or-distribute-them-through-the-modules-of-your-program/answer/Sean-Corfield?srid=upNN">my answer to "how do you use clojure.spec"</a> there should probably be a blog post so that folks without a Quora account can still read it. <em>[If you do have a Quora account, feel free to read it there instead and upvote it!]</em><!-- more --></p><p>The original question on Quora was:</p>
+    <a href="/blog/2019/09/13/using-spec/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">August 7, 2019</div>
+        </div>
+    </div>
+    <h2 id="lots-of-releases">Lots of Releases</h2><p>Over the last week or so I've released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.</p>
+    <a href="/blog/2019/08/07/releases/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">July 4, 2019</div>
+        </div>
+    </div>
+    <h2 id="nextjdbc-100-and-101">next.jdbc 1.0.0 and 1.0.1</h2><p>First off, <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0">seancorfield/next.jdbc 1.0.0</a> was released on June 13th, 2019 (and I <a href="https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379">announced it on ClojureVerse</a> but did not blog about it), and yesterday I released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1">seancorfield/next.jdbc 1.0.1</a> which is mostly documentation improvements.</p>
+    <a href="/blog/2019/07/04/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/06/04/next-jdbc/">Next.JDBC Release Candidate 1</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">June 4, 2019</div>
+        </div>
+    </div>
+    <h2 id="seancorfieldnextjdbc-100-rc1">seancorfield/next.jdbc 1.0.0-rc1</h2><p><code>next.jdbc</code> -- the "next generation" of <code>clojure.java.jdbc</code> -- is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test -- containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.</p>
+    <a href="/blog/2019/06/04/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/05/25/next-jdbc/">Next.JDBC Beta 1</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">May 25, 2019</div>
+        </div>
+    </div>
+    <h2 id="seancorfieldnextjdbc-100-beta1">seancorfield/next.jdbc 1.0.0-beta1</h2><p><code>next.jdbc</code> -- the "next generation" of <code>clojure.java.jdbc</code> -- is a modern Clojure wrapper for JDBC. Beta 1 is now available to test -- only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.</p>
+    <a href="/blog/2019/05/25/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/04/21/next-jdbc/">Next.JDBC</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">April 21, 2019</div>
+        </div>
+    </div>
+    <h2 id="seancorfieldnextjdbc-100-alpha8">seancorfield/next.jdbc 1.0.0-alpha8</h2><p>I've talked about this in a few groups -- it's been a long time coming. This is the "next generation" of <code>clojure.java.jdbc</code> -- a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p>
+    <a href="/blog/2019/04/21/next-jdbc/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
+        <h2><a href="/blog/2019/02/11/clojurians-slack-alternatives/">Clojurians Slack Alternatives</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">February 11, 2019</div>
+        </div>
+    </div>
+    <p>Daniel Compton has continued his excellent trend of
+<a href="https://danielcompton.net/2019/02/06/clojure-survey-2019">writing an analysis of the State of Clojure survey comments</a>
+and one of the comments in his <strong>Community</strong> section stood out for me:</p><blockquote><p>"I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose."</p></blockquote>
+    <a href="/blog/2019/02/11/clojurians-slack-alternatives/">Continue reading &#8594;</a>
+    <hr>
+    
 
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'seancorfield';
-      
+    <div id="prev-next">
         
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <a class="right" href="/p/2/">Next &raquo;</a>
+        
+    </div>
+</div>
 
+            </div>
+        </div>
 
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 </body>

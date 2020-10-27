@@ -1,353 +1,188 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Clojure 1.10's Datafy and Nav - An Architect's View</title>
-  <meta name="author" content="Sean Corfield">
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: Clojure 1.10&#39;s datafy and nav</title>
+    
+<meta name="keywords" content="diversity,cryogen,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript">
 
-  
-  <meta name="description" content="One of the more mysterious new features in Clojure 1.10 seems to be the pairing of datafy and nav (and their underlying protocols, Datafiable and &hellip;">
-  
+<meta name="description" content="One of the more mysterious new features in Clojure 1.10 seems to be the pairing of datafy and nav (and their underlying protocols, Datafiable and Navigable). Interest in these new functions has been piqued after Stuart Halloway showed off REBL at Clojure/conj (video). Stu presented this functionality as &quot;generalized laziness&quot;: datafy produces a &quot;data representation&quot; of things and nav lets you (lazily) navigate around that data.The REBL &quot;is a graphical, interactive tool for browsing Clojure data&quot;. And in Clojure we&#39;re used to the concept of &quot;it&#39;s just data&quot; so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu&#39;s claim of &quot;generalized laziness&quot; is well made but a little hard to grok until you actually build something with the new protocols and functions.">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:description" content="One of the more mysterious new features in Clojure 1.10 seems to be the pairing of datafy and nav (and their underlying protocols, Datafiable and Navigable). Interest in these new functions has been piqued after Stuart Halloway showed off REBL at Clojure/conj (video). Stu presented this functionality as &quot;generalized laziness&quot;: datafy produces a &quot;data representation&quot; of things and nav lets you (lazily) navigate around that data.The REBL &quot;is a graphical, interactive tool for browsing Clojure data&quot;. And in Clojure we&#39;re used to the concept of &quot;it&#39;s just data&quot; so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu&#39;s claim of &quot;generalized laziness&quot; is well made but a little hard to grok until you actually build something with the new protocols and functions.">
 
-  
-  <link rel="canonical" href="https://corfield.org/blog/2018/12/03/datafy-nav">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<meta property="og:url" content="https://corfield.org/blog/2018/12/03/datafy-nav/" />
+<meta property="og:title" content="Clojure 1.10&#39;s datafy and nav" />
+<meta property="og:type" content="article" />
 
-  
-
+    <link rel="canonical" href="https://corfield.org/blog/2018/12/03/datafy-nav/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">An Architect's View</a></h1>
-  
-    <h2>Clojure, Software Design, Frameworks and more...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:corfield.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/presentations">Presentations</a></li>
-</ul>
-
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Clojure 1.10's Datafy and Nav</h1>
-    
-    
-      <p class="meta">
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">December 3, 2018</div>
         
-
-
-
-
-<time class='entry-date' datetime='2018-12-03T09:20:00-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2018</span></span> <span class='time'>9:20 am</span></time>
-        
-           | <a href="#disqus_thread"
-             data-disqus-identifier="https://corfield.org">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as &ldquo;generalized laziness&rdquo;: <code>datafy</code> produces a &ldquo;data representation&rdquo; of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p>
-
-<p>The <a href="http://rebl.cognitect.com/">REBL</a> &ldquo;is a graphical, interactive tool for browsing Clojure data&rdquo;. And in Clojure we&rsquo;re used to the concept of &ldquo;it&rsquo;s just data&rdquo; so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu&rsquo;s claim of &ldquo;generalized laziness&rdquo; is well made but a little hard to grok until you actually build something with the new protocols and functions.</p>
-
-<p>Since I&rsquo;ve done exactly that &ndash; with experimental support for <a href="https://github.com/clojure/java.jdbc/blob/master/src/main/clojure/clojure/java/jdbc/datafy.clj">lazy navigation of related records in <code>java.jdbc</code></a> &ndash; and spent some time on Slack today explaining how it all works, I figured it would be worth writing down in a more permanent place, as a blog post.</p>
-
-<p>The <code>Datafiable</code> protocol (new in <code>clojure.core.protocols</code>) is defined for <code>nil</code> and <code>Object</code> to just return those values as-is, and then extended in <code>clojure.datafy</code> to cover:</p>
-
-<ul>
-<li><code>Throwable</code> &ndash; producing a simple hash map by calling <code>Throwable-&gt;map</code></li>
-<li><code>clojure.lang.IRef</code> &ndash; producing a vector containing the dereferenced value, with the original metadata from the reference attached to that vector</li>
-<li><code>clojure.lang.Namespace</code> &ndash; producing a hash map that is the data representation of the namespace (<code>:name</code>, <code>:publics</code>, <code>:imports</code>, and <code>:interns</code>) with the metadata of the namespace attached</li>
-<li><code>java.lang.Class</code> &ndash; producing the <code>clojure.reflect/reflect</code> representation of the class, with an additional member <code>:name</code>, and the <code>:members</code> of the class grouped by name and sorted</li>
-</ul>
-
-
-<p>The <code>Navigable</code> protocol (new in <code>clojure.core.protocols</code>) is defined just for <code>Object</code> and, given some sort of object or collection, some sort of &ldquo;key&rdquo;, and a value, it will just return the value itself.</p>
-
-<p>Based on that, it may not be clear how to implement the protocols or use the functions. The key thing that may not be obvious here is that <code>datafy</code> is intended to convert an arbitrary &ldquo;thing&rdquo; of any type into a pure Clojure data representation and, from that starting point, you can then use <code>nav</code> to &ldquo;navigate&rdquo; to a value derived from the original &ldquo;thing&rdquo;, which you would then process with <code>datafy</code> to get a pure Clojure data representation again. Those data representations may contain pieces that satisfy the <code>Navigable</code> protocol so that navigation (via <code>nav</code>) provides more than just a simple data-level lookup.</p>
-
-<p>Using the <code>clojure.java.jdbc.datafy</code> code as an example, you would call <code>query</code> (from that new namespace) and get back a result set. That looks like a sequence of hash maps (rows) but adds metadata to the rows that provides an implementation of <code>Datafiable</code> (<a href="https://github.com/clojure/clojure/blob/master/changes.md#22-protocol-extension-by-metadata">protocol extension via metadata</a> is also new in Clojure 1.10). The row is the &ldquo;arbitrary thing&rdquo; that we are starting with. One or more of the columns in that row may be a foreign key into another table. When you turn the row into a pure Clojure data representation &ndash; by calling <code>datafy</code> on it &ndash; it still looks like a hash map but now it has metadata that provides an implementation of <code>Navigable</code>. That supports calling <code>(nav row column value)</code> and, if the column is considered to be a foreign key to another table, it will fetch the relevant row(s) from that table and return that as the next &ldquo;arbitrary thing&rdquo;, otherwise it will just return the column&rsquo;s value as passed in. The cycle of converting that to data (via <code>datafy</code>) and navigating through it (by navigating the Clojure data and then calling <code>nav</code> on that) can be continued indefinitely, until you bottom out to simple values.</p>
-
-<p>You can sum this up as:</p>
-
-<ul>
-<li>Starting with a &ldquo;thing&rdquo;&hellip;</li>
-<li>&hellip;you convert it to data (with <code>datafy</code>)&hellip;</li>
-<li>&hellip;and walk it with simple Clojure data access&hellip;</li>
-<li>&hellip;and, at each stage, you can navigate to the corresponding &ldquo;new thing&rdquo; by calling <code>nav</code>&hellip;</li>
-<li>&hellip;which may return just that value or may do something more complex&hellip;</li>
-<li>&hellip;and from that &ldquo;new thing&rdquo; you convert it to data (with <code>datafy</code>) and continue the process.</li>
-</ul>
-
-
-<p>Relating this back to REBL, it works by taking some arbitrary value produced in the REPL and converting it to data (via <code>datafy</code>) so that it can be displayed in the UI. With any part of that data highlighted you can &ldquo;drill down&rdquo;, at which point REBL calls <code>nav</code> to perform the (potentially lazy, complex) navigation and then converts that to data (via <code>datafy</code>) and displays that as the next &ldquo;level&rdquo; of data. Given an associative data representation, it does <code>(get coll k)</code> first to get <code>v</code>, and then it calls <code>(nav coll k v)</code> to allow the underlying navigation to return an updated value.</p>
-
-<p>You go from &ldquo;thing&rdquo; to &ldquo;data representation&rdquo; of &ldquo;thing&rdquo; (via <code>datafy</code>), and then you can do the simple associative lookup <em>in the data representation, not the original thing</em>, and then you use <code>nav</code> to get back to the relevant equivalent part of the &ldquo;thing&rdquo;, and then you <code>datafy</code> that again to get pure data. For built-in Clojure data types that are already pure data, <code>datafy</code> does nothing and <code>nav</code> just returns the selected value. For hash maps, navigation is just simple key lookup. For vectors, navigation is also simple key (index) lookup. This new machinery only starts to shine in more complex situations.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2018-12-03T09:20:00-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2018</span></span> <span class='time'>9:20 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/jdbc/'>jdbc</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="https://corfield.org/blog/2018/12/03/datafy-nav/" data-via="seancorfield" data-counturl="https://corfield.org/blog/2018/12/03/datafy-nav/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2018/10/25/clojure-conj/" title="Previous Post: Excited About Clojure/conj">&laquo; Excited About Clojure/conj</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2018/12/06/null-nilable-optionality/" title="Next Post: SQL NULL, s/nilable, and optionality">SQL NULL, s/nilable, and optionality &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/07/releases/">Release! Release! Release!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </ul>
-  
-    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
-  
-</section>
-
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'seancorfield',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-<section>
-  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://www.linkedin.com/in/seancorfield">
-      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
-    </a>
-  </h1>
-</section>
-
-
-  
-</aside>
-
-
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - Sean Corfield -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <h2>Clojure 1.10&#39;s datafy and nav</h2>
+</div>
+<div>
+    
+    <p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as "generalized laziness": <code>datafy</code> produces a "data representation" of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p><p>The <a href="http://rebl.cognitect.com/">REBL</a> "is a graphical, interactive tool for browsing Clojure data". And in Clojure we're used to the concept of "it's just data" so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu's claim of "generalized laziness" is well made but a little hard to grok until you actually build something with the new protocols and functions.</p><p>Since I've done exactly that -- with experimental support for <a href="https://github.com/clojure/java.jdbc/blob/master/src/main/clojure/clojure/java/jdbc/datafy.clj">lazy navigation of related records in <code>java.jdbc</code></a> -- and spent some time on Slack today explaining how it all works, I figured it would be worth writing down in a more permanent place, as a blog post.</p><p>The <code>Datafiable</code> protocol (new in <code>clojure.core.protocols</code>) is defined for <code>nil</code> and <code>Object</code> to just return those values as-is, and then extended in <code>clojure.datafy</code> to cover:</p><ul><li><code>Throwable</code> -- producing a simple hash map by calling <code>Throwable-&gt;map</code></li><li><code>clojure.lang.IRef</code> -- producing a vector containing the dereferenced value, with the original metadata from the reference attached to that vector</li><li><code>clojure.lang.Namespace</code> -- producing a hash map that is the data representation of the namespace (<code>:name</code>, <code>:publics</code>, <code>:imports</code>, and <code>:interns</code>) with the metadata of the namespace attached</li><li><code>java.lang.Class</code> -- producing the <code>clojure.reflect/reflect</code> representation of the class, with an additional member <code>:name</code>, and the <code>:members</code> of the class grouped by name and sorted</li></ul><p>The <code>Navigable</code> protocol (new in <code>clojure.core.protocols</code>) is defined just for <code>Object</code> and, given some sort of object or collection, some sort of "key", and a value, it will just return the value itself.</p><p>Based on that, it may not be clear how to implement the protocols or use the functions. The key thing that may not be obvious here is that <code>datafy</code> is intended to convert an arbitrary "thing" of any type into a pure Clojure data representation and, from that starting point, you can then use <code>nav</code> to "navigate" to a value derived from the original "thing", which you would then process with <code>datafy</code> to get a pure Clojure data representation again. Those data representations may contain pieces that satisfy the <code>Navigable</code> protocol so that navigation (via <code>nav</code>) provides more than just a simple data-level lookup.</p><p>Using the <code>clojure.java.jdbc.datafy</code> code as an example, you would call <code>query</code> (from that new namespace) and get back a result set. That looks like a sequence of hash maps (rows) but adds metadata to the rows that provides an implementation of <code>Datafiable</code> (<a href="https://github.com/clojure/clojure/blob/master/changes.md#22-protocol-extension-by-metadata">protocol extension via metadata</a> is also new in Clojure 1.10). The row is the "arbitrary thing" that we are starting with. One or more of the columns in that row may be a foreign key into another table. When you turn the row into a pure Clojure data representation -- by calling <code>datafy</code> on it -- it still looks like a hash map but now it has metadata that provides an implementation of <code>Navigable</code>. That supports calling <code>(nav row column value)</code> and, if the column is considered to be a foreign key to another table, it will fetch the relevant row(s) from that table and return that as the next "arbitrary thing", otherwise it will just return the column's value as passed in. The cycle of converting that to data (via <code>datafy</code>) and navigating through it (by navigating the Clojure data and then calling <code>nav</code> on that) can be continued indefinitely, until you bottom out to simple values.</p><p>You can sum this up as:</p><ul><li>Starting with a "thing"...</li><li>...you convert it to data (with <code>datafy</code>)...</li><li>...and walk it with simple Clojure data access...</li><li>...and, at each stage, you can navigate to the corresponding "new thing" by calling <code>nav</code>...</li><li>...which may return just that value or may do something more complex...</li><li>...and from that "new thing" you convert it to data (with <code>datafy</code>) and continue the process.</li></ul><p>Relating this back to REBL, it works by taking some arbitrary value produced in the REPL and converting it to data (via <code>datafy</code>) so that it can be displayed in the UI. With any part of that data highlighted you can "drill down", at which point REBL calls <code>nav</code> to perform the (potentially lazy, complex) navigation and then converts that to data (via <code>datafy</code>) and displays that as the next "level" of data. Given an associative data representation, it does <code>(get coll k)</code> first to get <code>v</code>, and then it calls <code>(nav coll k v)</code> to allow the underlying navigation to return an updated value.</p><p>You go from "thing" to "data representation" of "thing" (via <code>datafy</code>), and then you can do the simple associative lookup <em>in the data representation, not the original thing</em>, and then you use <code>nav</code> to get back to the relevant equivalent part of the "thing", and then you <code>datafy</code> that again to get pure data. For built-in Clojure data types that are already pure data, <code>datafy</code> does nothing and <code>nav</code> just returns the selected value. For hash maps, navigation is just simple key lookup. For vectors, navigation is also simple key (index) lookup. This new machinery only starts to shine in more complex situations.</p>
+</div>
 
-</footer>
-  
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/jdbc/">jdbc</a>
+    
+</div>
 
-<script type="text/javascript">
-      var disqus_shortname = 'seancorfield';
-      
+
+    <div id="prev-next">
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'https://corfield.org/blog/2018/12/03/datafy-nav/';
-        var disqus_url = 'https://corfield.org/blog/2018/12/03/datafy-nav/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        <a href="/blog/2018/12/06/null-nilable-optionality/">&laquo; SQL NULL, s/nilable, and optionality</a>
+        
+        
+        <a class="right" href="/blog/2018/10/25/clojure-conj/">Excited About Clojure/conj &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2018/12/03/datafy-nav/";
+            this.page.identifier = "Clojure 1.10&#39;s datafy and nav";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
 
 
+</div>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            </div>
+        </div>
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 </body>

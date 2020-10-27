@@ -1,363 +1,230 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>SQL NULL, S/nilable, and Optionality - An Architect's View</title>
-  <meta name="author" content="Sean Corfield">
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: SQL NULL, s/nilable, and optionality</title>
+    
+<meta name="keywords" content="diversity,cryogen,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript">
 
-  
-  <meta name="description" content="Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+<meta name="description" content="Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
 called Maybe Not, where he mused
-on optionality and how we represent the absence &hellip;">
-  
+on optionality and how we represent the absence of a value.His talk covered many things, including how clojure.spec/keys currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of clojure.spec), but his mention of s/nilable was what
+triggered an &quot;ah-ha!&quot; moment for me.">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:description" content="Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+called Maybe Not, where he mused
+on optionality and how we represent the absence of a value.His talk covered many things, including how clojure.spec/keys currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of clojure.spec), but his mention of s/nilable was what
+triggered an &quot;ah-ha!&quot; moment for me.">
 
-  
-  <link rel="canonical" href="https://corfield.org/blog/2018/12/06/null-nilable-optionality">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<meta property="og:url" content="https://corfield.org/blog/2018/12/06/null-nilable-optionality/" />
+<meta property="og:title" content="SQL NULL, s/nilable, and optionality" />
+<meta property="og:type" content="article" />
 
-  
-
+    <link rel="canonical" href="https://corfield.org/blog/2018/12/06/null-nilable-optionality/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">An Architect's View</a></h1>
-  
-    <h2>Clojure, Software Design, Frameworks and more...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:corfield.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/presentations">Presentations</a></li>
-</ul>
-
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">SQL NULL, S/nilable, and Optionality</h1>
-    
-    
-      <p class="meta">
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">December 6, 2018</div>
         
-
-
-
-
-<time class='entry-date' datetime='2018-12-06T03:30:00-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>3:30 am</span></time>
-        
-           | <a href="#disqus_thread"
-             data-disqus-identifier="https://corfield.org">Comments</a>
-        
-      </p>
+    </div>
+    <h2>SQL NULL, s/nilable, and optionality</h2>
+</div>
+<div>
     
-  </header>
-
-
-<div class="entry-content"><p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+    <p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
 called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
-on optionality and how we represent the absence of a value.<!-- more --></p>
-
-<p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
+on optionality and how we represent the absence of a value.<!-- more --></p><p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
 complects both structure and optionality (and his thoughts on fixing that
 in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
-triggered an &ldquo;ah-ha!&rdquo; moment for me.</p>
-
-<p>At <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we deal with a lot
-of data in SQL (specifically in Percona&rsquo;s fork of MySQL) and, in SQL, you represent
+triggered an "ah-ha!" moment for me.</p><p>At <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we deal with a lot
+of data in SQL (specifically in Percona's fork of MySQL) and, in SQL, you represent
 the absence of a value with <code>NULL</code> in a column. Columns that represent optional
 data must be declared as nullable and when you read data from them with
 <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a> you get hash map
-entries in the rows that have <code>nil</code> values. If you&rsquo;re using <code>clojure.spec</code> to
+entries in the rows that have <code>nil</code> values. If you're using <code>clojure.spec</code> to
 describe your tables, rows, and columns, then you are going to have lots of
-<code>s/nilable</code> specs &ndash; and now your &ldquo;optionality&rdquo; has been reified into <code>nil</code>
-values, cast in the stone of your specs&hellip; which is clearly not an ideal situation!</p>
-
-<p>This made me realize that <code>java.jdbc</code> probably should just omit keys whose
+<code>s/nilable</code> specs -- and now your "optionality" has been reified into <code>nil</code>
+values, cast in the stone of your specs... which is clearly not an ideal situation!</p><p>This made me realize that <code>java.jdbc</code> probably should just omit keys whose
 values represent SQL <code>NULL</code>. They are, after all, <em>optional</em> values rather than
-truly <em>nilable</em> values.</p>
-
-<p>That would be a potentially breaking change in behavior for <code>java.jdbc</code> users.
+truly <em>nilable</em> values.</p><p>That would be a potentially breaking change in behavior for <code>java.jdbc</code> users.
 Sure, in most cases, if you have a hash map representing a row in a database
-table, you&rsquo;re not really going to care whether <code>(:col row)</code> gives you <code>nil</code>
-because <code>:col</code> maps to <code>nil</code> or because <code>row</code> doesn&rsquo;t contain <code>:col</code>. There are
-use cases where it matters: <code>contains?</code>, row/column specs, tabular printing.</p>
-
-<p>Along with changing the behavior of <code>NULL</code> columns and
+table, you're not really going to care whether <code>(:col row)</code> gives you <code>nil</code>
+because <code>:col</code> maps to <code>nil</code> or because <code>row</code> doesn't contain <code>:col</code>. There are
+use cases where it matters: <code>contains?</code>, row/column specs, tabular printing.</p><p>Along with changing the behavior of <code>NULL</code> columns and
 <a href="http://corfield.org/blog/2018/12/03/datafy-nav/">supporting <code>datafy</code> and <code>nav</code></a>,
-I have a lot of other changes that I&rsquo;d like to apply to <code>java.jdbc</code>, such as
+I have a lot of other changes that I'd like to apply to <code>java.jdbc</code>, such as
 automatically qualifying column keys with the table from which they came,
 improving overall performance (by no longer converting <code>ResultSet</code> objects to
 sequences of hash maps), dramatically simplifying and streamlining the options
 that are available (since many of them are very rarely used), and focusing on a
-reducible-first API. All of which would be breaking changes.</p>
-
-<p>I&rsquo;ve learned a lot &ndash; about Clojure, idioms, and databases &ndash; over the seven
-years that I&rsquo;ve been maintaining <code>org.clojure/java.jdbc</code>, and it is time for a
+reducible-first API. All of which would be breaking changes.</p><p>I've learned a lot -- about Clojure, idioms, and databases -- over the seven
+years that I've been maintaining <code>org.clojure/java.jdbc</code>, and it is time for a
 new namespace or perhaps even a completely new project, that offers a better
-way to deal with SQL databases from Clojure! I&rsquo;ll be writing a series of blog
+way to deal with SQL databases from Clojure! I'll be writing a series of blog
 posts about the differences I envisage between the current de facto standard
-JDBC wrapper and where I&rsquo;d like to go with this, so that I can get community
+JDBC wrapper and where I'd like to go with this, so that I can get community
 feedback on what should stay, what should change, and what should go. Stay tuned!</p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2018-12-06T03:30:00-08:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>3:30 am</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/jdbc/'>jdbc</a>
-  
-</span>
-
-
-    </p>
+<div id="post-tags">
+    <b>Tags: </b>
     
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="https://corfield.org/blog/2018/12/06/null-nilable-optionality/" data-via="seancorfield" data-counturl="https://corfield.org/blog/2018/12/06/null-nilable-optionality/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/jdbc/">jdbc</a>
+    
 </div>
 
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2018/12/03/datafy-nav/" title="Previous Post: Clojure 1.10's datafy and nav">&laquo; Clojure 1.10's datafy and nav</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2018/12/19/atom-chlorine/" title="Next Post: Chlorine: Clojure integration for Atom">Chlorine: Clojure integration for Atom &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/07/releases/">Release! Release! Release!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </ul>
-  
-    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
-  
-</section>
-
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'seancorfield',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-<section>
-  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://www.linkedin.com/in/seancorfield">
-      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
-    </a>
-  </h1>
-</section>
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - Sean Corfield -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'seancorfield';
-      
+    <div id="prev-next">
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'https://corfield.org/blog/2018/12/06/null-nilable-optionality/';
-        var disqus_url = 'https://corfield.org/blog/2018/12/06/null-nilable-optionality/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        <a href="/blog/2018/12/19/atom-chlorine/">&laquo; Chlorine: Clojure integration for Atom</a>
+        
+        
+        <a class="right" href="/blog/2018/12/03/datafy-nav/">Clojure 1.10&#39;s datafy and nav &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2018/12/06/null-nilable-optionality/";
+            this.page.identifier = "SQL NULL, s/nilable, and optionality";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
 
 
+</div>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            </div>
+        </div>
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 </body>

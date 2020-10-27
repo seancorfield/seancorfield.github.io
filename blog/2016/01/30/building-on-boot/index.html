@@ -1,331 +1,188 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Building on Boot - An Architect's View</title>
-  <meta name="author" content="Sean Corfield">
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: Building On Boot</title>
+    
+<meta name="keywords" content="diversity,cryogen,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript">
 
-  
-  <meta name="description" content="In yesterday&rsquo;s blog post, Rebooting Clojure, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I &hellip;">
-  
+<meta name="description" content="In yesterday&#39;s blog post, Rebooting Clojure, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.Over the coming weeks, I&#39;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:description" content="In yesterday&#39;s blog post, Rebooting Clojure, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.Over the coming weeks, I&#39;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.">
 
-  
-  <link rel="canonical" href="https://corfield.org/blog/2016/01/30/building-on-boot">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="An Architect's View" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<meta property="og:url" content="https://corfield.org/blog/2016/01/30/building-on-boot/" />
+<meta property="og:title" content="Building On Boot" />
+<meta property="og:type" content="article" />
 
-  
-
+    <link rel="canonical" href="https://corfield.org/blog/2016/01/30/building-on-boot/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
 </head>
+<body>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">An Architect's View</a></h1>
-  
-    <h2>Clojure, Software Design, Frameworks and more...</h2>
-  
-</hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:corfield.org" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/presentations">Presentations</a></li>
-</ul>
-
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
 </nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Building on Boot</h1>
-    
-    
-      <p class="meta">
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">January 30, 2016</div>
         
-
-
-
-
-<time class='entry-date' datetime='2016-01-30T12:30:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:30 pm</span></time>
-        
-           | <a href="#disqus_thread"
-             data-disqus-identifier="https://corfield.org">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>In yesterday&rsquo;s blog post, <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p>
-
-<p>Over the coming weeks, I&rsquo;ll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
-
-<p>In this post, I&rsquo;m going to cover some of the pros at a high level as it improved our build / test process.<!-- more --></p>
-
-<p>I mentioned that we&rsquo;d evolved a fair size Ant script over time that does most of the heavy lifting of our build / test / deploy process. We&rsquo;d gradually been replacing parts of that process with Clojure code but it was easier to stick a <code>-main</code> function in certain namespaces to call into our code than to turn chunks of our code into Leiningen plugins. A case in point was our database and data migration tasks. We have developed a persistence layer in Clojure, built on top of <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a>, that encapsulates our connection pooling strategies and environment settings. Our migration code was built on top of that. Our Ant script invoked Leiningen to run these <code>-main</code> functions at various points. With each of these, we had repeated code to deal with command line arguments, process and environment set up, and then calls to what were, in effect, a series of &ldquo;tasks&rdquo;.</p>
-
-<p>With Boot, we were able to eliminate a lot of that boilerplate. Boot tasks have command line argument parsing built-in. There&rsquo;s no need to create a <code>-main</code> function &ndash; the Boot tasks can call directly into our code. At this point we could easily compose tasks in a pipeline to satisfy any combination of database and data migration scenarios we needed, and we could simplify our Ant script to run a pipeline of Boot tasks as needed: which also meant we only fired up one JVM for that whole part of our build, instead of multiple invocations of Leiningen, each invoking a <code>-main</code> function.</p>
-
-<p>We also have some CFML applications in the mix. Because history. We had several tasks accessible via HTTP requests into those CFML applications and those were also invoked by the Ant script because it was easy to do. Over time, we&rsquo;re committed to moving more and more of the CFML functionality down into Clojure (for what I hope are obvious reasons). Some of the tasks we were invoking via HTTP in Ant were already just thin CFML veneers over Clojure functionality, fortunately, so we were easily able to create a Boot task to call that functionality instead of going through CFML via HTTP.</p>
-
-<p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we&rsquo;d able or willing to attempt with Leiningen in a long time.</p>
-
-<p>There were cons too, of course, and the biggest was that several of Leiningen&rsquo;s built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I&rsquo;ll cover some of those in my next post.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Sean Corfield</span></span>
-
-      
-
-
-
-
-<time class='entry-date' datetime='2016-01-30T12:30:00-08:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>12:30 pm</span></time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/boot/'>boot</a>, <a class='category' href='/blog/categories/clojure/'>clojure</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="https://corfield.org/blog/2016/01/30/building-on-boot/" data-via="seancorfield" data-counturl="https://corfield.org/blog/2016/01/30/building-on-boot/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2016/01/29/rebooting-clojure/" title="Previous Post: Rebooting Clojure">&laquo; Rebooting Clojure</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2016/01/31/testing-with-boot/" title="Next Post: Testing With Boot">Testing With Boot &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>About Me</h1>
-  <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/09/13/using-spec/">How Do You Use clojure.spec</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/07/releases/">Release! Release! Release!</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-  </ul>
-  
-    <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
-  
-</section>
-
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'seancorfield',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-<section>
-  <a href="https://github.com/framework-one">@framework-one</a> on GitHub
-</section>
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/+SeanCorfield_A?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32" alt="G+" title="G+" border="0">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://www.linkedin.com/in/seancorfield">
-      <img src="https://static.licdn.com/scds/common/u/img/logos/logo_linkedin_92x22.png" width="92" height="22" alt="LinkedIn" title="LinkedIn" border="0">
-    </a>
-  </h1>
-</section>
-
-
-  
-</aside>
-
-
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2020 - Sean Corfield -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <h2>Building On Boot</h2>
+</div>
+<div>
+    
+    <p>In yesterday's blog post, <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p><p>Over the coming weeks, I'll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p><p>In this post, I'm going to cover some of the pros at a high level as it improved our build / test process.<!-- more --></p><p>I mentioned that we'd evolved a fair size Ant script over time that does most of the heavy lifting of our build / test / deploy process. We'd gradually been replacing parts of that process with Clojure code but it was easier to stick a <code>-main</code> function in certain namespaces to call into our code than to turn chunks of our code into Leiningen plugins. A case in point was our database and data migration tasks. We have developed a persistence layer in Clojure, built on top of <a href="https://github.com/clojure/java.jdbc">clojure.java.jdbc</a>, that encapsulates our connection pooling strategies and environment settings. Our migration code was built on top of that. Our Ant script invoked Leiningen to run these <code>-main</code> functions at various points. With each of these, we had repeated code to deal with command line arguments, process and environment set up, and then calls to what were, in effect, a series of "tasks".</p><p>With Boot, we were able to eliminate a lot of that boilerplate. Boot tasks have command line argument parsing built-in. There's no need to create a <code>-main</code> function -- the Boot tasks can call directly into our code. At this point we could easily compose tasks in a pipeline to satisfy any combination of database and data migration scenarios we needed, and we could simplify our Ant script to run a pipeline of Boot tasks as needed: which also meant we only fired up one JVM for that whole part of our build, instead of multiple invocations of Leiningen, each invoking a <code>-main</code> function.</p><p>We also have some CFML applications in the mix. Because history. We had several tasks accessible via HTTP requests into those CFML applications and those were also invoked by the Ant script because it was easy to do. Over time, we're committed to moving more and more of the CFML functionality down into Clojure (for what I hope are obvious reasons). Some of the tasks we were invoking via HTTP in Ant were already just thin CFML veneers over Clojure functionality, fortunately, so we were easily able to create a Boot task to call that functionality instead of going through CFML via HTTP.</p><p>Could we have done all this with Leiningen and plugins? Perhaps. Our experience with writing Leiningen plugins at this point had discouraged us from large scale plugin development. We were able to achieve more in a couple of weeks with Boot than we'd able or willing to attempt with Leiningen in a long time.</p><p>There were cons too, of course, and the biggest was that several of Leiningen's built-in tasks and popular plugins, on which we relied heavily, were either absent or extremely different with Boot. I'll cover some of those in my next post.</p>
+</div>
 
-</footer>
-  
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/boot/">boot</a>
+    
+</div>
 
-<script type="text/javascript">
-      var disqus_shortname = 'seancorfield';
-      
+
+    <div id="prev-next">
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'https://corfield.org/blog/2016/01/30/building-on-boot/';
-        var disqus_url = 'https://corfield.org/blog/2016/01/30/building-on-boot/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        <a href="/blog/2016/01/31/testing-with-boot/">&laquo; Testing With Boot</a>
+        
+        
+        <a class="right" href="/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2016/01/30/building-on-boot/";
+            this.page.identifier = "Building On Boot";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
 
 
+</div>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            </div>
+        </div>
 
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 
 </body>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: next.jdbc Compendium II</title>
+    
+<meta name="keywords" content="diversity,cryogen,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript">
+
+<meta name="description" content="seancorfield/next.jdbc 1.1.610I recently released 1.1.610 and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.">
+
+<meta property="og:description" content="seancorfield/next.jdbc 1.1.610I recently released 1.1.610 and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.">
+
+<meta property="og:url" content="https://corfield.org/blog/2020/10/25/next-jdbc/" />
+<meta property="og:title" content="next.jdbc Compendium II" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2020/10/25/next-jdbc/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/feed.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 24, 2020</div>
+        
+    </div>
+    <h2>next.jdbc Compendium II</h2>
+</div>
+<div>
+    
+    <h2 id="seancorfieldnextjdbc-11610">seancorfield/next.jdbc 1.1.610</h2><p>I recently released <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.1.610">1.1.610</a> and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.</p><p>As before, this post is organized into fixative changes, accretive changes, and documentation improvements, with each section organized by functionality or by database as appropriate.<!-- more --></p><h3 id="bug-fixes">Bug Fixes</h3><ul><li><p>Spec fixes:</p><ul><li><code>next.jdbc/with-options</code> (was missing).</li><li><code>next.jdbc.connection/component</code>.</li><li><code>next.jdbc.prepare/statement</code>.</li></ul></li><li><p><code>next.jdbc.prepare/statement</code> is now type hinted correctly.</p></li><li><p>Result set builder adapters</p><ul><li><code>:cols</code> and <code>:rsmeta</code> access are now supported on these builders via <code>clojure.lang.ILookup</code>.</li></ul></li></ul><h3 id="enhancements">Enhancements</h3><ul><li><p><code>jdbc.next</code></p><ul><li><code>execute!</code> can return multiple result sets (if the <code>:multi-rs</code> option is set to <code>true</code>). This is useful when calling stored procedures and, for SQL Server, when working with T-SQL scripts. This was considered a big enough enhancement to bump the library from 1.0.z to 1.1.z because it has long been requested against <code>clojure.java.jdbc</code> (and <code>next.jdbc</code>).</li><li>Adds <code>with-options</code> that lets you wrap up a connectable along with default options that should be applied to all operations on that connectable. This provides most of the much-requested "default options" functionality (with caveats about functions that return native Java types).</li><li><code>get-connection</code> now has arities that accept username and password to support datasources that allow per-connection credentials.</li><li>Adds <code>snake-kebab-opts</code>, <code>unqualified-snake-kebab-opts</code>, for use with <code>with-options</code>. These are conditionally defined if <code>camel-snake-kebab</code> is on your classpath (see also <code>next.jdbc.result-set</code> enhancements below).</li><li>The result of <code>plan</code> is now foldable, as well as reducible (in the <code>clojure.core.reducers</code> sense). Folding the result of a <code>plan</code> call will use fork/join to provide some degree of parallelization of processing when streaming large result sets.</li><li>Inside the reducing function over <code>plan</code>, you can call <code>next.jdbc.result-set/metadata</code> to obtain a datafication of the <code>ResultSetMetaData</code> object from the underlying <code>ResultSet</code> object.</li></ul></li><li><p><code>next.jdbc.connection</code></p><ul><li>Adds <code>jdbc-url</code> to turn a "db spec" into a JDBC URL, for use with <code>-&gt;pool</code> and <code>component</code>.</li></ul></li><li><p><code>next.jdbc.datafy</code> (new namespace)</p><ul><li>Requiring this namespace causes <code>datafy</code>/<code>nav</code> functionality to be extended to several JDBC object types, making it easier to navigate around metadata from the database and to examine schemas and result set metadata.</li></ul></li><li><p><code>next.jdbc.plan</code> (new namespace)</p><ul><li>Adds <code>select!</code> and <code>select-one!</code> functions that simplify common uses (reductions) of <code>next.jdbc/plan</code>. <code>select!</code> lets you select just the values from a single column across the result set, or select a subset of columns by name. <code>select-one!</code> does the same but just for the first row (using <code>reduced</code> to short-circuit the reduction).</li></ul></li><li><p><code>next.jdbc.prepare</code></p><ul><li><code>execute-batch!</code> now supports a <code>:return-generated-keys</code> option so you can get back (all) the generated keys instead of just update counts.</li></ul></li><li><p><code>next.jdbc.result-set</code></p><ul><li><code>as-kebab-maps</code> and <code>as-unqualified-kebab-maps</code> are two new builders that are conditionally defined if <code>camel-snake-kebab</code> is on your classpath.</li><li><code>datafiable-result-set</code> now allows the connectable and the options to be omitted. Passing <code>nil</code> for the connectable (or omitting it) suppresses foreign key navigation (when using <code>datafy</code>/<code>nav</code>), instead of throwing an obscure exception.</li><li>Exposes <code>reducible-result-set</code> and <code>foldable-result-set</code> for users who want more control over processing result sets obtained from database metadata.</li><li>Adds <code>with-column-value</code> to <code>RowBuilder</code> protocol and provides a more generic <code>builder-adapter</code> that offers more control over how column values are read.</li></ul></li><li><p><code>next.jdbc.sql</code></p><ul><li><code>find-by-keys</code> supports additional options to control how queries are run and results are returned: <code>:columns</code> selects just a subset of columns from the query, <code>:top</code>, <code>:limit</code>, <code>:offset</code>, <code>:fetch</code> provide DB-specific ways to perform pagination (with all of the caveats of the underlying DB-specific syntax). In addition, <code>:all</code> may be specified in place of the where clause or example hash map to return all rows of a table (generally, for use with pagination).</li><li>The functions in this namespace support connectables built via <code>next.jdbc/with-options</code>.</li></ul></li><li><p><code>next.jdbc.transaction</code></p><ul><li>A new dynamic Var <code>*nested-tx*</code> allows users to control how attempts to create nested transactions should behave. The default <code>next.jdbc</code> behavior is <code>:allow</code> (essentially "caveat programmer"). Behavior more compatible with <code>clojure.java.jdbc</code> can be obtained with the <code>:ignore</code> value. A <code>:prohibit</code> value will cause such attempts to throw exceptions.</li></ul></li><li><p><code>next.jdbc.types</code> (new namespace)</p><ul><li>Contains <code>as-*</code> functions corresponding to <code>java.sql.Types/*</code> values, so you can "type hint" how values should be handled by the underlying JDBC driver. <em>Note: these initially wrapped values in vectors but in order to provide better compatibility with HoneySQL they now use thunks.</em></li></ul></li><li><p>Microsoft SQL Server: the jTDS driver is now officially supported.</p></li><li><p>PostgreSQL 12.2.0 is officially supported (previously only 10.11 was officially supported).</p></li><li><p>Some (badly-behaved) JDBC drivers do not correctly implement empty result sets, returning <code>null</code> instead of empty collections from some driver methods. <code>next.jdbc</code> is now more tolerant of this -- treating such collections as empty instead of throwing a <code>NullPointerException</code>.</p></li></ul><h3 id="documentation">Documentation</h3><ul><li>Migration: offers an equivalent for <code>db-do-commands</code> from <code>clojure.java.jdbc</code>.</li><li>MySQL <strong>Tips &amp; Tricks</strong> describes batch statement rewriting (<code>:rewriteBatchedStatements</code>).</li><li>SQLite <strong>Tips &amp; Tricks</strong> describes the handling of <code>bool</code> and <code>bit</code> column types.</li><li>Clarifies realization actions in the docstrings for <code>row-number</code>, <code>column-names</code>, and <code>metadata</code>.</li></ul><h2 id="thanks">Thanks!</h2><p>As always, thanks to everyone who uses <code>next.jdbc</code>, thanks to everyone who has provided feedback (especially on the documentation), reported bugs, suggested improvements, or sent pull requests. <code>next.jdbc</code> wouldn't be what it is today without all that input!</p><p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for all the changes in release order and <a href="https://cljdoc.org/d/seancorfield/next.jdbc">cljdoc.org</a> for overall documentation of the latest release.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/jdbc/">jdbc</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2020/10/25/next-jdbc/";
+            this.page.identifier = "next.jdbc Compendium II";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                        <li><a href="/blog/2019/12/31/releases/">Happy New Releases!</a></li>
+                        
+                        <li><a href="/blog/2019/09/13/using-spec/">How do you use clojure.spec</a></li>
+                        
+                        <li><a href="/blog/2019/08/07/releases/">Release! Release! Release!</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/cryogen/">cryogen</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2020 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="http://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
