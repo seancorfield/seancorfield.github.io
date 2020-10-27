@@ -1,6 +1,7 @@
 {:title "next.jdbc Compendium II",
  :date "2020-10-24 18:00",
  :tags ["clojure" "jdbc"]}
+
 ## seancorfield/next.jdbc 1.1.610
 
 I recently released [1.1.610](https://github.com/seancorfield/next-jdbc/releases/tag/v1.1.610) and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.

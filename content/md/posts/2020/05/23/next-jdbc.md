@@ -1,6 +1,7 @@
 {:title "next.jdbc Compendium",
  :date "2020-05-23 13:55",
  :tags ["clojure" "jdbc"]}
+
 ## seancorfield/next.jdbc 1.0.445
 
 This morning I released [1.0.445](https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.445) and realized it's the sixth release since I last mentioned it in a blog post, so I thought it would be helpful to summarize all of the changes made so far in 2020. 1.0.13 came out at the end of December and I decided to switch from MAJOR.MINOR.PATCH versioning to MAJOR.MINOR.COMMITS versioning since I'd already made the commitment to no breaking changes -- only fixative/accretive changes -- when the library originally moved from Alpha to Beta a year ago.
