@@ -21,7 +21,7 @@
 
 <nav class="navbar navbar-default">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header right">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -30,7 +30,7 @@
             </button>
             <a class="navbar-brand" href="{{index-uri}}">{{title}}</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+        <div id="navbar" class="navbar-collapse collapse right">
             <ul class="nav navbar-nav navbar-right">
                 <li {% if home %} class="active" {% endif %}><a href="{{index-uri}}">Home</a></li>
                 <li
@@ -61,14 +61,17 @@
 
         <div class="col-md-3">
             <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                {% if sidebar-pages|not-empty %}
                 <h3>Links</h3>
                 <ul id="links">
-                    <li><a href="http://cryogenweb.org/docs/home.html">Cryogen Docs</a></li>
-                    <li><a href="https://carmen.la/blog/archives/">Carmen's Blog</a></li>
                     {% for page in sidebar-pages %}
                     <li><a href="{{page.uri}}">{{page.title}}</a></li>
                     {% endfor %}
                 </ul>
+                {% endif %}
                 {% if latest-posts|not-empty %}
                 <div id="recent">
                     <h3>Recent Posts</h3>

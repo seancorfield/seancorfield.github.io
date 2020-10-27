@@ -12,7 +12,7 @@
  :blog-prefix                  ""
  :rss-name                     "feed.xml"
  :rss-filters                  ["cryogen"]
- :recent-posts                 3
+ :recent-posts                 5
  :post-date-format             "yyyy-MM-dd"
  :archive-group-format         "yyyy MMMM"
  :sass-src                     []
@@ -24,7 +24,7 @@
  :disqus-shortname             "seancorfield"
  :ignored-files                [#"\.#.*" #".*\.swp$"]
  :previews?                    true
- :posts-per-page               5
+ :posts-per-page               10
  :blocks-per-preview           2
  :clean-urls                   :trailing-slash
  :collapse-subdirs?            false

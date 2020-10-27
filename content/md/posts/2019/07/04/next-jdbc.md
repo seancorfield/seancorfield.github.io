@@ -1,17 +1,17 @@
 {:title "Next.JDBC to 1.0.0 and Beyond!",
  :date "2019-07-04 10:00:00",
  :tags ["clojure" "jdbc"]}
-# next.jdbc 1.0.0 and 1.0.1
+## next.jdbc 1.0.0 and 1.0.1
 
 First off, [seancorfield/next.jdbc 1.0.0](https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.0) was released on June 13th, 2019 (and I [announced it on ClojureVerse](https://clojureverse.org/t/next-jdbc-1-0-0-the-gold-release/4379) but did not blog about it), and yesterday I released [seancorfield/next.jdbc 1.0.1](https://github.com/seancorfield/next-jdbc/releases/tag/v1.0.1) which is mostly documentation improvements.
 
 Someone recently commented that this blog had the [Release Candidate announcement](https://corfield.org/blog/2019/06/04/next-jdbc/) on June 4th and was surprised I didn't "make a big deal" about the "gold" release. The 1.0.0 release is a **big deal** and this blog post is about that -- what it's taken to get here and what's to come.<!-- more -->
 
-## clojure.contrib.sql
+### clojure.contrib.sql
 
 I learned Clojure back in 2010 and started using it at work in early 2011. For us to use it in production, we needed JDBC support but `clojure.contrib.sql` was not being actively maintained at that point and the Clojure 1.3 release was in its Alpha phase. Part of the 1.3 release cycle involved [breaking up the "Monolithic Contrib" from the 1.2 release and finding new maintainers](https://clojure.org/community/contrib_history) in order for its parts to move forward. That's how I became the maintainer of [`clojure.java.jdbc`](https://github.com/clojure/java.jdbc) -- `clojure.contrib.sql`'s new name and home. `clojure.java.jdbc` started life with an 0.0.1 release.
 
-## clojure.java.jdbc
+### clojure.java.jdbc
 
 The 0.0.x releases mostly focused on compatibility with more databases and ease of use enhancements.
 
@@ -29,7 +29,7 @@ The 0.0.x releases mostly focused on compatibility with more databases and ease 
 
 By the time 0.7.0 was released, I was beginning to think more seriously about a 1.0.0 release. The 0.7.x releases continued to expand database support, to add more and more options, and also started to look at performance improvements.
 
-## Contrib Evolving
+### Contrib Evolving
 
 I'd solicited feedback from the Clojure/core folks about what it would mean for a 1.0.0 release at various points, starting as far back as the 0.3x series of releases, and I'd been folding that feedback into the various changes over time. Also, over time, it became clear that Clojure/core were less worried about placing restrictions on how maintainers ran their projects. Some Contrib libraries had their 1.0.0 releases and continued on, some were still in the 0.0.x phase, others run the gamut from 0.1.x to 0.10.x.
 
@@ -37,7 +37,7 @@ It's good to read [Stuart Sierra's post from 2012](https://clojure.org/news/2012
 
 It was in this environment that I continued to think about what a 1.0.0 release of `clojure.java.jdbc` should be. At Clojure/conj (2018), I was excited about [REBL](https://github.com/cognitect-labs/REBL-distro) and `datafy`/`nav`, and I introduced [experimental support for all that in `clojure.java.jdbc`](https://corfield.org/blog/2018/12/03/datafy-nav/). I was also thinking about `clojure.spec` and the shift to qualified keywords and the increased use of transducers and the focus on simplicity and consistency...
 
-## The Birth of next.jdbc
+### The Birth of next.jdbc
 
 It was around that point that I realized that I wouldn't really be comfortable declaring a 1.0.0 release on `clojure.java.jdbc`: there was no natural "end state" and it had become large and complex (and slow in places) -- and I couldn't realistically change that without making a whole 'nother round of breaking changes. But this time I heeded [Rich's advice about accretion and fixation](https://www.youtube.com/watch?v=oyLBGkS5ICk) and started to design the "next" version of `clojure.java.jdbc` not as a series of (breaking) changes to what already existed but as a completely new set of functions built on a completely new set of implementations, based on what I'd learned from nearly eight years of maintaining `clojure.java.jdbc`.
 
@@ -51,13 +51,13 @@ I spent a month or so sketching out what this new version of the library would l
 
 One of the key decisions I had to make was whether this would become new namespaces inside `clojure.java.jdbc` in Contrib or live standalone somewhere -- because I viewed it very much as the "next version" of that Contrib library. I was surprised that no one seemed to care if a library was published under someone's name as a group ID, nor even if the namespaces themselves contained someone's name. I'd viewed Contrib's well-maintained Continuous Integration system and automated documentation generator as pros, along with my perception that Contrib libraries were easy to find and had some stamp of "authority" by virtue of being in the `clojure` GitHub organization -- but I seemed to be very much in the minority in that perception. Once I had CI set up for [`next.jdbc` on CircleCI](https://circleci.com/gh/seancorfield/next-jdbc) and auto-generated [documentation for `next.jdbc` on cljdoc.org](https://cljdoc.org/d/seancorfield/next.jdbc), I decided that `seancorfield/next.jdbc` was going to live on, outside Contrib.
 
-## Beta 1 and Stability
+### Beta 1 and Stability
 
 I mentioned above that I considered Beta 1 to be the first stable release. Having gone through so many breaking changes with `clojure.java.jdbc` and having listened to Rich (and others in the Clojure community) talk about the need for backward compatibility and the futility of semantic versioning, it was important to me that I could draw a line in the sand at some point and say "no more breaking changes". I decided that the move from Alpha to Beta should be that line for `next.jdbc` and the last breaking change was renaming `reducible!` to `plan` as part of the beta release -- indeed, that was the gating factor for exiting the alpha phase of development.
 
 My goal is to never break backward compatibility across future versions of `next.jdbc` -- only adding new functionality (and fixing things that are clearly broken). I expect future versions to appear slowly and contain very few additional features, perhaps focusing mostly on improving the documentation in response to questions from users of the library.
 
-## Wrapping Up
+### Wrapping Up
 
 I couldn't have made `next.jdbc` without a lot of lessons learned from eight years of maintaining `clojure.java.jdbc` and all the feedback from the community -- both on `clojure.java.jdbc` itself and during the alpha phase of `next.jdbc`'s development. It's faster, more modern, and simpler than `clojure.java.jdbc`. It embraces the host platform by being based on JDBC types directly, but offers value beyond being "just" a wrapper for those types and their methods. It looks to the future by yielding qualified keywords by default, supporting `datafy`, `nav`, and focusing on reducing/transducing as a core part of the main API (via `plan`).
 

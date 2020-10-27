@@ -1,7 +1,7 @@
 {:title "Next.JDBC",
  :date "2019-04-21 23:00:00",
  :tags ["clojure" "jdbc"]}
-# seancorfield/next.jdbc 1.0.0-alpha8
+## seancorfield/next.jdbc 1.0.0-alpha8
 
 I've talked about this in a few groups -- it's been a long time coming. This is the "next generation" of `clojure.java.jdbc` -- a modern wrapper for JDBC, that focuses on `reduce`/transducers, qualified-keywords, and `datafy`/`nav` support (so, yes, it requires Clojure 1.10).
 

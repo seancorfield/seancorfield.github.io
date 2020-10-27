@@ -4,8 +4,8 @@
             [clojure.pprint :as pp]
             [clojure.string :as str]))
 
-(def ^:private source "/Users/sean/SkyDrive/Documents/Sean/seancorfield-web/source/_posts")
-(def ^:private target "/Users/sean/SkyDrive/Documents/Sean/new-blog/content/md/posts")
+(def ^:private source "/Developers/workspace/seancorfield-source/source/_posts")
+(def ^:private target "/Developers/workspace/seancorfield.github.io/content/md/posts")
 
 (defn get-posts
   []

@@ -1,5 +1,7 @@
 {:title "Presentations"
- :date "2019-06-27 10:40"}
+ :date "2019-06-27 10:40"
+ :navbar? true
+ :page-index 0}
 
 This is a selection my conference and user group talks, from 2011 to 2013, roughly in reverse date order. Most of my talks have been aimed at a CFML audience, even when discussing Clojure. I used to list about two dozen talks on my site, but a lot of those are outdated now, and even that list only went back to about 2008.
 

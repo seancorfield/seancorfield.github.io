@@ -1,7 +1,7 @@
 {:title "Next.JDBC Beta 1",
  :date "2019-05-25 15:00:00",
  :tags ["clojure" "jdbc"]}
-# seancorfield/next.jdbc 1.0.0-beta1
+## seancorfield/next.jdbc 1.0.0-beta1
 
 `next.jdbc` -- the "next generation" of `clojure.java.jdbc` -- is a modern Clojure wrapper for JDBC. Beta 1 is now available to test -- only accretive and fixative changes will be made from this point on, so the API should be considered stable enough for production usage.
 
@@ -9,7 +9,7 @@ https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-beta1/doc/readme
 
 The group and artifact ID will remain `seancorfield/next.jdbc`, the namespace structure will remain `next.jdbc.*`. With auto-generated documentation hosted on cljdoc.org and Continuous Integration testing hosted on circleci.com, I have decided to continue work on `next.jdbc` outside Clojure Contrib, rather than merge it into `clojure.java.jdbc` as new namespaces there. I have updated the [Contributing page on GitHub](https://github.com/seancorfield/next-jdbc/blob/master/CONTRIBUTING.md) to reflect that Pull Requests can now be submitted.
 
-## Changes since Alpha 13
+### Changes since Alpha 13
 
 * Set up CircleCI testing (just local DBs for now).
 * Address [#21](https://github.com/seancorfield/next-jdbc/issues/21) by adding `next.jdbc.specs` and documenting basic usage.

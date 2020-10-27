@@ -1,7 +1,7 @@
 {:title "Next.JDBC Release Candidate 1",
  :date "2019-06-04 18:30:00",
  :tags ["clojure" "jdbc"]}
-# seancorfield/next.jdbc 1.0.0-rc1
+## seancorfield/next.jdbc 1.0.0-rc1
 
 `next.jdbc` -- the "next generation" of `clojure.java.jdbc` -- is a modern Clojure wrapper for JDBC. The first Release Candidate is now available to test -- containing only accretive and fixative changes from Beta 1. The API should be considered stable enough for production usage.
 
@@ -9,7 +9,7 @@ https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-rc1/doc/readme
 
 The focus of this release is providing more flexibility in result set builders, so that it is easier to implement your own naming strategies, via new builders that accept `:label-fn` and `:qualifier-fn` options. These mirror the `:column-fn` and `:table-fn` options used in `next.jdbc.sql` -- which are updated versions of `clojure.java.jdbc`'s `:entities` option. These new builder options are updated versions of `clojure.java.jdbc`'s `:identifiers` option.
 
-## Changes since Beta 1
+### Changes since Beta 1
 
 * Fix #24 by adding return type hints to `next.jdbc` functions.
 * Fix #22 by adding `next.jdbc.optional` with six map builders that omit `NULL` columns from the row hash maps.
