@@ -1,4 +1,4 @@
-{:title "next.jdbc compendium",
+{:title "next.jdbc Compendium II",
  :date "2020-10-24 18:00",
  :tags ["clojure" "jdbc"]}
 ## seancorfield/next.jdbc 1.1.610
