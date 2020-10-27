@@ -19,7 +19,7 @@
  :sass-path                    "sass"
  :theme                        "coit"
  :resources                    ["articles" "bodyart" "camera" "img" "js" "CNAME" "favicon.ico"]
- :keep-files                   [".git"]
+ :keep-files                   [".git" "README.md"]
  :disqus?                      true
  :disqus-shortname             "seancorfield"
  :ignored-files                [#"\.#.*" #".*\.swp$"]
