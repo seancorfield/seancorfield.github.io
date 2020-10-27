@@ -23,7 +23,7 @@ Fumiko and I worked on a project with ClojureScript, [Reagent](http://reagent-pr
 
 [The Strange Loop](http://www.thestrangeloop.com/) was its usual amazing self. Alex Miller and his team manage to excel themselves, year-on-year. The keynote talks were _phenomenal_ this year with Idalin Bob&eacute;'s inspiring talk about activism and Morgan Marquis-Boire's terrifying security and espionage talk as the highlights of the whole conference. The "theme" this year was distributed systems. I think this image sums it up well:
 
-{% img center /images/distributed.jpg 600 450 'image' 'images' %}
+{% img center /img/distributed.jpg 600 450 'image' 'images' %}
 
 The other highlight for me was a social event: the [LGBTQ in Technology Slack](http://lgbtq.technology/) dinner, generously sponsored by [Code Climate](https://codeclimate.com/). The Strange Loop team work hard to ensure the conference is a diverse, welcoming, safe space for everyone and I was excited to be able to organize this dinner with the support of the conference organizers.
 
@@ -39,4 +39,4 @@ In addition, we created an OAuth 2 server, mostly in Clojure, to support our RES
 
 Our other big change, coming at the tail end of year, was a switch from [Leiningen](http://leiningen.org/) to [Boot](http://boot-clj.com/) for our primary Clojure build tool. I'll be blogging about this more in due course, but for now I'll just mention the [Boot task for running Expectations tests](https://github.com/seancorfield/boot-expectations) and that Leiningen-style templates will be coming to Boot soon...
 
-Happy 2016! 
+Happy 2016!

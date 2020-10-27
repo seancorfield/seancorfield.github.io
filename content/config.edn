@@ -18,7 +18,7 @@
  :sass-src                     []
  :sass-path                    "sass"
  :theme                        "coit"
- :resources                    ["articles" "bodyart" "camera" "img" "js" "CNAME"]
+ :resources                    ["articles" "bodyart" "camera" "img" "js" "CNAME" "favicon.ico"]
  :keep-files                   [".git"]
  :disqus?                      true
  :disqus-shortname             "seancorfield"
