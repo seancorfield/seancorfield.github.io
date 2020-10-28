@@ -533,7 +533,7 @@
      (println (yellow "overriding config.edn with:"))
      (pprint overrides-and-hooks))
    (let [overrides    (dissoc overrides-and-hooks :extend-params-fn :update-article-fn)
-         {:keys [^String site-url blog-prefix rss-name recent-posts keep-files ignored-files ignored-paths previews? author-root-uri theme]
+         {:keys [^String site-url blog-prefix rss-name recent-posts keep-files ignored-files previews? author-root-uri theme]
           :as   config} (resolve-config overrides)
          posts        (->> (read-posts config)
                            (add-prev-next)
@@ -606,7 +606,7 @@
        (println (blue "generating authors views"))
        (compile-authors params posts))
      (println (blue "generating site map"))
-     (->> (sitemap/generate site-url ignored-files ignored-paths)
+     (->> (sitemap/generate site-url config)
           (cryogen-io/create-file (cryogen-io/path "/" blog-prefix "sitemap.xml")))
      (println (blue "generating main rss"))
      (->> (rss/make-channel config posts)
