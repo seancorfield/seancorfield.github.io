@@ -22,7 +22,7 @@
  :keep-files                   [".git" "README.md"]
  :disqus?                      true
  :disqus-shortname             "seancorfield"
- :ignored-files                [#"\.#.*" #".*\.swp$" #".*bodyart.*"]
+ :ignored-files                [#"\.#.*" #".*\.swp$"]
  :sitemap-ignored-paths        [#"bodyart"]
  :previews?                    true
  :posts-per-page               10
