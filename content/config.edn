@@ -23,7 +23,7 @@
  :disqus?                      true
  :disqus-shortname             "seancorfield"
  :ignored-files                [#"\.#.*" #".*\.swp$" #".*bodyart.*"]
- :ignored-paths                [#"bodyart"]
+ :sitemap-ignored-paths        [#"bodyart"]
  :previews?                    true
  :posts-per-page               10
  :blocks-per-preview           2
