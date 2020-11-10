@@ -2,12 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Posts Tagged &quot;jdbc&quot;</title>
+    <title>An Architect&#39;s View: VS Code and Clover</title>
     
-    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
-    <meta name="keywords" content="">
-    
-    <link rel="canonical" href="https://corfield.org/tags/jdbc/">
+<meta name="keywords" content="diversity,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript">
+
+<meta name="description" content="I&#39;ve written before about how I switched from Emacs to Atom
+at the end of 2016,
+where I initially used ProtoREPL (which is no longer maintained)
+and then I switched to Chlorine
+at the end of 2018. I&#39;ve been very impressed with the work that
+Mauricio Szabo has done on Chlorine, add a way to
+extend the functionality using ClojureScript
+so that you can add your own commands --
+as I do in my atom-chlorine-setup repo
+so that I can easily work with Reveal
+(and previously with Cognitect&#39;s REBL). I&#39;ve posted a few
+Atom/Chlorine/REBL videos to YouTube
+showing my workflow.">
+
+<meta property="og:description" content="I&#39;ve written before about how I switched from Emacs to Atom
+at the end of 2016,
+where I initially used ProtoREPL (which is no longer maintained)
+and then I switched to Chlorine
+at the end of 2018. I&#39;ve been very impressed with the work that
+Mauricio Szabo has done on Chlorine, add a way to
+extend the functionality using ClojureScript
+so that you can add your own commands --
+as I do in my atom-chlorine-setup repo
+so that I can easily work with Reveal
+(and previously with Cognitect&#39;s REBL). I&#39;ve posted a few
+Atom/Chlorine/REBL videos to YouTube
+showing my workflow.">
+
+<meta property="og:url" content="https://corfield.org/blog/2020/11/09/vscode-clover/" />
+<meta property="og:title" content="VS Code and Clover" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2020/11/09/vscode-clover/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -55,57 +86,73 @@
         <div class="col-lg-9">
             <div id="content">
                 
-<div id="posts-by-tag">
-    <div id="page-header">
-        <h2>Posts Tagged &quot;jdbc&quot;</h2>
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">November 9, 2020</div>
+        
     </div>
-    <ul>
+    <h2>VS Code and Clover</h2>
+</div>
+<div>
     
-        <li>
-            <a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a>
-        </li>
+    <p>I've written before about how I switched from Emacs to Atom
+at the end of 2016,
+where I initially used ProtoREPL (which is no longer maintained)
+and then I switched to <a href="https://atom.io/packages/chlorine">Chlorine</a>
+at the end of 2018. I've been very impressed with the work that
+Mauricio Szabo has done on Chlorine, add a way to
+<a href="https://github.com/mauricioszabo/atom-chlorine/blob/master/docs/extending.md">extend the functionality using ClojureScript</a>
+so that you can add your own commands --
+as I do in my <a href="https://github.com/seancorfield/atom-chlorine-setup">atom-chlorine-setup repo</a>
+so that I can easily work with <a href="https://github.com/vlaaad/reveal/">Reveal</a>
+(and previously with Cognitect's REBL). I've posted a few
+<a href="https://www.youtube.com/channel/UC8GD-smsEvNyRd3EZ8oeSrA">Atom/Chlorine/REBL videos to YouTube</a>
+showing my workflow.<!--more--></p><p>One of Mauricio's goals with Chlorine was to structure it in
+such a way that the editor-specific functionality was separate
+from the core REPL management and evaluation functionality,
+with the latter being in its own <a href="https://github.com/mauricioszabo/repl-tooling">REBL tooling repo</a>.
+Based on this separation, he's been working on an extension for
+VS Code that provides the same core functionality, but a potential
+roadblock has been that VS Code doesn't allow you to add new
+commands at startup via the sort of user-supplied <code>init</code>-file
+machinery that Atom supports. That has held me back from trying
+VS Code, despite feeling that Atom isn't really getting the same
+level of love and support (not from Clojurians themselves, nor from the company behind them).</p><blockquote><p>The <a href="https://clojure.org/news/2020/02/20/state-of-clojure-2020">State of Clojure 2020 Survey</a> showed VS Code usage climbing to 10% this year (from 6.6% last year) while Atom usage dropped to 3.9% (from just over 4.5%). Microsoft owns GitHub, which produced Atom and Electron, but has the wildly successful VS Code which is where most of the attention is.</p></blockquote><p>The other day on Slack, however, Mauricio announced that he had been able to port the ClojureScript-based extension machinery from Chlorine to <a href="https://github.com/mauricioszabo/clover/">Clover for VS Code</a>, and the customizations are surfaced as "Tasks" that can be run via the VS Code API and which can have key bindings associated with them.
+The only downside is that the tasks don't show up in the VS Code "Command Palette" so they're not as discoverable.</p><p>This encouraged me to install VS Code over the weekend and, sure enough, every single piece of my Atom/Chlorine setup works out-of-the-box with VS Code/Clover, and I was able to use the exact same key bindings that I'm used to from Atom!</p><p>I've put up a <a href="https://github.com/seancorfield/vscode-clover-setup">vscode-clover repo</a> with my current VS Code settings, key bindings, and the Clover <code>config.cljs</code> (the latter is identical to the <code>chlorine-config.cljs</code> file in my atom-chlorine-setup repo mantioned earlier).</p><p>I set up VS Code first on my Mac, and then set it up on my Windows laptop (a recently-purchased Microsoft Surface Laptop 3 -- which I am loving!). VS Code has an experimental feature to synchronize your setup, so I enabled that on both machines and it replicated all of the extensions and settings from my Mac onto my Windows laptop -- which saved me a bunch of time (although it doesn't sync key bindings across different platforms but, luckily, I am sync'ing that via my setup repo on GitHub!). The other aspect that impressed me with VS Code on Windows is that it has a "remote" mode for working with WSL2, which is where I do all of my development on Windows, and that allows you to have all of your code and REPLs on WSL2 -- as well as all the VS Code extensions so they run "natively" on Linux -- but still use VS Code natively on Windows! That's much nicer than what I had been doing with Atom, where I installed the Linux version of Atom on WSL2 and used VcXsrv (Xlaunch) to display the GUI on Windows.</p><p>Now I have the <em>exact</em> same development experience on both machines with everything synchronized!</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-        <li>
-            <a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a>
-        </li>
+    <a href="/tags/clojure/">clojure</a>
     
-        <li>
-            <a href="/blog/2019/12/31/releases/">Happy New Releases!</a>
-        </li>
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II &raquo;</a>
+        
+    </div>
+
     
-        <li>
-            <a href="/blog/2019/08/07/releases/">Release! Release! Release!</a>
-        </li>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2020/11/09/vscode-clover/";
+            this.page.identifier = "VS Code and Clover";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
     
-        <li>
-            <a href="/blog/2019/07/04/next-jdbc/">Next.JDBC to 1.0.0 and Beyond!</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2019/06/04/next-jdbc/">Next.JDBC Release Candidate 1</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2019/05/25/next-jdbc/">Next.JDBC Beta 1</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2019/04/21/next-jdbc/">Next.JDBC</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2018/12/06/null-nilable-optionality/">SQL NULL, s/nilable, and optionality</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2018/12/03/datafy-nav/">Clojure 1.10&#39;s datafy and nav</a>
-        </li>
-    
-        <li>
-            <a href="/blog/2017/07/17/clojure-java-jdbc-0-7-0/">Release 0.7.0 of clojure.java.jdbc</a>
-        </li>
-    
-    </ul>
+
+
 </div>
 
             </div>
