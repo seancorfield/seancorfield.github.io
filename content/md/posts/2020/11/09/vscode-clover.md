@@ -6,7 +6,7 @@ at the end of 2016,
 where I initially used ProtoREPL (which is no longer maintained)
 and then I switched to [Chlorine](https://atom.io/packages/chlorine)
 at the end of 2018. I've been very impressed with the work that
-Mauricio Szabo has done on Chlorine, add a way to
+Mauricio Szabo has done on Chlorine, adding a way to
 [extend the functionality using ClojureScript](https://github.com/mauricioszabo/atom-chlorine/blob/master/docs/extending.md)
 so that you can add your own commands --
 as I do in my [atom-chlorine-setup repo](https://github.com/seancorfield/atom-chlorine-setup)
