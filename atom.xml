@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Mon, 09 Nov 2020 17:44:27 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2020/11/09/vscode-clover/</guid><link>https://corfield.org/blog/2020/11/09/vscode-clover/</link><title>VS Code and Clover</title><description>I've written before about how I switched from Emacs to Atom
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Mon, 09 Nov 2020 18:14:48 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2020/11/09/vscode-clover/</guid><link>https://corfield.org/blog/2020/11/09/vscode-clover/</link><title>VS Code and Clover</title><description>I've written before about how I switched from Emacs to Atom
 at the end of 2016,
 where I initially used ProtoREPL (which is no longer maintained)
 and then I switched to Chlorine
 at the end of 2018. I've been very impressed with the work that
-Mauricio Szabo has done on Chlorine, add a way to
+Mauricio Szabo has done on Chlorine, adding a way to
 extend the functionality using ClojureScript
 so that you can add your own commands --
 as I do in my atom-chlorine-setup repo
