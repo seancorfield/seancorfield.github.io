@@ -18,7 +18,7 @@ showing my workflow.<!--more-->
 One of Mauricio's goals with Chlorine was to structure it in
 such a way that the editor-specific functionality was separate
 from the core REPL management and evaluation functionality,
-with the latter being in its own [REBL tooling repo](https://github.com/mauricioszabo/repl-tooling).
+with the latter being in its own [repl-tooling repo](https://github.com/mauricioszabo/repl-tooling).
 Based on this separation, he's been working on an extension for 
 VS Code that provides the same core functionality, but a potential
 roadblock has been that VS Code doesn't allow you to add new
