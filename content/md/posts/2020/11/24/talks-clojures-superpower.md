@@ -1,5 +1,5 @@
 {:title "Talks: Clojure's Superpower",
- :date "2020-11-24 10:00:00",
+ :date "2020-11-24 09:30:00",
  :tags ["clojure" "presentations"]}
 
 For about a decade, I used to speak regularly at conferences and user groups around the world. In 2013, I decided to take a break and just enjoy attending events (here's a [small selection of my presentations](https://corfield.org/pages/presentations/) covering the last three years of that decade).<!--more-->
