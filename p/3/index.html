@@ -75,7 +75,7 @@
             <div class="date">July 29, 2016</div>
         </div>
     </div>
-    <p>A couple of years ago, I blogged about <a href="http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we've generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p><p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 -- an order of magnitude slower!<!-- more --></p>
+    <p>A couple of years ago, I blogged about <a href="https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">instrumenting Clojure for New Relic monitoring</a> and we've generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.</p><p>An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 -- an order of magnitude slower!<!-- more --></p>
     <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Continue reading &#8594;</a>
     <hr>
     
@@ -97,7 +97,7 @@
             <div class="date">June 17, 2016</div>
         </div>
     </div>
-    <p>Back in February I talked about <a href="http://corfield.org/blog/2016/02/02/boot-new/">boot-new</a> and talked about a "future 1.0.0 release". We're not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we've continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot's reach soon. In this post, I want to cover some of the things we've been doing with Boot recently.<!-- more --></p><p>I feel I should start with an apology for the "radio silence" since February -- it's a combination of work being extremely engaging (and busy!) and some aspects of my personal life going somewhat to hell in a handbasket... But things have improved lately (thankfully!) and I hope to be more regular in my blogging (I certainly have a decent queue of article ideas in my head!).</p>
+    <p>Back in February I talked about <a href="https://corfield.org/blog/2016/02/02/boot-new/">boot-new</a> and talked about a "future 1.0.0 release". We're not there yet, but <a href="https://github.com/seancorfield/boot-new#boot-generators">generators</a> got added in release 0.4.0 and, in the four minor releases since, the focus has been on refactoring to match the core <a href="http://boot-clj.com/">Boot</a> task structure and improving compatibility with Leiningen templates. At World Singles, we've continued to extend our usage of Boot until we have only a couple of Ant tasks left and we expect those to be within Boot's reach soon. In this post, I want to cover some of the things we've been doing with Boot recently.<!-- more --></p><p>I feel I should start with an apology for the "radio silence" since February -- it's a combination of work being extremely engaging (and busy!) and some aspects of my personal life going somewhat to hell in a handbasket... But things have improved lately (thankfully!) and I hope to be more regular in my blogging (I certainly have a decent queue of article ideas in my head!).</p>
     <a href="/blog/2016/06/17/more-boot/">Continue reading &#8594;</a>
     <hr>
     
@@ -108,7 +108,7 @@
             <div class="date">February 2, 2016</div>
         </div>
     </div>
-    <p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> -- <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="http://corfield.org/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p><p>Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>
+    <p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> -- <a href="https://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="https://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="https://corfield.org/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p><p>Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>
     <a href="/blog/2016/02/02/boot-new/">Continue reading &#8594;</a>
     <hr>
     
@@ -119,7 +119,7 @@
             <div class="date">January 31, 2016</div>
         </div>
     </div>
-    <p>In <a href="http://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more --></p><p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
+    <p>In <a href="https://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more --></p><p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
     <a href="/blog/2016/01/31/testing-with-boot/">Continue reading &#8594;</a>
     <hr>
     
@@ -130,7 +130,7 @@
             <div class="date">January 30, 2016</div>
         </div>
     </div>
-    <p>In yesterday's blog post, <a href="http://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p><p>Over the coming weeks, I'll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
+    <p>In yesterday's blog post, <a href="https://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, I talked about our switch from Leiningen to Boot but, as Sven Richter observed in the comments, I only gave general reasons why we preferred Boot, without a list of pros and cons.</p><p>Over the coming weeks, I'll write a series of posts about some of the specifics that worked better for us, as well as some of the obstacles we had to overcome in the transition.</p>
     <a href="/blog/2016/01/30/building-on-boot/">Continue reading &#8594;</a>
     <hr>
     
@@ -281,7 +281,7 @@
             </div>
         </div>
     </div>
-    <footer>Copyright &copy; 2020 Sean Corfield
+    <footer>Copyright &copy; 2021 Sean Corfield
         <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
 </div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
