@@ -31,7 +31,7 @@ There's a subtlety here that Leiningen glosses over: there are really two types 
 
 [Boot](http://boot-clj.com/) came along later in Clojure's evolution and approached build tools from a different direction. While most build tools (across most languages) are "declarative", i.e., they have some sort of Domain-Specific Language (DSL) and a file that describes the various properties of your development/testing/packaging strategies, Boot decided to provide a library and a set of abstractions that would let you write pure Clojure to implement your needs. As Boot's website says "It's not a build tool - it's build tooling."
 
-I've [written about Boot](http://corfield.org/blog/categories/boot/) quite a bit since we made our decision at [World Singles llc](http://worldsinglesnetworks.com/) to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it's composable and "it's just code". Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:
+I've [written about Boot](https://corfield.org/blog/categories/boot/) quite a bit since we made our decision at [World Singles llc](http://worldsinglesnetworks.com/) to switch our stack from Leiningen to Boot, back in late 2015. Boot feels more like Clojure: it's composable and "it's just code". Boot can do everything that Leiningen can do, and quite a bit more. And of course it chose its own terminology for the various JVM-related paths:
 
 * `resource-paths` -- any files that need to both be on the classpath and packaged up for deployment.
 * `source-paths` -- any files that need to be on the classpath, but not part of the deployment artifact.

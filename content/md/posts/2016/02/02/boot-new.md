@@ -1,7 +1,7 @@
 {:title "boot-new",
  :date "2016-02-02 17:00:00",
  :tags ["boot" "clojure"]}
-In my previous three blog posts about [Boot](http://boot-clj.com/) -- [Rebooting Clojure](http://corfield.org/blog/2016/01/29/rebooting-clojure/), [Building On Boot](http://corfield.org/blog/2016/01/30/building-on-boot/), and [Testing With Boot](http://corfield.org/blog/2016/01/31/testing-with-boot/) -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had [boot-expectations](https://github.com/seancorfield/boot-expectations) written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more -->
+In my previous three blog posts about [Boot](http://boot-clj.com/) -- [Rebooting Clojure](https://corfield.org/blog/2016/01/29/rebooting-clojure/), [Building On Boot](https://corfield.org/blog/2016/01/30/building-on-boot/), and [Testing With Boot](https://corfield.org/blog/2016/01/31/testing-with-boot/) -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had [boot-expectations](https://github.com/seancorfield/boot-expectations) written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more -->
 
 Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new [Framework One](https://github.com/framework-one/fw1-clj) application up and running?
 

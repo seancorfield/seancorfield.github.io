@@ -1,7 +1,7 @@
 {:title "Clojure, New Relic, and Slow Application Startup",
  :date "2016-07-29 20:20:00",
  :tags ["clojure"]}
-A couple of years ago, I blogged about [instrumenting Clojure for New Relic monitoring](http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/) and we've generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.
+A couple of years ago, I blogged about [instrumenting Clojure for New Relic monitoring](https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/) and we've generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.
 
 An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 -- an order of magnitude slower!<!-- more -->
 

@@ -2,7 +2,7 @@
  :date "2019-01-22 20:15:00",
  :tags ["clojure"]}
 About a month ago, I was [praising Chlorine, the new Clojure package for
-Atom](http://corfield.org/blog/2018/12/19/atom-chlorine/) and I've been using
+Atom](https://corfield.org/blog/2018/12/19/atom-chlorine/) and I've been using
 it, day-in, day-out, for all my Clojure development. On a Mac, that's
 straightforward because I start a Socket REPL on the Mac and I run Atom on the
 Mac so when I connect via Chlorine and issue the `Chlorine: Load File`

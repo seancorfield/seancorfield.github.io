@@ -5,7 +5,7 @@
 [Clojure/conj](https://2018.clojure-conj.org/) is over for another year and, as always, it was a great experience. Lots of interesting and inspiring talks (which are probably all up on [ClojureTV](https://www.youtube.com/user/ClojureTV)
 by now!) and of course the ever important "hallway track" which is the real value-add of attending the conference in person.
 
-Just over a month ago, I [blogged about my expectations for Conj](http://corfield.org/blog/2018/10/25/clojure-conj/) so this is my follow-up post with
+Just over a month ago, I [blogged about my expectations for Conj](https://corfield.org/blog/2018/10/25/clojure-conj/) so this is my follow-up post with
 my thoughts on the sessions I actually attended.
 
 * As I suspected, Stuart Halloway did show off some tooling that uses `prepl` but mostly it was focused on `datafy` and `nav`. [REBL](https://github.com/cognitect-labs/REBL-distro) is a REPL and visual browser for Clojure data that displays the "datafication" of results and lets you "navigate" into them based on how the results (and data representation) implement the protocols behind those two new functions. You can start the browser from your regular REPL and it uses a `prepl` socket server to communicate with your REPL process. It's hard to really appreciate it until you use it, and it is just a first cut of possible tooling built on the "generalized laziness" concept that underlies datafication and on-demand navigation. Because Stu put me on the hook during his talk, here's a rough first cut of `datafy`/`nav` support for [clojure.java.jdbc](https://github.com/clojure/java.jdbc/blob/master/src/main/clojure/clojure/java/jdbc/datafy.clj) that lets you browse query results and navigate into related records in other tables.

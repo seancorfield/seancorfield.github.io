@@ -31,7 +31,7 @@ because `:col` maps to `nil` or because `row` doesn't contain `:col`. There are
 use cases where it matters: `contains?`, row/column specs, tabular printing.
 
 Along with changing the behavior of `NULL` columns and
-[supporting `datafy` and `nav`](http://corfield.org/blog/2018/12/03/datafy-nav/),
+[supporting `datafy` and `nav`](https://corfield.org/blog/2018/12/03/datafy-nav/),
 I have a lot of other changes that I'd like to apply to `java.jdbc`, such as
 automatically qualifying column keys with the table from which they came,
 improving overall performance (by no longer converting `ResultSet` objects to
