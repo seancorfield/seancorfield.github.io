@@ -10,4 +10,4 @@ The "talk" will mostly be a live coding session, showing some aspects that I thi
 > Everyone talks about RDD but what it is really? Why is Clojure's REPL not like other languages' REPLs? Can you really develop an application "live"? What about restarts, refreshes? Don't I need special, magical tooling for this? This talk will show you how fundamental Clojure's REPL is to development, and how to build a web application, live, from your editor, with no restarts, no refreshes, just simple, basic tooling. Clojure's REPL is truly its superpower: it lets you hold your application in your hand, query it, modify it, evolve it, with just a basic set of tools and an understanding of what "REPL-friendly development" means.
 Here are the dates and times so far:
 * [Clojure Provo](https://www.meetup.com/Clojure-Provo/events/274782506/) -- December 15th, 7 pm MST
-* [London Clojurians](https://www.meetup.com/London-Clojurians/events/274302844/) -- January 12th, 6:30 pm GMT
+* [London Clojurians](https://www.meetup.com/London-Clojurians/events/274302844/) -- January 12th, 6:30 pm GMT -- watch the hour-long [presentation on YouTube](https://www.youtube.com/watch?v=gIoadGfm5T8).
