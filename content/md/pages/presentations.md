@@ -9,7 +9,7 @@ I stopped speaking at conferences after 2013, preferring to just enjoy attending
 
 Clojure's Superpower: REPL-Driven Development
 ---
-The slide deck is pretty minimal as it mostly just [sets the stage for a live coding session](https://corfield.org/articles/REPL-Driven-Development.pdf), but it does include some very useful links to reading material, talks, and courses about RDD. [Watch the recording on YouTube](https://www.youtube.com/watch?v=gIoadGfm5T8).
+The slide deck is pretty minimal as it mostly just [sets the stage for a live coding session](https://corfield.org/articles/REPL-Driven-Development.pdf), but it does include some very useful links to reading material, talks, and courses about RDD. [Watch the one hour recording from London Clojurians](https://www.youtube.com/watch?v=gIoadGfm5T8) or [the three hour recording from Clojure Provo](https://www.youtube.com/watch?v=skEXGSp10Xs) (the actual preso starts at 14m 30s) on YouTube.
 
 Learn You a What for Great Good
 ---
