@@ -82,7 +82,7 @@ across all of our subprojects, by including a single alias when invoking the CLI
 
 ### How did the Clojure CLI and `deps.edn` hinder us?
 
-The CLI assumes there are three `deps.edn` files: the system-level one baked into
+The CLI assumes there are three `deps.edn` files: the root one baked into
 the CLI installation (actually, into the version of `[org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)`
 that underpins the CLI), the user-level one (usually in `~/.clojure/`), and the
 project-level one.
@@ -164,20 +164,16 @@ meant we needed to rethink our "everything" setup.
 #### Not just us
 
 It's probably worth mentioning at this point
-that the [Polylith](https://polylith.gitbook.io/) team were also
+that the [Polylith](https://polylith.gitbook.io/) team are also
 looking at supporting the Clojure CLI / `deps.edn` and their architecture is
-a type of monorepo -- and they were also struggling with effective ways to organize
-`deps.edn` files and how to invoke them. I believe folks using Datomic Ions were
-also wrestling with some sort of variant of this problem too, based on discussions
-I had with Alex Miller.<a name="the-third-way">&nbsp;</a>
+a type of monorepo -- and they are also struggling with effective ways to organize
+`deps.edn` files and how to invoke them. Monorepos come in many forms!<a name="the-third-way">&nbsp;</a>
 
 ### The Third Way
 
 At this point, I pressed Alex Miller pretty hard on how he might tackle
 this problem if he were forced -- gun to his head -- to work on a monorepo
 like ours?
-
-> "I have worked on them in the past. did not like, would not mono repo again." (Alex Miller, Slack, February 19th, 2021)
 
 After a bit of back and forth with Alex in a thread on Slack and several DMs later, the
 path we agreed that I should explore was to create a top-level `deps.edn` file -- a variant of our
