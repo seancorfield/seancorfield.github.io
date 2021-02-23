@@ -18,6 +18,9 @@ artifacts from this codebase for deployment (as uberjars) to production.
 We have about 111,000 lines of Clojure: about 88,000 is source code and the rest,
 23,000, is test code.
 
+If you don't want to read all the back story, you can <a href="#the-third-way">jump
+straight to the TL;DR</a> and see the solution we've settled on.
+
 ### Why do we use a monorepo?
 
 Even though we _can_ (and sometimes _do_) build and deploy an application artifact
