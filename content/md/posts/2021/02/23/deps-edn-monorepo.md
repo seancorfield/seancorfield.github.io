@@ -339,3 +339,9 @@ user=> (require 'ws.activator)
 nil
 user=>
 ```
+
+### Got questions?
+
+Find me on the [Clojurians Slack](https://clojurians.slack.com),
+or [Twitter](https://twitter.com/seancorfield), or just ask in the comments
+below.
