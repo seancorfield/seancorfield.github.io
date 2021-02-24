@@ -86,7 +86,7 @@ across all of our subprojects, by including a single alias when invoking the CLI
 ### How did the Clojure CLI and `deps.edn` hinder us?
 
 The CLI assumes there are three `deps.edn` files: the root one baked into
-the CLI installation (actually, into the version of `[org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)`
+the CLI installation (actually, into the version of [`org.clojure/tools.deps.alpha`](https://github.com/clojure/tools.deps.alpha)
 that underpins the CLI), the user-level one (usually in `~/.clojure/`), and the
 project-level one.
 
@@ -209,9 +209,7 @@ In summary, here's the structure of our monorepo now:
 | | |____deps.edn # bare dependencies: no versions, no test
 | | |____src
 | | | |____ws
-| | | | |____activator
 | | | | |____activator.clj
-| | | | |____uberjar
 | | |____test
 | | | |____ws
 | | | | |____activator_expectations.clj
