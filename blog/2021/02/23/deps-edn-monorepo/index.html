@@ -118,7 +118,7 @@ if you want, giving our developers freedom to set up their environments however 
 can very easily depend upon each other at a source code level, mirroring how we work
 with all the source code in our editor already, across the whole monorepo.</p><p>We particularly like <code>:override-deps</code> so that we can "pin" versions of dependencies
 across all of our subprojects, by including a single alias when invoking the CLI.</p><h3 id="how-did-the-clojure-cli-and-depsedn-hinder-us">How did the Clojure CLI and <code>deps.edn</code> hinder us?</h3><p>The CLI assumes there are three <code>deps.edn</code> files: the root one baked into
-the CLI installation (actually, into the version of <code>[org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)</code>
+the CLI installation (actually, into the version of <a href="https://github.com/clojure/tools.deps.alpha"><code>org.clojure/tools.deps.alpha</code></a>
 that underpins the CLI), the user-level one (usually in <code>~/.clojure/</code>), and the
 project-level one.</p><h4 id="overriding-the-user-level-depsedn-file">Overriding the user-level <code>deps.edn</code> file</h4><p>Our initial approach was to leverage the <code>CLJ_CONFIG</code> environment variable that
 the CLI supports to select a different directory for the user-level <code>deps.edn</code>
