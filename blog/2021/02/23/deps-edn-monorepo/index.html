@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: deps.edn and monorepos</title>
+    
+<meta name="keywords" content="diversity,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript,presentations">
+
+<meta name="description" content="At World Singles Networks llc we have been using
+a monorepo for several years and it has taken us several iterations to settle on a
+structure that works well with the Clojure CLI and deps.edn.">
+
+<meta property="og:description" content="At World Singles Networks llc we have been using
+a monorepo for several years and it has taken us several iterations to settle on a
+structure that works well with the Clojure CLI and deps.edn.">
+
+<meta property="og:url" content="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/" />
+<meta property="og:title" content="deps.edn and monorepos" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">February 23, 2021</div>
+        
+    </div>
+    <h2>deps.edn and monorepos</h2>
+</div>
+<div>
+    
+    <p>At <a href="https://worldsinglesnetworks.com">World Singles Networks llc</a> we have been using
+a monorepo for several years and it has taken us several iterations to settle on a
+structure that works well with the Clojure CLI and <code>deps.edn</code>.<!--more--></p><h3 id="what-does-our-monorepo-look-like">What does our monorepo look like?</h3><p>Our main git repo has a <code>build</code> folder containing scripts, tooling, and configuration,
+and a <code>clojure</code> folder containing all our Clojure source and test code.</p><p>That <code>clojure</code> folder has over three dozen subprojects that represent either
+reusable "libraries" or "applications". We build just over a dozen application
+artifacts from this codebase for deployment (as uberjars) to production.</p><p>We have about 111,000 lines of Clojure: about 88,000 is source code and the rest,
+23,000, is test code.</p><p>If you don't want to read all the back story, you can <a href="#the-third-way">jump
+straight to the TL;DR</a> and see the solution we've settled on.</p><h3 id="why-do-we-use-a-monorepo">Why do we use a monorepo?</h3><p>Even though we <em>can</em> (and sometimes <em>do</em>) build and deploy an application artifact
+on its own, we tend to want to build and deploy all of our application artifacts
+together, tied to a single git tag and/or SHA.</p><p>Although each of our subprojects has different dependencies, we generally want to
+control the specific versions of many third-party library dependencies across the whole
+codebase so that we don't have to worry about a transitive dependency in one
+"library" (subproject) conflicting with a different version of the same dependency
+in another "library". We find value in being able to update a version in one place
+and have it apply to all of the subprojects.</p><p>When working in a REPL, we like to have all of the source code and all of the
+test code (and all of its dependencies) available in our editor, and can make
+changes across multiple subprojects if we wish, as well as being able to run
+any combination of tests from our editor.</p><p>An additional goal is to avoid, as much as possible, duplication of configuration
+across subprojects -- in particular, in the context of this article, to avoid
+duplication of dependencies and aliases across <code>deps.edn</code> files in these subprojects.</p><h3 id="how-does-the-clojure-cli-and-depsedn-help-us">How does the Clojure CLI and <code>deps.edn</code> help us?</h3><p>When we started building this codebase a decade ago, we used Leiningen because
+that was the only game in town. For a long time, it worked well, but it started
+to feel constraining as we wanted to automate more and more of our dev/test/build
+processes. I've <a href="https://corfield.org/blog/2016/01/29/rebooting-clojure/">talked about our switch from Leiningen to Boot</a> before, about five years ago.</p><p>Once we switched to Boot, we decided to put our dependencies in EDN files so
+that we had more control over them and could manipulate them programmatically.
+When the Clojure CLI first appeared (2017), we saw similarities between the
+<code>deps.edn</code> approach and our own handling of dependencies and I started work
+on a Boot task to read the new <code>deps.edn</code> format with a view to providing a
+migration path from Boot to the Clojure CLI. I <a href="https://corfield.org/blog/2018/04/18/all-the-paths/">compared Leiningen, Boot, and the Clojure CLI</a> about three years ago.
+We migrated completely to the Clojure CLI and <code>deps.edn</code> some time in 2018.</p><p>We like the simplicity and performance of the Clojure CLI: it computes a cache
+of dependencies and command line options only as needed and so it mostly runs
+just a single JVM (unlike Leiningen) with just your project's code and dependencies.</p><p>We can build any tooling we want for our dev/test/build pipeline, using regular
+Clojure code (much like Boot's approach, only without even the small "framework"
+of Boot itself). This also allows us to mix'n'match tooling as we need, much
+more smoothly than with either Leiningen or Boot.</p><p>We like that the Clojure CLI is official, supported tooling from Cognitect (Nubank),
+and gets regular updates that are carefully considered in a holistic manner alongside
+Clojure itself.</p><p>We like that you can choose to perform project-based CLI operations in a "reproducible"
+way that excludes user-level configuration in <code>~/.clojure/deps.edn</code> but that
+you can also perform operations with the full power of your personal customizations
+if you want, giving our developers freedom to set up their environments however they wish.</p><p>We like that dependencies can be local -- via <code>:local/root</code> -- so that our subprojects
+can very easily depend upon each other at a source code level, mirroring how we work
+with all the source code in our editor already, across the whole monorepo.</p><p>We particularly like <code>:override-deps</code> so that we can "pin" versions of dependencies
+across all of our subprojects, by including a single alias when invoking the CLI.</p><h3 id="how-did-the-clojure-cli-and-depsedn-hinder-us">How did the Clojure CLI and <code>deps.edn</code> hinder us?</h3><p>The CLI assumes there are three <code>deps.edn</code> files: the root one baked into
+the CLI installation (actually, into the version of <code>[org.clojure/tools.deps.alpha](https://github.com/clojure/tools.deps.alpha)</code>
+that underpins the CLI), the user-level one (usually in <code>~/.clojure/</code>), and the
+project-level one.</p><h4 id="overriding-the-user-level-depsedn-file">Overriding the user-level <code>deps.edn</code> file</h4><p>Our initial approach was to leverage the <code>CLJ_CONFIG</code> environment variable that
+the CLI supports to select a different directory for the user-level <code>deps.edn</code>
+file. This allowed us to have a single <code>deps.edn</code> containing all of the "control"
+aliases we wanted, for pinning dependencies via <code>:override-deps</code>, for testing
+tools, for building JAR files, etc, and then for each subproject to have its own
+project-level <code>deps.edn</code> file. This worked well:</p><pre><code class="bash">$ cd monorepo/subproject
+$ CLJ_CONFIG=../versions clojure -M:defaults:other:aliases -m some.tooling
+</code></pre><p>We wrapped this in a <code>build</code> shell script so we could run the following and it
+would handle <code>cd</code> and adding the other bits of the command-line:</p><pre><code class="bash">$ build other:aliases subproject -m some.tooling
+</code></pre><p>We also had a pseudo-project called <code>everything</code> and a small Clojure script that
+merged all the subproject <code>deps.edn</code> files into a single <code>deps.edn</code> file in the
+<code>everything</code> subproject that we used as the basis for our REPL with "all code"
+available. <em>[Since almost all dependency versions were specified via <code>:override-deps</code> in <code>versions/deps.edn</code>, this (generated) <code>everything/deps.edn</code> file only changed occasionally]</em></p><p>But it had the downside that developers could not leverage their user-level <code>deps.edn</code>
+because <code>CLJ_CONFIG</code> was overriding that with our <code>../versions/deps.edn</code>. That led
+to that file slowly accruing an amalgam of any and all tooling that each team member
+wanted, and it became unwanted incidental complexity in terms of maintenance.</p><h4 id="generating-project-level-depsedn-files">Generating project-level <code>deps.edn</code> files</h4><p>Eventually, we broke down and decided to figure out a way to restore access to the
+user-level <code>deps.edn</code> file while still maintaining our "control" file. After talking
+to a number of other Clojurians who were also using monorepos, it seemed a common
+option was to programmatically generate the project-level <code>deps.edn</code> file, as needed,
+from a repo-wide template (essentially our <code>versions/deps.edn</code> file) and a template
+in each project. Since it's "just data" in EDN files, this is trivial to do in
+Clojure -- and we were already doing a little of this for our <code>everything/deps.edn</code> file.
+We added some code to our <code>build</code> script to compute hashes for the template EDN files
+and to automatically generate subproject <code>deps.edn</code> files "on demand" and for a while
+that worked well: we simplified <code>versions/deps.edn</code> to remove all the per-developer
+cruft and we were happy that we could customize our developer experience as much as
+we wanted, outside of the company repo!</p><p>This also made it easier to run the <code>clojure</code> command without our <code>build</code> script
+since the <code>CLJ_CONFIG=../versions</code> prefix was no longer required (and sometimes
+we'd been running it manually outside the <code>build</code> script even when we had to provide
+that environment variable override).</p><p>However, <code>deps.edn</code> already has a subtle "gotcha" around local dependencies (<code>:local/root</code>),
+and that is regarding what happens if a (transitive) dependency changes: if you're
+working inside the subproject where that dependency changes, the CLI will see the
+change and regenerate the cache and everything will "just work". If you're working
+in a different subproject, that depends locally on the one that changed, that change
+can't be detected "at a distance" and you need to remember <code>-Sforce</code> (or just blow
+away the <code>.cpcache</code> directory the CLI maintains).</p><p>Once we started generating subproject <code>deps.edn</code> files "on demand", it amplified
+that problem because using <code>clojure -Sforce</code> was no longer enough to pick up
+transitive changes and our "on demand" code wasn't always smart enough to figure
+it out either so running <code>build ... -Sforce</code> wasn't quite reliable enough.</p><p>The final straw for us was a recent change to the CLI in <a href="https://clojure.org/releases/tools#v1.10.2.790">version 1.10.2.790</a>
+where a "warning [is issued] if <code>:paths</code> or <code>:extra-paths</code> refers to a directory
+outside the project root (<strong>in the future will become an error</strong>)" (emphasis mine).
+Our <code>everything</code> project depended on the other subproject's source code via <code>:local/root</code>
+but since that didn't include the tests, we used <code>:extra-paths</code> to provide all of
+the (relative) subproject paths to the tests, e.g., <code>"../subproject/test"</code>, which
+falls foul of this new warning. The warning is sensible and I can understand why
+the Clojure team want to disable "random external paths" in projects -- but it
+meant we needed to rethink our "everything" setup.</p><h4 id="not-just-us">Not just us</h4><p>It's probably worth mentioning at this point
+that the <a href="https://polylith.gitbook.io/">Polylith</a> team are also
+looking at supporting the Clojure CLI / <code>deps.edn</code> and their architecture is
+a type of monorepo -- and they are also struggling with effective ways to organize
+<code>deps.edn</code> files and how to invoke them. Monorepos come in many forms!<a name="the-third-way"> </a></p><h3 id="the-third-way">The Third Way</h3><p>At this point, I pressed Alex Miller pretty hard on how he might tackle
+this problem if he were forced -- gun to his head -- to work on a monorepo
+like ours?</p><p>After a bit of back and forth with Alex in a thread on Slack and several DMs later, the
+path we agreed that I should explore was to create a top-level <code>deps.edn</code> file -- a variant of our
+former <code>versions/deps.edn</code> file -- that had an alias for every subproject that
+contained a <code>:local/root</code> dependency on the subproject itself.</p><p>Since we can't activate aliases on local dependencies' <code>deps.edn</code> files, I
+also added a <code>:*-test</code> alias for every subproject into the top-level <code>deps.edn</code> file,
+"lifting" the testing dependencies and paths up one level.</p><p>Finally, I added an <code>:everything</code> alias that had <code>:extra-deps</code> containing every
+subproject and <code>:extra-paths</code> for all of the subprojects' test code.</p><p>All <code>clojure</code> commands are now run from that top-level directory, with our
+<code>:defaults</code> alias (bringing in <code>:override-deps</code>), an alias for the subproject(s)
+you want to operate on, maybe an alias for the tests for those subprojects,
+and then any tooling alias(es) and arguments. We still have our <code>build</code> shell
+script to make this a little less verbose (its "API" hasn't changed at all but
+it uses the subproject name as an alias now instead of changing into that
+subdirectory).</p><p>In summary, here's the structure of our monorepo now:</p><pre><code>&lt;repo&gt;
+|____build # our shell scripts / config / etc
+...
+|____clojure # our Clojure code "root"
+| |____activator # a subproject
+| | |____deps.edn # bare dependencies: no versions, no test
+| | |____src
+| | | |____ws
+| | | | |____activator
+| | | | |____activator.clj
+| | | | |____uberjar
+| | |____test
+| | | |____ws
+| | | | |____activator_expectations.clj
+...
+| |____classes
+| | |____.keep
+...
+| |____deps.edn # control deps.edn file
+...
+| |____worldsingles # another subproject
+| | |____deps.edn
+| | |____resources
+...
+| | |____src
+...
+| | |____test
+...
+</code></pre><p>Then <code>clojure/activator/deps.edn</code> has:</p><pre><code class="clojure">{:deps
+ {worldsingles/worldsingles {:local/root "../worldsingles"}
+  camel-snake-kebab/camel-snake-kebab {}
+  com.stuartsierra/component {}
+  seancorfield/next.jdbc {}}}
+</code></pre><p>And in <code>clojure/deps.edn</code> we have:</p><pre><code class="clojure">  ;; for each subproject, we have two aliases:
+  :activator {:extra-deps {worldsingles/activator {:local/root "activator"}}}
+  :activator-test
+  {:extra-paths ["activator/test"]
+   :extra-deps {worldsingles/worldsingles-test {:local/root "worldsingles-test"}}}
+</code></pre><p>That <code>clojure/deps.edn</code> also has tooling aliases, such as:</p><pre><code class="clojure">  :test ; for a testing context
+  {:extra-deps {com.gfredericks/test.chuck {:mvn/version "0.2.10"}
+                expectations/clojure-test {:mvn/version "1.2.1"}
+                org.clojure/test.check {}}
+   :jvm-opts ["-Dclojure.core.async.go-checking=true"
+              "-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j2-factory"
+              "-Dlogged-future=synchronous"
+              "-XX:-OmitStackTraceInFastThrow"
+              "--illegal-access=warn"]}
+
+  :runner ; to run tests (test:&lt;subproject&gt;-test:runner) -- the &lt;task&gt; called test
+  {:extra-deps {org.clojure/tools.namespace {}
+                org.clojure/tools.reader {}
+                com.cognitect/test-runner
+                {:git/url "https://github.com/cognitect-labs/test-runner"
+                 :sha "b6b3193fcc42659d7e46ecd1884a228993441182"}}
+   :jvm-opts ["-Dlog4j2.configurationFile=log4j2-silent.properties"]
+   :main-opts ["-m" "cognitect.test-runner"
+               "-r" ".*[-\\.](expectations|test)(\\..*)?$"]}
+</code></pre><p>So we would run:</p><pre><code class="bash">$ clojure -M:defaults:activator:activator-test:test:runner -d activator/test
+# or just
+$ build test activator
+</code></pre><p>All of the <code>{}</code> versions are specified in the <code>:defaults</code> alias via <code>:override-deps</code>:</p><pre><code class="clojure">  ;; "pinned" versions for all cross-project dependencies
+  :defaults
+  {:override-deps
+   {...
+    camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
+    clj-time/clj-time {:mvn/version "0.15.2"}
+    clojure.java-time/clojure.java-time {:mvn/version "0.3.2"}
+    ...
+    org.clojure/tools.logging {:mvn/version "1.1.0"}
+    org.clojure/tools.namespace {:mvn/version "1.0.0"}
+    org.clojure/tools.reader {:mvn/version "1.3.3"}
+    ...}}
+</code></pre><p>When we build an uberjar:</p><pre><code class="bash">$ clojure -X:uberjar :aliases '[:defaults :activator]' :jar '"test.jar"' :main-class ws.activator :aot true
+</code></pre><p>Where the <code>:uberjar</code> alias is:</p><pre><code class="clojure">  :uberjar
+  {:replace-deps {seancorfield/depstar {:mvn/version "2.0.187"}}
+   :exec-fn hf.depstar/uberjar}
+</code></pre><p>And that <code>:everything</code> alias?</p><pre><code class="clojure">  :everything
+  {:extra-deps {worldsingles/activator {:local/root "activator"}
+                ...
+                worldsingles/worldsingles {:local/root "worldsingles"}
+                ...}
+                worldsingles/wsseogeo {:local/root "wsseogeo"}}
+   :extra-paths ["activator/test"
+                 ...
+                 "worldsingles/test"
+                 "worldsingles-test/test"
+                 ...]}
+</code></pre><p>Starting a REPL:</p><pre><code class="clojure">$ clj -A:defaults:everything:test
+Clojure 1.10.3-rc1
+user=&gt; (require 'ws.activator)
+nil
+user=&gt;
+</code></pre><h3 id="got-questions">Got questions?</h3><p>Find me on the <a href="https://clojurians.slack.com">Clojurians Slack</a>,
+or <a href="https://twitter.com/seancorfield">Twitter</a>, or just ask in the comments
+below.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2020/11/24/talks-clojures-superpower/">Talks: Clojure&#39;s Superpower &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2021/02/23/deps-edn-monorepo/";
+            this.page.identifier = "deps.edn and monorepos";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></li>
+                        
+                        <li><a href="/blog/2020/11/24/talks-clojures-superpower/">Talks: Clojure&#39;s Superpower</a></li>
+                        
+                        <li><a href="/blog/2020/11/09/vscode-clover/">VS Code and Clover</a></li>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                        <li><a href="/blog/2020/05/23/next-jdbc/">next.jdbc Compendium</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <h3>Latest Tweets</h3>
+                <div id="tweets">
+                  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a><br/>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                
+                  <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2021 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
