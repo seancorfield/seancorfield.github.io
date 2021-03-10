@@ -8,7 +8,7 @@ and one of the comments in his **Community** section stood out for me:
 > "I suggest moving off of slack to a more accessible chat system. Losing history is a bad thing. Check out discord or matrix or gitter or mattermark or any other number of tools made for this purpose."
 <!-- more -->
 
-The [Clojurians Slack](https://clojurians.slack.com/) _[sign up [here](http://clojurians-invite.com/)]_
+The [Clojurians Slack](https://clojurians.slack.com/) _[sign up [here](http://clojurians.net/)]_
 started as a small experiment about four years ago and has been far more
 successful than anyone could have imagined, with around 15K members signed up
 and around 1,700 members considered "active" on a weekly basis (which means it
