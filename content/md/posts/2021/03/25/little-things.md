@@ -56,7 +56,7 @@ responses. Since we had that code in place, it wasn't much work to
 make it JSON-decode response bodies for 200 status responses as well.
 
 The migration was mostly fairly smooth but one weird hiccup took me hours
-to debug -- and that's what I want to talk about it here.
+to debug -- and that's what I want to talk about here.
 
 Back in the day, our main REST-like API was written in a non-Clojure language and
 so were our initial API tests. At some point, it was considered important
