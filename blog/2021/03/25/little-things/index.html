@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: It&#39;s the &quot;Little Things&quot;...</title>
+    
+<meta name="keywords" content="diversity,frege,clojure,boot,conferences,process,java,community,jdbc,conj,leiningen,javascript,presentations">
+
+<meta name="description" content="Our Clojure team is a big fan of reducing dependencies and, in particular,
+avoiding dependencies that are known to be troublesome (such as the special
+circle of hell that is all the different versions of the Jackson JSON libraries).We&#39;ve recently been looking at switching from libraries that have a lot
+of dependencies to equivalent libraries that have fewer (or none) if they
+are &quot;fast enough&quot;.">
+
+<meta property="og:description" content="Our Clojure team is a big fan of reducing dependencies and, in particular,
+avoiding dependencies that are known to be troublesome (such as the special
+circle of hell that is all the different versions of the Jackson JSON libraries).We&#39;ve recently been looking at switching from libraries that have a lot
+of dependencies to equivalent libraries that have fewer (or none) if they
+are &quot;fast enough&quot;.">
+
+<meta property="og:url" content="https://corfield.org/blog/2021/03/25/little-things/" />
+<meta property="og:title" content="It&#39;s the &quot;Little Things&quot;..." />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2021/03/25/little-things/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">March 25, 2021</div>
+        
+    </div>
+    <h2>It&#39;s the &quot;Little Things&quot;...</h2>
+</div>
+<div>
+    
+    <p>Our Clojure team is a big fan of reducing dependencies and, in particular,
+avoiding dependencies that are known to be troublesome (such as the special
+circle of hell that is all the different versions of the Jackson JSON libraries).<!-- more --></p><p>We've recently been looking at switching from libraries that have a lot
+of dependencies to equivalent libraries that have fewer (or none) if they
+are "fast enough".</p><p>One example is <a href="https://github.com/dakrone/cheshire">Cheshire</a> because
+of its Jackson dependencies -- and the fact that it is widespread and
+often pulled in transitively in different versions, which in turn want
+to bring in different versions of Jackson. For a long time, your high
+performance choices were Cheshire or <a href="https://github.com/metosin/jsonista">Jsonista</a>,
+which is also a Jackson-based library. <a href="https://github.com/clojure/data.json"><code>data.json</code></a>
+just wasn't fast enough to be considered for a lot of use cases, even
+though it is a pure Clojure project with zero dependencies.</p><p><code>data.json</code> recently got a serious overhaul, courtesy of <a href="https://github.com/slipset">Erik Assum</a>,
+that addressed a lot of performance issues and has made it reasonable
+to use this library in all but the most time-critical situations.
+At work, we decided to switch from Cheshire to <code>data.json</code> to reduce
+our dependencies -- I'll talk a bit more about that later.</p><h2 id="clj-http-and-http-kit">clj-http and http-kit</h2><p>Our latest target is <a href="https://github.com/dakrone/clj-http">clj-http</a> which
+has a bunch of Apache HTTP dependencies and Slingshot and Potemkin, and
+then indirectly relies on Cheshire and several other "optional" libraries
+for convenient features like automatic JSON, EDN, and Transit support.
+For historical reasons (we leverage quite a bit of our Clojure code from
+a legacy, non-Clojure web application), the Apache HTTP dependencies in
+particular are a pain for us because we need to control the versions so
+that they are compatible with both clj-http <em>and</em> our legacy web container.
+And of course we'd just gone through the Cheshire-to-<code>data.json</code> migration
+so having clj-http drag Cheshire back in was less than ideal.</p><p>Functionally, there's nothing wrong with clj-http (just as there's nothing
+functionally wrong with Cheshire). But non-functional requirements can be
+important too sometimes.</p><p>Migration looked fairly simple:</p><ul><li>add the http-kit dependencies to all subprojects that currently depend on clj-http</li><li>edit each namespace that uses <code>clj-http.core</code> to use <code>org.httpkit.client</code> instead and add a <code>deref</code> on all of the calls (http-kit is async by default)</li><li>edit the options passed in the calls:
+<ul><li>clj-http throws exceptions by default for a lot of things and you can pass <code>:throw-exceptions false</code> to make it return HTTP status instead; http-kit doesn't throw exceptions (but can return an <code>:error</code> key for any non-HTTP exception encountered)</li><li>clj-http can process the body automatically <code>:as :json</code> (if you have Cheshire on your classpath!); http-kit requires explicit JSON conversion</li></ul></li></ul><p>Since Cheshire only decodes the response body on a successful call,
+we already had to JSON-decode response bodies for non-200 HTTP status
+responses. Since we had that code in place, it wasn't much work to
+make it JSON-decode response bodies for 200 status responses as well.</p><p>The migration was mostly fairly smooth but one weird hiccup took me hours
+to debug -- and that's what I want to talk about it here.</p><p>Back in the day, our main REST-like API was written in a non-Clojure language and
+so were our initial API tests. At some point, it was considered important
+that certain API endpoints trimmed whitespace on some of their arguments,
+so the tests were updated to include query arguments with trailing whitespace.
+All was good: the code was updated to trim arguments and the tests passed.</p><p>When we introduced Clojure, we rewrote the tests to use clj-http and
+<a href="https://github.com/clojure-expectations/clojure-test">Expectations</a> and the
+new test suite added lots more tests -- and retained the existing ones that
+build query strings with trailing spaces. Everything passed (after fixing a
+few bugs that the newly-added tests detected).</p><p>Then we rewrote the legacy API in Clojure and got all the tests working
+again: we were confident that our new API server could replace our legacy
+API server and we were happy, and we migrated and everything continued
+to work just fine. In fact, life was much better: the Clojure version used
+less memory and ran faster, and was easier to deploy.</p><p>This week, I converted the tests from clj-http to http-kit and the
+trailing-whitespace tests failed. Hmm. I added a few logging calls into
+the API and discovered that the trailing whitespace was indeed coming
+through "as expected" but the API was not handling it. How could this be?
+We'd had tests for <em>years</em> that passed trailing whitespace into the API!</p><p>I reverted to clj-http but keep the logging calls and was <em>shocked</em> to
+discover that, somehow, clj-http was <em>trimming the trailing whitespace from the URL</em>!
+That seemed incredible to us so we started digging. Nothing in the clj-http
+source suggested that it was actively trimming whitespace anywhere.
+It <em>was</em> doing some slightly sketchy "URL encoding" on the full URL
+passed in but it definitely wasn't <em>trimming</em> anything.</p><p>I continued to dig and test and dig and test and after several hours(!)
+I had drilled down to a call to <code>java.net.URL</code>'s constructor in the
+clj-http code as the culprit:</p><pre><code class="clojure">user=&gt; (java.net.URL. "http://localhost:3333/email?foo=bar   ")
+#object[java.net.URL 0x4ba32242 "http://localhost:3333/email?foo=bar"]
+</code></pre><p>When clj-http is analyzing the URL and its components, it leans on <code>java.net.URL</code>
+to pick things apart, before going on to use <code>java.net.URI</code> for the
+actual HTTP call -- and this was completely incidentally stripping
+whitespace from the URL!</p><p>http-kit also uses <code>java.net.URI</code> for setting up the actual call but
+does not round-trip the URL through <code>java.net.URL</code>.</p><p>This meant that our tests had been broken for years and we just hadn't known!
+And, technically, our new API had also been broken since the rewrite
+to Clojure -- but no one had noticed or complained so we decided to
+simply remove the tests that had been broken by clj-http's whitespace trimming.</p><h3 id="sketchy-url-encoding">Sketchy URL Encoding</h3><p>I mentioned above that clj-http seemed to be doing some slightly
+sketchy URL encoding and I uncovered that via another test that
+broke when I switched to http-kit. This test was deliberately invoking
+an API endpoint with a URL that included a space in the resource ID.</p><p>A client application in a browser would URL encode such a request
+of course so this test was just making sure that such requests worked.</p><p>http-kit threw an exception instead. <code>java.net.URI</code> does not allow
+a URI that contains a space.</p><p>But.</p><p>Wait a minute, clj-http also uses <code>java.net.URI</code> so why doesn't it
+throw an exception?</p><p>Because clj-http includes a <a href="https://github.com/dakrone/clj-http/blob/3.x/src/clj_http/client.clj#L160-L168">very specific encoding</a>
+of the URL's path and query string that doesn't just use
+<code>java.net.URLEncoder/encode</code> but instead directly replaces
+spaces with <code>%20</code> and then runs <code>encode</code> on portions of the
+URL segments that include characters outside a particular set.</p><p>clj-http was masking an error in our tests which http-kit exposed.
+The fix this time was to update the tests to use properly
+encoded URLs in the first place. At least the API code was
+already doing the right thing in this case!</p><h2 id="cheshire-and-datajson">Cheshire and data.json</h2><p>I said I'd talk about our migration from Cheshire to <code>data.json</code>
+because that also had a few speed bumps. Cheshire is very
+helpful: it converts quite a few non-JSON data types to strings
+for you, such as UUIDs and dates. It was so convenient that it
+had never occurred to me that <code>data.json</code> did not do this.</p><p>Naturally, we relied on these extra conversions, but <code>data.json</code>
+lets you provide a <code>:value-fn</code> converter so you can supply
+them yourself.</p><p>The most obvious one was from <code>java.util.Date</code> or <code>#inst</code> to
+a format that turned out to be <code>ISO_INSTANT</code> in Java Time.
+This is Cheshire's default. We already had a similar converter for
+<code>java.time.Instant</code> in our code so this was trivial to add.</p><p>More tests passed.</p><p>The next failure was because we passed a UUID through Cheshire,
+now <code>data.json</code>, but that's easy to handle just by calling <code>str</code>
+to get the same result as Cheshire.</p><p>More tests passed.</p><p>The final failure seemed to be date-related. We were now
+getting an exception from Java Time that it couldn't format
+the date. Given the converter we had already installed, this
+seemed strange... until we realized the new date was <code>java.sql.Date</code>
+and <em>not</em> <code>java.util.Date</code> and the SQL version very helpfully
+throws <code>UnsupportedOperationException</code> from its <code>toInstant()</code>
+method -- because it has no seconds.</p><p>So we added a special case for <code>java.sql.Date</code> that round-tripped
+through <code>java.time.LocalDate</code> to <code>java.time.LocalDateTime</code> and
+that worked perfectly.</p><p>Then we hit another date-related failure and this time it was
+because we were using a custom string pattern instead of
+<code>ISO_INSTANT</code> (and, frankly, this is why Java Time makes me
+pull my hair out: both <code>ISO_INSTANT</code> and our custom pattern
+want year, month, day, hour, minute, second but apparently
+they want some of these fields "differently" so different
+Java Time types may or may not satisfy the criteria).</p><p>A bit of conditional futzing around based on whether we wanted
+the default format or our custom format and we were back off
+to the races!</p><h2 id="its-the-little-things-in-life">It's the Little Things in life...</h2><p>Overall, both migrations -- from Cheshire to <code>data.json</code> and
+from clj-http to http-kit -- have gone very smoothly and I'll
+attribute a lot of that to the careful design that many Clojure
+developers apply to their code.</p><p>But both migrations also included bizarre edge cases that
+produced hard-to-debug test failures that, ultimately, came
+down to peculiarities of how those libraries used the underlying
+Java standard library functions. Hmm...</p><h2 id="what-about-javanethttp">What about java.net.http?</h2><p>Given our desire to reduce dependencies, a very reasonable question
+would be "Why not just use <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html">Java's built-in HTTP client</a>?"</p><p>It's a very well-designed and flexible HTTP client, providing both
+synchronous and asynchronous operation, as well as ways to plug in
+your own response body processing via handlers and subscribers. It
+has a modern "builder-style" interface and I'm sure it is lovely
+to use from Java.</p><p>Two problems for us:</p><ol><li>Frankly, the builder-style APIs are nasty and it's nearly always more convenient in Clojure to use a wrapper that lets you provide the entire configuration as a plain old hash map instead of all those chained interop calls.</li><li>A lot of our Clojure code that does HTTP calls is shared between our modern, all-Clojure apps and our legacy, non-Clojure code... and that legacy code has to run on Java 8, unfortunately, which means no <code>java.net.http</code> as that only arrived in Java 11.</li></ol><p><em>The latter issue has been a big driver for our rewrite to Clojure!</em></p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2021/03/25/little-things/";
+            this.page.identifier = "It&#39;s the &quot;Little Things&quot;...";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2021/03/25/little-things/">It&#39;s the &quot;Little Things&quot;...</a></li>
+                        
+                        <li><a href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></li>
+                        
+                        <li><a href="/blog/2020/11/24/talks-clojures-superpower/">Talks: Clojure&#39;s Superpower</a></li>
+                        
+                        <li><a href="/blog/2020/11/09/vscode-clover/">VS Code and Clover</a></li>
+                        
+                        <li><a href="/blog/2020/10/25/next-jdbc/">next.jdbc Compendium II</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <h3>Latest Tweets</h3>
+                <div id="tweets">
+                  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a><br/>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                
+                  <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2021 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
