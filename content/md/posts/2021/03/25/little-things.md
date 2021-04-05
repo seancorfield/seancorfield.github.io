@@ -50,7 +50,7 @@ Migration looked fairly simple:
   * clj-http throws exceptions by default for a lot of things and you can pass `:throw-exceptions false` to make it return HTTP status instead; http-kit doesn't throw exceptions (but can return an `:error` key for any non-HTTP exception encountered)
   * clj-http can process the body automatically `:as :json` (if you have Cheshire on your classpath!); http-kit requires explicit JSON conversion
 
-Since Cheshire only decodes the response body on a successful call,
+Since clj-http only decodes the response body on a successful call,
 we already had to JSON-decode response bodies for non-200 HTTP status
 responses. Since we had that code in place, it wasn't much work to
 make it JSON-decode response bodies for 200 status responses as well.
