@@ -4,7 +4,11 @@
 
 At [World Singles Networks llc](https://worldsinglesnetworks.com) we have been using
 a monorepo for several years and it has taken us several iterations to settle on a
-structure that works well with the Clojure CLI and `deps.edn`.<!--more-->
+structure that works well with the Clojure CLI and `deps.edn`.
+
+_Updated April 21st, 2021 to reflect recent changes in our setup.
+See [`deps.edn` and monorepos II](/blog/2021/04/21/deps-edn-monorepo-2/)
+for more details._<!--more-->
 
 ### What does our monorepo look like?
 
@@ -27,21 +31,25 @@ Even though we _can_ (and sometimes _do_) build and deploy an application artifa
 on its own, we tend to want to build and deploy all of our application artifacts
 together, tied to a single git tag and/or SHA.
 
-Although each of our subprojects has different dependencies, we generally want to
+~~Although each of our subprojects has different dependencies, we generally want to
 control the specific versions of many third-party library dependencies across the whole
 codebase so that we don't have to worry about a transitive dependency in one
 "library" (subproject) conflicting with a different version of the same dependency
 in another "library". We find value in being able to update a version in one place
-and have it apply to all of the subprojects.
+and have it apply to all of the subprojects.~~ _[2021-04-21: while this has been
+convenient, we've decided that the benefits do not outweigh the inconveniences
+caused by our use of the `:defaults` alias -- see below.]_
 
 When working in a REPL, we like to have all of the source code and all of the
 test code (and all of its dependencies) available in our editor, and can make
 changes across multiple subprojects if we wish, as well as being able to run
 any combination of tests from our editor.
 
-An additional goal is to avoid, as much as possible, duplication of configuration
+~~An additional goal is to avoid, as much as possible, duplication of configuration
 across subprojects -- in particular, in the context of this article, to avoid
-duplication of dependencies and aliases across `deps.edn` files in these subprojects.
+duplication of dependencies and aliases across `deps.edn` files in these
+subprojects.~~ _[2021-04-21: as with pinning versions above, we have decided to accept some duplication
+as a trade-off for simple use of tooling -- see below.]_
 
 ### How does the Clojure CLI and `deps.edn` help us?
 
@@ -80,8 +88,9 @@ We like that dependencies can be local -- via `:local/root` -- so that our subpr
 can very easily depend upon each other at a source code level, mirroring how we work
 with all the source code in our editor already, across the whole monorepo.
 
-We particularly like `:override-deps` so that we can "pin" versions of dependencies
-across all of our subprojects, by including a single alias when invoking the CLI.
+~~We particularly like `:override-deps` so that we can "pin" versions of dependencies
+across all of our subprojects, by including a single alias when invoking the
+CLI.~~ _[2021-04-21: we did like it but it doesn't play all that well with a lot of CLI tooling.]_
 
 ### How did the Clojure CLI and `deps.edn` hinder us?
 
@@ -170,7 +179,9 @@ It's probably worth mentioning at this point
 that the [Polylith](https://polylith.gitbook.io/) team are also
 looking at supporting the Clojure CLI / `deps.edn` and their architecture is
 a type of monorepo -- and they are also struggling with effective ways to organize
-`deps.edn` files and how to invoke them. Monorepos come in many forms!<a name="the-third-way">&nbsp;</a>
+`deps.edn` files and how to invoke them. Monorepos come in many forms!
+_[2021-04-21: I've spent quite a bit of time looking at Polylith since I wrote this
+post and that experience has influenced some of the changes we have made since then.]_ <a name="the-third-way">&nbsp;</a>
 
 ### The Third Way
 
@@ -196,7 +207,9 @@ you want to operate on, maybe an alias for the tests for those subprojects,
 and then any tooling alias(es) and arguments. We still have our `build` shell
 script to make this a little less verbose (its "API" hasn't changed at all but
 it uses the subproject name as an alias now instead of changing into that
-subdirectory).
+subdirectory). _[2021-04-21: we've abandoned the `:defaults` alias and the use
+of `:override-deps` and accepted a small amount of duplication of dependency
+version declarations, in exchange for simpler tooling interactions.]_
 
 In summary, here's the structure of our monorepo now:
 
@@ -207,6 +220,7 @@ In summary, here's the structure of our monorepo now:
 |____clojure # our Clojure code "root"
 | |____activator # a subproject
 | | |____deps.edn # bare dependencies: no versions, no test
+. . .    [2021-04-21: src dependencies with versions, no test]
 | | |____src
 | | | |____ws
 | | | | |____activator.clj
@@ -234,9 +248,15 @@ Then `clojure/activator/deps.edn` has:
 ```clojure
 {:deps
  {worldsingles/worldsingles {:local/root "../worldsingles"}
+  ;; originally:
   camel-snake-kebab/camel-snake-kebab {}
   com.stuartsierra/component {}
-  seancorfield/next.jdbc {}}}
+  seancorfield/next.jdbc {}
+  ;; 2021-04-21:
+  camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
+  com.stuartsierra/component {:mvn/version "1.0.0"}
+  seancorfield/next.jdbc {:mvn/version "1.1.646"}
+  }}
 ```
 
 And in `clojure/deps.edn` we have:
@@ -281,7 +301,8 @@ $ clojure -M:defaults:activator:activator-test:test:runner -d activator/test
 $ build test activator
 ```
 
-All of the `{}` versions are specified in the `:defaults` alias via `:override-deps`:
+All of the `{}` versions are specified in the `:defaults` alias via `:override-deps`
+_[2021-04-21: this has gone away -- versions are specified directly in subprojects' `deps.edn` files now.]_:
 
 ```clojure
   ;; "pinned" versions for all cross-project dependencies
@@ -337,6 +358,9 @@ user=> (require 'ws.activator)
 nil
 user=>
 ```
+
+_[2021-04-21: see [`deps.edn` and monorepos II](/blog/2021/04/21/deps-edn-monorepo-2/)
+for more details about the changes made since this post was originally written.]_
 
 ### Got questions?
 
