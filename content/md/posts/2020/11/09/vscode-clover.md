@@ -1,6 +1,7 @@
 {:title "VS Code and Clover",
  :date "2020-11-09 17:00:00",
- :tags ["clojure"]}
+ :tags ["clojure" "vs code" "editors"]}
+
 I've written before about how I switched from Emacs to Atom
 at the end of 2016,
 where I initially used ProtoREPL (which is no longer maintained)
@@ -19,7 +20,7 @@ One of Mauricio's goals with Chlorine was to structure it in
 such a way that the editor-specific functionality was separate
 from the core REPL management and evaluation functionality,
 with the latter being in its own [repl-tooling repo](https://github.com/mauricioszabo/repl-tooling).
-Based on this separation, he's been working on an extension for 
+Based on this separation, he's been working on an extension for
 VS Code that provides the same core functionality, but a potential
 roadblock has been that VS Code doesn't allow you to add new
 commands at startup via the sort of user-supplied `init`-file

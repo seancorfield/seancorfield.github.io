@@ -1,6 +1,6 @@
 {:title "deps.edn and monorepos II",
  :date "2021-04-21 20:40:00",
- :tags ["clojure"]}
+ :tags ["clojure" "monorepo" "polylith"]}
 
 A couple of months ago, I wrote about our use of [`deps.edn` with our monorepo](/blog/2021/02/23/deps-edn-monorepo/) at work.
 I've updated that post to reflect changes we've made recently and I'm going to talk

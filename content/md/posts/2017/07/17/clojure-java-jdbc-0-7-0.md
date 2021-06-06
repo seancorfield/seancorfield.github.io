@@ -1,6 +1,7 @@
 {:title "Release 0.7.0 of clojure.java.jdbc",
  :date "2017-07-17 10:40:00",
- :tags ["clojure" "jdbc"]}
+ :tags ["clojure" "jdbc" "open source"]}
+
 The stable 0.7.0 release of `java.jdbc` -- the [Clojure Contrib JDBC library](https://github.com/clojure/java.jdbc) -- has been baking for over a year, across of a trail of alpha and beta releases, and is now, finally, available!
 
 While you _could_ read the [`java.jdbc` Change Log](https://github.com/clojure/java.jdbc/blob/master/CHANGES.md) to figure out what is new in this release, I thought it would be easier to consolidate all the changes into a blog post, with changes organized by category, and provide justification for the various changes.<!-- more -->

@@ -1,6 +1,6 @@
 {:title "Start Your Engine",
  :date "2016-07-18 11:00:00",
- :tags ["clojure"]}
+ :tags ["clojure" "open source"]}
 Today I'm inspired by the [latest issue of Eric Normand's Clojure Gazette](http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&id=56d35f53c5) which talks about why his "Joy of Programming" comes from learning and exploration.
 
 I got into programming as a child because I was curious about solving puzzles and problems: given the (relatively) limited vocabulary of a programming language and its input and output features, and some interesting problem that came to mind, can I solve it in a usable (and hopefully elegant) way?

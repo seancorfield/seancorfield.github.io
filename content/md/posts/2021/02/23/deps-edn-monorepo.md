@@ -1,6 +1,6 @@
 {:title "deps.edn and monorepos",
  :date "2021-02-23 15:30:00",
- :tags ["clojure"]}
+ :tags ["clojure" "monorepo"]}
 
 At [World Singles Networks llc](https://worldsinglesnetworks.com) we have been using
 a monorepo for several years and it has taken us several iterations to settle on a

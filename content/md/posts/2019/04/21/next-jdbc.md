@@ -1,11 +1,12 @@
 {:title "Next.JDBC",
  :date "2019-04-21 23:00:00",
- :tags ["clojure" "jdbc"]}
+ :tags ["clojure" "jdbc" "open source"]}
+
 ## seancorfield/next.jdbc 1.0.0-alpha8
 
 I've talked about this in a few groups -- it's been a long time coming. This is the "next generation" of `clojure.java.jdbc` -- a modern wrapper for JDBC, that focuses on `reduce`/transducers, qualified-keywords, and `datafy`/`nav` support (so, yes, it requires Clojure 1.10).
 
-https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme  
+https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme
 
 _The next generation of `clojure.java.jdbc`: a new low-level Clojure wrapper for JDBC-based access to databases._  It's intended to be both faster and simpler than `clojure.java.jdbc` and it's where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!
 

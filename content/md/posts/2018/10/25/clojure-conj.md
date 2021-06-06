@@ -1,6 +1,6 @@
 {:title "Excited About Clojure/conj",
  :date "2018-10-25 10:40:00",
- :tags ["clojure" "conj"]}
+ :tags ["clojure" "conj" "conferences"]}
 It has been a crazy busy year, both at work and personally, and it's hard for me to believe my last blog post was in April!
 
 [Clojure/conj](https://2018.clojure-conj.org/) is coming up fast and the schedule was posted today, which has made me even more excited about it. Here's a run down of the sessions I plan to attend -- I'll write up my thoughts on everything shortly after the conference.

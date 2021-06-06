@@ -1,6 +1,6 @@
 {:title "The Strange Loop 2014",
  :date "2014-09-25 18:32:18 -0700",
- :tags ["conferences"]}
+ :tags ["conferences" "strange loop"]}
 Last week I attended [The Strange Loop](https://thestrangeloop.com/) in St Louis. I attended in 2011 and was blown away. I missed 2012 but attended again in 2013 and was blown away once more. I already have 2015's dates in my calendar. How was 2014?<!-- more -->
 
 Yup, blown away again. Alex Miller and his team have created an iconic event that crosses technology boundaries and bridges between academia and industry, to bring some of the brightest minds together to share their ideas. And for attendees too, the opportunity to meet a huge variety of our peers - from novice to expert - in all different technologies, creates an atmosphere of excitement, wonder, and enjoyment.

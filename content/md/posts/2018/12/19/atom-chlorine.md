@@ -1,6 +1,7 @@
 {:title "Chlorine: Clojure integration for Atom",
  :date "2018-12-19 22:45",
- :tags ["clojure"]}
+ :tags ["clojure" "atom" "editors"]}
+
 I've been using the [Atom](https://atom.io) editor for about two years now.
 I switched from Emacs after Clojure/conj 2016, having seen
 [Jason Gilman's talk about ProtoREPL](https://youtu.be/buPPGxOnBnk) [video].

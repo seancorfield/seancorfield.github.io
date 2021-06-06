@@ -1,6 +1,6 @@
 {:title "Atom, Chlorine, and Windows",
  :date "2019-01-22 20:15:00",
- :tags ["clojure"]}
+ :tags ["clojure" "atom" "editors" "windows"]}
 About a month ago, I was [praising Chlorine, the new Clojure package for
 Atom](https://corfield.org/blog/2018/12/19/atom-chlorine/) and I've been using
 it, day-in, day-out, for all my Clojure development. On a Mac, that's

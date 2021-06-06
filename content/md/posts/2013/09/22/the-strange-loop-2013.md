@@ -1,6 +1,6 @@
 {:title "The Strange Loop 2013",
  :date "2013-09-22 11:00:00 -0700",
- :tags ["conferences"]}
+ :tags ["conferences" "strange loop"]}
 <p>This was my second time at <a href="http://thestrangeloop.com">The Strange Loop</a>. When I attended in 2011, I said that it was one of the best conferences I had ever attended, and I was disappointed that family plans meant I couldn't attend in 2012. That meant my expectations were high. The main hotel for the event was the beautiful DoubleTree Union Station, an historic castle-like building that was once an ornate train station. The conference itself was a short walk away at the Peabody Opera House. Alex Miller, organizer of The Strange Loop, <a href="http://clojurewest.com">Clojure/West</a>, and <a href="http://lambdajam.com">Lambda Jam</a> (new this year), likes to use interesting venues, to make the conferences extra special.</p>
 <p>I'm providing a brief summary here of what sessions I attended, followed by some general commentary about the event. As I said last time, if you can only attend one conference a year, this should be the one.</p>
 <ul>
