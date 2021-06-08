@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: deps.edn and monorepos III (Polylith)</title>
+    
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+
+<meta name="description" content="Back in April, I talked about us dipping into Polylith at work in deps.edn and monorepos II,
+and also our planned migration away from clj-http. Since then, we&#39;ve completed the migration to
+http-kit and we&#39;ve also migrated away from clj-time (which is deprecated, because it is based on Joda Time). We&#39;ve also started
+refactoring our subprojects into Polylith components. This is another periodic update on where we are in our journey.">
+
+<meta property="og:description" content="Back in April, I talked about us dipping into Polylith at work in deps.edn and monorepos II,
+and also our planned migration away from clj-http. Since then, we&#39;ve completed the migration to
+http-kit and we&#39;ve also migrated away from clj-time (which is deprecated, because it is based on Joda Time). We&#39;ve also started
+refactoring our subprojects into Polylith components. This is another periodic update on where we are in our journey.">
+
+<meta property="og:url" content="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/" />
+<meta property="og:title" content="deps.edn and monorepos III (Polylith)" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">June 6, 2021</div>
+        
+    </div>
+    <h2>deps.edn and monorepos III (Polylith)</h2>
+</div>
+<div>
+    
+    <p>Back in April, I talked about us dipping into Polylith at work in <a href="/blog/2021/04/21/deps-edn-monorepo-2/"><code>deps.edn</code> and monorepos II</a>,
+and also our <a href="/blog/2021/03/25/little-things/">planned migration away from <code>clj-http</code></a>. Since then, we've completed the migration to
+<code>http-kit</code> and we've also migrated away from <code>clj-time</code> (which is deprecated, because it is based on Joda Time). We've also started
+refactoring our subprojects into Polylith components. This is another periodic update on where we are in our journey.<!--more--></p><p>While I've worked on a few new features for our online dating platform over the last month and a half,
+I've been fortunate enough to mostly work on eliminating "technical debt". I say "fortunate" because
+many companies do not formally recognize technical debt and do not value working on it. By contrast,
+at <a href="https://worldsinglesnetworks.com">World Singles Networks</a>, we are encouraged to create Jira tickets
+identifying any technical debt that we deliberately
+(or incidentally) take on and we are also encouraged to work on those tickets as part of our
+overall workload.</p><p>Part of that technical debt work for me, recently, was completing our migration from <code>clj-http</code> to <code>http-kit</code>
+and also migrating from <code>clj-time</code> to Java Time and starting to migrate away from <code>date-clj</code>
+(also to Java Time). Previously, it involved migrating from <code>Cheshire</code> to <code>data.json</code>.</p><p>In addition, I've been able to spend time
+reviewing some of our oldest code and refactoring it -- and finding out that
+some of it is no longer used and removing it! I have deleted several thousand lines of code over the last
+six weeks, both legacy non-Clojure code as well as some "legacy" Clojure code.
+Our Clojure codebase stretches back over a decade now
+and many of our early coding decisions were made while we were still learning Clojure and still
+figuring out reasonable approaches to architecture.</p><p>Another part of that technical debt work has been to start picking apart some of our older subprojects
+and figuring our better names for groups of functionality as Polylith <code>components</code>. Our first foray
+into Polylith had produced four <code>components</code>, one item in <code>bases</code> and one in <code>projects</code>. We now have
+sixteen <code>components</code> so I feel like I have a better handle on how Polylith is going to serve us
+going forward.</p><p>Per the <a href="https://polylith.gitbook.io/">high-level Polylith documentation</a>, it is an architecture
+that focuses on simple, composable components ("bricks"). Refactoring our codebase to follow the Polylith
+architecture has produced the following benefits so far:</p><ul><li>Naming,</li><li>Modularization,</li><li>Focusing on dependencies.</li></ul><h2 id="naming">Naming</h2><p>Polylith has made us think about naming more than we have before.
+Previously, as our monorepo has grown, code has been
+"organized" into very coarse-grained subprojects that either have fairly generic names
+(<code>lowlevel</code>, <code>datamapper</code>) or that represent entire applications (services) we build.
+Accordingly, these have accrued a lot of functionality over the years and some of them --
+especially the more generic ones -- have become somewhat random "grab bags" of functionality.</p><p>Because Polylith favors much smaller components -- because it makes you think about individual
+units of reuse (a.k.a <code>components</code>) -- I've broken apart several of our generic subprojects
+and we've had discussions about meaningful names for the reusable pieces. So far, we have
+sixteen components that have mostly been extracted from three legacy subprojects.</p><p>Several of these new components have come from single namespaces within our old subprojects
+or even sometimes just a handful of functions from a single namespace. Extracting them out
+into standalone components has made us think more carefully about the names we should give
+each of them: sometimes their original namespace was reasonable but, with hindsight, several
+of them needed better names, especially where we've extracted just a subset of a single
+namespace. And by giving them better names -- often names we have now discussed as a team --
+we are more likely to think before adding new functions: do they really belong in this
+well-named component or should they go in their own component?</p><p>This should make discoverability of functionality easier which in turn should reduce
+reimplementation of functionality (compared to figuring out when a function might already
+exist in the codebase in some more randomly-named location).</p><h2 id="modularization">Modularization</h2><p>Following on from the deeper consideration of naming, Polylith components encourage you to
+separate out concerns. Even aside from Polylith's separation of <code>projects</code> (what you build and how),
+from <code>bases</code> (how you expose functionality -- APIs, command-lines, web apps), from <code>components</code>
+(the basic functionality -- domain logic etc -- of your systems), just the focus on small, well-named components
+means that you also tend to think more about improving the modularization of your code.</p><p>The mindfulness associated with identifying and constructing those components means
+that you think about narrowing your focus and teasing apart the code, decomplecting and
+simplifying what each "piece" does and separating it from its neighbors.</p><p>The very fact that three of our subprojects have been refactored to sixteen components
+speaks to the increased focus on modularization. We're very happy with that so far.</p><h2 id="focusing-on-dependencies">Focusing on Dependencies</h2><p>Polylith components only specify the external libraries they depend on: they deliberately
+do not specify which other <code>components</code> they depend on. The reason for this is that <code>projects</code>
+assemble the "bill of materials" that goes into a finished, deployable artifact. Multiple
+<code>components</code> can implement the same (functional) interface so you can mix'n'match them,
+as needed, when you build an artifact.</p><p>In addition, the <code>poly</code> tool that supports the Polylith architecture can check that components
+only call into each others' <code>interface</code> namespace and don't try to access the implementation
+of any components.</p><p>This separation means that you also think carefully about any 3rd party library dependency you
+add to a component -- as well as considering, should you find yourself adding the same library
+to multiple components, whether a component should depend directly on that library or on another
+component that already uses that library. You tend to ask "Is this component wrapping
+the library? Or it is just using it an implementation detail? Is there useful commonality
+between the components that use this same library -- is there an abstraction I'm missing?".</p><p>When code is less modular, adding more external dependencies carries less semantic "weight":
+one more dependency "doesn't matter". With smaller pieces that have better names and are
+more modular, each new dependency becomes an important consideration.</p><h2 id="beyond-components">Beyond Components</h2><p>The increased focus on naming, modularization, and dependencies that Polylith has
+encouraged has spread beyond just "components": this new-found critical eye is being
+applied to our dev/test/build infrastructure as well.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/polylith/">polylith</a>
+    
+    <a href="/tags/monorepo/">monorepo</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/";
+            this.page.identifier = "deps.edn and monorepos III (Polylith)";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></li>
+                        
+                        <li><a href="/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></li>
+                        
+                        <li><a href="/blog/2021/03/25/little-things/">It&#39;s the &quot;Little Things&quot;...</a></li>
+                        
+                        <li><a href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></li>
+                        
+                        <li><a href="/blog/2020/11/24/talks-clojures-superpower/">Talks: Clojure&#39;s Superpower</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <h3>Latest Tweets</h3>
+                <div id="tweets">
+                  <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/seancorfield"  data-widget-id="480131406987673601"  data-link-color="#1863a1" data-tweet-limit="4" data-chrome="noheader nofooter transparent noscrollbar">Tweets by @seancorfield</a><br/>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+                
+                  <a href="http://twitter.com/seancorfield" class="twitter-follow-button" data-show-count="true">Follow @seancorfield</a>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/strange loop/">strange loop</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/polylith/">polylith</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/editors/">editors</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/windows/">windows</a></li>
+                        
+                        <li><a href="/tags/monorepo/">monorepo</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/observability/">observability</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                        <li><a href="/tags/new relic/">new relic</a></li>
+                        
+                        <li><a href="/tags/vs code/">vs code</a></li>
+                        
+                        <li><a href="/tags/open source/">open source</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2021 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
