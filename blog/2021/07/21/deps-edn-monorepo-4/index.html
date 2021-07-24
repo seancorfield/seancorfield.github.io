@@ -92,7 +92,7 @@ internally, on and off, for a long time: switching away from an ad hoc set of ba
 that manage our test/build/deploy processes and instead having a single Clojure script
 that orchestrates all of that. We've had Clojure scripts for many parts of that pipeline
 for a long time but we've never made the jump to running those scripts from Clojure itself.
-With the knowledge that <a href="https://github.com/clojure/tool.build"><code>tools.build</code></a> was on the
+With the knowledge that <a href="https://github.com/clojure/tools.build"><code>tools.build</code></a> was on the
 way, this seems like a good time to do that last leg of the work.</p><p>We've run our database migrations via Clojure for years. Our "cold start" to stand up a
 dev/test environment involves two sets of database migrations, an Elastic Search setup
 (for indices), and a "publishing" step to take dev/test data from MySQL and propagate
