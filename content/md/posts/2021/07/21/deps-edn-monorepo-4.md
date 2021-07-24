@@ -29,7 +29,7 @@ internally, on and off, for a long time: switching away from an ad hoc set of ba
 that manage our test/build/deploy processes and instead having a single Clojure script
 that orchestrates all of that. We've had Clojure scripts for many parts of that pipeline
 for a long time but we've never made the jump to running those scripts from Clojure itself.
-With the knowledge that [`tools.build`](https://github.com/clojure/tool.build) was on the
+With the knowledge that [`tools.build`](https://github.com/clojure/tools.build) was on the
 way, this seems like a good time to do that last leg of the work.
 
 We've run our database migrations via Clojure for years. Our "cold start" to stand up a
