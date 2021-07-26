@@ -35,7 +35,7 @@ way, this seems like a good time to do that last leg of the work.
 We've run our database migrations via Clojure for years. Our "cold start" to stand up a
 dev/test environment involves two sets of database migrations, an Elastic Search setup
 (for indices), and a "publishing" step to take dev/test data from MySQL and propagate
-the appropriate pieces into Elastic Search. We've run out test suite in part and in whole
+the appropriate pieces into Elastic Search. We've run our test suite in part and in whole
 using [Cognitect's `test-runner`](https://github.com/cognitect-labs/test-runner) for a
 long time as well and we were very pleased to see an "exec function" entry point added
 recently -- we've had our own "exec function" entry point for a while that performs
@@ -48,7 +48,7 @@ by posting "flag" files to the servers that need to retrieve those JAR files and
 
 We replaced two bash scripts with a single Clojure `build.clj` script that can run database
 migrations, run tests, build uberjars, upload JAR files, and notifying the staging server.
-Our first run at this ended up with `tools.deps.alpha` and all our our code on the classpath,
+Our first run at this ended up with `tools.deps.alpha` and all our code on the classpath,
 at least for test running, which caused some interesting race conditions, due to the optional
 S3 transporter code in `tools.deps.alpha` performing asynchronous requires of some libraries
 that we also use in our tests (including `core.async`). We knew this wasn't ideal -- the core
