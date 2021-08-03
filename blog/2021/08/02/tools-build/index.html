@@ -2,19 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Next.JDBC</title>
+    <title>An Architect&#39;s View: tools.build</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="seancorfield/next.jdbc 1.0.0-alpha8I&#39;ve talked about this in a few groups -- it&#39;s been a long time coming. This is the &quot;next generation&quot; of clojure.java.jdbc -- a modern wrapper for JDBC, that focuses on reduce/transducers, qualified-keywords, and datafy/nav support (so, yes, it requires Clojure 1.10).">
+<meta name="description" content="With the recent release of tools.build,
+I wanted to provide a quick example of using it for a CI-like pipeline.tools.build is focused on &quot;building&quot; things and when the subject has come up
+on Slack, the feedback has been that the CLI already has a good story for running
+tests etc, and the consensus seems to be that running multiple CLI commands is
+the intended usage.">
 
-<meta property="og:description" content="seancorfield/next.jdbc 1.0.0-alpha8I&#39;ve talked about this in a few groups -- it&#39;s been a long time coming. This is the &quot;next generation&quot; of clojure.java.jdbc -- a modern wrapper for JDBC, that focuses on reduce/transducers, qualified-keywords, and datafy/nav support (so, yes, it requires Clojure 1.10).">
+<meta property="og:description" content="With the recent release of tools.build,
+I wanted to provide a quick example of using it for a CI-like pipeline.tools.build is focused on &quot;building&quot; things and when the subject has come up
+on Slack, the feedback has been that the CLI already has a good story for running
+tests etc, and the consensus seems to be that running multiple CLI commands is
+the intended usage.">
 
-<meta property="og:url" content="https://corfield.org/blog/2019/04/21/next-jdbc/" />
-<meta property="og:title" content="Next.JDBC" />
+<meta property="og:url" content="https://corfield.org/blog/2021/08/02/tools-build/" />
+<meta property="og:title" content="tools.build" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2019/04/21/next-jdbc/">
+    <link rel="canonical" href="https://corfield.org/blog/2021/08/02/tools-build/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -65,14 +73,40 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">April 21, 2019</div>
+        <div class="col-lg-6">August 2, 2021</div>
         
     </div>
-    <h2>Next.JDBC</h2>
+    <h2>tools.build</h2>
 </div>
 <div>
     
-    <h2 id="seancorfieldnextjdbc-100-alpha8">seancorfield/next.jdbc 1.0.0-alpha8</h2><p>I've talked about this in a few groups -- it's been a long time coming. This is the "next generation" of <code>clojure.java.jdbc</code> -- a modern wrapper for JDBC, that focuses on <code>reduce</code>/transducers, qualified-keywords, and <code>datafy</code>/<code>nav</code> support (so, yes, it requires Clojure 1.10).</p><p>https://cljdoc.org/d/seancorfield/next.jdbc/1.0.0-alpha8/doc/readme</p><p><em>The next generation of <code>clojure.java.jdbc</code>: a new low-level Clojure wrapper for JDBC-based access to databases.</em>  It's intended to be both faster and simpler than <code>clojure.java.jdbc</code> and it's where I intend to focus my future energy, although I have not yet decided whether it will ultimately be a new set of namespaces in the Contrib lib or a separate, standalone OSS library!</p><p>At this point, I'm looking for feedback on the API and the approach (as well as bugs, performance issues, etc). Please take it for a spin and let me know what you think via <a href="https://github.com/seancorfield/next-jdbc/issues">GitHub issues</a> or in the <a href="https://clojurians.slack.com/messages/C1Q164V29/details/"><code>#sql</code> channel on the Clojurians Slack</a> or the <a href="https://clojurians.zulipchat.com/#narrow/stream/152063-sql"><code>#sql</code> stream on the Clojurians Zulip</a>.</p><p><em>The group/artifact ID will change at some point:</em> and the actual namespaces will too, but I will try to make that as painless as possible when I take this out of the alpha phase.</p>
+    <p>With the recent release of <a href="https://clojure.org/guides/tools_build"><code>tools.build</code></a>,
+I wanted to provide a quick example of using it for a CI-like pipeline.</p><p><code>tools.build</code> is focused on "building" things and when the subject has come up
+on Slack, the feedback has been that the CLI already has a good story for running
+tests etc, and the consensus seems to be that running multiple CLI commands is
+the intended usage.</p><p>That consensus has never stopped me from wanting something more integrated.
+I'd like to be able to run a single CLI command that runs tests and if they
+pass then create a JAR file, ready to deploy -- as a minimum CI-like pipeline.</p><p><code>tools.build</code> provides <code>create-basis</code>, <code>java-command</code>, and <code>process</code> functions
+so that you can fairly easily run arbitrary <code>java</code> commands in a subprocess.
+That makes it fairly easy to run your tests from a <code>build.clj</code> script:</p><pre><code class="clojure">(defn run-tests
+  [_]
+  (let [basis    (b/create-basis {:aliases [:test]})
+        combined (t/combine-aliases basis [:test])
+        cmds     (b/java-command {:basis     basis
+                                  :java-opts (:jvm-opts combined)
+                                  :main      'clojure.main
+                                  :main-args ["-m" "cognitect.test-runner"]})
+        {:keys [exit]} (b/process cmds)]
+    (when-not (zero? exit)
+      (throw (ex-info "Tests failed" {})))))
+</code></pre><p>As a concrete example of this, I've added a <a href="https://github.com/seancorfield/next-jdbc/blob/develop/build.clj"><code>build.clj</code> script to <code>next.jdbc</code></a>
+so that I can run:</p><pre><code class="bash">clojure -T:build ci
+</code></pre><p>and have it run tests and, if they pass, go ahead and create the <code>pom.xml</code> and
+build the JAR file for the project based on MAJOR.MINOR.COMMITS for the version.</p><p>Deploying to Clojars is then a single CLI command:</p><pre><code class="bash">clojure -X:deploy :artifact target/next&lt;TAB&gt;
+</code></pre><p>this will autocomplete to <code>target/next.jdbc-1.2.nnn.jar</code> where <code>nnn</code> is the number
+of commits. A more confident workflow would be to run <code>deps-deploy</code> via
+<code>create-basis</code>, <code>java-command</code>, and <code>process</code> to automatically deploy the JAR
+to Clojars as part of the <code>ci</code> process.</p>
 </div>
 
 <div id="post-tags">
@@ -80,19 +114,17 @@
     
     <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/jdbc/">jdbc</a>
+    <a href="/tags/tools.build/">tools.build</a>
     
-    <a href="/tags/open source/">open source</a>
+    <a href="/tags/jdbc/">jdbc</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2019/05/25/next-jdbc/">&laquo; Next.JDBC Beta 1</a>
         
-        
-        <a class="right" href="/blog/2019/02/11/clojurians-slack-alternatives/">Clojurians Slack Alternatives &raquo;</a>
+        <a class="right" href="/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV &raquo;</a>
         
     </div>
 
@@ -100,8 +132,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2019/04/21/next-jdbc/";
-            this.page.identifier = "Next.JDBC";
+            this.page.url = "https://corfield.org/blog/2021/08/02/tools-build/";
+            this.page.identifier = "tools.build";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

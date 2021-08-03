@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>An Architect&#39;s View: Clojure, New Relic, and Slow Application Startup</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
 <meta name="description" content="A couple of years ago, I blogged about instrumenting Clojure for New Relic monitoring and we&#39;ve generally been pretty happy with New Relic as a service overall. A while back, we had tried to update our New Relic Agent (used with our Tomcat-based web applications) from 3.21.0 to 3.25.0 and we ran into exceedingly long application start times, so we rolled back and continued on with 3.21.0. Recently, we decided to update the Agent to 3.30.1 to take advantage of advertised performance improvements and security enhancements. Once again we ran into exceedingly long application start times.An application that took just over four minutes to start up fully with 3.21.0 was taking around forty minutes to start up with 3.30.1 -- an order of magnitude slower!">
 
@@ -128,6 +128,8 @@
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2021/08/02/tools-build/">tools.build</a></li>
+                        
                         <li><a href="/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></li>
                         
                         <li><a href="/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></li>
@@ -135,8 +137,6 @@
                         <li><a href="/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></li>
                         
                         <li><a href="/blog/2021/03/25/little-things/">It&#39;s the &quot;Little Things&quot;...</a></li>
-                        
-                        <li><a href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></li>
                         
                     </ul>
                 </div>
@@ -206,6 +206,8 @@
                         <li><a href="/tags/java/">java</a></li>
                         
                         <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
                         
                         <li><a href="/tags/windows/">windows</a></li>
                         

@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>An Architect&#39;s View: Instrumenting Clojure for New Relic Monitoring</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
 <meta name="description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
 
@@ -161,6 +161,8 @@ public class Thing {
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2021/08/02/tools-build/">tools.build</a></li>
+                        
                         <li><a href="/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></li>
                         
                         <li><a href="/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></li>
@@ -168,8 +170,6 @@ public class Thing {
                         <li><a href="/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></li>
                         
                         <li><a href="/blog/2021/03/25/little-things/">It&#39;s the &quot;Little Things&quot;...</a></li>
-                        
-                        <li><a href="/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></li>
                         
                     </ul>
                 </div>
@@ -239,6 +239,8 @@ public class Thing {
                         <li><a href="/tags/java/">java</a></li>
                         
                         <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
                         
                         <li><a href="/tags/windows/">windows</a></li>
                         
