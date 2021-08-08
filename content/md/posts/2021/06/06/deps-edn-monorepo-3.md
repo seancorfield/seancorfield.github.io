@@ -9,8 +9,7 @@ refactoring our subprojects into Polylith components. This is another periodic u
 
 ### The Monorepo/Polylith Series
 
-_This blog post is part of an ongoing series following our experiences with our_
-_Clojure monorepo and our migration to Polylith:_
+_This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:_
 
 1. _[deps.edn and monorepos](https://corfield.org/blog/2021/02/23/deps-edn-monorepo/)_
 2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/)_
