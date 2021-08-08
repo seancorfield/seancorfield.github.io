@@ -10,6 +10,16 @@ _Updated April 21st, 2021 to reflect recent changes in our setup.
 See [`deps.edn` and monorepos II](/blog/2021/04/21/deps-edn-monorepo-2/)
 for more details._<!--more-->
 
+### The Monorepo/Polylith Series
+
+_This blog post is part of an ongoing series following our experiences with our_
+_Clojure monorepo and our migration to Polylith:_
+
+1. _[deps.edn and monorepos](https://corfield.org/blog/2021/02/23/deps-edn-monorepo/) (this post)_
+2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/)_
+3. _[deps.edn and monorepos III (Polylith)](https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/)_
+4. _[deps.edn and monorepos IV](https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/)_
+
 ### What does our monorepo look like?
 
 Our main git repo has a `build` folder containing scripts, tooling, and configuration,

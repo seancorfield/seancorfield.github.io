@@ -7,6 +7,18 @@ and also our [planned migration away from `clj-http`](/blog/2021/03/25/little-th
 `http-kit` and we've also migrated away from `clj-time` (which is deprecated, because it is based on Joda Time). We've also started
 refactoring our subprojects into Polylith components. This is another periodic update on where we are in our journey.<!--more-->
 
+### The Monorepo/Polylith Series
+
+_This blog post is part of an ongoing series following our experiences with our_
+_Clojure monorepo and our migration to Polylith:_
+
+1. _[deps.edn and monorepos](https://corfield.org/blog/2021/02/23/deps-edn-monorepo/)_
+2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/)_
+3. _[deps.edn and monorepos III (Polylith)](https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/) (this post)_
+4. _[deps.edn and monorepos IV](https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/)_
+
+## Part III
+
 While I've worked on a few new features for our online dating platform over the last month and a half,
 I've been fortunate enough to mostly work on eliminating "technical debt". I say "fortunate" because
 many companies do not formally recognize technical debt and do not value working on it. By contrast,

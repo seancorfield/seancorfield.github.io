@@ -6,6 +6,18 @@ A couple of months ago, I wrote about our use of [`deps.edn` with our monorepo](
 I've updated that post to reflect changes we've made recently and I'm going to talk
 in more detail about those changes in this post.<!--more-->
 
+### The Monorepo/Polylith Series
+
+_This blog post is part of an ongoing series following our experiences with our_
+_Clojure monorepo and our migration to Polylith:_
+
+1. _[deps.edn and monorepos](https://corfield.org/blog/2021/02/23/deps-edn-monorepo/)_
+2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/) (this post)_
+3. _[deps.edn and monorepos III (Polylith)](https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/)_
+4. _[deps.edn and monorepos IV](https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/)_
+
+## Part II
+
 The main change is that we have abandoned the use of a `:defaults` alias in the repo-level `deps.edn` file -- and the use of `:override-deps` to pin versions -- and now we specify versions explicitly in subprojects' `deps.edn` directly.
 
 ## Pinning Dependencies

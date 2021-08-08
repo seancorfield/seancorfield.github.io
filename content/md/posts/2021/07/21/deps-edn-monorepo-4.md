@@ -6,6 +6,18 @@ This is part of an ongoing series of blog posts about our ever-evolving use of t
 `deps.edn`, and [Polylith](https://polylith.gitbook.io/), with our monorepo at
 [World Singles Networks](https://worldsinglesnetworks.com).<!--more-->
 
+### The Monorepo/Polylith Series
+
+_This blog post is part of an ongoing series following our experiences with our_
+_Clojure monorepo and our migration to Polylith:_
+
+1. _[deps.edn and monorepos](https://corfield.org/blog/2021/02/23/deps-edn-monorepo/)_
+2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/)_
+3. _[deps.edn and monorepos III (Polylith)](https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/)_
+4. _[deps.edn and monorepos IV](https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/) (this post)_
+
+## Part IV
+
 Since [last month's post](/blog/2021/06/06/deps-edn-monorepo-3/), we've created Polylith `projects`
 for each of our deployable artifacts, as well as refactoring all of our cron job tasks into a new
 base called `batch-jobs`. We now have 16 `projects`, 3 `bases`, and 23 `components`. This has

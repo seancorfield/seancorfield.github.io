@@ -4,7 +4,7 @@
 
 Our Clojure team is a big fan of reducing dependencies and, in particular,
 avoiding dependencies that are known to be troublesome (such as the special
-circle of hell that is all the different versions of the Jackson JSON libraries).<!-- more -->
+circle of hell that is all the different versions of the Jackson JSON libraries).<!--more-->
 
 We've recently been looking at switching from libraries that have a lot
 of dependencies to equivalent libraries that have fewer (or none) if they
