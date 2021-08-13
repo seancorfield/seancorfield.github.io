@@ -106,7 +106,7 @@ build the JAR file for the project based on MAJOR.MINOR.COMMITS for the version.
 </code></pre><p>this will autocomplete to <code>target/next.jdbc-1.2.nnn.jar</code> where <code>nnn</code> is the number
 of commits. A more confident workflow would be to run <code>deps-deploy</code> via
 <code>create-basis</code>, <code>java-command</code>, and <code>process</code> to automatically deploy the JAR
-to Clojars as part of the <code>ci</code> process.</p>
+to Clojars as part of the <code>ci</code> process.</p><p><em>Update: As of August 12th, <a href="https://github.com/seancorfield/honeysql/blob/develop/build.clj">HoneySQL also has <code>build.clj</code></a> and the <code>ci</code> function there runs the <code>readme</code> tests, Eastwood, ClojureScript tests, and multi-version Clojure testing, before building the JAR file!</em></p>
 </div>
 
 <div id="post-tags">
