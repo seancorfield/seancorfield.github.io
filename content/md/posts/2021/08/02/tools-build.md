@@ -52,3 +52,5 @@ this will autocomplete to `target/next.jdbc-1.2.nnn.jar` where `nnn` is the numb
 of commits. A more confident workflow would be to run `deps-deploy` via
 `create-basis`, `java-command`, and `process` to automatically deploy the JAR
 to Clojars as part of the `ci` process.
+
+_Update: As of August 12th, [HoneySQL also has `build.clj`](https://github.com/seancorfield/honeysql/blob/develop/build.clj) and the `ci` function there runs the `readme` tests, Eastwood, ClojureScript tests, and multi-version Clojure testing, before building the JAR file!_
