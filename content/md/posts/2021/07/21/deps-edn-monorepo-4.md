@@ -1,6 +1,6 @@
 {:title "deps.edn and monorepos IV",
  :date "2021-07-24 00:25:00",
- :tags ["clojure" "monorepo" "polylith"]}
+ :tags ["clojure" "monorepo" "polylith" "tools.build"]}
 
 This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
 `deps.edn`, and [Polylith](https://polylith.gitbook.io/), with our monorepo at
@@ -14,6 +14,7 @@ _This blog post is part of an ongoing series following our experiences with our 
 2. _[deps.edn and monorepos II](https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/)_
 3. _[deps.edn and monorepos III (Polylith)](https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/)_
 4. _[deps.edn and monorepos IV](https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/) (this post)_
+5. _[deps.edn and monorepos V (Polylith)](https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/)_
 
 ## Part IV
 
