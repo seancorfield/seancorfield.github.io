@@ -2,12 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Posts Tagged &quot;boot&quot;</title>
+    <title>An Architect&#39;s View: deps.edn and monorepos V (Polylith)</title>
     
-    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
-    <meta name="keywords" content="">
-    
-    <link rel="canonical" href="https://corfield.org/tags/boot/">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+
+<meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
+
+<meta property="og:description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
+
+<meta property="og:url" content="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/" />
+<meta property="og:title" content="deps.edn and monorepos V (Polylith)" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -55,45 +66,96 @@
         <div class="col-lg-9">
             <div id="content">
                 
-<div id="posts-by-tag">
-    <div id="page-header">
-        <h2>Posts Tagged &quot;boot&quot;</h2>
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">August 25, 2021</div>
+        
     </div>
-    <ul>
+    <h2>deps.edn and monorepos V (Polylith)</h2>
+</div>
+<div>
     
-        <li>
-            <a href="/blog/2018/04/18/all-the-paths/">All The Paths</a>
-        </li>
+    <p>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+<code>deps.edn</code>, and <a href="https://polylith.gitbook.io/">Polylith</a>, with our monorepo at
+<a href="https://worldsinglesnetworks.com">World Singles Networks</a>.<!--more--></p><h3 id="the-monorepopolylith-series">The Monorepo/Polylith Series</h3><p><em>This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:</em></p><ol><li><em><a href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></em></li><li><em><a href="https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></em></li><li><em><a href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></em></li><li><em><a href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a> (this post)</em></li></ol><h2 id="part-v">Part V</h2><p>It's been about a month since my last post in this series so I felt an update is about due.
+I've spent a lot of the last month focused on rewriting our legacy (non-Clojure) code, mostly
+into existing subprojects that already included earlier parts of the rewrite so we haven't
+added much to our Polylith journey recently (just two new <code>components</code>).
+I've also spent some time streamlining our
+test/build/deploy process and preparing for our migration from one network zone at the data
+center to all new virtualized servers in another network zone, which has been its own kind of
+special "joy", but our automated upload-and-deploy machinery is in place on the seven new application
+servers and now we're back to waiting on the managed services company to do their thing with
+file and database synchronization (we have a tiny software team and no "ops" folks so we have
+relied on the same managed services company for a lot of the infrastructure "heavy lifting" for years).</p><p>That's not to say there hasn't been anything exciting happening!</p><h3 id="polylith">Polylith</h3><p>The Polylith branch that we've been working against (<code>issue-66</code>) has now been merged and versions
+<a href="https://github.com/polyfy/polylith/releases/tag/v0.2.0-alpha10">0.2.0-alpha10</a> and
+<a href="https://github.com/polyfy/polylith/releases/tag/v0.2.0-alpha11">0.2.0-alpha11</a> have been released,
+along with a <code>migrate</code> command in the <code>poly</code> tool to help folks move from earlier versions to the
+new CLI/<code>deps.edn</code>-based structure we've been using for several months.</p><p>I've been contributing
+to Polylith as well, with a PR to fix a <a href="https://github.com/polyfy/polylith/issues/108">problem with how <code>git</code> deps were handled</a>
+and a PR to support <a href="https://github.com/polyfy/polylith/issues/114">installing Polylith as a CLI "tool"</a>.
+If you are using my <a href="https://github.com/seancorfield/dot-clojure">dot-clojure repo</a>, you'll find
+a <code>tools</code> folder in it, with <code>clojure -Ttools install</code>'d versions of <code>clj-new</code>, <code>depstar</code>, <code>deps-new</code> (as <code>new</code>),
+and now the <code>poly</code> tool (via a full SHA on the main branch).</p><p>In addition, my suggestion to <a href="https://github.com/polyfy/polylith/issues/110">provide per-project test suite fixtures</a>
+has also been implemented (and we're already using that at work). Several other <a href="https://github.com/polyfy/polylith/issues">Polylith issues</a>
+are being worked on as well, so the next release of the <code>poly</code> tool will be an exciting one!</p><h3 id="toolsbuild"><code>tools.build</code></h3><p>We've continued to expand our use of <code>tools.build</code> at work, completing the work of replacing
+all our legacy bash <code>build</code> script, and it has had a number of
+<a href="https://github.com/polyfy/polylith/issues">useful enhancements</a>
+during the past month, adding the ability to update the <code>&lt;scm&gt;</code> properties in <code>pom.xml</code> and
+a <code>pom-path</code> function that returns the computed path of where <code>pom.xml</code> will be written so
+that you can use it in your deployment step. I've updated several of my open source projects
+to take advantage of this. Here's what I typically have for my <code>:build</code> alias now:</p><pre><code class="clojure">  ;; for help: clojure -A:deps -T:build help/doc
+  :build {:deps {io.github.clojure/tools.build {:git/tag "v0.1.9" :git/sha "6736c83"}
+                 io.github.slipset/deps-deploy {:sha "b4359c5d67ca002d9ed0c4b41b710d7e5a82e3bf"}}
+          :ns-default build}
+</code></pre><p>Then in my <code>build.clj</code> script (here's the <a href="https://github.com/seancorfield/next-jdbc/blob/develop/build.clj"><code>next.jdbc</code> <code>build.clj</code> script</a>),
+I have my <code>deploy</code> function (using <a href="https://github.com/slipset/deps-deploy">Erik Assum's <code>deps-deploy</code> library</a>):</p><pre><code class="clojure">(defn deploy "Deploy the JAR to Clojars." [opts]
+  (dd/deploy (merge {:installer :remote :artifact jar-file
+                     :pom-file (b/pom-path {:lib lib :class-dir class-dir})}
+                    opts)))
+</code></pre><p>I'll probably curate the reusable bits of my various <code>build.clj</code> scripts into a "build library"
+on GitHub soon to reduce the duplication across my projects (and so folks can reuse those pieces
+if they wish).</p><blockquote><p>Note: I am no longer using <code>depstar</code> for building library JARs in my open source projects -- relying on <code>tools.build</code>'s <code>jar</code> task for this (although, at work we still have to use <code>depstar</code> for building uberjar files since we rely on a few features that <code>uber</code> does not yet have in <code>tools.build</code>).</p></blockquote>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-        <li>
-            <a href="/blog/2017/11/17/boot-localrepo/">Boot localrepo?</a>
-        </li>
+    <a href="/tags/clojure/">clojure</a>
     
-        <li>
-            <a href="/blog/2017/01/19/boot-new-moved/">seancorfield/boot-new has moved to boot/new</a>
-        </li>
+    <a href="/tags/polylith/">polylith</a>
     
-        <li>
-            <a href="/blog/2016/06/17/more-boot/">More Boot</a>
-        </li>
+    <a href="/tags/tools.build/">tools.build</a>
     
-        <li>
-            <a href="/blog/2016/02/02/boot-new/">boot-new</a>
-        </li>
+    <a href="/tags/monorepo/">monorepo</a>
     
-        <li>
-            <a href="/blog/2016/01/31/testing-with-boot/">Testing With Boot</a>
-        </li>
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2021/08/02/tools-build/">tools.build &raquo;</a>
+        
+    </div>
+
     
-        <li>
-            <a href="/blog/2016/01/30/building-on-boot/">Building On Boot</a>
-        </li>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/";
+            this.page.identifier = "deps.edn and monorepos V (Polylith)";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
     
-        <li>
-            <a href="/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>
-        </li>
-    
-    </ul>
+
+
 </div>
 
             </div>
