@@ -5,10 +5,11 @@ pom.xml.asc
 /classes/
 /target/
 /checkouts/
+.clj-kondo/.cache
 .lein-deps-sum
 .lein-repl-history
 .lein-plugins/
 .lein-failures
-.lsp
+.lsp/.cache
 /public/
 *.code-workspace
