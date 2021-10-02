@@ -2,19 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Powered by JavaScript</title>
+    <title>An Architect&#39;s View: deps.edn and monorepos VI (Polylith)</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="The first annual Powered by JavaScript conference, organized by Manning Books, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&#39;t JavaScript?I&#39;m fairly public about my dislike of JavaScript - and it&#39;s an easy language to take pot shots at. Indeed, in the following two days of The Strange Loop conference, several speakers reminded us why JavaScript&#39;s flaws have led to so much innovation in both the compile-to-JS (&quot;altJS&quot;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.">
+<meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
 
-<meta property="og:description" content="The first annual Powered by JavaScript conference, organized by Manning Books, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn&#39;t JavaScript?I&#39;m fairly public about my dislike of JavaScript - and it&#39;s an easy language to take pot shots at. Indeed, in the following two days of The Strange Loop conference, several speakers reminded us why JavaScript&#39;s flaws have led to so much innovation in both the compile-to-JS (&quot;altJS&quot;) and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.">
+<meta property="og:description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
 
-<meta property="og:url" content="https://corfield.org/blog/2014/09/20/powered-by-javascript/" />
-<meta property="og:title" content="Powered by JavaScript" />
+<meta property="og:url" content="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/" />
+<meta property="og:title" content="deps.edn and monorepos VI (Polylith)" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2014/09/20/powered-by-javascript/">
+    <link rel="canonical" href="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -65,32 +69,99 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">September 20, 2014</div>
+        <div class="col-lg-6">October 1, 2021</div>
         
     </div>
-    <h2>Powered by JavaScript</h2>
+    <h2>deps.edn and monorepos VI (Polylith)</h2>
 </div>
 <div>
     
-    <p>The first annual <a href="http://www.manning.com/poweredbyjavascript/">Powered by JavaScript</a> conference, organized by <a href="http://www.manning.com/">Manning Books</a>, took place in St Louis this past week. How did this inaugural event work for someone like me who really doesn't JavaScript?<!-- more --></p><p>I'm fairly public about my dislike of JavaScript - and it's an easy language to take pot shots at. Indeed, in the following two days of <a href="https://thestrangeloop.com/">The Strange Loop</a> conference, several speakers reminded us why JavaScript's flaws have led to so much innovation in both the compile-to-JS ("altJS") and the native JS framework space. Despite the (many) flaws, JS is ubiquitous and has evolved from a hastily constructed scripting engine to become the powerhouse of the modern web and with Node.js has moved into the server side development space and as a common part of a build chain that touches almost every web development shop, regardless of their core technology.</p><p>The conference opened with keynotes from Dan Shaw about Node.js and Tomomi Imura about the state of the mobile web. Tomomi's keynote was particularly interesting, as she went through the evolution of mobile browsers in detail, looking at features and releases of Chrome, Firefox, Opera, Safari, and Internet Explorer, as well as some of the politics behind the modern "browser wars". I always enjoy a keynote that teaches me something practical I can use as well as providing inspiration, and Tomomi scored on both.</p><p>Since this was the first year of the conference, I had signed up long before I knew how the schedule would pan out and as the number of speakers announced continued to grow, I was wondering how they would fit everyone into a one day event. The answer turned out to be three tracks of seven sessions each, which made for a lot of difficult choices. Here's what I chose to attend:</p><ul><li>Steven Luscher - Decomplexifying UI Code with React. Steven did a great job of explaining the motivations and concepts behind React.js. We're just starting to use React.js at World Singles, for an internal application, albeit wrapped up in a ClojureScript framework and I haven't had to suffer through the pain of large-scale JS development, so it was very interesting to hear <em>why</em> this approach helps - declarative and reactive.</li><li>Josh Powell - Unravelling the Knot: Client &amp; Testable Client Side Code. One of the authors of "<a href="http://www.manning.com/mikowski/">Single Page Web Applications</a>", Josh walked us through a relatively simple example that showed how data dependencies quickly build up and can lead to bugs and offered us a design pattern to address this: a central data store that is updated by all components and which shifts dependencies from a web of component-to-component to a hub'n'spoke architecture of component-to-data. For me it was a nice follow-on from Steven's talk which also dealt with the complexity of dependencies.</li><li>Sarah Groff-Palermo - Art.js: Transfigure Data to Create 21st Century Art. Time for a complete shift of gears with a talk that covered emotion and whimsy and what can be grown out of fragmented data with a variety of JS tools and frameworks and some creativity. It was a very engaging talk and it inspires me to be more experimental with some of the visualization tools that I'd like to play with but have previously been intimidated by.</li><li>Brian Lonsdorf - Fact, Fiction, &amp; Functional Programming. After lunch, Brian took us on a whirlwind tour of monads, functors, and point-free programming in JavaScript, using a web application written in a nearly pure functional style. I was impressed at how far this sort of thing has come in JS, with things like <a href="https://github.com/CrossEye/ramda">Project Ramda</a>!</li><li>Mike Mikowksi - Dump Less and SASS: Dynamic CSS Manipulation with JavaScript. This was the real dud of the day. The other author of Single Page Web Applications, Mike was far more interested in telling us how clever he was and how lucky we were to have chosen his session (seriously dude?) than actually showing us anything useful. He made at least one sexist joke, and several other very dodgy comments, and came off as an arrogant jerk. I'd heard complaints about his arrogant, sexist behavior in the bar the previous night but was still intrigued by the topic - unfortunately it was a waste of time.</li><li>Trek Glowacki - Single Page Applications: The Web's Horseless Carriage. After the break, the conference got back on track with a fascinating look at the evolution of web applications and how we talk about them, positing that "Single Page Web Application" is a term that indicates we don't really have a handle on what this space is really about - and what it will become.</li><li>Marcus Kobler - React.js and the Importance of Isomorphic SPAs. For the last session of the day, I chose another React.js session and it was another good choice. Marcus dug into React.js in more detail than Steven so it was a good progression and I hadn't heard about "Isomorphic JavaScript" before so that was yet another topic to Google and add pages to <a href="http://getpocket.com/">Pocket</a> for later reading!</li></ul><p>Manning made an excellent choice to close out the conference with a roundtable of JavaScript experts playing what turned out to be a hilarious version of The Newlywed Game which touched on the good and the bad in JavaScript.</p><p>In addition, Manning set up a comprehensive library of their books in the lobby of the conference and selected various tweets they liked throughout the day to award free books. I picked up "Java 8 in Action" for one of my tweets - and I'd signed up early enough to get "Single Page Web Applications" as well as a registration gift so I was very happy with that.</p><p>Watch out for Powered by JavaScript 2015!</p>
+    <p>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+<code>deps.edn</code>, and <a href="https://polylith.gitbook.io/">Polylith</a>, with our monorepo at
+<a href="https://worldsinglesnetworks.com">World Singles Networks</a>.<!--more--></p><h3 id="the-monorepopolylith-series">The Monorepo/Polylith Series</h3><p><em>This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:</em></p><ol><li><em><a href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></em></li><li><em><a href="https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></em></li><li><em><a href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></em></li><li><em><a href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/">deps.edn and monorepos VI (Polylith)</a> (this post)</em></li></ol><h2 id="part-vi">Part VI</h2><p>A lot of things have changed in the month (and a bit) since my last post in this series!
+Our refactoring to Polylith has ramped back up, Polylith itself has had a new alpha release,
+<code>tools.build</code> has continued to evolve nicely, and Java 17 has been released!</p><h3 id="polylith">Polylith</h3><p>We have refactored two more applications into <code>bases</code> and <code>projects</code> so about a quarter of
+our codebase is Polylith-shaped now. The <code>poly deps</code> matrix no longer looks like a couple
+of dozen unrelated <code>components</code> and now shows <code>bases</code> that actually depend on them!</p><p>The rewriting of our legacy (non-Clojure) code is now all going to Polylith bricks and as
+we add new features to our dating platform, that is also going into Polylith as new bricks.</p><p>I mentioned back in March that we were
+<a href="https://corfield.org/blog/2021/03/25/little-things/">switching from <code>clj-http</code> to <code>httpkit</code></a>
+and that has been completed but it had the side effect that we have lost some telemetry in
+New Relic around "web external" activity in our apps because it doesn't recognize <code>httpkit</code>'s
+calls. The obvious thing at this point would be to switch to something like
+<a href="https://github.com/gnarroway/hato"><code>hato</code></a> since that wraps Java's built-in <code>HttpClient</code>
+functionality but, unfortunately, our legacy (non-Clojure) code still has to run on Java 8
+and a lot of our Clojure code is shared between those apps and our "modern" (pure Clojure) apps
+that run on more recent Java versions. I've been experimenting with <code>hato</code> in our test suite
+code, since that is not shared with the legacy apps, and I've decided that this is a good
+opportunity to leverage the "swappable implementation" feature of Polylith's <code>components</code>.
+We're going to write an <code>http-client</code> interface (component) and have two implementations:
+one using <code>httpkit</code> and one using <code>hato</code> and then our legacy apps can use the <code>httpkit</code>-based
+implementation while our other apps can use the <code>hato</code>-based implementation, with the shared
+code written against the common interface. We'll be able to switch <code>projects</code> over one at a time
+if we want and we'll be able to develop against either implementation based on
+<a href="https://github.com/polyfy/polylith#profile">profiles in Polylith</a>.</p><p>As noted above, Polylith has had a new alpha release which includes the work I talked about
+in the last post to install <code>poly</code> as a Clojure CLI "tool" and to run per-project test suite
+fixtures, as well as now being able to test individual bricks. Right now, we're running against
+a SHA on master so that we can pick up a recent fix for those per-project test suite fixtures
+and support for <code>data_readers.clj</code>.</p><h3 id="toolsbuild"><code>tools.build</code></h3><p>The <code>uber</code> task in <code>tools.build</code> has now reached parity with <code>depstar</code>'s functionality so
+I have archived <code>depstar</code> to encourage people to switch over to <code>tools.build</code>. The log4j2
+plugins cache merging from <code>depstar</code> has been spun out into a separate project that provides a
+<a href="https://github.com/seancorfield/build-uber-log4j2-handler">log4j2 plugins cache conflict handler</a>
+for <code>tools.build</code> (as of v0.4.0).</p><p>In addition to switching all of my OSS projects over to <code>tools.build</code> for JAR building,
+I've been able to switch our monorepo at work over to it as well for uberjar building,
+and I've abstracted a lot of the common code from various <code>build.clj</code> files to a new
+library -- <a href="https://github.com/seancorfield/build-clj">build-clj</a> -- that lets you
+simplify your <code>build.clj</code> file by providing sane defaults for a lot of the options
+that <code>tools.build</code> offers. That <code>build-clj</code> library automatically includes the log4j2
+conflict handler mentioned above.</p><p>I've also created a new, simpler tool for creating new CLI / <code>deps.edn</code> projects, based
+on <code>tools.build</code> as I hinted at in part IV of this series:
+<a href="https://github.com/seancorfield/deps-new">deps-new</a>. In particular, this new tool makes
+it much, much easier to write your own project templates since they can be almost entirely
+declarative with all the "heavy lifting" done by <code>tools.build</code> itself.</p><p>In part IV, I showed our <code>:build</code> alias which has now been simplified to this:</p><pre><code class="clojure">  :build
+  {:deps {org.clojure/clojure {:mvn/version "1.11.0-alpha2"}
+
+          io.github.seancorfield/build-clj {:git/tag "v0.4.0" :git/sha "54e39ae"
+                                            :exclusions [org.slf4j/slf4j-nop]}
+          ;; and local build tools:
+          worldsingles/build {:local/root "build"}
+          poly/artifact-uploader-cli {:local/root "bases/artifact-uploader-cli"}
+          poly/artifact-uploader {:local/root "components/artifact-uploader"}}
+   :ns-default build}
+</code></pre><p>Gone is the dependency on <code>depstar</code>, and the <code>tools.build</code> dependency has been
+replaced by my <code>build-clj</code> wrapper which has simplified our artifact building
+code substantially (all my OSS projects also use <code>build-clj</code> -- see, for example,
+<a href="https://github.com/seancorfield/next-jdbc/blob/develop/build.clj"><code>next.jdbc</code>'s <code>build.clj</code></a>).</p><p>Oh, and we're on Clojure 1.11 Alpha 2 in production (as of today).</p><h3 id="java-17">Java 17</h3><p>Even though our production systems run on Java 11 (except for our legacy apps), we've
+been testing locally on Java 14, 15, and 16 so that we can be ready for the new LTS
+release, Java 17. We've been testing on that for about a week now but we're still
+blocked from upgrading production by lack of support for Java 17 in New Relic.</p><p>They just released <a href="https://docs.newrelic.com/docs/release-notes/agent-release-notes/java-release-notes/java-agent-730/">version 7.3.0</a>
+with support for Java 16 (yesterday!), and they plan to support Java 17 fully in
+<a href="https://github.com/newrelic/newrelic-java-agent/issues/384">version 7.4.0</a>.
+See <a href="https://github.com/newrelic/newrelic-java-agent/issues/418">issue 418</a> for
+the ongoing work, which is basically complete, but there are still
+<a href="https://github.com/newrelic/newrelic-java-agent/issues?q=is%3Aissue+is%3Aopen+17">a few issues to shake out</a>
+before they're fully there.</p><p>The timing is pretty good for us really since 7.4.0 will likely be available before
+we go live on our new virtual server farm at the data center so we expect to roll
+straight to Java 17, from Java 11, at that point.</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags/conferences/">conferences</a>
+    <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/javascript/">javascript</a>
+    <a href="/tags/polylith/">polylith</a>
+    
+    <a href="/tags/tools.build/">tools.build</a>
+    
+    <a href="/tags/monorepo/">monorepo</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2014/09/23/clojure-in-the-enterprise/">&laquo; Clojure in the Enterprise?</a>
         
-        
-        <a class="right" href="/blog/2014/06/21/clojurebridge/">ClojureBridge &raquo;</a>
+        <a class="right" href="/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith) &raquo;</a>
         
     </div>
 
@@ -98,8 +169,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2014/09/20/powered-by-javascript/";
-            this.page.identifier = "Powered by JavaScript";
+            this.page.url = "https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/";
+            this.page.identifier = "deps.edn and monorepos VI (Polylith)";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

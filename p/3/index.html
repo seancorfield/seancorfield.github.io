@@ -58,6 +58,31 @@
 <div id="post">
     
     <div class="post-header">
+        <h2><a href="/blog/2019/01/22/atom-chlorine-windows/">Atom, Chlorine, and Windows</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">January 22, 2019</div>
+        </div>
+    </div>
+    <p>About a month ago, I was <a href="https://corfield.org/blog/2018/12/19/atom-chlorine/">praising Chlorine, the new Clojure package for
+Atom</a> and I've been using
+it, day-in, day-out, for all my Clojure development. On a Mac, that's
+straightforward because I start a Socket REPL on the Mac and I run Atom on the
+Mac so when I connect via Chlorine and issue the <code>Chlorine: Load File</code>
+command (via <code>Ctrl-, f</code> in my keymap), it sends <code>(load-file "/path/to/file.clj")</code>
+to the REPL, for the file being edited, and that is evaluated and loads the
+source from disk and compiles it. On Windows...<!-- more --> Well, on Windows
+there are a few obstacles to this workflow.</p><p>The first obstacle (for me) is that <code>clj</code> doesn't run on Windows and that's
+what I use for everything Clojure on a Mac and on Linux now. There's a
+PowerShell implementation in progress but Windows has always been a bit of a
+second-class citizen so it's still a ways off. But Windows has WSL (Windows
+Subsystem for Linux) so I can
+and do run (user-mode) Ubuntu on my Windows laptop and I do all of my Clojure
+work on that...</p>
+    <a href="/blog/2019/01/22/atom-chlorine-windows/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
         <h2><a href="/blog/2018/12/19/atom-chlorine/">Chlorine: Clojure integration for Atom</a></h2>
         <div id="post-meta">
             
@@ -172,17 +197,6 @@ triggered an "ah-ha!" moment for me.</p>
     <a href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-header">
-        <h2><a href="/blog/2016/07/18/start-your-engine/">Start Your Engine</a></h2>
-        <div id="post-meta">
-            
-            <div class="date">July 18, 2016</div>
-        </div>
-    </div>
-    <p>Today I'm inspired by the <a href="http://us4.campaign-archive1.com/?u=a33b5228d1b5bf2e0c68a83f4&amp;id=56d35f53c5">latest issue of Eric Normand's Clojure Gazette</a> which talks about why his "Joy of Programming" comes from learning and exploration.</p><p>I got into programming as a child because I was curious about solving puzzles and problems: given the (relatively) limited vocabulary of a programming language and its input and output features, and some interesting problem that came to mind, can I solve it in a usable (and hopefully elegant) way?</p>
-    <a href="/blog/2016/07/18/start-your-engine/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -208,6 +222,8 @@ triggered an "ah-ha!" moment for me.</p>
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2021/10/01/deps-edn-monorepo-6/">deps.edn and monorepos VI (Polylith)</a></li>
+                        
                         <li><a href="/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a></li>
                         
                         <li><a href="/blog/2021/08/02/tools-build/">tools.build</a></li>
@@ -215,8 +231,6 @@ triggered an "ah-ha!" moment for me.</p>
                         <li><a href="/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></li>
                         
                         <li><a href="/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></li>
-                        
-                        <li><a href="/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></li>
                         
                     </ul>
                 </div>
