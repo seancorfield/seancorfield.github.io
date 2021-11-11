@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Wed, 13 Oct 2021 23:40:31 -0700</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/</guid><link>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/</link><title>deps.edn and monorepos VII (Polylith)</title><description>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Wed, 10 Nov 2021 17:09:35 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2021/11/10/social-media/</guid><link>https://corfield.org/blog/2021/11/10/social-media/</link><title>Social Media</title><description>I've been on both Twitter and Facebook for a very long time
+and it definitely has had its ups and downs. A couple of
+times over the last six years, I've felt the need to take
+a complete break from Facebook and have deactivated my
+account for up to a couple of months each time. I've also
+taken several breaks from Twitter, although I didn't deactivate
+my account.I've finally decided that the cons are outweighing the pros
+for me on social media so I have shutdown (deleted) both my
+Twitter account and my Facebook account. Permanently.</description><pubDate>Wed, 10 Nov 2021 00:00:00 -0800</pubDate></item><item><guid>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/</guid><link>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/</link><title>deps.edn and monorepos VII (Polylith)</title><description>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
 deps.edn, and Polylith, with our monorepo at
 World Singles Networks.</description><pubDate>Wed, 13 Oct 2021 00:00:00 -0700</pubDate></item><item><guid>https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/</guid><link>https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/</link><title>deps.edn and monorepos VI (Polylith)</title><description>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
 deps.edn, and Polylith, with our monorepo at
