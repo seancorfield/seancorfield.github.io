@@ -376,6 +376,5 @@ for more details about the changes made since this post was originally written.]
 
 ### Got questions?
 
-Find me on the [Clojurians Slack](https://clojurians.slack.com),
-or [Twitter](https://twitter.com/seancorfield), or just ask in the comments
+Find me on the [Clojurians Slack](https://clojurians.slack.com), or just ask in the comments
 below.

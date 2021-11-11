@@ -167,5 +167,4 @@ it will be easier to push forward with Polylith and refactor older code
 in a piecemeal manner rather than requiring "big bang" changes.
 
 As before, if you have questions, find me on the [Clojurians Slack](https://clojurians.slack.com),
-or [Twitter](https://twitter.com/seancorfield), or just ask in the comments
-below.
+or just ask in the comments below.
