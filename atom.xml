@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Wed, 10 Nov 2021 17:09:35 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2021/11/10/social-media/</guid><link>https://corfield.org/blog/2021/11/10/social-media/</link><title>Social Media</title><description>I've been on both Twitter and Facebook for a very long time
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Sun, 14 Nov 2021 16:02:46 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2021/11/14/clojure-doc/</guid><link>https://corfield.org/blog/2021/11/14/clojure-doc/</link><title>The new clojure-doc web site</title><description>Back when I was working on the clojure.java.jdbc Contrib library, I moved
+its documentation to clojure-doc.org so that the community could contribute
+to it, without the CLA that covers contributions to Contrib itself. Over time
+I became a general contributor to clojuredocs/guides which was the repository
+behind the clojure-doc.org web site.Unfortunately, about three years ago, the infrastructure that runs clojure-doc.org
+became inaccessible to the maintainers of the site so, although pull requests
+continued to be accepted, the site itself could no longer be updated. I talked
+with Michael Klishin, the original creator of the site, about moving it to GitHub
+pages but we never quite got around to it. Until today.</description><pubDate>Sun, 14 Nov 2021 00:00:00 -0800</pubDate></item><item><guid>https://corfield.org/blog/2021/11/10/social-media/</guid><link>https://corfield.org/blog/2021/11/10/social-media/</link><title>Social Media</title><description>I've been on both Twitter and Facebook for a very long time
 and it definitely has had its ups and downs. A couple of
 times over the last six years, I've felt the need to take
 a complete break from Facebook and have deactivated my
