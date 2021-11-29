@@ -1,6 +1,7 @@
 {:title "Instrumenting Clojure for New Relic Monitoring",
  :date "2013-05-01 20:09:04 -0700",
  :tags ["clojure" "new relic" "observability"]}
+
 We've recently started evaluating the [New Relic monitoring service](http://newrelic.com/) at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what's going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces).<!-- more --> For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you're lucky!).
 
 However, we have a mixture of CFML and Clojure, running on the [free open source Railo server](http://www.getrailo.org) so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.
