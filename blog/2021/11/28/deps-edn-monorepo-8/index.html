@@ -120,9 +120,9 @@ had Alpha 2 in production for a couple of months and I expect we'll have Alpha
 has merged the Pull Request I submitted to allow it to be installed as a CLI "tool"
 so you can now do:</p><pre><code class="bash">$ clojure -Ttools install nvd-clojure/nvd-clojure '{:mvn/version "RELEASE"}' :as nvd
 
-$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath)"'"'
+$ clojure -Tnvd nvd.task/check :classpath '"'$(clojure -Spath)'"'
 # or with aliases to pull in dependencies:
-$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath -A:any:aliases)"'"'
+$ clojure -Tnvd nvd.task/check :classpath '"'$(clojure -Spath -A:any:aliases)'"'
 </code></pre><p>This will highlight any security vulnerabilities you may have in your dependencies
 so it's definitely worthwhile to install and run this tool on all of your projects!</p>
 </div>
