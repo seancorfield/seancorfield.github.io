@@ -96,9 +96,9 @@ so you can now do:
 ```bash
 $ clojure -Ttools install nvd-clojure/nvd-clojure '{:mvn/version "RELEASE"}' :as nvd
 
-$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath)"'"'
+$ clojure -Tnvd nvd.task/check :classpath '"'$(clojure -Spath)'"'
 # or with aliases to pull in dependencies:
-$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath -A:any:aliases)"'"'
+$ clojure -Tnvd nvd.task/check :classpath '"'$(clojure -Spath -A:any:aliases)'"'
 ```
 
 This will highlight any security vulnerabilities you may have in your dependencies
