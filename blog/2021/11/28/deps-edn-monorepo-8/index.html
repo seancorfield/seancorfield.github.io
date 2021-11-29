@@ -2,19 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Instrumenting Clojure for New Relic Monitoring</title>
+    <title>An Architect&#39;s View: deps.edn and monorepos VIII (Polylith)</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
+<meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
 
-<meta property="og:description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
+<meta property="og:description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+deps.edn, and Polylith, with our monorepo at
+World Singles Networks.">
 
-<meta property="og:url" content="https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/" />
-<meta property="og:title" content="Instrumenting Clojure for New Relic Monitoring" />
+<meta property="og:url" content="https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/" />
+<meta property="og:title" content="deps.edn and monorepos VIII (Polylith)" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">
+    <link rel="canonical" href="https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -65,49 +69,62 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">May 1, 2013</div>
+        <div class="col-lg-6">November 28, 2021</div>
         
     </div>
-    <h2>Instrumenting Clojure for New Relic Monitoring</h2>
+    <h2>deps.edn and monorepos VIII (Polylith)</h2>
 </div>
 <div>
     
-    <p>We've recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what's going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces).<!-- more --> For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you're lucky!).</p><p>However, we have a mixture of CFML and Clojure, running on the <a href="http://www.getrailo.org">free open source Railo server</a> so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.</p><p>This <a href="http://blog.newrelic.com/2012/11/13/setting-up-custom-instrumentation-using-the-new-relic-java-agent/">New Relic blog post talks about custom instrumentation</a> and shows how you can use method annotations in Java to make specific function calls show up in web transaction traces. (The New Relic documentation, accessible from their monitoring console, provides more detail)</p><p>In Java (approximately):</p><pre><code>import com.newrelic.api.agent.Trace;
+    <p>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
+<code>deps.edn</code>, and <a href="https://polylith.gitbook.io/">Polylith</a>, with our monorepo at
+<a href="https://worldsinglesnetworks.com">World Singles Networks</a>.<!--more--></p><h3 id="the-monorepopolylith-series">The Monorepo/Polylith Series</h3><p><em>This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:</em></p><ol><li><em><a href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></em></li><li><em><a href="https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></em></li><li><em><a href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></em></li><li><em><a href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/">deps.edn and monorepos VI (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/">deps.edn and monorepos VII (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/11/19/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a> (this post)</em></li></ol><h2 id="part-viii">Part VIII</h2><p>It's been a month and a half since the last update so I figured an update was due, although I don't
+really feel like I have much to report.</p><h3 id="new-relic">New Relic</h3><p>New Relic finally released a version of their Java Agent that is compatible with JDK 17
+(<a href="https://docs.newrelic.com/docs/release-notes/agent-release-notes/java-release-notes/java-agent-740/">7.4.0 on October 28th</a>)
+so we are finally rolling JDK 17 out into production. Early signs are good: with no
+changes in configuration at all it looks like the G1 collector has become a bit more aggressive and,
+although we saw marginally higher CPU usage for GC for the first few days (and
+marginally lower throughput), now that we've been running for about a week, it
+looks like GC has settled back down (to ~0.1% of CPU), throughput has settled
+back down, and overall memory usage is lower with garbage being collected more
+aggressively than on JDK 11. We're planning to roll more processes over to JDK 17
+this week and if things continue to go smoothly, we'll start experimenting with
+ZGC since several people have had good things to say about that.</p><h2 id="toolsbuild"><code>tools.build</code></h2><p>This library has seen several new releases since my last update and we have
+now replaced all of the <code>ant</code> / <code>build.xml</code> / <code>bash</code> scripts around our "modern"
+(Clojure) apps by switching from <code>.tar.gz</code> files built by the latter to <code>.zip</code>
+files built by the former. They're about 50% larger but bandwidth and disk
+space really aren't issues these days and having "everything" controllable via
+a single <code>build.clj</code> script, which we can use from the REPL, simplifies that
+last piece of our build/deploy chain.</p><p>Our legacy (non-Clojure) apps still rely on <code>ant</code> / <code>build.xml</code> / <code>bash</code> scripts
+but the rewrite continues aggressively so I expect to ditch that in 2022!</p><h3 id="automating-builds">Automating Builds</h3><p>On the subject of automation and <code>tools.build</code>, I finally bit the bullet and
+updated both <a href="https://github.com/seancorfield/next-jdbc"><code>next.jdbc</code></a> and
+<a href="https://github.com/seancorfield/honeysql"><code>honeysql</code></a> to automatically,
+test, build, and deploy, full "release" JARs to Clojars whenever I cut a
+new release on GitHub (effectively whenever I push a new tag that starts with <code>v</code>).
+This removes the last manual step that I was performing with these libraries
+when making a new release.</p><h2 id="clojure-cli-and-toolsdepsalpha">Clojure CLI (and <code>tools.deps.alpha</code>)</h2><p>These have also had several new releases since my last update. There is now
+a very nice <code>clojure -X:deps list</code> command that shows a sorted list of the
+actual resolved dependencies and versions. In addition, the long-standing
+issue of <code>:local/root</code> deps becoming stale and not recomputed has been
+addressed, reducing the need for <code>-Sforce</code> in many situations (especially
+in monorepos, such as you have with Polylith!).</p><h2 id="polylith">Polylith</h2><p>Nothing specific to report here, except that I have declared Fridays to
+be "refactoring Fridays" for a while at work so I can more aggressively
+refactor our existing subprojects into <code>components</code> (and <code>bases</code>) and
+expand the leverage that incremental testing provides, via Polylith.</p><p>We're at 18 projects, 6 bases, 35 components, and just shy of 26k lines
+of our production code using Polylith now (out of just over 96k lines).</p><h2 id="other-important-releases">Other Important Releases</h2><p>In closing, I want to call out <a href="https://clojure.org/releases/devchangelog#v1.11.0-alpha3">Clojure 1.11 Alpha 3</a>
+which has a number of convenience features (and bug fixes). We have Alpha 3 in QA
+and we're already using <code>parse-long</code>, <code>parse-double</code>, and <code>random-uuid</code> (we'll
+probably start using the new <code>clojure.java.math</code> namespace next week). We have
+had Alpha 2 in production for a couple of months and I expect we'll have Alpha
+3 in production next week.</p><p>In addition, the <a href="https://github.com/rm-hull/nvd-clojure/">National Vulnerability Database dependency-checker library</a>
+has merged the Pull Request I submitted to allow it to be installed as a CLI "tool"
+so you can now do:</p><pre><code class="bash">$ clojure -Ttools install nvd-clojure/nvd-clojure '{:mvn/version "RELEASE"}' :as nvd
 
-public class Thing {
-
-    @Trace
-    public void someMethod() {
-        ...
-    }
-
-}
-</code></pre><p>So how do you do the same thing in Clojure? Annotations have been supported for quite a while in Clojure but they're very poorly documented and they require some specialized code.</p><p>Let's suppose you have this Clojure code:</p><pre><code>(ns my-project.stuff)
-
-(defn some-func [x y z] ...)
-
-(defn another-fn [a b] ...)
-</code></pre><p>We want to annotate both of these functions so they show up in New Relic web transaction traces. You can add annotations in a <code>deftype</code> so we have to transform our code quite a bit. First off, you'll need the New Relic JAR as a dependency in <code>project.clj</code>:</p><pre><code>  :dependencies
-    [...
-     [com.newrelic.agent.java/newrelic-api "3.10.0"]
-     ...]
-</code></pre><p>Check <a href="http://search.maven.org/#search%7Cga%7C1%7Cnewrelic-api">Maven Central</a> for the latest version! <em>As of September 26th, 2014, it was <code>3.10.0</code>.</em></p><p>Then you need to import the <code>Trace</code> annotation:</p><pre><code>(ns my-project.stuff
-  (:import com.newrelic.api.agent.Trace))
-</code></pre><p>Since we need to use <code>deftype</code> we need to define an interface type for the functions we want to instrument. We also need to use Java-compatible names. Here's a first cut:</p><pre><code>(definterface INR
-  (some_func [x y z])
-  (another_fn [a b]))
-</code></pre><p>Now we can define the implementation type with the annotations. Then we'll need to expose a Clojure API based on that. Let's start by renaming our existing implementations and making them private, so we can call them from the <code>deftype</code> with minimal code changes:</p><pre><code>(defn- some-func* [x y z] ...)
-
-(defn- another-fn* [a b] ...)
-</code></pre><p>Now we can write our <code>deftype</code> with annotations:</p><pre><code>(deftype NR []
-  INR
-  ;; @Trace maps to Trace {} metadata:
-  (^{Trace {}} some_func  [_ x y z] (some-func* x y z))
-  (^{Trace {}} another_fn [_ a b]   (another-fn* a b)))
-</code></pre><p>Here we have an implementation - <code>NR</code> - of our interface - <code>INR</code> - which provides the two methods. Note that they ignore their first argument (<code>this</code>) because the object type is just an artifact of <code>deftype</code> for us to add the annotations. Finally, we can reimplement our original API in terms of the new type. In order to do that, we need an instance of our type, and to avoid classloader issues, we'll create a new instance in each call. <em>In my original blog post I suggested using a private singleton but later discovered that caused problems with classloaders sometimes.</em></p><p>And finally here is our original API reimplemented in a traceable way:</p><pre><code>(defn some-func  [x y z] (.some_func (NR.) x y z))
-
-(defn another-fn [a b]   (.another_fn (NR.) a b))
-</code></pre><p>Now you just need to start your web application container with the JVM option <code>-javaagent:/path/to/newrelic.jar</code> (which is your licensed JAR file downloaded from your monitoring console, not the one pulled in by Leiningen based on the dependency we added above!).</p><p>When you drill into web transaction traces, you should see <code>my_project.stuff.NR.some_func</code> and <code>my_project.stuff.NR.another_fn</code> entries in it!</p>
+$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath)"'"'
+# or with aliases to pull in dependencies:
+$ clojure -Tnvd nvd.task/check :classpath '"'"$(clojure -Spath -A:any:aliases)"'"'
+</code></pre><p>This will highlight any security vulnerabilities you may have in your dependencies
+so it's definitely worthwhile to install and run this tool on all of your projects!</p>
 </div>
 
 <div id="post-tags">
@@ -115,7 +132,11 @@ public class Thing {
     
     <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/observability/">observability</a>
+    <a href="/tags/polylith/">polylith</a>
+    
+    <a href="/tags/tools.build/">tools.build</a>
+    
+    <a href="/tags/monorepo/">monorepo</a>
     
     <a href="/tags/new relic/">new relic</a>
     
@@ -124,8 +145,8 @@ public class Thing {
 
     <div id="prev-next">
         
-        <a href="/blog/2013/09/22/the-strange-loop-2013/">&laquo; The Strange Loop 2013</a>
         
+        <a class="right" href="/blog/2021/11/14/clojure-doc/">The new clojure-doc web site &raquo;</a>
         
     </div>
 
@@ -133,8 +154,8 @@ public class Thing {
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/";
-            this.page.identifier = "Instrumenting Clojure for New Relic Monitoring";
+            this.page.url = "https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/";
+            this.page.identifier = "deps.edn and monorepos VIII (Polylith)";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
