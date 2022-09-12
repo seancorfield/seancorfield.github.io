@@ -4,6 +4,8 @@
 
 ## seancorfield/next.jdbc 1.1.610
 
+_Updated 2022-09-12 to clarify `camel-snake-kebab` usage in more recent `next.jdbc` versions._
+
 I recently released [1.1.610](https://github.com/seancorfield/next-jdbc/releases/tag/v1.1.610) and since it has been about five months since my last post summarizing advances in this library, I thought another summary post would be helpful.
 
 As before, this post is organized into fixative changes, accretive changes, and documentation improvements, with each section organized by functionality or by database as appropriate.<!-- more -->
@@ -26,7 +28,7 @@ As before, this post is organized into fixative changes, accretive changes, and 
   * `execute!` can return multiple result sets (if the `:multi-rs` option is set to `true`). This is useful when calling stored procedures and, for SQL Server, when working with T-SQL scripts. This was considered a big enough enhancement to bump the library from 1.0.z to 1.1.z because it has long been requested against `clojure.java.jdbc` (and `next.jdbc`).
   * Adds `with-options` that lets you wrap up a connectable along with default options that should be applied to all operations on that connectable. This provides most of the much-requested "default options" functionality (with caveats about functions that return native Java types).
   * `get-connection` now has arities that accept username and password to support datasources that allow per-connection credentials.
-  * Adds `snake-kebab-opts`, `unqualified-snake-kebab-opts`, for use with `with-options`. These are conditionally defined if `camel-snake-kebab` is on your classpath (see also `next.jdbc.result-set` enhancements below).
+  * Adds `snake-kebab-opts`, `unqualified-snake-kebab-opts`, for use with `with-options`. These are conditionally defined if `camel-snake-kebab` is on your classpath (see also `next.jdbc.result-set` enhancements below). _As of 1.2.659, these are included unconditionally and `next.jdbc` depends directly on `camel-snake-kebab`._
   * The result of `plan` is now foldable, as well as reducible (in the `clojure.core.reducers` sense). Folding the result of a `plan` call will use fork/join to provide some degree of parallelization of processing when streaming large result sets.
   * Inside the reducing function over `plan`, you can call `next.jdbc.result-set/metadata` to obtain a datafication of the `ResultSetMetaData` object from the underlying `ResultSet` object.
 
@@ -43,7 +45,7 @@ As before, this post is organized into fixative changes, accretive changes, and 
   * `execute-batch!` now supports a `:return-generated-keys` option so you can get back (all) the generated keys instead of just update counts.
 
 * `next.jdbc.result-set`
-  * `as-kebab-maps` and `as-unqualified-kebab-maps` are two new builders that are conditionally defined if `camel-snake-kebab` is on your classpath.
+  * `as-kebab-maps` and `as-unqualified-kebab-maps` are two new builders that are conditionally defined if `camel-snake-kebab` is on your classpath. _As of 1.2.659, these are included unconditionally and `next.jdbc` depends directly on `camel-snake-kebab`._
   * `datafiable-result-set` now allows the connectable and the options to be omitted. Passing `nil` for the connectable (or omitting it) suppresses foreign key navigation (when using `datafy`/`nav`), instead of throwing an obscure exception.
   * Exposes `reducible-result-set` and `foldable-result-set` for users who want more control over processing result sets obtained from database metadata.
   * Adds `with-column-value` to `RowBuilder` protocol and provides a more generic `builder-adapter` that offers more control over how column values are read.
