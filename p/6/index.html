@@ -2,19 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Happy New Releases!</title>
+    <title>An Architect&#39;s View</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
-
-<meta name="description" content="Wrapping Up 2019It&#39;s been a while since I blogged about the projects I maintain so I figured New Year&#39;s Eve 2019 was a good time to provide an update!">
-
-<meta property="og:description" content="Wrapping Up 2019It&#39;s been a while since I blogged about the projects I maintain so I figured New Year&#39;s Eve 2019 was a good time to provide an update!">
-
-<meta property="og:url" content="https://corfield.org/blog/2019/12/31/releases/" />
-<meta property="og:title" content="Happy New Releases!" />
-<meta property="og:type" content="article" />
-
-    <link rel="canonical" href="https://corfield.org/blog/2019/12/31/releases/">
+    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
+    <meta name="keywords" content="">
+    
+    <link rel="canonical" href="https://corfield.org">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -64,53 +57,25 @@
             <div id="content">
                 
 <div id="post">
+    
     <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">December 31, 2019</div>
-        
+        <h2><a href="/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">Instrumenting Clojure for New Relic Monitoring</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">May 1, 2013</div>
+        </div>
     </div>
-    <h2>Happy New Releases!</h2>
-</div>
-<div>
+    <p>We've recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what's going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces).<!-- more --> For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you're lucky!).</p><p>However, we have a mixture of CFML and Clojure, running on the <a href="http://www.getrailo.org">free open source Railo server</a> so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.</p>
+    <a href="/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">Continue reading &#8594;</a>
+    <hr>
     
-    <h2 id="wrapping-up-2019">Wrapping Up 2019</h2><p>It's been a while since I blogged about the projects I maintain so I figured New Year's Eve 2019 was a good time to provide an update!</p><h3 id="expectationsclojure-test-121">expectations/clojure-test 1.2.1</h3><p>Mocking in <code>side-effects</code>, optional message argument in <code>expect</code> (like <code>is</code>), <code>between</code> predicate, official support for Clojure 1.8 onward, lots of documentation improvements!</p><p>See the <a href="https://github.com/clojure-expectations/clojure-test/blob/master/CHANGELOG.md">change log</a> for more details.</p><h3 id="jkkhoneysql-098">jkk/honeysql 0.9.8</h3><p>Lots of bug fixes, some enhancements (<code>composite</code>, <code>truncate</code>), and some documentation enhancements.</p><p>See the <a href="https://github.com/jkk/honeysql/blob/master/CHANGES.md">change log</a> for more details.</p><h3 id="orgclojurecorecache-082">org.clojure/core.cache 0.8.2</h3><p>Add <code>clojure.core.cache.wrapped</code> to make using the library easier!</p><p>See the <a href="https://github.com/clojure/core.cache/blob/master/README.md#change-log">change log</a> for more details.</p><h3 id="orgclojurecorememoize-082">org.clojure/core.memoize 0.8.2</h3><p>Bug fixes and a new <code>memoizer</code> function that makes it easier to define custom function caches.</p><p>See the <a href="https://github.com/clojure/core.memoize/blob/master/README.md#change-log">change log</a> for more details.</p><h3 id="orgclojurejavadata-015">org.clojure/java.data 0.1.5</h3><p>Yup, I took over maintenance of this in October!</p><p><code>set-properties</code> to set arbitrary properties post-construction, constructor argument support, numerous bug fixes and reflection warnings addressed.</p><p>See the <a href="https://github.com/clojure/java.data/blob/master/README.md#change-log">change log</a> for more details.</p><h3 id="orgclojurejavajdbc-0711">org.clojure/java.jdbc 0.7.11</h3><p>This library is officially "stable" and no longer being actively maintained beyond critical bug fixes -- please consider migrating to <code>seancorfield/next.jdbc</code> (see below).</p><p>That said, this got the same transaction rollback exception edge case fix and Turkish locale fix that <code>next.jdbc</code> already had.</p><p>See the <a href="https://github.com/clojure/java.jdbc/blob/master/README.md#change-log">change log</a> for more details.</p><h3 id="seancorfieldclj-new-082">seancorfield/clj-new 0.8.2</h3><p>AOT compilation in <code>app</code> uberjar, <code>pom.xml</code> generation, <code>:uberjar</code> in <code>app</code> and <code>:jar</code> in <code>lib</code> and <code>template</code> projects, <code>-?</code> / <code>--query</code> option to explain what <code>clj-new</code> will attempt to do, <code>-e</code> / <code>--env</code> option to define "environment" variables that set substitution values in project templates, dependency updates, documentation improvements.</p><p>See the <a href="https://github.com/seancorfield/clj-new/blob/master/CHANGELOG.md">change log</a> for more details.</p><h3 id="seancorfielddepstar-042">seancorfield/depstar 0.4.2</h3><p>Support for Multi-Release JARs, AOT compilation for uberjars (with <code>pom.xml</code>), JDK 11 support, better handling of unknown file types.</p><p>See the <a href="https://github.com/seancorfield/depstar#changes">change log</a> for more details.</p><h3 id="seancorfieldnextjdbc-1013">seancorfield/next.jdbc 1.0.13</h3><p><code>next.jdbc.prepare/statement</code> and support for <code>java.sql.Statement</code>, arbitrary <code>Connection</code> and <code>Statement</code> property support, fix transaction rollback exception edge case (thank you Jepsen!), expose SQL builders, now tested against MS SQL Server and MySQL (formally), provide additional date/time/timestamp conversion support, CLOB support, <code>:jdbcUrl</code> support, HugSQL quick start guide, result set builder adapters, expanded Tips &amp; Tricks, lots of documentation enhancements!</p><p>See the <a href="https://github.com/seancorfield/next-jdbc/blob/master/CHANGELOG.md">change log</a> for more details.</p><h3 id="seancorfielddot-clojure">seancorfield/dot-clojure</h3><p>If you are getting started with the <a href="https://clojure.org/guides/deps_and_cli">Clojure CLI and <code>deps.edn</code></a> then you might want to check out my <a href="https://github.com/seancorfield/dot-clojure">.clojure/deps.edn file</a> which contains a lot of useful aliases and hints &amp; tips to get you up and running with a powerful set of composable tools: create new projects, start various types of REPLs, run tests -- against multiple versions of Clojure, build JARs and uberjars, benchmark your code, check for outdated dependencies, and more!</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
-    
-    <a href="/tags/clojure/">clojure</a>
-    
-    <a href="/tags/jdbc/">jdbc</a>
-    
-</div>
-
 
     <div id="prev-next">
         
-        <a href="/blog/2020/05/23/next-jdbc/">&laquo; next.jdbc Compendium</a>
+        <a class="left" href="/p/5/">&laquo; Prev</a>
         
-        
-        <a class="right" href="/blog/2019/09/13/using-spec/">How do you use clojure.spec &raquo;</a>
         
     </div>
-
-    
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2019/12/31/releases/";
-            this.page.identifier = "Happy New Releases!";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//seancorfield.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    
-
-
 </div>
 
             </div>

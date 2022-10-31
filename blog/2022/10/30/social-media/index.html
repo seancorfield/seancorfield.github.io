@@ -2,19 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Testing With Boot</title>
+    <title>An Architect&#39;s View: Social Media Revisited</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="In Building On Boot, I gave some high level benefits we&#39;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&#39;s what I&#39;m going to cover here, since that was the first real obstacle we encountered.We use Jay Fields&#39; Expectations library very heavily for most of our testing needs. We use clojure.test only for our Clojure-powered WebDriver testing. Leiningen has a test task built-in and we had been using lein-expectations for years. It was quite a shock to find out that Boot has no testing tasks built-in!">
+<meta name="description" content="About a year I posted that I had deleted both my Twitter and Facebook accounts.In March, my wife &amp; I visited friends and family in England (for the first time
+in three years) as my mother had been diagnosed with AAA (abdominal
+aortic aneurysm) and it had grown substantially -- the doctor has given her
+&quot;months&quot; to live, although she&#39;s already lasted longer than that!">
 
-<meta property="og:description" content="In Building On Boot, I gave some high level benefits we&#39;d found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that&#39;s what I&#39;m going to cover here, since that was the first real obstacle we encountered.We use Jay Fields&#39; Expectations library very heavily for most of our testing needs. We use clojure.test only for our Clojure-powered WebDriver testing. Leiningen has a test task built-in and we had been using lein-expectations for years. It was quite a shock to find out that Boot has no testing tasks built-in!">
+<meta property="og:description" content="About a year I posted that I had deleted both my Twitter and Facebook accounts.In March, my wife &amp; I visited friends and family in England (for the first time
+in three years) as my mother had been diagnosed with AAA (abdominal
+aortic aneurysm) and it had grown substantially -- the doctor has given her
+&quot;months&quot; to live, although she&#39;s already lasted longer than that!">
 
-<meta property="og:url" content="https://corfield.org/blog/2016/01/31/testing-with-boot/" />
-<meta property="og:title" content="Testing With Boot" />
+<meta property="og:url" content="https://corfield.org/blog/2022/10/30/social-media/" />
+<meta property="og:title" content="Social Media Revisited" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2016/01/31/testing-with-boot/">
+    <link rel="canonical" href="https://corfield.org/blog/2022/10/30/social-media/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -66,36 +72,47 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">January 31, 2016</div>
+        <div class="col-lg-6">October 30, 2022</div>
         
     </div>
-    <h2>Testing With Boot</h2>
+    <h2>Social Media Revisited</h2>
 </div>
 <div>
     
-    <p>In <a href="https://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more --></p><p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p><p>Boot's standard for driving <code>clojure.test</code> is <a href="https://github.com/adzerk-oss/boot-test">Adzerk's boot-test</a>. Using it in your <code>build.boot</code> file is as simple as adding a dependency on <code>[adzerk/boot-test "1.0.7" :scope "test"]</code> and then referring in the <code>test</code> task:</p><pre><code>(merge-env! :dependencies '[[adzerk/boot-test "1.0.7" :scope "test"]])
-(require '[adzerk.boot-test :refer [test]])
-</code></pre><p>Now you can do <code>boot test</code> and run any tests in any of the namespaces in your source paths. Unfortunately there was no equivalent for Expectations so this was my first chance to roll up my sleeves and write a Boot task as a standalone project. The result is <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a>. Add a dependency on <code>[seancorfield/boot-expectations "1.0.5" :scope "test"]</code> and then refer in the <code>expectations</code> task:</p><pre><code>(merge-env! :dependencies '[[seancorfield/boot-expectations "1.0.5" :scope "test"]])
-(require '[seancorfield.boot-expectations :refer [expectation]])
-</code></pre><p>Now you can do <code>boot expectations</code> to run any Expectations tests in any of the namespaces in your source paths. Do <code>boot expectations -h</code> to see all the options the task provides.</p><p>I relied very heavily on two sources for this project: Adzerk's <code>boot-test</code> for the shape of the code and the <a href="https://clojurians.slack.com/messages/boot/">#boot channel</a> on the <a href="http://clojurians.net">Clojurians Slack</a> where Boot's maintainers hang out and are <em>extremely attentive and helpful</em>! In particular, <a href="https://github.com/micha">Micha Niskin</a> was invaluable, answering all my newbie questions and making suggestions. Boot's "pods" made it easy to specify the version of Clojure to use when running the tests, without affecting the version of Clojure used for anything else in the build process (we have always run our tests against the released version we are actually using as well as the latest snapshot of Clojure's master branch so we don't get surprised by any changes being introduced in the next release). The "pod" machinery also made it straightforward to have namespaces required into the testing environment, and shutdown functions run after the tests, again without affecting the main build process. And all in a single JVM process that runs for the duration of the build.</p><p>As you can see on Boot's wiki, the ecosystem of <a href="https://github.com/boot-clj/boot/wiki/Community-Tasks">community-maintained Boot tasks</a> is already pretty strong and growing all the time.</p><p>Back to our build process and one of the key drivers for looking at Boot in the first place: we'd hit around 30K lines of production Clojure and 10K lines of test Clojure code, and we had it in three fair-sized projects with Leiningen. We wanted to reorganize the code and break it up into many more projects in order to have more flexibility in how we deploy code as well as being able to develop and test smaller chunks of code in isolation. We also wanted to be able to "pin" versions of certain libraries that we depended on across multiple "projects". With Leiningen we'd had multiple <code>project.clj</code> files and were already finding that we were pushing the declarative envelope of Leiningen by having to escape executable code into our <code>defproject</code> form. It felt like we were starting to fight the build tool. The declarative nature of <code>project.clj</code> didn't feel natural for the more fluid approach we wanted to take with our code base. What appealed about Boot was the possibility of a single <code>build.boot</code> file that could mix'n'match source and test code from various locations to allow the more modular develop / test approach we were aiming for, while still being able to easily build, push, and depend on artifacts from sub-projects. With Leiningen, we had a project for our WebDriver tests and it depended on a JAR built from the main source code project, so we would build and install (locally) a JAR of our main project, as part of the build. With Boot and a single <code>build.boot</code> file it was much easier to set up execution and test "contexts" as tasks that built the list of dependencies and source paths needed for each testing task. We now have all our Clojure code as "sub-projects" but can treat it as a single project too where that is more convenient.</p><p>In the next post, I'll take a diversion from World Singles' use of Boot and look at the <a href="https://github.com/seancorfield/boot-new">Boot new</a> project I've been working on for a month -- another "missing piece of the ecosystem" that I wanted to help fill!</p>
+    <p>About a year I <a href="https://corfield.org/blog/2021/11/10/social-media/">posted that I had deleted both my Twitter and Facebook accounts</a>.</p><p>In March, my wife &amp; I visited friends and family in England (for the first time
+in three years) as my mother had been diagnosed with AAA (abdominal
+aortic aneurysm) and it had grown substantially -- the doctor has given her
+"months" to live, although she's already lasted longer than that!</p><p>One of the frustrations of that trip was that we ended up having to use my
+wife's Facebook account to organize all the get togethers with <em>my</em> friends
+and family because, well, I'd deleted my Facebook account!</p><p>So, shortly after we got back, I bit the bullet and recreated both my
+Facebook account and, grudgingly, my Twitter account as well. I was able to
+use the same usernames on both and start fresh. I've kept both accounts very
+"slim" in terms of followers and my experience has generally been much better
+than it was, through a judicious combination of not having the apps on my
+phone's home screen and not having either site in my favorites or the
+"quick links" in my browser.</p><p>But they're still both "junk" really and at this point I view Facebook as
+an unpleasant necessity for keeping in touch with friends and family around
+the world. I do not view Twitter as a necessity of any stripe, however, and
+with the recent acquisition by the world's richest idiot, I decided it was
+time to find a better "home" for interacting with people.</p><p>So I've been part of the <code>#TwitterMigration</code> and I've moved to Mastodon,
+like 80,000 other people did yesterday!</p><p>I've added a link to the site navigation here and my Twitter profile (and
+I've changed my display name on Twitter to my Mastodon handle).</p><p>From now on, you can find me at <a href="https://tech.lgbt/@seancorfield">@seancorfield@tech.lgbt</a>.
+Come on in, the <code>#fediverse</code> is a welcoming, fun, and interesting place to find
+friends and chat.</p>
 </div>
 
 <div id="post-tags">
     <b>Tags: </b>
     
-    <a href="/tags/clojure/">clojure</a>
-    
-    <a href="/tags/boot/">boot</a>
+    <a href="/tags/personal/">personal</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2016/02/02/boot-new/">&laquo; boot-new</a>
         
-        
-        <a class="right" href="/blog/2016/01/30/building-on-boot/">Building On Boot &raquo;</a>
+        <a class="right" href="/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith) &raquo;</a>
         
     </div>
 
@@ -103,8 +120,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2016/01/31/testing-with-boot/";
-            this.page.identifier = "Testing With Boot";
+            this.page.url = "https://corfield.org/blog/2022/10/30/social-media/";
+            this.page.identifier = "Social Media Revisited";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
