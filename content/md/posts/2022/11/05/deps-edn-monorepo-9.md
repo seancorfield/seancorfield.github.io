@@ -66,7 +66,7 @@ architectural approach.
 
 We now have two swappable component implementations. I've talked before about
 our HTTP client component (using either Hato on modern JDKs or http-kit on
-legacy JDKs) but we also have two i18n implemantations now. Our traditional
+legacy JDKs) but we also have two i18n implementations now. Our traditional
 i18n component uses a database-backed implementation as part of our content
 management system that supports over a dozen languages, with dedicated
 translators using our Admin app to work with out content, that can then be
