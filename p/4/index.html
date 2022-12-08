@@ -59,6 +59,17 @@
 <div id="post">
     
     <div class="post-header">
+        <h2><a href="/blog/2018/12/03/datafy-nav/">Clojure 1.10&#39;s datafy and nav</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 3, 2018</div>
+        </div>
+    </div>
+    <p>One of the more mysterious new features in Clojure 1.10 seems to be the pairing of <a href="https://github.com/clojure/clojure/blob/master/changes.md#26-datafy-and-nav"><code>datafy</code> and <code>nav</code></a> (and their underlying protocols, <code>Datafiable</code> and <code>Navigable</code>). Interest in these new functions has been piqued after Stuart Halloway showed off <a href="https://www.youtube.com/watch?v=c52QhiXsmyI&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=3">REBL at Clojure/conj</a> (video). Stu presented this functionality as "generalized laziness": <code>datafy</code> produces a "data representation" of things and <code>nav</code> lets you (lazily) navigate around that data.<!-- more --></p><p>The <a href="http://rebl.cognitect.com/">REBL</a> "is a graphical, interactive tool for browsing Clojure data". And in Clojure we're used to the concept of "it's just data" so a graphical browser might sound useful but not exactly earthshaking. But REBL is just an example of what can be built with the new functionality in 1.10 and, indeed, Stu's claim of "generalized laziness" is well made but a little hard to grok until you actually build something with the new protocols and functions.</p>
+    <a href="/blog/2018/12/03/datafy-nav/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
         <h2><a href="/blog/2018/10/25/clojure-conj/">Excited About Clojure/conj</a></h2>
         <div id="post-meta">
             
@@ -157,17 +168,6 @@
     <a href="/blog/2016/02/02/boot-new/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-header">
-        <h2><a href="/blog/2016/01/31/testing-with-boot/">Testing With Boot</a></h2>
-        <div id="post-meta">
-            
-            <div class="date">January 31, 2016</div>
-        </div>
-    </div>
-    <p>In <a href="https://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more --></p><p>We use <a href="http://jayfields.com/expectations/">Jay Fields' Expectations</a> library very heavily for most of our testing needs. We use <code>clojure.test</code> only for our <a href="https://github.com/semperos/clj-webdriver">Clojure-powered WebDriver testing</a>. Leiningen has a <code>test</code> task built-in and we had been using <a href="https://github.com/gar3thjon3s/lein-expectations">lein-expectations</a> for years. It was quite a shock to find out that Boot has no testing tasks built-in!</p>
-    <a href="/blog/2016/01/31/testing-with-boot/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -193,6 +193,8 @@
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></li>
+                        
                         <li><a href="/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></li>
                         
                         <li><a href="/blog/2022/10/30/social-media/">Social Media Revisited</a></li>
@@ -200,8 +202,6 @@
                         <li><a href="/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></li>
                         
                         <li><a href="/blog/2021/11/14/clojure-doc/">The new clojure-doc web site</a></li>
-                        
-                        <li><a href="/blog/2021/11/10/social-media/">Social Media</a></li>
                         
                     </ul>
                 </div>
