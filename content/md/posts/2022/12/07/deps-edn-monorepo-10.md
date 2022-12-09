@@ -116,7 +116,7 @@ build and deploy of the "admin app" to staging.
 
 We were able to continue our deployment with only about a 30 minute delay!
 
-> Note: we've since switched from the Cogniect AWS API to [Michael Glasemann's awyeah-api](https://github.com/grzm/awyeah-api) which doen't depend on the Jetty 9 HTTP client and is therefore compatible with our Jetty 11 codebase (so we deleted that `web-server-9` component).
+> Note: we've since switched from the Cognitect AWS API to [Michael Glasemann's awyeah-api](https://github.com/grzm/awyeah-api) which doesn't depend on the Jetty 9 HTTP client and is therefore compatible with our Jetty 11 codebase (so we deleted that `web-server-9` component).
 
 ### Polylith to the Rescue, Part 2
 
@@ -254,5 +254,8 @@ Then we have a task like this to build all the artifacts that changed:
                      (set/difference (set billing-build-artifacts)))]
     (uberjars (assoc params :projects projects))))
 ```
+
+`billig-build-artifacts` is the list of projects that are not yet migrated to
+Polylith.
 
 Just in time for the holiday season, Polylith is the gift that keeps on giving!

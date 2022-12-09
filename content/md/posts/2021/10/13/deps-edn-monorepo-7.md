@@ -1,6 +1,6 @@
 {:title "deps.edn and monorepos VII (Polylith)",
  :date "2021-10-13 23:00:00",
- :tags ["clojure" "monorepo" "polylith" "tools.build" "vs code"]}
+ :tags ["clojure" "monorepo" "polylith" "portal" "tools.build" "vs code"]}
 
 This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
 `deps.edn`, and [Polylith](https://polylith.gitbook.io/), with our monorepo at
