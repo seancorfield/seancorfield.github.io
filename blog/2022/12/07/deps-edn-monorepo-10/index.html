@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>An Architect&#39;s View: deps.edn and monorepos X (Polylith)</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,portal,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
 <meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
 deps.edn, and Polylith, with our monorepo at
@@ -142,7 +142,7 @@ build.</p><p>"Polylith to the Rescue!" -- I copied our <code>web-server</code> c
 <code>web-server-9</code>, edited the dependencies to switch that implementation back to
 the standard Jetty 9 Ring adapter, updated <code>projects/wsadmin/deps.edn</code> to use
 that implementation instead of the regular <code>web-server</code> one, and triggered a
-build and deploy of the "admin app" to staging.</p><p>We were able to continue our deployment with only about a 30 minute delay!</p><blockquote><p>Note: we've since switched from the Cogniect AWS API to <a href="https://github.com/grzm/awyeah-api">Michael Glasemann's awyeah-api</a> which doen't depend on the Jetty 9 HTTP client and is therefore compatible with our Jetty 11 codebase (so we deleted that <code>web-server-9</code> component).</p></blockquote><h3 id="polylith-to-the-rescue-part-2">Polylith to the Rescue, Part 2</h3><p>We have a legacy app, that predates our switch to Clojure and still requires
+build and deploy of the "admin app" to staging.</p><p>We were able to continue our deployment with only about a 30 minute delay!</p><blockquote><p>Note: we've since switched from the Cognitect AWS API to <a href="https://github.com/grzm/awyeah-api">Michael Glasemann's awyeah-api</a> which doesn't depend on the Jetty 9 HTTP client and is therefore compatible with our Jetty 11 codebase (so we deleted that <code>web-server-9</code> component).</p></blockquote><h3 id="polylith-to-the-rescue-part-2">Polylith to the Rescue, Part 2</h3><p>We have a legacy app, that predates our switch to Clojure and still requires
 JDK 8 to run. We're probably going to rewrite it completely at some point so
 migrating it completely to Clojure is low on our list of priorities. In fact,
 we haven't even deployed a new version of it for almost ten months. But it
@@ -230,7 +230,8 @@ only applied to passing builds and can then be incorporated into the JAR file).<
                      (set)
                      (set/difference (set billing-build-artifacts)))]
     (uberjars (assoc params :projects projects))))
-</code></pre><p>Just in time for the holiday season, Polylith is the gift that keeps on giving!</p>
+</code></pre><p><code>billig-build-artifacts</code> is the list of projects that are not yet migrated to
+Polylith.</p><p>Just in time for the holiday season, Polylith is the gift that keeps on giving!</p>
 </div>
 
 <div id="post-tags">
@@ -367,6 +368,8 @@ only applied to passing builds and can then be incorporated into the JAR file).<
                         <li><a href="/tags/community/">community</a></li>
                         
                         <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/portal/">portal</a></li>
                         
                         <li><a href="/tags/conj/">conj</a></li>
                         
