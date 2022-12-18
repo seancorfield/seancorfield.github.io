@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <title>An Architect&#39;s View: Instrumenting Clojure for New Relic Monitoring</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,personal,atom,tools.build,windows,monorepo,community,jdbc,portal,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,portal,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
 <meta name="description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
 
@@ -162,6 +162,8 @@ public class Thing {
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal</a></li>
+                        
                         <li><a href="/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></li>
                         
                         <li><a href="/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></li>
@@ -169,8 +171,6 @@ public class Thing {
                         <li><a href="/blog/2022/10/30/social-media/">Social Media Revisited</a></li>
                         
                         <li><a href="/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></li>
-                        
-                        <li><a href="/blog/2021/11/14/clojure-doc/">The new clojure-doc web site</a></li>
                         
                     </ul>
                 </div>
@@ -230,11 +230,15 @@ public class Thing {
                         
                         <li><a href="/tags/java/">java</a></li>
                         
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
                         <li><a href="/tags/personal/">personal</a></li>
                         
                         <li><a href="/tags/atom/">atom</a></li>
                         
                         <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
                         
                         <li><a href="/tags/windows/">windows</a></li>
                         

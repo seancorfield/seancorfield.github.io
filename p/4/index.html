@@ -59,6 +59,22 @@
 <div id="post">
     
     <div class="post-header">
+        <h2><a href="/blog/2018/12/06/null-nilable-optionality/">SQL NULL, s/nilable, and optionality</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">December 6, 2018</div>
+        </div>
+    </div>
+    <p>Rich Hickey gave a very thought-provoking talk at Clojure/conj 2018
+called <a href="https://www.youtube.com/watch?v=YR5WdGrpoug&amp;list=PLZdCLR02grLpMkEBXT22FTaJYxB92i3V3&amp;index=2">Maybe Not</a>, where he mused
+on optionality and how we represent the absence of a value.<!-- more --></p><p>His talk covered many things, including how <code>clojure.spec/keys</code> currently
+complects both structure and optionality (and his thoughts on fixing that
+in a future version of <code>clojure.spec</code>), but his mention of <code>s/nilable</code> was what
+triggered an "ah-ha!" moment for me.</p>
+    <a href="/blog/2018/12/06/null-nilable-optionality/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
         <h2><a href="/blog/2018/12/03/datafy-nav/">Clojure 1.10&#39;s datafy and nav</a></h2>
         <div id="post-meta">
             
@@ -157,17 +173,6 @@
     <a href="/blog/2016/06/17/more-boot/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-header">
-        <h2><a href="/blog/2016/02/02/boot-new/">boot-new</a></h2>
-        <div id="post-meta">
-            
-            <div class="date">February 2, 2016</div>
-        </div>
-    </div>
-    <p>In my previous three blog posts about <a href="http://boot-clj.com/">Boot</a> -- <a href="https://corfield.org/blog/2016/01/29/rebooting-clojure/">Rebooting Clojure</a>, <a href="https://corfield.org/blog/2016/01/30/building-on-boot/">Building On Boot</a>, and <a href="https://corfield.org/blog/2016/01/31/testing-with-boot/">Testing With Boot</a> -- I looked at why World Singles decided to switch from Leiningen to Boot, as well discussing one of the missing pieces for us (testing). Once I had <a href="https://github.com/seancorfield/boot-expectations">boot-expectations</a> written, I was casting around for other missing pieces in the ecosystem and one glaring one was the lack of something to generate new projects from templates.<!-- more --></p><p>Leiningen has long-supported the generation of new projects from templates and it's pretty slick. Want to get a new <a href="https://github.com/framework-one/fw1-clj">Framework One</a> application up and running?</p>
-    <a href="/blog/2016/02/02/boot-new/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -193,6 +198,8 @@
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal</a></li>
+                        
                         <li><a href="/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></li>
                         
                         <li><a href="/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></li>
@@ -200,8 +207,6 @@
                         <li><a href="/blog/2022/10/30/social-media/">Social Media Revisited</a></li>
                         
                         <li><a href="/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></li>
-                        
-                        <li><a href="/blog/2021/11/14/clojure-doc/">The new clojure-doc web site</a></li>
                         
                     </ul>
                 </div>
@@ -261,11 +266,15 @@
                         
                         <li><a href="/tags/java/">java</a></li>
                         
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
                         <li><a href="/tags/personal/">personal</a></li>
                         
                         <li><a href="/tags/atom/">atom</a></li>
                         
                         <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
                         
                         <li><a href="/tags/windows/">windows</a></li>
                         

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: Calva, Joyride, and Portal</title>
+    
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,portal,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
+
+<meta name="description" content="I&#39;ve mentioned in several posts over the years that I switched my
+development setup from Emacs to Atom, initially with ProtoREPL and later
+with Chlorine, and then to VS Code, initially with Clover (a port of
+Chlorine) and more recently with
+Calva.
+There were several detours along the way, but that is the overall arc.I&#39;ve also mentioned a couple of times that I use
+Portal
+now, as an extension inside VS Code (after previously using Reveal and, before
+that, Cognitect&#39;s REBL).I&#39;ve also published my
+VS Code and Calva setup
+files on GitHub.But I haven&#39;t really talked about what that experience is like on a
+day-to-day basis or any specifics of my integrated workflow.">
+
+<meta property="og:description" content="I&#39;ve mentioned in several posts over the years that I switched my
+development setup from Emacs to Atom, initially with ProtoREPL and later
+with Chlorine, and then to VS Code, initially with Clover (a port of
+Chlorine) and more recently with
+Calva.
+There were several detours along the way, but that is the overall arc.I&#39;ve also mentioned a couple of times that I use
+Portal
+now, as an extension inside VS Code (after previously using Reveal and, before
+that, Cognitect&#39;s REBL).I&#39;ve also published my
+VS Code and Calva setup
+files on GitHub.But I haven&#39;t really talked about what that experience is like on a
+day-to-day basis or any specifics of my integrated workflow.">
+
+<meta property="og:url" content="https://corfield.org/blog/2022/12/18/calva-joyride-portal/" />
+<meta property="og:title" content="Calva, Joyride, and Portal" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2022/12/18/calva-joyride-portal/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a rel="me" href="https://tech.lgbt/@seancorfield">tech.lgbt</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">December 18, 2022</div>
+        
+    </div>
+    <h2>Calva, Joyride, and Portal</h2>
+</div>
+<div>
+    
+    <p>I've mentioned in several posts over the years that I switched my
+development setup from Emacs to Atom, initially with ProtoREPL and later
+with Chlorine, and then to VS Code, initially with Clover (a port of
+Chlorine) and more recently with
+<a href="https://marketplace.visualstudio.com/items?itemName=betterthantomorrow.calva">Calva</a>.
+There were several detours along the way, but that is the overall arc.</p><p>I've also mentioned a couple of times that I use
+<a href="https://marketplace.visualstudio.com/items?itemName=djblue.portal">Portal</a>
+now, as an extension inside VS Code (after previously using Reveal and, before
+that, Cognitect's REBL).</p><p>I've also published my
+<a href="https://github.com/seancorfield/vscode-calva-setup">VS Code and Calva setup</a>
+files on GitHub.</p><p>But I haven't really talked about what that experience is like on a
+day-to-day basis or any specifics of my integrated workflow.<!--more--></p><h2 id="my-repl">My REPL</h2><p>When starting a REPL, I use a number of aliases (which can be found in
+<a href="https://github.com/seancorfield/dot-clojure/blob/develop/deps.edn">my dot-clojure <code>deps.edn</code></a>)
+to add dependencies that are roughly equivalent to this:</p><pre><code class="clojure">    org.clojure/tools.deps.alpha ; add-lib3 branch
+    {:git/url "https://github.com/clojure/tools.deps.alpha"
+      :git/sha "8f8fc2571e721301b6d52e191129248355cb8c5a"}
+    jedi-time/jedi-time {:mvn/version "0.2.1"}
+    cider/cider-nrepl {:mvn/version "RELEASE"}
+    djblue/portal {:mvn/version "RELEASE"}
+    party.donut/dbxray {:mvn/version "RELEASE"}
+    com.datomic/dev.datafy {:git/sha "4a9dffb"
+                            :git/tag "v0.1"
+                            :git/url "https://github.com/Datomic/dev.datafy"}
+    io.github.stuarthalloway/reflector
+    {:git/url "https://github.com/stuarthalloway/reflector"
+      :git/sha "93a0c19b4526c1180959e940202928d35e5c3cef"}
+</code></pre><p>I have my own script to start various types of REPL but most of the time I
+have a CIDER-enhanced nREPL server running with Portal middleware. See
+<a href="https://github.com/seancorfield/dot-clojure/blob/develop/dev.clj">my dot-clojure <code>dev.clj</code></a>
+for full details. The TL;DR is that the script enables whatever is on the
+classpath of the things it knows about but a basic version boils down to:</p><pre><code class="bash">clojure -M:&lt;dev-aliases&gt; -m nrepl.cmdline \
+  --middleware '[portal.nrepl/wrap-portal cider.nrepl/cider-middleware]'
+</code></pre><h2 id="portal">Portal</h2><p>Inside VS Code, I use <code>ctrl+alt+c ctrl+alt+c</code> to connect Calva to that running
+nREPL server and then I have a key binding to open Portal (<code>ctrl+alt+space p</code>),
+using <code>:launcher :vs-code</code>, so that it starts up inside VS Code, and finally
+I arrange the workspace so I have Portal on the right and my editor(s) on the
+left (when Portal opens, I press <code>ctrl+alt+e ctrl+alt+right</code> to move it to
+the right group, then <code>ctrl+1</code> to put focus back on my code editor in the left
+group). See my
+<a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/keybindings.json">key bindings</a>
+and my
+<a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/calva/config.edn">Calva configuration</a>
+which has my custom REPL command snippets, activated via the <code>ctrl+alt+space</code>
+prefix.</p><p>I do not bother having the REPL output window visible --
+with the Portal middleware in place, any code you evaluate in VS Code/Calva
+will cause the result to be <code>tap&gt;</code>'d and it will appear in Portal. This lets
+me use Portal instead of the plain text REPL output window.</p><p>I start my REPL from a external terminal window and leave it running, because it
+typically outlives my editor sessions. With the add-lib3 branch of <code>tools.deps.alpha</code>
+I can add new dependencies without restarting my REPL.</p><p>My <code>dev.clj</code> script will wire up <code>clojure.tools.logging</code> (if it's on the
+classpath) so that all log output is also <code>tap&gt;</code>'d into Portal.</p><h2 id="joyride">Joyride</h2><p>The final piece of the puzzle is
+<a href="https://marketplace.visualstudio.com/items?itemName=betterthantomorrow.joyride">Joyride</a>
+which lets you script VS Code (and Calva) using ClojureScript -- powered by
+<a href="https://github.com/babashka/sci">@borkdude's excellent <code>sci</code></a>.</p><p>I'm only just getting started with Joyride! I have a key binding that opens
+ClojureDocs.org in a browser (in VS Code) for the symbol my cursor is on and
+another that opens the Java documentation for a class name (or the class type
+of an expression I evaluate). You can see those two
+<a href="https://github.com/seancorfield/vscode-calva-setup/tree/develop/joyride/scripts">Joyride scripts</a>
+in my VS Code/Calva setup repo.</p><p>I'm currently working on automating my remote debugging setup and that's what
+the rest of this blog post will cover!</p><h2 id="remote-debugging-with-calva-and-portal">Remote Debugging with Calva and Portal</h2><p>There are quite a few moving parts in this section so I'm going to go through
+the code and configuration first and then talk about how it all fits
+together.</p><p>The idea behind this setup is that we can conditionally run an nREPL server
+and/or a Portal server in any process, triggered via JVM properties much like
+the built-in Socket server in Clojure. Then we start SSH tunnels over the VPN
+into the data center, connect a browser to the Portal server and connect
+Calva to the remote nREPL server, then debug the remote process by evaluating
+code within it and viewing the results in Portal.</p><h3 id="starting-nrepl-and-portal">Starting nREPL and Portal</h3><p>We've chosen <code>nrepl.server.port</code> and <code>portal.server.port</code> as our two JVM
+properties and we have the following code in a Polylith component
+implementation:</p><pre><code class="clojure">(defn maybe-start-server
+  "Given a symbol identifying a function to start a server,
+  derive a property name for the port to use and see if we
+  can start the server."
+  [start-server-fn]
+  (let [[server-type] (str/split (namespace start-server-fn) #"\.")
+        property      (str server-type ".server.port")]
+    (when-let [port-str (System/getProperty property)]
+      (try
+        (let [port         (parse-long port-str)
+              start-server (requiring-resolve start-server-fn)]
+          (start-server {:port port})
+          (logger/info server-type "server started on port" port))
+        (catch Throwable t
+          (logger/error property
+                        "property exists, but either"
+                        "the port is invalid,"
+                        "the library is not available,"
+                        "or the server cannot be started:"
+                        (type t) (ex-message t)))))))
+</code></pre><p>In the interface for that component, we have:</p><pre><code class="clojure">(defonce ^{:doc "Optional nREPL server instance."} nrepl-server
+  (impl/maybe-start-server 'nrepl.server/start-server))
+
+(defonce ^{:doc "Optional Portal server instance."} portal-server
+  (impl/maybe-start-server 'portal.api/start))
+</code></pre><p>We add that interface namespace to the <code>:require</code> clause of the <code>ns</code> form
+in the main namespace of each application for which we want to enable
+remote debugging. Right now, we're doing that in just one application which
+is internal-facing but we've run Socket servers in several of our applications
+for years to enable debugging via the REPL so we'll probably add this to a
+few more applications as we polish the workflow.</p><p>The script that starts each of our applications looks for a <code>.jvm_opts</code> file
+named for the application and adds those JVM options -- which is how we
+specify the ports for the Socket server, the nREPL server, and the Portal
+server.</p><h3 id="connecting-vs-code-to-the-remote-server">Connecting VS Code to the Remote Server</h3><p>As noted above, there are several steps needed here but Joyride can help
+automate them.</p><p>Here's the Joyride script I'm developing:</p><pre><code class="clojure">(ns remote-repl
+  (:require ["vscode" :as vscode]
+            [promesa.core :as p]))
+
+(defn- start-tunnel [nrepl-port portal-port label remote-server]
+  (let [terminal (vscode/window.createTerminal #js {:isTransient true
+                                                    :name label
+                                                    :message (str label " Remote REPL...")})]
+    (.show terminal)
+    (.sendText terminal (str "ssh -N"
+                             " -L " nrepl-port ":localhost:" nrepl-port
+                             " -L " portal-port ":localhost:" portal-port
+                             " " remote-server))))
+
+(defn- start-browser [portal-port]
+  (vscode/commands.executeCommand "simpleBrowser.show" (str "http://localhost:" portal-port))
+  (p/do
+    (p/delay 2000)
+    (vscode/commands.executeCommand "workbench.action.moveEditorToRightGroup")
+    (p/delay 1000)
+    (vscode/commands.executeCommand "workbench.action.focusFirstEditorGroup")))
+
+(defn- connect-repl []
+  (vscode/commands.executeCommand "calva.disconnect")
+  (vscode/commands.executeCommand "calva.connect"))
+
+(defn- repl-setup [nrepl-port portal-port label remote-server]
+  (start-tunnel nrepl-port portal-port label remote-server)
+  (p/do
+    (p/delay 2000)
+    (start-browser portal-port)
+    (p/delay 1000)
+    (connect-repl)))
+
+(repl-setup 6666 7777 "QA" "qauser@10.0.1.2")
+</code></pre><p>This does the following:</p><ul><li>start a terminal in VS Code and run the <code>ssh</code> command to setup the tunnel with two ports mapped,</li><li>open a Simple Browser inside VS Code, pointing to the Portal server,</li><li>move that browser to the right group (and set focus back to the left group),</li><li>disconnect any existing REPL session and connect a new one.</li></ul><p>The <code>delay</code> calls are fairly arbitrary but allow for each preceding step to
+complete before the next step starts (otherwise you get fairly unpredictable
+behavior as all the steps tend to overlap!).</p><p>To avoid manually filling in the various REPL connection dialogs, we add this
+Calva setting:</p><pre><code class="json">    "calva.replConnectSequences": [
+      {
+        "name": "QA nREPL Server",
+        "projectType": "deps.edn",
+        "cljsType": "none",
+        "nReplPortFile": ["development", "resources", "qa.nrepl"],
+        "menuSelections": {}
+      }
+    ],
+</code></pre><p>This adds <code>QA nREPL Server</code> at the top of the list of REPL types that Calva
+displays and references a file that contains the known port number in
+<code>development/resources/qa.nrepl</code>.</p><p>This reduces the connect sequence to:</p><ul><li>accept the suggested directory for the project</li><li>select the <code>QA nREPL Server</code> REPL type</li></ul><p>There's an open issue in Calva to
+<a href="https://github.com/BetterThanTomorrow/calva/issues/1984">provide an API for the whole connection sequence</a>
+so this process can, hopefully, be simplified at some point!</p><p>Then we have a key binding to run this script:</p><pre><code class="clojure">    {
+      "key": "ctrl+alt+b q",
+      "command": "joyride.runUserScript",
+      "args": "remote_repl.cljs"
+    },
+</code></pre><p>At this point, my process is:</p><ul><li>connect my VPN to the data center</li><li>open VS Code in the project</li><li>press <code>ctrl+alt+b q</code></li></ul><p>Joyride will start the SSH tunnel in terminal, open a browser in VS Code
+connected to the Portal server, and start the REPL connection sequence for me!</p><h3 id="debugging-the-remote-process">Debugging the Remote Process</h3><p>At this point I can open my REPL scratch file and evaluate the whole file
+and then start evaluating expressions in the Rich Comment Form as needed:</p><pre><code class="clojure">;; scratch pad for debugging against Admin on QA/production
+
+(ns sean-repl-scratch
+  (:require [next.jdbc :as jdbc]
+            [portal.api :as p]
+            [ws.admin-web.interface.system :refer [sys]]))
+
+(set! *warn-on-reflection* true)
+
+(defn- as-table [v] (with-meta v {:portal.viewer/default :portal.viewer/table}))
+
+(comment
+
+  ;; set the theme:
+  (p/eval-str (str
+               '(portal.ui.state/dispatch! portal.ui.state/state
+                                           portal.ui.state/set-theme!
+                                           :portal.colors/zerodark)))
+
+  ;; start tapping...
+  (add-tap #'p/submit)
+
+  ;; don't forget this:
+  (p/clear)
+  (remove-tap #'p/submit)
+
+  ;; a useful datasource:
+
+  (def ds (-&gt; sys :application :datasource))
+
+  ;; =================== scratch code for debugging ===================
+
+  (as-table (jdbc/execute! ds ["describe table"]))
+
+  (as-table
+   (jdbc/execute! ds [(str "select * from table"
+                           " where name like 'email%'")]))
+  )
+</code></pre><p>This uses the Portal API to set the theme in the connected browser -- the
+default for a headless Portal server is a light theme and I have VS Code
+set to a dark theme so setting the browser to <code>zerodark</code> makes things a lot
+more readable for me.</p><p>I have expressions to add Portal as a <code>tap&gt;</code> listener, to clear Portal's
+history, and to remove Portal as a <code>tap&gt;</code> listener. This is intended to
+avoid leaving the results of my debugging session in memory and to ensure
+that any <code>tap&gt;</code> calls in the production code don't continue to send results
+to Portal when I'm no longer actively debugging things.</p><p>Our <code>-main</code> function in the "admin web app" stores the running system
+<a href="https://github.com/stuartsierra/component">Component</a> in a global Var
+called <code>sys</code> purely for REPL-based debugging sessions. It contains the
+(running) web server and our application state, which in turn contains
+a datasource (a HikariCP connection pooled datasource, specifically).
+The <code>as-table</code> function is a convenience to wrap values so that <code>tap&gt;</code>'ing
+them into Portal will use the table viewer by default, instead of the
+inspector viewer.</p><p>Portal supports <code>datafy</code>/<code>nav</code> and by using <code>next.jdbc</code> to query
+tables, I can then navigate through foreign key relationships in the data.
+At some point soon, I hope to create some screencasts showing how this
+works because it's harder to describe than to show!</p><h3 id="work-in-progress">Work in Progress</h3><p>This is very much a work in progress. I have all of the above working
+locally but it needs some polishing, and then I'll add the scripts and
+configuration to my <code>vscode-calva-setup</code> repo.</p><p>In addition, once Calva offers an API to start a REPL session without
+needing any dialogs or user input, this process can be streamlined further
+to potentially remove the REPL connect sequence and to allow for the
+automated process to automatically set the Portal theme in the browser.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/joyride/">joyride</a>
+    
+    <a href="/tags/calva/">calva</a>
+    
+    <a href="/tags/portal/">portal</a>
+    
+    <a href="/tags/vs code/">vs code</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith) &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2022/12/18/calva-joyride-portal/";
+            this.page.identifier = "Calva, Joyride, and Portal";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal</a></li>
+                        
+                        <li><a href="/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></li>
+                        
+                        <li><a href="/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></li>
+                        
+                        <li><a href="/blog/2022/10/30/social-media/">Social Media Revisited</a></li>
+                        
+                        <li><a href="/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/strange loop/">strange loop</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/polylith/">polylith</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/editors/">editors</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
+                        <li><a href="/tags/personal/">personal</a></li>
+                        
+                        <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
+                        
+                        <li><a href="/tags/windows/">windows</a></li>
+                        
+                        <li><a href="/tags/monorepo/">monorepo</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/portal/">portal</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/observability/">observability</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                        <li><a href="/tags/new relic/">new relic</a></li>
+                        
+                        <li><a href="/tags/vs code/">vs code</a></li>
+                        
+                        <li><a href="/tags/open source/">open source</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2022 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
