@@ -1,5 +1,5 @@
 {:title "Calva, Joyride, and Portal",
- :date "2022-12-09 10:00:00",
+ :date "2022-12-18 10:00:00",
  :tags ["clojure" "calva" "joyride" "portal" "vs code"]}
 
 I've mentioned in several posts over the years that I switched my
@@ -25,7 +25,7 @@ day-to-day basis or any specifics of my integrated workflow.<!--more-->
 
 When starting a REPL, I use a number of aliases (which can be found in
 [my dot-clojure `deps.edn`](https://github.com/seancorfield/dot-clojure/blob/develop/deps.edn))
-to add dependencies that are equivalent to this:
+to add dependencies that are roughly equivalent to this:
 
 ```clojure
     org.clojure/tools.deps.alpha ; add-lib3 branch
@@ -60,7 +60,9 @@ Inside VS Code, I use `ctrl+alt+c ctrl+alt+c` to connect Calva to that running
 nREPL server and then I have a key binding to open Portal (`ctrl+alt+space p`),
 using `:launcher :vs-code`, so that it starts up inside VS Code, and finally
 I arrange the workspace so I have Portal on the right and my editor(s) on the
-left (when Portal opens, `ctrl+alt+e ctrl+alt+right`). See my
+left (when Portal opens, I press `ctrl+alt+e ctrl+alt+right` to move it to
+the right group, then `ctrl+1` to put focus back on my code editor in the left
+group). See my
 [key bindings](https://github.com/seancorfield/vscode-calva-setup/blob/develop/keybindings.json)
 and my
 [Calva configuration](https://github.com/seancorfield/vscode-calva-setup/blob/develop/calva/config.edn)
@@ -72,7 +74,7 @@ with the Portal middleware in place, any code you evaluate in VS Code/Calva
 will cause the result to be `tap>`'d and it will appear in Portal. This lets
 me use Portal instead of the plain text REPL output window.
 
-I start my REPL from a terminal window and leave it running, because it
+I start my REPL from a external terminal window and leave it running, because it
 typically outlives my editor sessions. With the add-lib3 branch of `tools.deps.alpha`
 I can add new dependencies without restarting my REPL.
 
@@ -208,7 +210,7 @@ Here's the Joyride script I'm developing:
 This does the following:
 * start a terminal in VS Code and run the `ssh` command to setup the tunnel with two ports mapped,
 * open a Simple Browser inside VS Code, pointing to the Portal server,
-* move that browser to the righthand side of the screen (and set focus back to the lefthand side),
+* move that browser to the right group (and set focus back to the left group),
 * disconnect any existing REPL session and connect a new one.
 
 The `delay` calls are fairly arbitrary but allow for each preceding step to
