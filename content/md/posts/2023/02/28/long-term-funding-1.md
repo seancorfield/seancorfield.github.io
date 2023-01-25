@@ -52,8 +52,9 @@ supporting more declarative templates for projects. That led to more
 
 In January, I stripped the wrapper out of my open source projects'
 `build.clj` files as a way to make them a better example for beginners.
-
-**Plan to strip the wrapper from [usermanager](https://github.com/seancorfield/usermanager-example)**
+I also stripped the wrapper out of the
+[usermanager example application](https://github.com/seancorfield/usermanager-example)
+that I regularly link beginners to, as a basic web application.
 
 **Plan to strip the wrapper from `deps-new`**
 
