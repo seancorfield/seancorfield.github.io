@@ -20,9 +20,7 @@ Pull Requests (if you've e-signed the CA) -- and it has expanded massively,
 compared to the material it covered back then.
 
 `clojure-doc.org` itself grew a lot of ambitious content, including extensive
-guides to [`clojure.java.jdbc`](https://github.com/clojure/java.jdbc) and
-[`clojure.core.typed`](https://github.com/clojure/core.typed) that are now
-very dated.
+guides to `clojure.java.jdbc` and `clojure.core.typed` that are now very dated.
 
 In addition to cleaning up and modernizing `clojure-doc.org`, I also said that
 I wanted to help streamline the beginner experience around Clojure tooling,
@@ -50,13 +48,16 @@ supporting more declarative templates for projects. That led to more
 "knobs & dials" on my `tools.build` wrapper as the projects created by
 `deps-new` depended heavily on the wrapper.
 
-In January, I stripped the wrapper out of my open source projects'
+In January, I stripped the wrapper out of all my open source projects'
 `build.clj` files as a way to make them a better example for beginners.
 I also stripped the wrapper out of the
 [usermanager example application](https://github.com/seancorfield/usermanager-example)
-that I regularly link beginners to, as a basic web application.
+that I regularly link beginners to, as a basic web application, and out of
+[`deps-new`](https://github.com/seancorfield/deps-new) so that people will
+(hopefully) stop creating projects that use my wrapper.
 
-**Plan to strip the wrapper from `deps-new`**
+The net result should be many more examples of how to use `tools.build`
+directly and a normalization of how `build.clj` files should be written.
 
 ## `clojure-doc.org`
 
