@@ -1,6 +1,6 @@
 {:title "The new clojure-doc web site",
  :date "2021-11-14 16:00:00",
- :tags ["clojure"]}
+ :tags ["clojure" "clojure-doc.org"]}
 
 Back when I was working on the `clojure.java.jdbc` Contrib library, I moved
 its documentation to clojure-doc.org so that the community could contribute
