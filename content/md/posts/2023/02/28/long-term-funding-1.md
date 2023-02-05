@@ -24,7 +24,7 @@ guides to `clojure.java.jdbc` and `clojure.core.typed` that are now very dated.
 
 In addition to cleaning up and modernizing `clojure-doc.org`, I also said that
 I wanted to help streamline the beginner experience around Clojure tooling,
-and I've talked a lot with Alex Miller about possible avenues for that.
+and I've talked with Alex Miller about possible avenues for that.
 
 My first couple of months have focused on reviewing the content on
 `clojure-doc.org` to establish what is still relevant and pruning outdated
@@ -43,7 +43,7 @@ and simpler. As people started using this wrapper, it began to develop more
 "knobs & dials" to make it more configurable -- and then I created
 [`deps-new`](https://github.com/seancorfield/deps-new) as a modern
 "replacement" for [`clj-new`](https://github.com/seancorfield/clj-new)
-(which in turn derived from `boot-new` and `lein new`), with the idea of
+(which in turn derived from `boot-new`, which derived from `lein new`), with the idea of
 supporting more declarative templates for projects. That led to more
 "knobs & dials" on my `tools.build` wrapper as the projects created by
 `deps-new` depended heavily on the wrapper.
@@ -64,10 +64,27 @@ directly and a normalization of how `build.clj` files should be written.
 As noted above, `clojure.org` has grown dramatically since `clojure-doc.org`
 was created and provides more up-to-date content in many areas, so I've
 focused on pruning the duplicated and outdated content and linking to the
-official site for:
+official site where up-to-date content now exists.
 
-* [books]()
-* [user groups]()
-* [how to start/run a user group]()
-* [getting started with Clojure]() -- although the official site doesn't cover Leiningen so that is still covered on `clojure-doc.org`
-* ... what else ...
+In particular, the following pages have been unlinked and removed from
+the navigation, in favor of other sources:
+
+* Books -- deferring to clojure.org
+* Emacs & vim-fireplace -- the former was very outdated, the latter is still pending review
+* Typed Clojure -- or `core.typed` as the old section was called, which was a decade old
+* User Groups, including how to start/run a user group
+
+The following pages have been overhauled/updated:
+
+* About -- which is also the README now
+* Community -- several sections defer to new material on clojure.org
+* Content -- a work in progress as the site evolves
+* Editors -- a new overview page has been added with key links to other material
+
+Nearly 60 pages have been updated to fix broken links.
+[Changes so far this year!](https://github.com/clojure-doc/clojure-doc.github.io/compare/03d64232651eb6ca77630edca6059c0c70fa72be..source)
+
+## What's Next?
+
+In March/April, I plan to review and/or overhaul the Getting Started,
+Introduction, and Web Development sections, with a focus on the latter.
