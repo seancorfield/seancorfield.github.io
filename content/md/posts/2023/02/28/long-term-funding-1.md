@@ -88,3 +88,12 @@ Nearly 60 pages have been updated to fix broken links.
 
 In March/April, I plan to review and/or overhaul the Getting Started,
 Introduction, and Web Development sections, with a focus on the latter.
+
+## Additional Project Releases
+
+In addition to changing all my projects to use plain `tools.build` instead
+of my wrapper for it,
+[HoneySQL](https://github.com/seancorfield/honeysql)
+2.x has had three releases in January/February,
+that have mostly focused on improving documentation and also compatibility
+with 1.x to make it easier for folks to migrate.
