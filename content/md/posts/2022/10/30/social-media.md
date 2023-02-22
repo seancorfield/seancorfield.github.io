@@ -2,7 +2,7 @@
  :date "2022-10-30 16:45:00",
  :tags ["personal"]}
 
-About a year I [posted that I had deleted both my Twitter and Facebook accounts](https://corfield.org/blog/2021/11/10/social-media/).
+About a year ago I [posted that I had deleted both my Twitter and Facebook accounts](https://corfield.org/blog/2021/11/10/social-media/).
 
 In March, my wife & I visited friends and family in England (for the first time
 in three years) as my mother had been diagnosed with AAA (abdominal
