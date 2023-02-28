@@ -2,19 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: seancorfield/boot-new has moved to boot/new</title>
+    <title>An Architect&#39;s View: Long-Term Funding, Update #1</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,portal,clojure-doc.org,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="I&#39;m pleased to announce that the &quot;Boot new&quot; task formerly known as seancorfield/boot-new has moved to the Boot organization, as boot-clj/boot-new and that the group/artifact ID is now boot/new.You can use this to easily create a new Boot-based project:">
+<meta name="description" content="As part of Clojurists Together&#39;s Long-Term Funding for 2023
+I talked about working on clojure-doc.org
+which I had resurrected a few years ago, as a GitHub Pages project,
+powered by Cryogen.">
 
-<meta property="og:description" content="I&#39;m pleased to announce that the &quot;Boot new&quot; task formerly known as seancorfield/boot-new has moved to the Boot organization, as boot-clj/boot-new and that the group/artifact ID is now boot/new.You can use this to easily create a new Boot-based project:">
+<meta property="og:description" content="As part of Clojurists Together&#39;s Long-Term Funding for 2023
+I talked about working on clojure-doc.org
+which I had resurrected a few years ago, as a GitHub Pages project,
+powered by Cryogen.">
 
-<meta property="og:url" content="https://corfield.org/blog/2017/01/19/boot-new-moved/" />
-<meta property="og:title" content="seancorfield/boot-new has moved to boot/new" />
+<meta property="og:url" content="https://corfield.org/blog/2023/02/28/long-term-funding-1/" />
+<meta property="og:title" content="Long-Term Funding, Update #1" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2017/01/19/boot-new-moved/">
+    <link rel="canonical" href="https://corfield.org/blog/2023/02/28/long-term-funding-1/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -66,15 +72,74 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">January 19, 2017</div>
+        <div class="col-lg-6">February 28, 2023</div>
         
     </div>
-    <h2>seancorfield/boot-new has moved to boot/new</h2>
+    <h2>Long-Term Funding, Update #1</h2>
 </div>
 <div>
     
-    <p>I'm pleased to announce that the "Boot new" task formerly known as <code>seancorfield/boot-new</code> has moved to the Boot organization, as <a href="https://github.com/boot-clj/boot-new"><code>boot-clj/boot-new</code></a> and that the group/artifact ID is now <code>boot/new</code>.</p><p>You can use this to easily create a new Boot-based project:</p><pre><code>boot -d boot/new new -t app -n my-new-boot-app
-</code></pre>
+    <p>As part of <a href="https://www.clojuriststogether.org/news/clojurists-together-2023-long-term-funding-announcement/">Clojurists Together's Long-Term Funding for 2023</a>
+I talked about working on <a href="https://clojure-doc.org">clojure-doc.org</a>
+which I had resurrected a few years ago, as a GitHub Pages project,
+powered by <a href="https://cryogenweb.org/">Cryogen</a>.<!--more--></p><p>It was originally created over a decade ago, intended as a community hub for
+general documentation related to Clojure that couldn't be found on
+<a href="https://clojure.org">clojure.org</a> and which wasn't bound by the
+<a href="https://clojure.org/dev/contributor_agreement">Clojure Contributor Agreement</a>.</p><p>A lot has changed since then. The Contributor Agreement has gone from a purely
+paper and "snail mail" process to an online e-form. The <code>clojure.org</code> website
+is now <a href="https://github.com/clojure/clojure-site">on GitHub</a> and accepts
+Pull Requests (if you've e-signed the CA) -- and it has expanded massively,
+compared to the material it covered back then.</p><p><code>clojure-doc.org</code> itself grew a lot of ambitious content, including extensive
+guides to <code>clojure.java.jdbc</code> and <code>clojure.core.typed</code> that are now very dated.</p><p>In addition to cleaning up and modernizing <code>clojure-doc.org</code>, I also said that
+I wanted to help streamline the beginner experience around Clojure tooling,
+and I've started to talk with Alex Miller about possible avenues for that.</p><p>My first couple of months have focused on reviewing the content on
+<code>clojure-doc.org</code> to establish what is still relevant and pruning outdated
+content, as well as streamlining my own open source projects around tooling.</p><h2 id="build-clj--toolsbuild"><code>build-clj</code> &amp; <code>tools.build</code></h2><p>I was very pleased when <a href="https://github.com/clojure/tools.build"><code>tools.build</code></a>
+landed and I aggressively switched all my open source projects and my work
+projects over to it.</p><p>I initially felt that there was a lot of boilerplate and duplication in the
+<code>build.clj</code> files I was creating and my initial reaction was to create a
+simple wrapper that provided "sane" defaults to make build files smaller
+and simpler. As people started using this wrapper, it began to develop more
+"knobs &amp; dials" to make it more configurable -- and then I created
+<a href="https://github.com/seancorfield/deps-new"><code>deps-new</code></a> as a modern
+"replacement" for <a href="https://github.com/seancorfield/clj-new"><code>clj-new</code></a>
+(which in turn derived from <code>boot-new</code>, which derived from <code>lein new</code>), with the idea of
+supporting more declarative templates for projects. That led to more
+"knobs &amp; dials" on my <code>tools.build</code> wrapper as the projects created by
+<code>deps-new</code> depended heavily on the wrapper.</p><p>In January, I stripped the wrapper out of all my open source projects'
+<code>build.clj</code> files as a way to make them a better example for beginners.
+I went on to strip the wrapper out of the
+<a href="https://github.com/seancorfield/usermanager-example">usermanager example application</a>
+that I regularly link beginners to, as a basic web application, and out of
+the project templates in <a href="https://github.com/seancorfield/deps-new"><code>deps-new</code></a>
+so that people creating projects via that will no longer use my wrapper.</p><p>The net result should be many more examples of how to use <code>tools.build</code>
+directly and a normalization of how <code>build.clj</code> files should be written.
+I think the <a href="https://github.com/seancorfield/honeysql/blob/develop/build.clj">HoneySQL <code>build.clj</code></a>
+file in particular is a good example of how to run various tasks,
+such as <a href="https://github.com/lread/test-doc-blocks"><code>test-doc-blocks</code></a>
+and <a href="https://github.com/jonase/eastwood">Eastwood</a>, as well as running
+multi-version testing, both Clojure and ClojureScript tests, and building
+and deploying a library JAR to Clojars.</p><p>I plan to write a cookbook for <code>clojure-doc.org</code> that expands on the
+<a href="https://clojure.org/guides/tools_build">official <code>tools.build</code> guide</a>,
+covering the sorts of things I've found useful in both my open source
+and work projects.</p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>As noted above, <code>clojure.org</code> has grown dramatically since <code>clojure-doc.org</code>
+was created and provides more up-to-date content in many areas, so I've
+focused on pruning the duplicated and outdated content and linking to the
+official site where up-to-date content now exists.</p><p>In particular, the following pages have been unlinked and removed from
+the navigation, in favor of other sources:</p><ul><li>Books -- deferring to clojure.org</li><li>Emacs &amp; vim-fireplace -- the former was very outdated, and the latter is only one of several good vim/neovim plugins so deferring to other docs makes more sense</li><li>Typed Clojure -- or <code>core.typed</code> as the old section was called, which was a decade old</li><li>User Groups, including how to start/run a user group -- deferring to clojure.org</li></ul><p>I've temporarily removed all the ecosystem and library pages from the navigation
+to make the main sections easier to find, while I review and update them over
+the next few months.</p><p>The following pages have been overhauled/updated:</p><ul><li>About -- which is also the README now</li><li>Community -- several sections defer to new material on clojure.org</li><li>Content -- a work in progress as the site evolves</li><li>Editors -- a new overview page has been added with key links to other material</li></ul><p>Nearly 60 pages have been updated to fix broken links.
+<a href="https://github.com/clojure-doc/clojure-doc.github.io/compare/03d64232651eb6ca77630edca6059c0c70fa72be..source">Changes so far this year!</a></p><p>I welcome feedback on both the updated content and the site itself,
+either via the <a href="https://app.slack.com/client/T03RZGPFR/C02M6N5C137">#clojure-doc channel on Slack</a><em>(self-signup at <a href="http://clojurians.net">clojurians.net</a>)</em> or via
+<a href="https://github.com/clojure-doc/clojure-doc.github.io/discussions">clojure-doc discussions on GitHub</a>.
+Feel free to open issues directly for errors on the site and of course
+pull requests on the <code>source</code> branch are also welcome!</p><h2 id="whats-next">What's Next?</h2><p>In March/April, I plan to review and/or overhaul the Getting Started,
+Introduction, and Web Development sections, with a focus on the latter.</p><h2 id="additional-project-releases">Additional Project Releases</h2><p>In addition to changing all my projects to use plain <code>tools.build</code> instead
+of my wrapper for it,
+<a href="https://github.com/seancorfield/honeysql">HoneySQL</a>
+2.x has had four releases in January/February,
+that have mostly focused on improving documentation and also compatibility
+with 1.x to make it easier for folks to migrate.</p>
 </div>
 
 <div id="post-tags">
@@ -82,17 +147,21 @@
     
     <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/boot/">boot</a>
+    <a href="/tags/tools.build/">tools.build</a>
+    
+    <a href="/tags/community/">community</a>
+    
+    <a href="/tags/clojure-doc.org/">clojure-doc.org</a>
+    
+    <a href="/tags/open source/">open source</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2017/07/17/clojure-java-jdbc-0-7-0/">&laquo; Release 0.7.0 of clojure.java.jdbc</a>
         
-        
-        <a class="right" href="/blog/2016/07/29/clojure-new-relic-slow-startup/">Clojure, New Relic, and Slow Application Startup &raquo;</a>
+        <a class="right" href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal &raquo;</a>
         
     </div>
 
@@ -100,8 +169,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2017/01/19/boot-new-moved/";
-            this.page.identifier = "seancorfield/boot-new has moved to boot/new";
+            this.page.url = "https://corfield.org/blog/2023/02/28/long-term-funding-1/";
+            this.page.identifier = "Long-Term Funding, Update #1";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
