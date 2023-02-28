@@ -27,7 +27,7 @@ and I've started to talk with Alex Miller about possible avenues for that.
 
 My first couple of months have focused on reviewing the content on
 `clojure-doc.org` to establish what is still relevant and pruning outdated
-content, as well as streamlining my open source projects around tooling.
+content, as well as streamlining my own open source projects around tooling.
 
 ## `build-clj` & `tools.build`
 
@@ -49,11 +49,11 @@ supporting more declarative templates for projects. That led to more
 
 In January, I stripped the wrapper out of all my open source projects'
 `build.clj` files as a way to make them a better example for beginners.
-I also stripped the wrapper out of the
+I went on to strip the wrapper out of the
 [usermanager example application](https://github.com/seancorfield/usermanager-example)
 that I regularly link beginners to, as a basic web application, and out of
-[`deps-new`](https://github.com/seancorfield/deps-new) so that people will
-(hopefully) stop creating projects that use my wrapper.
+the project templates in [`deps-new`](https://github.com/seancorfield/deps-new)
+so that people creating projects via that will no longer use my wrapper.
 
 The net result should be many more examples of how to use `tools.build`
 directly and a normalization of how `build.clj` files should be written.
@@ -82,7 +82,7 @@ the navigation, in favor of other sources:
 * Books -- deferring to clojure.org
 * Emacs & vim-fireplace -- the former was very outdated, and the latter is only one of several good vim/neovim plugins so deferring to other docs makes more sense
 * Typed Clojure -- or `core.typed` as the old section was called, which was a decade old
-* User Groups, including how to start/run a user group
+* User Groups, including how to start/run a user group -- deferring to clojure.org
 
 I've temporarily removed all the ecosystem and library pages from the navigation
 to make the main sections easier to find, while I review and update them over
