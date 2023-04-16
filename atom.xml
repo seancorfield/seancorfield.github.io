@@ -1,7 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Tue, 28 Feb 2023 11:30:57 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2023/02/28/long-term-funding-1/</guid><link>https://corfield.org/blog/2023/02/28/long-term-funding-1/</link><title>Long-Term Funding, Update #1</title><description>As part of Clojurists Together's Long-Term Funding for 2023
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Sun, 16 Apr 2023 14:13:58 -0700</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2023/04/16/calva-joyride-portal/</guid><link>https://corfield.org/blog/2023/04/16/calva-joyride-portal/</link><title>Calva, Joyride, and Portal</title><description>Back in December, 2022, I described my original Calva, Joyride, and Portal setup.
+I've been very happy with it all but, of course, I continue to tweak and update
+my development environment and my projects, and now that
+Clojure 1.12.0 Alpha 2 is available
+with add-libs-style functionality built-in, I've updated various projects
+and my dot-clojure
+and vscode-calva-setup
+GitHub repos to take advantage of that, so I figured an updated version of that post
+was warranted.My development environment is VS Code, running on Windows, with all my
+Clojure-related files and processes running on WSL2 (Ubuntu).
+I use Calva,
+Portal,
+and Joyride
+to enhance and automate my day-to-day work.</description><pubDate>Sun, 16 Apr 2023 00:00:00 -0700</pubDate></item><item><guid>https://corfield.org/blog/2023/02/28/long-term-funding-1/</guid><link>https://corfield.org/blog/2023/02/28/long-term-funding-1/</link><title>Long-Term Funding, Update #1</title><description>As part of Clojurists Together's Long-Term Funding for 2023
 I talked about working on clojure-doc.org
 which I had resurrected a few years ago, as a GitHub Pages project,
-powered by Cryogen.</description><pubDate>Tue, 28 Feb 2023 00:00:00 -0800</pubDate></item><item><guid>https://corfield.org/blog/2022/12/18/calva-joyride-portal/</guid><link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/</link><title>Calva, Joyride, and Portal</title><description>I've mentioned in several posts over the years that I switched my
+powered by Cryogen.</description><pubDate>Tue, 28 Feb 2023 00:00:00 -0800</pubDate></item><item><guid>https://corfield.org/blog/2022/12/18/calva-joyride-portal/</guid><link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/</link><title>Calva, Joyride, and Portal</title><description>An updated version of this post describes my latest Calva, Joyride, and Portal setup.I've mentioned in several posts over the years that I switched my
 development setup from Emacs to Atom, initially with ProtoREPL and later
 with Chlorine, and then to VS Code, initially with Clover (a port of
 Chlorine) and more recently with
