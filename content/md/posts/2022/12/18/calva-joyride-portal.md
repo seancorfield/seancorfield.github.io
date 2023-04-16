@@ -2,6 +2,8 @@
  :date "2022-12-18 10:00:00",
  :tags ["clojure" "calva" "joyride" "portal" "vs code"]}
 
+_An updated version of this post [describes my latest Calva, Joyride, and Portal setup](https://corfield.org/blog/2023/04/16/calva-joyride-portal/)._
+
 I've mentioned in several posts over the years that I switched my
 development setup from Emacs to Atom, initially with ProtoREPL and later
 with Chlorine, and then to VS Code, initially with Clover (a port of
