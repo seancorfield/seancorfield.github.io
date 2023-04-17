@@ -9,6 +9,13 @@ body {
     font-size: 16px;
 }
 
+body blockquote {
+    color: #333;
+    background-color: rgb(81, 51, 102);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
 .container {
     max-width: 1000px;
 }
