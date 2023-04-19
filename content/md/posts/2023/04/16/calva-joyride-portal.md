@@ -262,13 +262,39 @@ The generic Joyride script for that is published in GitHub now:
 * [remote_repl.cljs](https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/src/remote_repl.cljs) -- lives in `joyride/src`
 * [example_repl.cljs](https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/scripts/example_repl.cljs) -- example usage in `joyride/scripts`
 
-In particular (and this is a recent change for anyone who has looked at the
-code there since December), the `calva.connect` command now passes the
-following options to ensure you don't get the `autoConnectRepl` sequence:
+_Updated April 18th, 2023 after input from [@djblue](https://github.com/djblue)_
+
+Previously, my `remote_repl.cljs` script opened a "Simple Browser" in VS Code
+that connected to the main port that the Portal server was running on and,
+while this worked, it wasn't the best developer experience.
+
+Chris submitted a
+[pull request against my VS Code setup repo](https://github.com/seancorfield/vscode-calva-setup/pull/3/files)
+that allowed me to use the Portal extension in VS Code directly against the
+remote Portal server, instead of a browser. The `calva.connect` command is now
+passed to bypass all the menus and connect directly to the nREPL server on
+the specified port:
 
 ```clojure
-#js {:disableAutoSelect true}
+#js {:port nrepl-port :connectSequence "Generic"}
 ```
 
-This is relatively new in Calva, when the connect sequence machinery was
-enhanced.
+My workflow now is:
+* Connect my VPN so I have access to remote servers,
+* Press `ctrl+alt+b q` or `ctrl+alt+b p` to run a QA or Production version of `example_repl.cljs`:
+  - Starts the `ssh` tunnel
+  - Connects Calva to the remote nREPL server
+  - Reads the local `.portal/vs-code.edn` file and tells the REPL to `spit` it out on the remote server
+* Press `ctrl+alt+space p` to run my Portal startup sequence in [`~/.config/calva/config.edn](https://github.com/seancorfield/vscode-calva-setup/blob/develop/calva/config.edn):
+  - Starts up two Portal windows in VS Code
+  - One for logging/middleware output
+  - One for plain `tap>` operations
+
+With all the auto-connect and auto-jack-in REPL connect sequences in place,
+this makes it very easy to work with either a local REPL (`ctrl+alt+c ctrl+alt+j`
+if there isn't a known REPL for Calva to auto-connect to) or a remote REPL
+(`ctrl+alt+b q` or `ctrl+alt+b p`). Then to switch back from remote to local,
+I can press `ctrl+t ctrl+f` (terminal focus) `ctrl+c` (quit the `ssh` command),
+`exit <return>` to close out that terminal, `ctrl+alt+c ctrl+alt+c` to auto-connect
+back to my local REPL. And `ctrl+alt+space p` whenever I want to bring up
+Portal windows connected to my current REPL!
