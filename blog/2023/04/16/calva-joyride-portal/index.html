@@ -232,11 +232,24 @@ of an expression I evaluate). You can see those two
 <a href="https://github.com/seancorfield/vscode-calva-setup/tree/develop/joyride/scripts">Joyride scripts</a>
 in my VS Code/Calva setup repo.</p><h2 id="remote-debugging-with-calva-and-portal">Remote Debugging with Calva and Portal</h2><p>The rest of my original blog post on this subject talked about how I was
 using Joyride to automate connecting to remote nREPL servers and using
-Portal to help debug issues or run analyses in the context of QA or production.</p><p>The generic Joyride script for that is published in GitHub now:</p><ul><li><a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/src/remote_repl.cljs">remote_repl.cljs</a> -- lives in <code>joyride/src</code></li><li><a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/scripts/example_repl.cljs">example_repl.cljs</a> -- example usage in <code>joyride/scripts</code></li></ul><p>In particular (and this is a recent change for anyone who has looked at the
-code there since December), the <code>calva.connect</code> command now passes the
-following options to ensure you don't get the <code>autoConnectRepl</code> sequence:</p><pre><code class="clojure">#js {:disableAutoSelect true}
-</code></pre><p>This is relatively new in Calva, when the connect sequence machinery was
-enhanced.</p>
+Portal to help debug issues or run analyses in the context of QA or production.</p><p>The generic Joyride script for that is published in GitHub now:</p><ul><li><a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/src/remote_repl.cljs">remote_repl.cljs</a> -- lives in <code>joyride/src</code></li><li><a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/joyride/scripts/example_repl.cljs">example_repl.cljs</a> -- example usage in <code>joyride/scripts</code></li></ul><p><em>Updated April 18th, 2023 after input from <a href="https://github.com/djblue">@djblue</a></em></p><p>Previously, my <code>remote_repl.cljs</code> script opened a "Simple Browser" in VS Code
+that connected to the main port that the Portal server was running on and,
+while this worked, it wasn't the best developer experience.</p><p>Chris submitted a
+<a href="https://github.com/seancorfield/vscode-calva-setup/pull/3/files">pull request against my VS Code setup repo</a>
+that allowed me to use the Portal extension in VS Code directly against the
+remote Portal server, instead of a browser. The <code>calva.connect</code> command is now
+passed to bypass all the menus and connect directly to the nREPL server on
+the specified port:</p><pre><code class="clojure">#js {:port nrepl-port :connectSequence "Generic"}
+</code></pre><p>My workflow now is:</p><ul><li>Connect my VPN so I have access to remote servers,</li><li>Press <code>ctrl+alt+b q</code> or <code>ctrl+alt+b p</code> to run a QA or Production version of <code>example_repl.cljs</code>:
+<ul><li>Starts the <code>ssh</code> tunnel</li><li>Connects Calva to the remote nREPL server</li><li>Reads the local <code>.portal/vs-code.edn</code> file and tells the REPL to <code>spit</code> it out on the remote server</li></ul></li><li>Press <code>ctrl+alt+space p</code> to run my Portal startup sequence in <a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/calva/config.edn">`~/.config/calva/config.edn</a>:
+<ul><li>Starts up two Portal windows in VS Code</li><li>One for logging/middleware output</li><li>One for plain <code>tap&gt;</code> operations</li></ul></li></ul><p>With all the auto-connect and auto-jack-in REPL connect sequences in place,
+this makes it very easy to work with either a local REPL (<code>ctrl+alt+c ctrl+alt+j</code>
+if there isn't a known REPL for Calva to auto-connect to) or a remote REPL
+(<code>ctrl+alt+b q</code> or <code>ctrl+alt+b p</code>). Then to switch back from remote to local,
+I can press <code>ctrl+t ctrl+f</code> (terminal focus) <code>ctrl+c</code> (quit the <code>ssh</code> command),
+<code>exit &lt;return&gt;</code> to close out that terminal, <code>ctrl+alt+c ctrl+alt+c</code> to auto-connect
+back to my local REPL. And <code>ctrl+alt+space p</code> whenever I want to bring up
+Portal windows connected to my current REPL!</p>
 </div>
 
 <div id="post-tags">
