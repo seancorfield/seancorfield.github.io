@@ -2,7 +2,7 @@
  :date "2023-04-16 12:00:00",
  :tags ["clojure" "calva" "joyride" "portal" "vs code"]}
 
-Back in December, 2022, I described my [original Calva, Joyride, and Portal setup](https://corfield.org/blog/2022/12/07/calva-joyride-portal/).
+Back in December, 2022, I described my [original Calva, Joyride, and Portal setup](https://corfield.org/blog/2022/12/18/calva-joyride-portal/).
 I've been very happy with it all but, of course, I continue to tweak and update
 my development environment and my projects, and now that
 [Clojure 1.12.0 Alpha 2 is available](https://clojure.org/news/2023/04/14/clojure-1-12-alpha2)
