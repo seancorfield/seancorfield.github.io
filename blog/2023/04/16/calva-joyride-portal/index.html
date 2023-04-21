@@ -238,8 +238,8 @@ while this worked, it wasn't the best developer experience.</p><p>Chris submitte
 <a href="https://github.com/seancorfield/vscode-calva-setup/pull/3/files">pull request against my VS Code setup repo</a>
 that allowed me to use the Portal extension in VS Code directly against the
 remote Portal server, instead of a browser. The <code>calva.connect</code> command is now
-passed to bypass all the menus and connect directly to the nREPL server on
-the specified port:</p><pre><code class="clojure">#js {:port nrepl-port :connectSequence "Generic"}
+passed a "connect sequence" to bypass all the menus and connect directly to the
+nREPL server on the specified port:</p><pre><code class="clojure">#js {:port nrepl-port :connectSequence "Generic"}
 </code></pre><p>My workflow now is:</p><ul><li>Connect my VPN so I have access to remote servers,</li><li>Press <code>ctrl+alt+b q</code> or <code>ctrl+alt+b p</code> to run a QA or Production version of <code>example_repl.cljs</code>:
 <ul><li>Starts the <code>ssh</code> tunnel</li><li>Connects Calva to the remote nREPL server</li><li>Reads the local <code>.portal/vs-code.edn</code> file and tells the REPL to <code>spit</code> it out on the remote server</li></ul></li><li>Press <code>ctrl+alt+space p</code> to run my Portal startup sequence in <a href="https://github.com/seancorfield/vscode-calva-setup/blob/develop/calva/config.edn">`~/.config/calva/config.edn</a>:
 <ul><li>Starts up two Portal windows in VS Code</li><li>One for logging/middleware output</li><li>One for plain <code>tap&gt;</code> operations</li></ul></li></ul><p>With all the auto-connect and auto-jack-in REPL connect sequences in place,
