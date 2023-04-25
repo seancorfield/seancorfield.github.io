@@ -272,8 +272,8 @@ Chris submitted a
 [pull request against my VS Code setup repo](https://github.com/seancorfield/vscode-calva-setup/pull/3/files)
 that allowed me to use the Portal extension in VS Code directly against the
 remote Portal server, instead of a browser. The `calva.connect` command is now
-passed to bypass all the menus and connect directly to the nREPL server on
-the specified port:
+passed a "connect sequence" to bypass all the menus and connect directly to the
+nREPL server on the specified port:
 
 ```clojure
 #js {:port nrepl-port :connectSequence "Generic"}
