@@ -42,12 +42,14 @@ but it's been a rough few weeks).
 As the [Practical.li project templates](https://github.com/practicalli/project-templates)
 were being developed, John found a bug in the `template` project which I fixed
 and in turn I reviewed drafts of his
-[articles about creating project templates using `deps.new`](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/),
+[article about creating project templates using `deps.new`](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/),
 both of which are now linked from the `deps-new` README and documentation.
 
 ## `honeysql`
 
-During March/April, HoneySQL saw four new releases, which were mostly an even
+During March/April,
+[HoneySQL](https://github.com/seancorfield/honeysql)
+saw four new releases, which were mostly an even
 split between improving documentation and expanding ANSI SQL support.
 
 Many of the questions I see about HoneySQL on Slack (and other places) suggest
@@ -68,7 +70,8 @@ who contributed three pull requests to the release that went out in early March.
 
 ## `next.jdbc`
 
-`next.jdbc` also saw four releases, which provided a mix of bug fixes,
+[`next.jdbc`](https://github.com/seancorfield/next-jdbc)
+also saw four releases, which provided a mix of bug fixes,
 compatibility improvements (with `clojure.java.jdbc`, to ease migration),
 documentation improvements, and a few enhancements.
 
