@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #2",
- :date "2023-04-30 10:00:00",
+ :date "2023-04-30 12:00:00",
  :tags ["clojure" "clojure-doc.org" "open source" "tools.build" "community"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/02/28/long-term-funding-1/)
@@ -39,15 +39,59 @@ but it's been a rough few weeks).
 
 ## `deps-new`
 
-Practical.li
+As the [Practical.li project templates](https://github.com/practicalli/project-templates)
+were being developed, John found a bug in the `template` project which I fixed
+and in turn I reviewed drafts of his
+[articles about creating project templates using `deps.new`](https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/),
+both of which are now linked from the `deps-new` README and documentation.
 
 ## `honeysql`
 
-4 releases
+During March/April, HoneySQL saw four new releases, which were mostly an even
+split between improving documentation and expanding ANSI SQL support.
+
+Many of the questions I see about HoneySQL on Slack (and other places) suggest
+deficiencies in the documentation so, while I try to answer those questions
+directly on Slack, I also tend to create GitHub issues for them to see if I
+can improve the documentation in those areas.
+
+Some of the ANSI SQL improvements including support for `INTERVAL`,
+keyword arguments in function calls,
+nested `JOIN`,
+standardizing `TRUNCATE` syntax,
+and `WITH ORDINALITY`. There were also bug fixes and documentation
+improvements around `DO UPDATE SET` and a number of other constructs.
+
+I'd also like to give a special shout out to
+[Eugene Pakhomov](https://github.com/p-himik)
+who contributed three pull requests to the release that went out in early March.
 
 ## `next.jdbc`
 
-4 releases
+`next.jdbc` also saw four releases, which provided a mix of bug fixes,
+compatibility improvements (with `clojure.java.jdbc`, to ease migration),
+documentation improvements, and a few enhancements.
+
+## `next.jdbc.xt`
+
+The [Juxt](https://www.juxt.pro/) team were present in force at
+[Clojure/conj](https://2023.clojure-conj.org/) this year and announced
+early access to [XTDB 2.0](https://www.xtdb.com/blog/2x-early-access).
+
+I think this will be a very exciting release, with improved bitemporality
+(including temporal joins and range scans), a new columnar architecture,
+and -- the part that interests me the most -- a dynamic relation engine
+that provides both a Datalog API **and** a SQL API.
+
+That inspired me to create a new project, offering experimental support
+for XTDB 2.0 in `next.jdbc`: [`next.jdbc.xt`](https://github.com/seancorfield/next.jdbc.xt).
+This allows you to treat an XTDB client "node" as a "connectable" so
+you can call `execute!`, `execute-one!`, and `plan` on it (as well as the
+full range of "friendly SQL functions").
+
+As XTDB 2.0 evolves, I plan to continue to enhance this new project to
+hopefully support batch operations and perhaps full transaction support,
+if possible.
 
 ## What's Next?
 
