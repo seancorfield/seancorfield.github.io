@@ -18,6 +18,14 @@ https://corfield.org/tags/atom/index.html
 </url>
 <url>
 <loc>
+https://corfield.org/tags/clojurists together/index.html
+</loc>
+<lastmod>
+2023-04-30
+</lastmod>
+</url>
+<url>
+<loc>
 https://corfield.org/tags/jdbc/index.html
 </loc>
 <lastmod>
@@ -243,6 +251,14 @@ https://corfield.org/tags/boot/index.html
 <url>
 <loc>
 https://corfield.org/tags/strange loop/index.html
+</loc>
+<lastmod>
+2023-04-30
+</lastmod>
+</url>
+<url>
+<loc>
+https://corfield.org/tags/honeysql/index.html
 </loc>
 <lastmod>
 2023-04-30
