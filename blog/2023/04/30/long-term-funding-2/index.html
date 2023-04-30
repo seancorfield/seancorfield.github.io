@@ -2,22 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Long-Term Funding, Update #1</title>
+    <title>An Architect&#39;s View: Long-Term Funding, Update #2</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,portal,clojure-doc.org,conj,leiningen,javascript,observability,presentations,new relic,vs code,open source">
 
-<meta name="description" content="As part of Clojurists Together&#39;s Long-Term Funding for 2023
-I talked about working on clojure-doc.org
-which I had resurrected a few years ago, as a GitHub Pages project,
-powered by Cryogen.">
+<meta name="description" content="In my previous Long-Term Funding update
+I said that I planned &quot;to review and/or overhaul the Getting Started,
+Introduction, and Web Development sections, with a focus on the latter.&quot;
+(of the clojure-doc.org website).I mostly achieved that goal but didn&#39;t get to the additional goal I set of writing
+a tools.build cookbook. I have sketched out the topics I hope to cover in
+that cookbook, however.How did the past two months go?">
 
-<meta property="og:description" content="As part of Clojurists Together&#39;s Long-Term Funding for 2023
-I talked about working on clojure-doc.org
-which I had resurrected a few years ago, as a GitHub Pages project,
-powered by Cryogen.">
+<meta property="og:description" content="In my previous Long-Term Funding update
+I said that I planned &quot;to review and/or overhaul the Getting Started,
+Introduction, and Web Development sections, with a focus on the latter.&quot;
+(of the clojure-doc.org website).I mostly achieved that goal but didn&#39;t get to the additional goal I set of writing
+a tools.build cookbook. I have sketched out the topics I hope to cover in
+that cookbook, however.How did the past two months go?">
 
 <meta property="og:url" content="https://corfield.org/blog/2023/04/30/long-term-funding-2/" />
-<meta property="og:title" content="Long-Term Funding, Update #1" />
+<meta property="og:title" content="Long-Term Funding, Update #2" />
 <meta property="og:type" content="article" />
 
     <link rel="canonical" href="https://corfield.org/blog/2023/04/30/long-term-funding-2/">
@@ -72,74 +76,62 @@ powered by Cryogen.">
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">February 28, 2023</div>
+        <div class="col-lg-6">April 30, 2023</div>
         
     </div>
-    <h2>Long-Term Funding, Update #1</h2>
+    <h2>Long-Term Funding, Update #2</h2>
 </div>
 <div>
     
-    <p>As part of <a href="https://www.clojuriststogether.org/news/clojurists-together-2023-long-term-funding-announcement/">Clojurists Together's Long-Term Funding for 2023</a>
-I talked about working on <a href="https://clojure-doc.org">clojure-doc.org</a>
-which I had resurrected a few years ago, as a GitHub Pages project,
-powered by <a href="https://cryogenweb.org/">Cryogen</a>.<!--more--></p><p>It was originally created over a decade ago, intended as a community hub for
-general documentation related to Clojure that couldn't be found on
-<a href="https://clojure.org">clojure.org</a> and which wasn't bound by the
-<a href="https://clojure.org/dev/contributor_agreement">Clojure Contributor Agreement</a>.</p><p>A lot has changed since then. The Contributor Agreement has gone from a purely
-paper and "snail mail" process to an online e-form. The <code>clojure.org</code> website
-is now <a href="https://github.com/clojure/clojure-site">on GitHub</a> and accepts
-Pull Requests (if you've e-signed the CA) -- and it has expanded massively,
-compared to the material it covered back then.</p><p><code>clojure-doc.org</code> itself grew a lot of ambitious content, including extensive
-guides to <code>clojure.java.jdbc</code> and <code>clojure.core.typed</code> that are now very dated.</p><p>In addition to cleaning up and modernizing <code>clojure-doc.org</code>, I also said that
-I wanted to help streamline the beginner experience around Clojure tooling,
-and I've started to talk with Alex Miller about possible avenues for that.</p><p>My first couple of months have focused on reviewing the content on
-<code>clojure-doc.org</code> to establish what is still relevant and pruning outdated
-content, as well as streamlining my own open source projects around tooling.</p><h2 id="build-clj--toolsbuild"><code>build-clj</code> &amp; <code>tools.build</code></h2><p>I was very pleased when <a href="https://github.com/clojure/tools.build"><code>tools.build</code></a>
-landed and I aggressively switched all my open source projects and my work
-projects over to it.</p><p>I initially felt that there was a lot of boilerplate and duplication in the
-<code>build.clj</code> files I was creating and my initial reaction was to create a
-simple wrapper that provided "sane" defaults to make build files smaller
-and simpler. As people started using this wrapper, it began to develop more
-"knobs &amp; dials" to make it more configurable -- and then I created
-<a href="https://github.com/seancorfield/deps-new"><code>deps-new</code></a> as a modern
-"replacement" for <a href="https://github.com/seancorfield/clj-new"><code>clj-new</code></a>
-(which in turn derived from <code>boot-new</code>, which derived from <code>lein new</code>), with the idea of
-supporting more declarative templates for projects. That led to more
-"knobs &amp; dials" on my <code>tools.build</code> wrapper as the projects created by
-<code>deps-new</code> depended heavily on the wrapper.</p><p>In January, I stripped the wrapper out of all my open source projects'
-<code>build.clj</code> files as a way to make them a better example for beginners.
-I went on to strip the wrapper out of the
-<a href="https://github.com/seancorfield/usermanager-example">usermanager example application</a>
-that I regularly link beginners to, as a basic web application, and out of
-the project templates in <a href="https://github.com/seancorfield/deps-new"><code>deps-new</code></a>
-so that people creating projects via that will no longer use my wrapper.</p><p>The net result should be many more examples of how to use <code>tools.build</code>
-directly and a normalization of how <code>build.clj</code> files should be written.
-I think the <a href="https://github.com/seancorfield/honeysql/blob/develop/build.clj">HoneySQL <code>build.clj</code></a>
-file in particular is a good example of how to run various tasks,
-such as <a href="https://github.com/lread/test-doc-blocks"><code>test-doc-blocks</code></a>
-and <a href="https://github.com/jonase/eastwood">Eastwood</a>, as well as running
-multi-version testing, both Clojure and ClojureScript tests, and building
-and deploying a library JAR to Clojars.</p><p>I plan to write a cookbook for <code>clojure-doc.org</code> that expands on the
-<a href="https://clojure.org/guides/tools_build">official <code>tools.build</code> guide</a>,
-covering the sorts of things I've found useful in both my open source
-and work projects.</p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>As noted above, <code>clojure.org</code> has grown dramatically since <code>clojure-doc.org</code>
-was created and provides more up-to-date content in many areas, so I've
-focused on pruning the duplicated and outdated content and linking to the
-official site where up-to-date content now exists.</p><p>In particular, the following pages have been unlinked and removed from
-the navigation, in favor of other sources:</p><ul><li>Books -- deferring to clojure.org</li><li>Emacs &amp; vim-fireplace -- the former was very outdated, and the latter is only one of several good vim/neovim plugins so deferring to other docs makes more sense</li><li>Typed Clojure -- or <code>core.typed</code> as the old section was called, which was a decade old</li><li>User Groups, including how to start/run a user group -- deferring to clojure.org</li></ul><p>I've temporarily removed all the ecosystem and library pages from the navigation
-to make the main sections easier to find, while I review and update them over
-the next few months.</p><p>The following pages have been overhauled/updated:</p><ul><li>About -- which is also the README now</li><li>Community -- several sections defer to new material on clojure.org</li><li>Content -- a work in progress as the site evolves</li><li>Editors -- a new overview page has been added with key links to other material</li></ul><p>Nearly 60 pages have been updated to fix broken links.
-<a href="https://github.com/clojure-doc/clojure-doc.github.io/compare/03d64232651eb6ca77630edca6059c0c70fa72be..source">Changes so far this year!</a></p><p>I welcome feedback on both the updated content and the site itself,
-either via the <a href="https://app.slack.com/client/T03RZGPFR/C02M6N5C137">#clojure-doc channel on Slack</a><em>(self-signup at <a href="http://clojurians.net">clojurians.net</a>)</em> or via
-<a href="https://github.com/clojure-doc/clojure-doc.github.io/discussions">clojure-doc discussions on GitHub</a>.
-Feel free to open issues directly for errors on the site and of course
-pull requests on the <code>source</code> branch are also welcome!</p><h2 id="whats-next">What's Next?</h2><p>In March/April, I plan to review and/or overhaul the Getting Started,
-Introduction, and Web Development sections, with a focus on the latter.</p><h2 id="additional-project-releases">Additional Project Releases</h2><p>In addition to changing all my projects to use plain <code>tools.build</code> instead
-of my wrapper for it,
-<a href="https://github.com/seancorfield/honeysql">HoneySQL</a>
-2.x has had four releases in January/February,
-that have mostly focused on improving documentation and also compatibility
-with 1.x to make it easier for folks to migrate.</p>
+    <p>In my <a href="https://corfield.org/blog/2023/02/28/long-term-funding-1/">previous Long-Term Funding update</a>
+I said that I planned "to review and/or overhaul the Getting Started,
+Introduction, and Web Development sections, with a focus on the latter."
+(of the <a href="https://clojure-doc.org">clojure-doc.org</a> website).</p><p>I mostly achieved that goal but didn't get to the additional goal I set of writing
+a <code>tools.build</code> cookbook. I have sketched out the topics I hope to cover in
+that cookbook, however.</p><p>How did the past two months go?<!--more--></p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>I updated <a href="https://clojure-doc.org/articles/tutorials/getting_started/">Getting Started with Clojure</a>
+to talk about both Leiningen <strong>and</strong> the Clojure CLI and wrote a new
+<a href="https://clojure-doc.org/articles/tutorials/getting_started_cli/">Getting Started with the Clojure CLI</a>
+page that also covers <code>tools.build</code> / <code>build.clj</code> and building uberjars.
+Both pages now have a new section highlighting <strong>Interactive Development</strong>
+(as opposed to "just" using a REPL).</p><p>I reviewed the <a href="https://clojure-doc.org/articles/tutorials/introduction/">Introduction to Clojure</a>
+and decided it was mostly sound, but added more examples, tweaked the formatting,
+and added references to the Clojure CLI.</p><p>I reworked John Gabriele's excellent
+<a href="https://clojure-doc.org/articles/tutorials/basic_web_development/">Basic Web Development guide</a>
+to use the Clojure CLI, updated all the library references, and reordered the
+sections to work bottom-up so that code could always be evaluated in the REPL.</p><p>I didn't get as far as I wanted with the <code>tools.build</code> cookbook due to a
+combination of writer's block (and stress over my mother being taken to hospital
+unexpectedly for a fractured hip -- she's nearly 90, has osteoporosis, and her
+oxygen levels are too low/precarious for surgery at this point; she's home now
+but it's been a rough few weeks).</p><h2 id="deps-new"><code>deps-new</code></h2><p>As the <a href="https://github.com/practicalli/project-templates">Practical.li project templates</a>
+were being developed, John found a bug in the <code>template</code> project which I fixed
+and in turn I reviewed drafts of his
+<a href="https://practical.li/blog/posts/create-deps-new-template-for-clojure-cli-projects/">articles about creating project templates using <code>deps.new</code></a>,
+both of which are now linked from the <code>deps-new</code> README and documentation.</p><h2 id="honeysql"><code>honeysql</code></h2><p>During March/April, HoneySQL saw four new releases, which were mostly an even
+split between improving documentation and expanding ANSI SQL support.</p><p>Many of the questions I see about HoneySQL on Slack (and other places) suggest
+deficiencies in the documentation so, while I try to answer those questions
+directly on Slack, I also tend to create GitHub issues for them to see if I
+can improve the documentation in those areas.</p><p>Some of the ANSI SQL improvements including support for <code>INTERVAL</code>,
+keyword arguments in function calls,
+nested <code>JOIN</code>,
+standardizing <code>TRUNCATE</code> syntax,
+and <code>WITH ORDINALITY</code>. There were also bug fixes and documentation
+improvements around <code>DO UPDATE SET</code> and a number of other constructs.</p><p>I'd also like to give a special shout out to
+<a href="https://github.com/p-himik">Eugene Pakhomov</a>
+who contributed three pull requests to the release that went out in early March.</p><h2 id="nextjdbc"><code>next.jdbc</code></h2><p><code>next.jdbc</code> also saw four releases, which provided a mix of bug fixes,
+compatibility improvements (with <code>clojure.java.jdbc</code>, to ease migration),
+documentation improvements, and a few enhancements.</p><h2 id="nextjdbcxt"><code>next.jdbc.xt</code></h2><p>The <a href="https://www.juxt.pro/">Juxt</a> team were present in force at
+<a href="https://2023.clojure-conj.org/">Clojure/conj</a> this year and announced
+early access to <a href="https://www.xtdb.com/blog/2x-early-access">XTDB 2.0</a>.</p><p>I think this will be a very exciting release, with improved bitemporality
+(including temporal joins and range scans), a new columnar architecture,
+and -- the part that interests me the most -- a dynamic relation engine
+that provides both a Datalog API <strong>and</strong> a SQL API.</p><p>That inspired me to create a new project, offering experimental support
+for XTDB 2.0 in <code>next.jdbc</code>: <a href="https://github.com/seancorfield/next.jdbc.xt"><code>next.jdbc.xt</code></a>.
+This allows you to treat an XTDB client "node" as a "connectable" so
+you can call <code>execute!</code>, <code>execute-one!</code>, and <code>plan</code> on it (as well as the
+full range of "friendly SQL functions").</p><p>As XTDB 2.0 evolves, I plan to continue to enhance this new project to
+hopefully support batch operations and perhaps full transaction support,
+if possible.</p><h2 id="whats-next">What's Next?</h2><p>In May/June, I hope to get the <code>tools.build</code> cookbook written and
+to review/overhaul the Libraries pages (both authoring and the directory).</p>
 </div>
 
 <div id="post-tags">
@@ -160,10 +152,8 @@ with 1.x to make it easier for folks to migrate.</p>
 
     <div id="prev-next">
         
-        <a href="/blog/2023/02/28/long-term-funding-1/">&laquo; Long-Term Funding, Update #1</a>
         
-        
-        <a class="right" href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal &raquo;</a>
+        <a class="right" href="/blog/2023/04/16/calva-joyride-portal/">Calva, Joyride, and Portal &raquo;</a>
         
     </div>
 
@@ -172,7 +162,7 @@ with 1.x to make it easier for folks to migrate.</p>
     <script type="text/javascript">
         var disqus_config = function () {
             this.page.url = "https://corfield.org/blog/2023/04/30/long-term-funding-2/";
-            this.page.identifier = "Long-Term Funding, Update #1";
+            this.page.identifier = "Long-Term Funding, Update #2";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -199,11 +189,11 @@ with 1.x to make it easier for folks to migrate.</p>
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2023/04/30/long-term-funding-2/">Long-Term Funding, Update #2</a></li>
+                        
                         <li><a href="/blog/2023/04/16/calva-joyride-portal/">Calva, Joyride, and Portal</a></li>
                         
                         <li><a href="/blog/2023/02/28/long-term-funding-1/">Long-Term Funding, Update #1</a></li>
-                        
-                        <li><a href="/blog/2023/04/30/long-term-funding-2/">Long-Term Funding, Update #1</a></li>
                         
                         <li><a href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal</a></li>
                         
