@@ -1,6 +1,6 @@
 {:title "Long-Term Funding, Update #2",
  :date "2023-04-30 12:00:00",
- :tags ["clojure" "clojure-doc.org" "open source" "tools.build" "community"]}
+ :tags ["clojure" "clojure-doc.org" "honeysql" "jdbc" "open source" "community" "clojurists together"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/02/28/long-term-funding-1/)
 I said that I planned "to review and/or overhaul the Getting Started,

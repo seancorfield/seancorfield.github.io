@@ -1,6 +1,6 @@
 {:title "Long-Term Funding, Update #1",
  :date "2023-02-28 10:00:00",
- :tags ["clojure" "clojure-doc.org" "open source" "tools.build" "community"]}
+ :tags ["clojure" "clojure-doc.org" "open source" "tools.build" "community" "clojurists together"]}
 
 As part of [Clojurists Together's Long-Term Funding for 2023](https://www.clojuriststogether.org/news/clojurists-together-2023-long-term-funding-announcement/)
 I talked about working on [clojure-doc.org](https://clojure-doc.org)

@@ -1,6 +1,6 @@
 {:title "Release! Release! Release!",
  :date "2019-08-07 15:30:00",
- :tags ["clojure" "jdbc"]}
+ :tags ["clojure" "honeysql" "jdbc"]}
 ## Lots of Releases
 
 Over the last week or so I've released minor updates to several of the projects I maintain, so I thought it would be nice to have a summary blog post rather than a scattering of minor announcements.
