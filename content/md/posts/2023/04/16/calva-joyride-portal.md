@@ -162,7 +162,7 @@ This launches **two** Portal windows into VS Code:
 
 > See my [Portal: Launch and Usage](https://github.com/seancorfield/vscode-calva-setup/blob/develop/README.md#portal-launch-and-usage) notes in my `vscode-calva-setup` repo for more details.
 
-The I arrange the workspace so I have the two Portal windows on the right
+Then I arrange the workspace so I have the two Portal windows on the right
 (stacked so the `tap>` window is top-right and the `**logging**` window is
 bottom-right) and my editor(s) on the left. When Portal opens, I press
 `ctrl+alt+e ctrl+alt+right`, if needed, to move them to the right group,
