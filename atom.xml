@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Sun, 25 Jun 2023 16:30:35 -0700</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2023/04/30/long-term-funding-2/</guid><link>https://corfield.org/blog/2023/04/30/long-term-funding-2/</link><title>Long-Term Funding, Update #2</title><description>In my previous Long-Term Funding update
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Thu, 29 Jun 2023 11:54:22 -0700</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2023/06/30/long-term-funding-3/</guid><link>https://corfield.org/blog/2023/06/30/long-term-funding-3/</link><title>Long-Term Funding, Update #3</title><description>In my previous Long-Term Funding update
+I said I would review/overhaul the Libraries pages (both authoring and the directory)
+and write the tools.build cookbook.The library authoring guide
+has been rewritten to use the Clojure CLI, deps-new, and deps-deploy and
+was well-received by the community, who provided some useful feedback that I
+have also incorporated into the guide.The information from the library directory has been integrated into
+The Clojure Toolbox
+via a couple of Pull Requests that
+added optional tool-tip descriptions
+and libraries that were on clojure-doc
+but missing from the Toolbox. Thanks to James Reeves for accepting those PRs!What else did I get done?</description><pubDate>Thu, 29 Jun 2023 00:00:00 -0700</pubDate></item><item><guid>https://corfield.org/blog/2023/04/30/long-term-funding-2/</guid><link>https://corfield.org/blog/2023/04/30/long-term-funding-2/</link><title>Long-Term Funding, Update #2</title><description>In my previous Long-Term Funding update
 I said that I planned "to review and/or overhaul the Getting Started,
 Introduction, and Web Development sections, with a focus on the latter."
 (of the clojure-doc.org website).I mostly achieved that goal but didn't get to the additional goal I set of writing
