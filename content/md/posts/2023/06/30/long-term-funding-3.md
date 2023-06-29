@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #3",
- :date "2023-06-30 12:00:00",
+ :date "2023-06-29 11:50:00",
  :tags ["clojure" "clojure-doc.org" "honeysql" "clojure-clr" "jdbc" "open source" "community" "clojurists together"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/04/30/long-term-funding-2/)
@@ -52,7 +52,7 @@ descriptions have been added to the Toolbox as well (which now show up
 as tooltips when you hover over the library name/link). The Toolbox still has
 a lot of libraries listed without descriptions so, hopefully, that's something
 the community can add over time (or help James with automating, using project
-descriptions from GitHub?).
+descriptions from GitHub, perhaps?).
 
 The library authoring guide has been substantially rewritten to use the Clojure
 CLI, `deps.edn`, and `build.clj`. The old Leiningen-based library authoring guide
@@ -60,11 +60,15 @@ has been lightly updated and is still available, linked from the new guide.
 
 In addition to the library work mentioned above, I've been working on
 the [`tools.build` cookbook](https://clojure-doc.org/articles/cookbooks/cli_build_projects/).
-I shared an early draft to get community feedback and the whole thing is
+I shared an early draft to get community feedback and then shared the
+completed version this week. The whole thing is
 over 3,000 words now, with a lot of code examples. I've tried to distill
 everything I've learned about `tools.build` into a single document that
 covers various scenarios that go beyond what is in the
 [official `tools.build` guide](https://clojure.org/guides/tools_build).
+
+Some additional community feedback has already been incorporated and more
+will be incorporated over the next few weeks, I expect.
 
 ## What's Next?
 
