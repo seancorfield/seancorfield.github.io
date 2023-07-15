@@ -1,5 +1,5 @@
 {:title "deps.edn and monorepos XI (Polylith)",
- :date "2023-07-14 11:00:00",
+ :date "2023-07-15 11:00:00",
  :tags ["clojure" "monorepo" "polylith" "tools.build"]}
 
 This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
