@@ -1,5 +1,5 @@
 {:title "deps.edn and monorepos XI (Polylith)",
- :date "2023-07-15 15:00:00",
+ :date "2023-07-14 11:00:00",
  :tags ["clojure" "monorepo" "polylith" "tools.build"]}
 
 This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
@@ -29,5 +29,46 @@ our migration with 114,114 lines of code converted to Polylith. We completed
 it a while back but I've been lax about writing the "final" (maybe) chapter
 of this series.
 
-We have 138,497 lines of Clojure code in Polylith now. We build 21 projects
-from 21 bases and 144 components. We have 1,160 source and test files.
+We completed the migration a few weeks after I posted my last update, moving the
+last two large applications into `bases` and renaming all the namespaces,
+then migrated the shared subproject to a `component`. Initially, we kept all
+the shared code in the `interface`, but then we made several refactoring
+passes over this code to split it into smaller components, as well as breaking the
+code into `interface` and `impl` namespaces. This allowed us to simplify our
+`build.clj` file since everything was now part of the Polylith structure:
+no special "billing artifacts" to deal with, and we also streamlined our CI
+pipelines since we no longer had to test and build the billing applications
+separately.
+
+We currently have 138,497 lines of Clojure code in Polylith now. We build 21
+projects from 21 bases and 144 components. We have 1,160 Clojure files
+(source and test).
+
+Probably our biggest remaining challenge at this point is that we still have
+some `components` that "do too much" and end up being depended on by too many
+other `components`. When those change, they trigger a lot of repetitive
+testing and building -- which is indicative of too much coupling. We've started
+teasing some of those apart, often along Command/Query lines (a la CQRS), but
+it's a slow process. It emphasizes the importance of `components` doing just
+one thing and being as self-contained as possible!
+
+## Polylith
+
+Polylith itself has had a number of enhancements over the past seven months:
+
+* It reports unnecessary component dependencies (previously, it only reported missing dependencies).
+* It checks and reports missing and unnecessary component `:test` dependencies separately.
+* It checks and reports missing and unnecessary base dependencies separately.
+* It uses [edamame](https://github.com/borkdude/edamame) so its parsing is more robust and it now supports reader conditionals.
+* It can show outdated library dependencies (leveraging [antq](https://github.com/liquidz/antq)).
+* The parsing and dependency analysis have been dramatically speeded up -- which makes a big difference on a project our size!
+
+I'm currently working with the Polylith team on moving the project and all the
+documentation away from my `tools.build` wrapper (`build-clj`) so that it uses
+a more standard approach to the core Clojure tooling.
+
+[Cursive 1.13.0](https://groups.google.com/g/cursive/c/9dTn12AkHzA/m/R_dj2fzRBAAJ)
+introduces a lot of changes to `deps.edn` support that make it much easier to
+work with Polylith projects. In particular, the workaround of using `:extra-paths`
+for component dependencies in `:dev` is no longer necessary! `:extra-deps` can
+now be used with `:local/root` dependencies for all editors and tools.

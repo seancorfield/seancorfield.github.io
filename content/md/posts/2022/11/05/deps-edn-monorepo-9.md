@@ -20,6 +20,7 @@ _This blog post is part of an ongoing series following our experiences with our 
 8. _[deps.edn and monorepos VIII (Polylith)](https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/)_
 9. _[deps.edn and monorepos IX (Polylith)](https://corfield.org/blog/2022/11/05/deps-edn-monorepo-9/) (this post)_
 10. _[deps.edn and monorepos X (Polylith)](https://corfield.org/blog/2022/12/07/deps-edn-monorepo-10/)_
+11. _[deps.edn and monorepos XI (Polylith)](https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/)_
 
 ## Part IX
 
