@@ -7,6 +7,7 @@ I said I would review/overhaul the "ecosystem" and "tutorials" sections.<!--more
 
 ## `clojure-doc.org`
 
+Incorporated feedback from the community on the `tools.build` cookbook.
 ## Polylith
 
 Switched from `build-clj` to `tools.build`.
@@ -18,6 +19,27 @@ Switched from `build-clj` to `tools.build`.
 Switched from `build-clj` to `tools.build`.
 
 ## `clj-commons`
+
+Information about `clj-commons` was spread across the
+[`clj-commons`](https://clj-commons.org) website and the
+[`meta`](https://github.com/clj-commons/meta) repository's `README`
+and the Wiki there. Based on some recent feedback, I wanted to consolidate
+that information and bring it up to date.
+
+As I started on that, I realized that the
+[`clj-commons` project list](https://clj-commons.org/projects.html)
+was very outdated so I decided to regenerate it (there's a
+[Clojure script](https://github.com/clj-commons/clj-commons.github.io/blob/master/src/clj_commons/projects.clj)
+for this). That uncovered a number of projects that were missing either the
+`ORIGINATOR` file in the root of the repo (how `clj-commons` identifies the
+original author of a project) or the `.github/CODEOWNERS` file that lists
+the current active maintainers.
+
+I went through every `clj-commons` repo and added the missing files,
+updated the `projects.clj` script to support `#` comments in `CODEOWNERS`,
+and regenerated the `projects.html` page.
+
+And now, back to the governance docs...
 
 Governance docs?
 
