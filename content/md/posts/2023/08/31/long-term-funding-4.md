@@ -8,22 +8,34 @@ I said I would review/overhaul the "ecosystem" and "tutorials" sections.<!--more
 ## `clojure-doc.org`
 
 Incorporated feedback from the community on the `tools.build` cookbook.
+Many thanks, in particular, for [@phronmophobic](https://github.com/phronmophobic)
+who provided extensive feedback and Pull Requests!
+
+I reviewed the "ecosystem" and "tutorials" sections and removed outdated
+content.
+
+AND?!?!?!
+
 ## Polylith
 
-Switched from `build-clj` to `tools.build`.
+The Polylith project (and documentation) was still using my old (archived) `build-clj`
+wrapper so I worked on a Pull Request to switch everything to plain
+`tools.build` usage as a better example for the community. That has been
+merged in and updated documentation will be released soon.
 
 ## `clj-new`
 
-1.2.404
-
-Switched from `build-clj` to `tools.build`.
+This project also still used `build-clj` so I updated all the project
+templates to use `tools.build` directly and released version
+1.2.404 so that, going forward, newly-generated projects will be better
+examples for the community.
 
 ## `clj-commons`
 
-Information about `clj-commons` was spread across the
+Information about `clj-commons` governance was spread across the
 [`clj-commons`](https://clj-commons.org) website and the
-[`meta`](https://github.com/clj-commons/meta) repository's `README`
-and the Wiki there. Based on some recent feedback, I wanted to consolidate
+[`meta`](https://github.com/clj-commons/meta) repository's `README`.
+Based on some recent feedback, I wanted to consolidate
 that information and bring it up to date.
 
 As I started on that, I realized that the
@@ -39,9 +51,11 @@ I went through every `clj-commons` repo and added the missing files,
 updated the `projects.clj` script to support `#` comments in `CODEOWNERS`,
 and regenerated the `projects.html` page.
 
-And now, back to the governance docs...
+Then I consolidated and and updated how CLJ Commons accepts and maintains
+projects, and updated the `README` in the `meta` repo:
 
-Governance docs?
+* [Accepting projects into clj-commons](https://clj-commons.org/accepting-projects.html)
+* [Maintaining projects in clj-commons](https://clj-commons.org/maintaining-projects.html)
 
 ## Other Projects
 
@@ -55,5 +69,5 @@ remaining period, I'll tackle the "language" section.
 
 I mentioned in the previous update that my mother was back in hospital and
 not doing too well. She passed away on my birthday, July 7th, and much of
-my energy for the rest of the month was focused on that. She would have been
-90 this coming December.
+my energy for the rest of the month was focused on that. Her funeral
+service was July 26th. She would have been 90 this coming December.
