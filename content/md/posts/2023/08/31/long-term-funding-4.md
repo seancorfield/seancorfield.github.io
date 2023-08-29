@@ -41,8 +41,9 @@ Feedback from the community suggested that I should
 focus on a different order of sections so I turned my attention to the "language"
 section, and updated the following from Clojure 1.5 to Clojure 1.11:
 
-* [Functions](https://clojure-doc.org/articles/language/functions/)
-* [Collections and Sequences](https://clojure-doc.org/articles/language/collections_and_sequences/)
+* [Language: Functions](https://clojure-doc.org/articles/language/functions/)
+* [Language: clojure.core](https://clojure-doc.org/articles/language/core_overview/)
+* [Language: Collections and Sequences](https://clojure-doc.org/articles/language/collections_and_sequences/)
 
 ## HoneySQL
 
