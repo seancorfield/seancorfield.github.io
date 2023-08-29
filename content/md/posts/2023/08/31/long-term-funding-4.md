@@ -45,6 +45,7 @@ section, and updated the following from Clojure 1.5 to Clojure 1.11:
 * [Language: clojure.core](https://clojure-doc.org/articles/language/core_overview/)
 * [Language: Collections and Sequences](https://clojure-doc.org/articles/language/collections_and_sequences/)
 * [Language: Namespaces](https://clojure-doc.org/articles/language/namespaces/)
+* [Language: Java Interop](https://clojure-doc.org/articles/language/interop/)
 
 ## HoneySQL
 
