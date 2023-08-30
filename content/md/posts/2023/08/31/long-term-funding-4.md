@@ -47,6 +47,7 @@ section and updated the following pages from Clojure 1.5 to Clojure 1.11:
 * [Language: Collections and Sequences](https://clojure-doc.org/articles/language/collections_and_sequences/)
 * [Language: Namespaces](https://clojure-doc.org/articles/language/namespaces/)
 * [Language: Java Interop](https://clojure-doc.org/articles/language/interop/)
+* [Language: Polymorphism](https://clojure-doc.org/articles/language/polymorphism/)
 
 In some cases that just meant double-checking the code examples still worked
 as shown, but in other cases it meant updating the examples to use newer
