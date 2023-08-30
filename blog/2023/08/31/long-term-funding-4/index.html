@@ -2,19 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Instrumenting Clojure for New Relic Monitoring</title>
+    <title>An Architect&#39;s View: Long-Term Funding, Update #4</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,vs code,clj-commons,open source">
 
-<meta name="description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
+<meta name="description" content="In my previous Long-Term Funding update
+I said I would review/overhaul the &quot;ecosystem&quot; and &quot;tutorials&quot; sections.">
 
-<meta property="og:description" content="We&#39;ve recently started evaluating the New Relic monitoring service at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what&#39;s going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces). For a CFML application tho&#39;, all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you&#39;re lucky!).However, we have a mixture of CFML and Clojure, running on the free open source Railo server so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.">
+<meta property="og:description" content="In my previous Long-Term Funding update
+I said I would review/overhaul the &quot;ecosystem&quot; and &quot;tutorials&quot; sections.">
 
-<meta property="og:url" content="https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/" />
-<meta property="og:title" content="Instrumenting Clojure for New Relic Monitoring" />
+<meta property="og:url" content="https://corfield.org/blog/2023/08/31/long-term-funding-4/" />
+<meta property="og:title" content="Long-Term Funding, Update #4" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/">
+    <link rel="canonical" href="https://corfield.org/blog/2023/08/31/long-term-funding-4/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -66,49 +68,74 @@
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">May 1, 2013</div>
+        <div class="col-lg-6">August 30, 2023</div>
         
     </div>
-    <h2>Instrumenting Clojure for New Relic Monitoring</h2>
+    <h2>Long-Term Funding, Update #4</h2>
 </div>
 <div>
     
-    <p>We've recently started evaluating the <a href="http://newrelic.com/">New Relic monitoring service</a> at World Singles and when you use their Java agent with your web application container, you can get a lot of information about what's going on inside your application (JVM activity, database activity, external HTTP calls, web transaction traces).<!-- more --> For a CFML application tho', all you tend to get in the web transaction traces is the Servlet entry point, some JDBC SQL reports, and some of the low-level Java libraries (if you're lucky!).</p><p>However, we have a mixture of CFML and Clojure, running on the <a href="http://www.getrailo.org">free open source Railo server</a> so I thought it might be possible to somehow instrument the Clojure code to enable more visibility into our application traces.</p><p>This <a href="http://blog.newrelic.com/2012/11/13/setting-up-custom-instrumentation-using-the-new-relic-java-agent/">New Relic blog post talks about custom instrumentation</a> and shows how you can use method annotations in Java to make specific function calls show up in web transaction traces. (The New Relic documentation, accessible from their monitoring console, provides more detail)</p><p>In Java (approximately):</p><pre><code>import com.newrelic.api.agent.Trace;
-
-public class Thing {
-
-    @Trace
-    public void someMethod() {
-        ...
-    }
-
-}
-</code></pre><p>So how do you do the same thing in Clojure? Annotations have been supported for quite a while in Clojure but they're very poorly documented and they require some specialized code.</p><p>Let's suppose you have this Clojure code:</p><pre><code>(ns my-project.stuff)
-
-(defn some-func [x y z] ...)
-
-(defn another-fn [a b] ...)
-</code></pre><p>We want to annotate both of these functions so they show up in New Relic web transaction traces. You can add annotations in a <code>deftype</code> so we have to transform our code quite a bit. First off, you'll need the New Relic JAR as a dependency in <code>project.clj</code>:</p><pre><code>  :dependencies
-    [...
-     [com.newrelic.agent.java/newrelic-api "3.10.0"]
-     ...]
-</code></pre><p>Check <a href="http://search.maven.org/#search%7Cga%7C1%7Cnewrelic-api">Maven Central</a> for the latest version! <em>As of September 26th, 2014, it was <code>3.10.0</code>.</em></p><p>Then you need to import the <code>Trace</code> annotation:</p><pre><code>(ns my-project.stuff
-  (:import com.newrelic.api.agent.Trace))
-</code></pre><p>Since we need to use <code>deftype</code> we need to define an interface type for the functions we want to instrument. We also need to use Java-compatible names. Here's a first cut:</p><pre><code>(definterface INR
-  (some_func [x y z])
-  (another_fn [a b]))
-</code></pre><p>Now we can define the implementation type with the annotations. Then we'll need to expose a Clojure API based on that. Let's start by renaming our existing implementations and making them private, so we can call them from the <code>deftype</code> with minimal code changes:</p><pre><code>(defn- some-func* [x y z] ...)
-
-(defn- another-fn* [a b] ...)
-</code></pre><p>Now we can write our <code>deftype</code> with annotations:</p><pre><code>(deftype NR []
-  INR
-  ;; @Trace maps to Trace {} metadata:
-  (^{Trace {}} some_func  [_ x y z] (some-func* x y z))
-  (^{Trace {}} another_fn [_ a b]   (another-fn* a b)))
-</code></pre><p>Here we have an implementation - <code>NR</code> - of our interface - <code>INR</code> - which provides the two methods. Note that they ignore their first argument (<code>this</code>) because the object type is just an artifact of <code>deftype</code> for us to add the annotations. Finally, we can reimplement our original API in terms of the new type. In order to do that, we need an instance of our type, and to avoid classloader issues, we'll create a new instance in each call. <em>In my original blog post I suggested using a private singleton but later discovered that caused problems with classloaders sometimes.</em></p><p>And finally here is our original API reimplemented in a traceable way:</p><pre><code>(defn some-func  [x y z] (.some_func (NR.) x y z))
-
-(defn another-fn [a b]   (.another_fn (NR.) a b))
-</code></pre><p>Now you just need to start your web application container with the JVM option <code>-javaagent:/path/to/newrelic.jar</code> (which is your licensed JAR file downloaded from your monitoring console, not the one pulled in by Leiningen based on the dependency we added above!).</p><p>When you drill into web transaction traces, you should see <code>my_project.stuff.NR.some_func</code> and <code>my_project.stuff.NR.another_fn</code> entries in it!</p>
+    <p>In my <a href="https://corfield.org/blog/2023/06/30/long-term-funding-3/">previous Long-Term Funding update</a>
+I said I would review/overhaul the "ecosystem" and "tutorials" sections.<!--more--></p><h2 id="on-a-personal-note">On a personal note...</h2><p>I ended the previous update with a personal note but I'm going to start this
+update with one. It's been a very difficult couple of months. My mother
+passed away in early July (on my birthday!) and much of the month involved
+a lot of back and forth with the funeral home in England and family around
+the world. My wife &amp; I attended the service via Zoom at the end of July and then
+it took some additional time to get the service booklet and recording
+distributed to family and friends.</p><p>Then in early August, both my wife and I got COVID-19 -- after three and a
+half years of avoiding it, and having all our shots and boosters. My wife
+tested positive soon after symptoms started and got paxlovid. I had all the
+same symptoms too, but kept testing negative until I was outside the window for
+paxlovid -- and then started testing positive. It took about two weeks for us
+both to test negative reliably. We're both still recovering from the fatigue
+and brain fog but every day is an improvement. Wear your masks, folks, and
+get all your shots and boosters!</p><p>Consequently, I didn't get as much done as I'd hoped in the past two months.</p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>I incorporated feedback from the community on the <code>tools.build</code> cookbook.
+Many thanks, in particular, to <a href="https://github.com/phronmophobic">@phronmophobic</a>
+who provided extensive feedback and Pull Requests!</p><p>I reviewed the "ecosystem" and "tutorials" sections but only so far as to
+remove outdated content. I reviewed and updated the main <strong>Content</strong> page
+to reflect the current state of the site, reordering sections and removing
+outdated content.</p><p>Feedback from the community suggested that I should
+review sections in a different order to my initial plan,
+so I turned my attention to the "language"
+section and updated the following pages from Clojure 1.5 to Clojure 1.11:</p><ul><li><a href="https://clojure-doc.org/articles/language/functions/">Language: Functions</a></li><li><a href="https://clojure-doc.org/articles/language/core_overview/">Language: clojure.core</a></li><li><a href="https://clojure-doc.org/articles/language/collections_and_sequences/">Language: Collections and Sequences</a></li><li><a href="https://clojure-doc.org/articles/language/namespaces/">Language: Namespaces</a></li><li><a href="https://clojure-doc.org/articles/language/interop/">Language: Java Interop</a></li><li><a href="https://clojure-doc.org/articles/language/polymorphism/">Language: Polymorphism</a></li></ul><p>In some cases that just meant double-checking the code examples still worked
+as shown, but in other cases it meant updating the examples to use newer
+functions, adding new examples showing alternative approaches that are now
+possible, or changing the error messages shown to match the current behavior
+(since Clojure 1.10 did a lot to improve error messages).</p><p>I still need to make additional passes over several of these pages to address
+the remaining "TBD" items (mostly adding more examples).</p><h2 id="honeysql">HoneySQL</h2><p>Several complicated changes were made to HoneySQL this period, leading to the
+<a href="https://github.com/seancorfield/honeysql/releases/tag/v2.4.1066">2.4.1066 release</a>,
+which included the first pass at supporting temporal queries, and reworking
+how <code>:insert-into</code>, <code>:columns</code>, and <code>:values</code> work together which should
+make it easier to avoid generating invalid SQL as well as making it easier
+to extend HoneySQL to support additional features around <code>INSERT</code> statements.</p><h2 id="polylith">Polylith</h2><p>The <a href="https://github.com/polyfy/polylith">Polylith project</a>
+(and documentation) was still using my old (archived) <code>build-clj</code>
+wrapper so I worked on a Pull Request to switch everything to plain
+<code>tools.build</code> usage as a better example for the community. That has been
+merged in and updated documentation will be released soon (on cljdoc.org
+instead of GitBook!).</p><h2 id="clj-new"><code>clj-new</code></h2><p>This project also still used <code>build-clj</code> so I updated all the project
+templates to use <code>tools.build</code> directly and released version
+1.2.404 so that, going forward, newly-generated projects will be better
+examples for the community. <code>deps-new</code> had previously been updated to
+generate projects using <code>tools.build</code> directly.</p><h2 id="clj-commons"><code>clj-commons</code></h2><p>Information about CLJ Commons governance was spread across the
+<a href="https://clj-commons.org"><code>clj-commons</code></a> website and the
+<a href="https://github.com/clj-commons/meta"><code>meta</code></a> repository's <code>README</code>
+and other pages.
+Based on some community feedback in June, I wanted to consolidate
+that information and bring it up to date.</p><p>As I started on that, I realized that the
+<a href="https://clj-commons.org/projects.html"><code>clj-commons</code> project list</a>
+was very outdated so I decided to regenerate it (there's a
+<a href="https://github.com/clj-commons/clj-commons.github.io/blob/master/src/clj_commons/projects.clj">Clojure script</a>
+for this). That uncovered a number of projects that were missing either the
+<code>ORIGINATOR</code> file in the root of the repo (how <code>clj-commons</code> identifies the
+original author of a project) or the <code>.github/CODEOWNERS</code> file that lists
+the current active maintainers.</p><p>I went through every <code>clj-commons</code> repo and added the missing files,
+updated the <code>projects.clj</code> script to support <code>#</code> comments in <code>CODEOWNERS</code>,
+and regenerated the <code>projects.html</code> page.</p><p>Finally, I consolidated and updated the information about how CLJ Commons accepts and maintains
+projects, and updated the <code>README</code> in the <code>meta</code> repo to reflect that this
+information is all on the main website now:</p><ul><li><a href="https://clj-commons.org/accepting-projects.html">Accepting projects into clj-commons</a></li><li><a href="https://clj-commons.org/maintaining-projects.html">Maintaining projects in clj-commons</a></li></ul><h2 id="whats-next">What's Next?</h2><p>In September/October, I'm hoping to complete a review and update of the
+"tutorials" and "ecosystem" sections of clojure-doc.org, and then in the
+remaining period, I'll tackle the "cookbooks" section and make another
+pass of "TBD" items in the "language" section.</p>
 </div>
 
 <div id="post-tags">
@@ -116,17 +143,27 @@ public class Thing {
     
     <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/observability/">observability</a>
+    <a href="/tags/polylith/">polylith</a>
     
-    <a href="/tags/new relic/">new relic</a>
+    <a href="/tags/community/">community</a>
+    
+    <a href="/tags/honeysql/">honeysql</a>
+    
+    <a href="/tags/clojurists together/">clojurists together</a>
+    
+    <a href="/tags/clojure-doc.org/">clojure-doc.org</a>
+    
+    <a href="/tags/clj-commons/">clj-commons</a>
+    
+    <a href="/tags/open source/">open source</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2013/09/22/the-strange-loop-2013/">&laquo; The Strange Loop 2013</a>
         
+        <a class="right" href="/blog/2023/07/15/deps-edn-monorepo-11/">deps.edn and monorepos XI (Polylith) &raquo;</a>
         
     </div>
 
@@ -134,8 +171,8 @@ public class Thing {
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/";
-            this.page.identifier = "Instrumenting Clojure for New Relic Monitoring";
+            this.page.url = "https://corfield.org/blog/2023/08/31/long-term-funding-4/";
+            this.page.identifier = "Long-Term Funding, Update #4";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
