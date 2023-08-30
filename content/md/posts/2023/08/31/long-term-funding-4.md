@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #4",
- :date "2023-08-31 10:00:00", :draft? true,
+ :date "2023-08-30 13:00:00",
  :tags ["clojure" "clojure-doc.org" "honeysql" "clj-commons" "open source" "community" "clojurists together" "polylith"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/06/30/long-term-funding-3/)
@@ -69,7 +69,8 @@ to extend HoneySQL to support additional features around `INSERT` statements.
 
 ## Polylith
 
-The Polylith project (and documentation) was still using my old (archived) `build-clj`
+The [Polylith project](https://github.com/polyfy/polylith)
+(and documentation) was still using my old (archived) `build-clj`
 wrapper so I worked on a Pull Request to switch everything to plain
 `tools.build` usage as a better example for the community. That has been
 merged in and updated documentation will be released soon (on cljdoc.org
