@@ -7,16 +7,30 @@ I said I would review/overhaul the "ecosystem" and "tutorials" sections.<!--more
 
 ## `clojure-doc.org`
 
+* Language: Collections and Sequences -- new section on transducers.
+* Language: Concurrency and Parallelism -- updated to Clojure 1.11.
+* Language: Macros -- updated to Clojure 1.11.
+* `tools.build` cookbook -- new section on template `pom.xml` and `:pom-data` approaches.
 ...
 
+## `deps-new`
+
+0.5.3 -- switch to `tools.build` 0.9.6 for `pom.xml` generation via `:pom-data`.
+...
+
+## Expectations
+
+2.1.182 -- overhaul failure reporting to be more consistent and informative.
+...
 
 ## HoneySQL
 
+2.4.1078 -- fix bug in helpers that was preventing their use with quoted-symbol DSL; improve BigQuery support
 ...
 
 ## `next.jdbc`
 
-1.3.894
+1.3.894 -- provide variants of `with-transaction` and `on-connection` that will rewrap an options-wrapped connectable.
 ...
 
 ## What's Next?
