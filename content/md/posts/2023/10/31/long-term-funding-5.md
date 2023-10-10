@@ -10,7 +10,10 @@ I said I would review/overhaul the "ecosystem" and "tutorials" sections.<!--more
 * Language: Collections and Sequences -- new section on transducers.
 * Language: Concurrency and Parallelism -- updated to Clojure 1.11.
 * Language: Macros -- updated to Clojure 1.11.
-* `tools.build` cookbook -- new section on template `pom.xml` and `:pom-data` approaches.
+* Language: Laziness -- updated to Clojure 1.11.
+* Ecosystem: Generating Documentation -- added cljdoc.org, removed outdated content
+* Ecosystem: Web Development -- almost entirely rewritten, added a lot of new content, removed outdated content
+* Cookbooks: `tools.build` -- new section on template `pom.xml` and `:pom-data` approaches.
 ...
 
 ## `deps-new`
