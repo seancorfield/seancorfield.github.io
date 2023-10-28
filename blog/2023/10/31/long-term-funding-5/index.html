@@ -2,12 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: Posts Tagged &quot;editors&quot;</title>
+    <title>An Architect&#39;s View: Long-Term Funding, Update #5</title>
     
-    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
-    <meta name="keywords" content="">
-    
-    <link rel="canonical" href="https://corfield.org/tags/editors/">
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,vs code,clj-commons,open source">
+
+<meta name="description" content="In my previous Long-Term Funding update
+I said I would review/overhaul the &quot;ecosystem&quot; and &quot;tutorials&quot; sections
+(once I&#39;d finished the &quot;language&quot; section).">
+
+<meta property="og:description" content="In my previous Long-Term Funding update
+I said I would review/overhaul the &quot;ecosystem&quot; and &quot;tutorials&quot; sections
+(once I&#39;d finished the &quot;language&quot; section).">
+
+<meta property="og:url" content="https://corfield.org/blog/2023/10/31/long-term-funding-5/" />
+<meta property="og:title" content="Long-Term Funding, Update #5" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2023/10/31/long-term-funding-5/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -56,25 +67,109 @@
         <div class="col-lg-9">
             <div id="content">
                 
-<div id="posts-by-tag">
-    <div id="page-header">
-        <h2>Posts Tagged &quot;editors&quot;</h2>
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 28, 2023</div>
+        
     </div>
-    <ul>
+    <h2>Long-Term Funding, Update #5</h2>
+</div>
+<div>
     
-        <li>
-            <a href="/blog/2020/11/09/vscode-clover/">VS Code and Clover</a>
-        </li>
+    <p>In my <a href="https://corfield.org/blog/2023/08/31/long-term-funding-4/">previous Long-Term Funding update</a>
+I said I would review/overhaul the "ecosystem" and "tutorials" sections
+(once I'd finished the "language" section).<!--more--></p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>I finished reviewing and updating the last three language sections to Clojure 1.11
+(<a href="https://clojure-doc.org/articles/language/concurrency_and_parallelism/">Concurrency and Parallelism</a>,
+<a href="https://clojure-doc.org/articles/language/macros/">Macros</a>,
+and <a href="https://clojure-doc.org/articles/language/laziness/">Laziness</a>), and I
+added a new section about transducers to the
+<a href="https://clojure-doc.org/articles/language/collections_and_sequences/">Collections and Sequences</a>
+section. In the next period, I'll revisit the "TBD" items in the language
+section to see what I can do to address them.</p><p>I rewrote the
+<a href="https://clojure-doc.org/articles/ecosystem/generating_documentation/">Generating Documentation</a>
+section (ecosystem) to focus on <a href="https://cljdoc.org/">cljdoc.org</a>
+and removed the outdated content.</p><p>The <a href="https://clojure-doc.org/articles/ecosystem/web_development/">Web Development</a>
+section (ecosystem) also got a major rewrite, adding a lot of new content,
+removing outdated content, and incorporating a lot of community feedback
+on a draft version (thank you!).</p><p>Finally, I added a new section to the
+<a href="https://clojure-doc.org/articles/cookbooks/cli_build_projects/"><code>tools.build</code> Cookbook</a>
+about template <code>pom.xml</code> file and the <code>:pom-data</code> approach (new in <code>tools.build</code> 0.9.6).</p><h2 id="toolsbuild-and-deps-new"><code>tools.build</code> and <code>deps-new</code></h2><p>Following on from the <code>tools.build</code> Cookbook update, I updated
+<a href="https://github.com/seancorfield/deps-new"><code>deps-new</code></a> to use that new
+release of <code>tools.build</code> and updated all the project templates to use
+<code>:pom-data</code> for generating <code>pom.xml</code> files.
+See the <a href="https://github.com/seancorfield/deps-new/releases/tag/v0.5.3">v0.5.3</a>
+release</p><p>I need to do the same for <code>clj-new</code> at some point -- perhaps in the next period!</p><h2 id="honeysql">HoneySQL</h2><p>HoneySQL also saw a lot of work with two releases that mostly focused on
+improving BigQuery support (array subquery, select as struct, create or replace,
+ignore/respect nulls, and new <code>:distinct</code> and <code>:expr</code> clauses to facilitate
+certain non-standard queries), and introducing basic support for NRQL (New Relic Query Language)
+as a new dialect.</p><p>NRQL has non-standard quoting rules, non-standard entity names, and inlines
+all expression values, since it is mostly used directly within the New Relic
+web UI or via their CLI, neither of which support parameterized queries. New
+clauses and helpers have been added for <code>:compare-with</code>, <code>:since</code>, <code>:timeseries</code>,
+<code>until</code>, and <code>:facet</code>.</p><p>In addition, an important bug in the helper merge functions was fixed that
+affected anyone using the quoted-symbol style of DSL (instead of the keyword
+style).</p><p>See <a href="https://github.com/seancorfield/honeysql/releases">HoneySQL releases</a>
+for more details of these two new versions.</p><h2 id="expectations">Expectations</h2><p><a href="https://github.com/clojure-expectations/clojure-test">Expectations</a> also saw
+two new releases this period. The first release focused on improving the
+way test failures are reported to be more consistent and informative. The
+second release was a minor one to improve <code>clj-kondo</code> support for <code>more-of</code>.</p><p>See <a href="https://github.com/clojure-expectations/clojure-test/releases">Expectations releases</a>
+for more details on these two new versions.</p><h2 id="nextjdbc"><code>next.jdbc</code></h2><p>Finally, <code>next.jdbc</code> <a href="https://github.com/seancorfield/next-jdbc/releases/tag/v1.3.894">1.3.894</a>
+provides variants of <code>with-transaction</code> and <code>on-connection</code> that will rewrap an
+options-wrapped connectable. This was a long-requested feature that I had
+struggled with finding an elegant solution for. In addition, I updated most of
+the JDBC drivers that <code>next.jdbc</code> is tested against, to flush out any issues
+with those newer versions. Notably, SQLite no longer supports <code>:return-generated-keys true</code>
+but you can specify <code>RETURNING *</code> in your SQL instead.</p><h2 id="whats-next">What's Next?</h2><p>In November/December, I'm hoping to complete a review and update of the
+"cookbooks" section and make another pass of "TBD" items in the "language"
+section.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
     
-        <li>
-            <a href="/blog/2019/01/22/atom-chlorine-windows/">Atom, Chlorine, and Windows</a>
-        </li>
+    <a href="/tags/clojure/">clojure</a>
     
-        <li>
-            <a href="/blog/2018/12/19/atom-chlorine/">Chlorine: Clojure integration for Atom</a>
-        </li>
+    <a href="/tags/expectations/">expectations</a>
     
-    </ul>
+    <a href="/tags/community/">community</a>
+    
+    <a href="/tags/jdbc/">jdbc</a>
+    
+    <a href="/tags/honeysql/">honeysql</a>
+    
+    <a href="/tags/clojurists%20together/">clojurists together</a>
+    
+    <a href="/tags/clojure-doc.org/">clojure-doc.org</a>
+    
+    <a href="/tags/open%20source/">open source</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2023/08/31/long-term-funding-4/">Long-Term Funding, Update #4 &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2023/10/31/long-term-funding-5/";
+            this.page.identifier = "Long-Term Funding, Update #5";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
 </div>
 
             </div>
