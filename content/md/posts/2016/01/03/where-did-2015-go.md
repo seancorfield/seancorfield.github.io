@@ -1,6 +1,6 @@
 {:title "Where Did 2015 Go?",
  :date "2016-01-03 16:00:00",
- :tags ["clojure" "frege" "conferences" "diversity"]}
+ :tags ["clojure" "expectations" "frege" "conferences" "diversity"]}
 I did not intend to stop blogging in 2015 but that's certainly what it looks like here!
 
 So what kept me so busy that I didn't get around to blogging anything?<!-- more -->

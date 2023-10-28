@@ -1,6 +1,6 @@
 {:title "Rebooting Clojure",
  :date "2016-01-29 22:30:00",
- :tags ["boot" "clojure"]}
+ :tags ["boot" "clojure" "expectations"]}
 We switched from [Leiningen](http://leiningen.org/) to [Boot](http://boot-clj.com/). What is Boot and why did we switch?<!-- more -->
 
 ## Leiningen

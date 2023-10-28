@@ -1,6 +1,6 @@
 {:title "Happy New Releases!",
  :date "2019-12-31 23:59:59",
- :tags ["clojure" "honeysql" "jdbc"]}
+ :tags ["clojure" "honeysql" "jdbc" "expectations"]}
 
 ## Wrapping Up 2019
 

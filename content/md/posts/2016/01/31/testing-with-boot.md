@@ -1,6 +1,6 @@
 {:title "Testing With Boot",
  :date "2016-01-31 15:30:00",
- :tags ["boot" "clojure"]}
+ :tags ["boot" "clojure" "expectations"]}
 In [Building On Boot](https://corfield.org/blog/2016/01/30/building-on-boot/), I gave some high level benefits we'd found with Boot, compared to Leiningen, and how it had helped up streamline our build process. That article closed with a note about Boot not having the equivalent of common Leiningen plugins, and that's what I'm going to cover here, since that was the first real obstacle we encountered.<!-- more -->
 
 We use [Jay Fields' Expectations](http://jayfields.com/expectations/) library very heavily for most of our testing needs. We use `clojure.test` only for our [Clojure-powered WebDriver testing](https://github.com/semperos/clj-webdriver). Leiningen has a `test` task built-in and we had been using [lein-expectations](https://github.com/gar3thjon3s/lein-expectations) for years. It was quite a shock to find out that Boot has no testing tasks built-in!
