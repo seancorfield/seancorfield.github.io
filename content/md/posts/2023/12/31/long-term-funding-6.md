@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #6",
- :date "2023-12-31 15:15:00",
+ :date "2023-12-31 15:15:00", :draft? true,
  :tags ["clojure" "clojure-doc.org" "expectations" "honeysql" "jdbc" "open source" "community" "clojurists together"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/10/31/long-term-funding-5/)
@@ -24,9 +24,21 @@ have been added since Clojure 1.4, when most of the original material on
 
 I also went through all the Java documentation links and updated those to
 point to the Java 17 versions (they were mostly pointing at Java 7 previously!).
+These will get updated again once use of JDK 21 has become more widespread.
+
+I've been slowly working my way through the "TBD" items in the various
+**Language** guides, although some of them really need input from community
+members who have specialist knowledge in those areas. In particular, the
+[**Concurrency and Parallelism**](https://clojure-doc.org/articles/language/concurrency_and_parallelism/)
+and
+[**Polymorphism**](https://clojure-doc.org/articles/language/polymorphism/)
+guides still have a number of "TBD" items that I'm not qualified to write!
+Volunteers welcome!
 
 Thank you to [@adham-omran](https://github.com/adham-omran) for a PR that
-added the [Date and Time cookbook](https://clojure-doc.org/articles/cookbooks/date_and_time/).
+added the [Date and Time cookbook](https://clojure-doc.org/articles/cookbooks/date_and_time/)
+and to [@samhedin](https://github.com/samhedin) for a PR that added
+a section about [adding Java code to Clojure projects](https://clojure-doc.org/articles/cookbooks/cli_build_projects/#including-java-code-in-a-clojure-project) to the `tools.build` cookbook.
 
 ## `tools.build` and `deps-new`
 
