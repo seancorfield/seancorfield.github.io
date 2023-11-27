@@ -27,7 +27,7 @@ point to the Java 17 versions (they were mostly pointing at Java 7 previously!).
 These will get updated again once use of JDK 21 has become more widespread.
 
 I've been slowly working my way through the "TBD" items in the various
-**Language** guides, although some of them really need input from community
+**Language** guides, including the **Glossary**, although some of them really need input from community
 members who have specialist knowledge in those areas. In particular, the
 [**Concurrency and Parallelism**](https://clojure-doc.org/articles/language/concurrency_and_parallelism/)
 and
