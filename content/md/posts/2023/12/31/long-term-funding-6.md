@@ -32,7 +32,7 @@ members who have specialist knowledge in those areas. In particular, the
 [**Concurrency and Parallelism**](https://clojure-doc.org/articles/language/concurrency_and_parallelism/)
 and
 [**Polymorphism**](https://clojure-doc.org/articles/language/polymorphism/)
-guides still have a number of "TBD" items that I'm not qualified to write!
+guides still have a number of "TBD" items that I don't feel qualified to write!
 Volunteers welcome!
 
 Thank you to [@adham-omran](https://github.com/adham-omran) for a PR that
@@ -40,15 +40,30 @@ added the [Date and Time cookbook](https://clojure-doc.org/articles/cookbooks/da
 and to [@samhedin](https://github.com/samhedin) for a PR that added
 a section about [adding Java code to Clojure projects](https://clojure-doc.org/articles/cookbooks/cli_build_projects/#including-java-code-in-a-clojure-project) to the `tools.build` cookbook.
 
-## `tools.build` and `deps-new`
+To wrap up the year of work on `clojure-doc.org`, I consider the Clojurists
+Together funding to have been a massive success. The site has been completely
+overhauled at this point, bringing it up to date with Clojure 1.11 and
+removing all the outdated and now-duplicated material that was previously
+missing from the official Clojure documentation. In addition, by raising the
+profile of `clojure-doc.org` in the community, contributions have increased
+with two new cookbooks added via Pull Requests and several other sections of
+the site either getting PRs or being updated by me in response to extensive
+feedback from the community (mostly on Slack).
 
-* 0.5.next -- doc updates
+Keeping the site updated now feels like a tractable problem and I'm hoping
+to find time in 2024 and beyond to add more content to the site, especially
+when Clojure 1.12 is released and there are a lot of enhancements to Java
+interop!
+
+## `deps-new`
+
+* 0.5.next -- doc updates -- `:src-dirs`
 
 `clj-new`?
 
 ## HoneySQL
 
-* 2.5.next?
+* 2.5.1103 -- smarter quoting of entities, smarter handling of metadata, new options
 
 ## Expectations
 
