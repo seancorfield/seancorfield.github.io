@@ -1,6 +1,6 @@
 {:title "Long-Term Funding, Update #6",
  :date "2023-12-31 15:15:00", :draft? true,
- :tags ["clojure" "clojure-doc.org" "expectations" "honeysql" "jdbc" "open source" "community" "clojurists together"]}
+ :tags ["clojure" "clojure-doc.org" "expectations" "honeysql" "jdbc" "open source" "community" "clojurists together" "watson"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/10/31/long-term-funding-5/)
 I said I would review and update of the
@@ -100,13 +100,15 @@ for the community.
 for checking your dependencies for known security vulnerabilities. It's a
 wrapper around
 [OWASP Dependency Check](https://owasp.org/www-project-dependency-check/)
-and NIST is requiring users of its NVD (National Vulnerability Database) data
-to switch from using downloads to a new API that requires a free key for
+and NIST is requiring users of its NVD (National Vulnerability Database)
+to switch from using data feed downloads to a new API that requires a free key for
 access. The DependencyCheck library that `clj-watson` uses has been updated
 to use the new API, but it isn't backward compatible so `clj-watson` needs
 changes to use the new version of the library -- and to provide an easier
 way for users to specify their own NVD API key.
 
+Unfortunately, the `clj-watson` maintainer has moved on from Clojure so
+I've volunteered to take over maintenance of the library.
 So far I've been updating the documentation, some of the library dependencies,
 and adding a new, optional properties file that users can provide to override
 defaults, as well as a new command line option to specify that file, if you
