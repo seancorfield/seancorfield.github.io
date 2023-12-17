@@ -12,9 +12,11 @@ section.<!--more-->
 I reviewed and updated the cookbooks for
 [Files and Directories](https://clojure-doc.org/articles/cookbooks/files_and_directories/)
 [Mathematics](https://clojure-doc.org/articles/cookbooks/math/),
-[Middleware](https://clojure-doc.org/articles/cookbooks/middleware/), and
+[Middleware](https://clojure-doc.org/articles/cookbooks/middleware/),
+[Parsing XML in Clojure](https://clojure-doc.org/articles/cookbooks/parsing_xml_with_zippers/), and
 [Strings](https://clojure-doc.org/articles/cookbooks/strings/),
-bringing them all up to Clojure 1.11.
+bringing them all up to Clojure 1.11 (and testing the examples -- and
+fixing the broken ones).
 
 For the **Mathematics** cookbook, that
 meant rewriting the content that previously used Java interop and/or
@@ -37,7 +39,7 @@ members who have specialist knowledge in those areas. In particular, the
 and
 [**Polymorphism**](https://clojure-doc.org/articles/language/polymorphism/)
 guides still have a number of "TBD" items that I don't feel qualified to write!
-Volunteers welcome!
+**Volunteers welcome!**
 
 Thank you to [@adham-omran](https://github.com/adham-omran) for a PR that
 added the [Date and Time cookbook](https://clojure-doc.org/articles/cookbooks/date_and_time/)
@@ -47,7 +49,7 @@ a section about [adding Java code to Clojure projects](https://clojure-doc.org/a
 To wrap up the year of work on `clojure-doc.org`, I consider the Clojurists
 Together funding to have been a massive success. The site has been completely
 overhauled at this point, bringing it up to date with Clojure 1.11 and
-removing all the outdated and now-duplicated material that was previously
+removing all the outdated and now-duplicated material that was originally
 missing from the official Clojure documentation. In addition, by raising the
 profile of `clojure-doc.org` in the community, contributions have increased
 with two new cookbooks added via Pull Requests and several other sections of
@@ -61,18 +63,63 @@ interop!
 
 ## `deps-new`
 
-* 0.5.next -- doc updates -- `:src-dirs`
-
-`clj-new`?
+Although I haven't cut a new release of
+[`deps-new`](https://github.com/seancorfield/deps-new/)
+yet, it has had several
+documentation updates, and the addition of a `:src-dirs` option to make it
+easier to use `deps-new` as a library and use templates from the local
+file system.
 
 ## HoneySQL
 
-* 2.5.1103 -- smarter quoting of entities, smarter handling of metadata, new options
+[HoneySQL](https://github.com/seancorfield/honeysql/) 2.5.1103
+was released with smarter quoting of entities, smarter
+handling of metadata in formatting, and new options to provide more control
+over both of those features.
 
 ## Expectations
 
-* 2.1.next -- doc updates
+No new release yet but several documentation updates for
+the `clojure.test`-compatible version of
+[Expectations](https://github.com/clojure-expectations/clojure-test).
 
 ## `next.jdbc`
 
-* 1.3.next -- improve compatibility of `insert-multi!`; doc updates for `find-by-keys` and database drivers; add more control over schema conventions for `datafy`/`nav`.
+[`next.jdbc`](https://github.com/seancorfield/next-jdbc/) 1.3.909
+brings improved compatibility with `clojure.java.jdbc` for
+`insert-multi!` and adds a `:schema-opts` option to provide more control over
+schema conventions for `datafy`/`nav`. There have also been several
+documentation updates, in particular around how to use `next.jdbc/plan` and
+`next.jdbc.sql/find-by-keys`. The `build.clj` has been updated to use the
+`:pom-data` option introduced in `tools.build` 0.9.6, as a better example
+for the community.
+
+## `clj-watson`
+
+[`clj-watson`](https://github.com/clj-holmes/clj-watson/) is a great tool
+for checking your dependencies for known security vulnerabilities. It's a
+wrapper around
+[OWASP Dependency Check](https://owasp.org/www-project-dependency-check/)
+and NIST is requiring users of its NVD (National Vulnerability Database) data
+to switch from using downloads to a new API that requires a free key for
+access. The DependencyCheck library that `clj-watson` uses has been updated
+to use the new API, but it isn't backward compatible so `clj-watson` needs
+changes to use the new version of the library -- and to provide an easier
+way for users to specify their own NVD API key.
+
+So far I've been updating the documentation, some of the library dependencies,
+and adding a new, optional properties file that users can provide to override
+defaults, as well as a new command line option to specify that file, if you
+don't want it on the classpath.
+
+The final step of this round of work will be to update the DependencyCheck
+library and provide documentation on how to obtain an NVD API key and how
+to use it with `clj-watson`.
+
+## `org.clojure/java.data`
+
+Finally, the [`java.data`](https://github.com/clojure/java.data/) Contrib
+library has a new release, 1.1.103, which removes the dependency on
+`org.clojure/tools.logging` -- which in turn means that `next.jdbc` no longer
+depends on `tools.logging`, reducing the chance of conflicts for users of
+either library.
