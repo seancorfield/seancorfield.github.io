@@ -46,10 +46,13 @@ added the [Date and Time cookbook](https://clojure-doc.org/articles/cookbooks/da
 and to [@samhedin](https://github.com/samhedin) for a PR that added
 a section about [adding Java code to Clojure projects](https://clojure-doc.org/articles/cookbooks/cli_build_projects/#including-java-code-in-a-clojure-project) to the `tools.build` cookbook.
 
+Finally, I made a logo and a favicon for the site with my very limited
+artistic "talents"!
+
 To wrap up the year of work on `clojure-doc.org`, I consider the Clojurists
 Together funding to have been a massive success. The site has been completely
 overhauled at this point, bringing it up to date with Clojure 1.11 and
-removing all the outdated and now-duplicated material that was originally
+removing all the outdated (and now-duplicated) material that was originally
 missing from the official Clojure documentation. In addition, by raising the
 profile of `clojure-doc.org` in the community, contributions have increased
 with two new cookbooks added via Pull Requests and several other sections of
@@ -66,9 +69,16 @@ interop!
 Although I haven't cut a new release of
 [`deps-new`](https://github.com/seancorfield/deps-new/)
 yet, it has had several
-documentation updates, and the addition of a `:src-dirs` option to make it
+documentation updates, a new `:src-dirs` option to make it
 easier to use `deps-new` as a library and use templates from the local
-file system.
+file system, and a new `:post-process-fn` to make it possible to modify
+the generated project programmatically.
+
+## Expectations
+
+No new release yet but several documentation updates for
+the `clojure.test`-compatible version of
+[Expectations](https://github.com/clojure-expectations/clojure-test).
 
 ## HoneySQL
 
@@ -76,12 +86,6 @@ file system.
 was released with smarter quoting of entities, smarter
 handling of metadata in formatting, and new options to provide more control
 over both of those features.
-
-## Expectations
-
-No new release yet but several documentation updates for
-the `clojure.test`-compatible version of
-[Expectations](https://github.com/clojure-expectations/clojure-test).
 
 ## `next.jdbc`
 
@@ -103,20 +107,19 @@ wrapper around
 and NIST is requiring users of its NVD (National Vulnerability Database)
 to switch from using data feed downloads to a new API that requires a free key for
 access. The DependencyCheck library that `clj-watson` uses has been updated
-to use the new API, but it isn't backward compatible so `clj-watson` needs
+to use the new API, but it isn't backward compatible so `clj-watson` needed
 changes to use the new version of the library -- and to provide an easier
 way for users to specify their own NVD API key.
 
-Unfortunately, the `clj-watson` maintainer has moved on from Clojure so
-I've volunteered to take over maintenance of the library.
-So far I've been updating the documentation, some of the library dependencies,
-and adding a new, optional properties file that users can provide to override
-defaults, as well as a new command line option to specify that file, if you
-don't want it on the classpath.
+Although the `clj-watson` maintainer has moved on from Clojure,
+they've been receptive to Pull Requests to update the documentation,
+update the library dependencies, add a new, optional properties file that
+users can provide to override defaults, as well as a new command line option
+to specify that file, if you don't want it on the classpath, and to update
+the DependencyCheck library and provide documentation on how to obtain an
+NVD API key and how to use it with `clj-watson`.
 
-The final step of this round of work will be to update the DependencyCheck
-library and provide documentation on how to obtain an NVD API key and how
-to use it with `clj-watson`.
+(the final step will be to cut a 5.0.0 release)
 
 ## `org.clojure/java.data`
 
