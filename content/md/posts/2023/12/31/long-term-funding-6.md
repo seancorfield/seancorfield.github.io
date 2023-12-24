@@ -119,7 +119,9 @@ to specify that file, if you don't want it on the classpath, and to update
 the DependencyCheck library and provide documentation on how to obtain an
 NVD API key and how to use it with `clj-watson`.
 
-(the final step will be to cut a 5.0.0 release)
+A v5.0.0 release of `clj-watson` has been made, with all these changes, and
+is available as a git dependency. A Pull Request is pending with the README
+updates.
 
 ## `org.clojure/java.data`
 
