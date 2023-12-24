@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #6",
- :date "2023-12-31 15:15:00", :draft? true,
+ :date "2023-12-24 15:15:00", :draft? true,
  :tags ["clojure" "clojure-doc.org" "expectations" "honeysql" "jdbc" "open source" "community" "clojurists together" "watson"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/10/31/long-term-funding-5/)
