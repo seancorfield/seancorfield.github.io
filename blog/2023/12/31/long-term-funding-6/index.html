@@ -2,23 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: deps.edn and monorepos XI (Polylith)</title>
+    <title>An Architect&#39;s View: Long-Term Funding, Update #6</title>
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
 
-<meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-deps.edn, and Polylith, with our monorepo at
-World Singles Networks.">
+<meta name="description" content="In my previous Long-Term Funding update
+I said I would review and update of the
+&quot;cookbooks&quot; section and make another pass of &quot;TBD&quot; items in the &quot;language&quot;
+section.">
 
-<meta property="og:description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-deps.edn, and Polylith, with our monorepo at
-World Singles Networks.">
+<meta property="og:description" content="In my previous Long-Term Funding update
+I said I would review and update of the
+&quot;cookbooks&quot; section and make another pass of &quot;TBD&quot; items in the &quot;language&quot;
+section.">
 
-<meta property="og:url" content="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/" />
-<meta property="og:title" content="deps.edn and monorepos XI (Polylith)" />
+<meta property="og:url" content="https://corfield.org/blog/2023/12/31/long-term-funding-6/" />
+<meta property="og:title" content="Long-Term Funding, Update #6" />
 <meta property="og:type" content="article" />
 
-    <link rel="canonical" href="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/">
+    <link rel="canonical" href="https://corfield.org/blog/2023/12/31/long-term-funding-6/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -70,42 +72,91 @@ World Singles Networks.">
 <div id="post">
     <div class="post-header">
     <div id="post-meta" class="row">
-        <div class="col-lg-6">July 15, 2023</div>
+        <div class="col-lg-6">December 25, 2023</div>
         
     </div>
-    <h2>deps.edn and monorepos XI (Polylith)</h2>
+    <h2>Long-Term Funding, Update #6</h2>
 </div>
 <div>
     
-    <p>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-<code>deps.edn</code>, and <a href="https://polylith.gitbook.io/">Polylith</a>, with our monorepo at
-<a href="https://worldsinglesnetworks.com">World Singles Networks</a>.<!--more--></p><h3 id="the-monorepopolylith-series">The Monorepo/Polylith Series</h3><p><em>This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:</em></p><ol><li><em><a href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></em></li><li><em><a href="https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></em></li><li><em><a href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></em></li><li><em><a href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/">deps.edn and monorepos VI (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/">deps.edn and monorepos VII (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/">deps.edn and monorepos XI (Polylith)</a> (this post)</em></li></ol><h2 id="part-xi">Part XI</h2><p>In my last post -- about eight months ago -- I said we were about 86% through
-our migration with 114,114 lines of code converted to Polylith. We completed
-it a while back but I've been lax about writing the "final" (maybe) chapter
-of this series.</p><p>We completed the migration a few weeks after I posted my last update, moving the
-last two large applications into <code>bases</code> and renaming all the namespaces,
-then migrated the shared subproject to a <code>component</code>. Initially, we kept all
-the shared code in the <code>interface</code>, but then we made several refactoring
-passes over this code to split it into smaller components, as well as breaking the
-code into <code>interface</code> and <code>impl</code> namespaces. This allowed us to simplify our
-<code>build.clj</code> file since everything was now part of the Polylith structure:
-no special "billing artifacts" to deal with, and we also streamlined our CI
-pipelines since we no longer had to test and build the billing applications
-separately.</p><p>We currently have 138,497 lines of Clojure code in Polylith now. We build 21
-projects from 21 bases and 144 components. We have 1,160 Clojure files
-(source and test).</p><p>Probably our biggest remaining challenge at this point is that we still have
-some <code>components</code> that "do too much" and end up being depended on by too many
-other <code>components</code>. When those change, they trigger a lot of repetitive
-testing and building -- which is indicative of too much coupling. We've started
-teasing some of those apart, often along Command/Query lines (a la CQRS), but
-it's a slow process. It emphasizes the importance of <code>components</code> doing just
-one thing and being as self-contained as possible!</p><h2 id="polylith">Polylith</h2><p>Polylith itself has had a number of enhancements over the past seven months:</p><ul><li>It reports unnecessary component dependencies (previously, it only reported missing dependencies).</li><li>It checks and reports missing and unnecessary component <code>:test</code> dependencies separately.</li><li>It checks and reports missing and unnecessary base dependencies separately.</li><li>It uses <a href="https://github.com/borkdude/edamame">edamame</a> so its parsing is more robust and it now supports reader conditionals.</li><li>It can show outdated library dependencies (leveraging <a href="https://github.com/liquidz/antq">antq</a>).</li><li>The parsing and dependency analysis have been dramatically speeded up -- which makes a big difference on a project our size!</li></ul><p>I'm currently working with the Polylith team on moving the project and all the
-documentation away from my <code>tools.build</code> wrapper (<code>build-clj</code>) so that it uses
-a more standard approach to the core Clojure tooling.</p><p><a href="https://groups.google.com/g/cursive/c/9dTn12AkHzA/m/R_dj2fzRBAAJ">Cursive 1.13.0</a>
-introduces a lot of changes to <code>deps.edn</code> support that make it much easier to
-work with Polylith projects. In particular, the workaround of using <code>:extra-paths</code>
-for component dependencies in <code>:dev</code> is no longer necessary! <code>:extra-deps</code> can
-now be used with <code>:local/root</code> dependencies for all editors and tools.</p>
+    <p>In my <a href="https://corfield.org/blog/2023/10/31/long-term-funding-5/">previous Long-Term Funding update</a>
+I said I would review and update of the
+"cookbooks" section and make another pass of "TBD" items in the "language"
+section.<!--more--></p><h2 id="clojure-docorg"><code>clojure-doc.org</code></h2><p>I reviewed and updated the cookbooks for
+<a href="https://clojure-doc.org/articles/cookbooks/files_and_directories/">Files and Directories</a><a href="https://clojure-doc.org/articles/cookbooks/math/">Mathematics</a>,
+<a href="https://clojure-doc.org/articles/cookbooks/middleware/">Middleware</a>,
+<a href="https://clojure-doc.org/articles/cookbooks/parsing_xml_with_zippers/">Parsing XML in Clojure</a>, and
+<a href="https://clojure-doc.org/articles/cookbooks/strings/">Strings</a>,
+bringing them all up to Clojure 1.11 (and testing the examples -- and
+fixing the broken ones).</p><p>For the <strong>Mathematics</strong> cookbook, that
+meant rewriting the content that previously used Java interop and/or
+<a href="https://github.com/clojure/math.numeric-tower/">math.numeric-tower</a> to use
+the new-in-1.11 <code>clojure.math</code> namespace.</p><p>Several cookbooks got minor updates
+to take advantage of functions in <code>clojure.core</code> and <code>clojure.string</code> that
+have been added since Clojure 1.4, when most of the original material on
+<code>clojure-doc</code> was written.</p><p>I also went through all the Java documentation links and updated those to
+point to the Java 17 versions (they were mostly pointing at Java 7 previously!).
+These will get updated again once use of JDK 21 has become more widespread.</p><p>I've been slowly working my way through the "TBD" items in the various
+<strong>Language</strong> guides, including the <strong>Glossary</strong>, although some of them really need input from community
+members who have specialist knowledge in those areas. In particular, the
+<a href="https://clojure-doc.org/articles/language/concurrency_and_parallelism/"><strong>Concurrency and Parallelism</strong></a>
+and
+<a href="https://clojure-doc.org/articles/language/polymorphism/"><strong>Polymorphism</strong></a>
+guides still have a number of "TBD" items that I don't feel qualified to write!
+<strong>Volunteers welcome!</strong></p><p>Thank you to <a href="https://github.com/adham-omran">@adham-omran</a> for a PR that
+added the <a href="https://clojure-doc.org/articles/cookbooks/date_and_time/">Date and Time cookbook</a>
+and to <a href="https://github.com/samhedin">@samhedin</a> for a PR that added
+a section about <a href="https://clojure-doc.org/articles/cookbooks/cli_build_projects/#including-java-code-in-a-clojure-project">adding Java code to Clojure projects</a> to the <code>tools.build</code> cookbook.</p><p>Finally, I made a logo and a favicon for the site with my very limited
+artistic "talents"!</p><p>To wrap up the year of work on <code>clojure-doc.org</code>, I consider the Clojurists
+Together funding to have been a massive success. The site has been completely
+overhauled at this point, bringing it up to date with Clojure 1.11 and
+removing all the outdated (and now-duplicated) material that was originally
+missing from the official Clojure documentation. In addition, by raising the
+profile of <code>clojure-doc.org</code> in the community, contributions have increased
+with two new cookbooks added via Pull Requests and several other sections of
+the site either getting PRs or being updated by me in response to extensive
+feedback from the community (mostly on Slack).</p><p>Keeping the site updated now feels like a tractable problem and I'm hoping
+to find time in 2024 and beyond to add more content to the site, especially
+when Clojure 1.12 is released and there are a lot of enhancements to Java
+interop!</p><h2 id="deps-new"><code>deps-new</code></h2><p><a href="https://github.com/seancorfield/deps-new/"><code>deps-new</code></a> 0.6.0 was released
+with several
+documentation updates, a new <code>:src-dirs</code> option to make it
+easier to use <code>deps-new</code> as a library and use templates from the local
+file system, and a new <code>:post-process-fn</code> to make it possible to modify
+the generated project programmatically.</p><h2 id="expectations">Expectations</h2><p>No new release yet but several documentation updates for
+the <code>clojure.test</code>-compatible version of
+<a href="https://github.com/clojure-expectations/clojure-test">Expectations</a>.</p><h2 id="honeysql">HoneySQL</h2><p><a href="https://github.com/seancorfield/honeysql/">HoneySQL</a> 2.5.1103
+was released with smarter quoting of entities, smarter
+handling of metadata in formatting, and new options to provide more control
+over both of those features.</p><h2 id="nextjdbc"><code>next.jdbc</code></h2><p><a href="https://github.com/seancorfield/next-jdbc/"><code>next.jdbc</code></a> 1.3.909
+brings improved compatibility with <code>clojure.java.jdbc</code> for
+<code>insert-multi!</code> and adds a <code>:schema-opts</code> option to provide more control over
+schema conventions for <code>datafy</code>/<code>nav</code>. There have also been several
+documentation updates, in particular around how to use <code>next.jdbc/plan</code> and
+<code>next.jdbc.sql/find-by-keys</code>. The <code>build.clj</code> has been updated to use the
+<code>:pom-data</code> option introduced in <code>tools.build</code> 0.9.6, as a better example
+for the community.</p><h2 id="clj-watson"><code>clj-watson</code></h2><p><a href="https://github.com/clj-holmes/clj-watson/"><code>clj-watson</code></a> is a great tool
+for checking your dependencies for known security vulnerabilities. It's a
+wrapper around
+<a href="https://owasp.org/www-project-dependency-check/">OWASP Dependency Check</a>
+and NIST is requiring users of its NVD (National Vulnerability Database)
+to switch from using data feed downloads to a new API that requires a free key for
+access. The DependencyCheck library that <code>clj-watson</code> uses has been updated
+to use the new API, but it isn't backward compatible so <code>clj-watson</code> needed
+changes to use the new version of the library -- and to provide an easier
+way for users to specify their own NVD API key.</p><p>Although the <code>clj-watson</code> maintainer has moved on from Clojure,
+they've been receptive to Pull Requests to update the documentation,
+update the library dependencies, add a new, optional properties file that
+users can provide to override defaults, as well as a new command line option
+to specify that file, if you don't want it on the classpath, and to update
+the DependencyCheck library and provide documentation on how to obtain an
+NVD API key and how to use it with <code>clj-watson</code>.</p><p>A v5.0.0 release of <code>clj-watson</code> has been made, with all these changes, and
+is available as a git dependency. A Pull Request is pending with the README
+updates.</p><h2 id="orgclojurejavadata"><code>org.clojure/java.data</code></h2><p>Finally, the <a href="https://github.com/clojure/java.data/"><code>java.data</code></a> Contrib
+library has a new release, 1.1.103, which removes the dependency on
+<code>org.clojure/tools.logging</code> -- which in turn means that <code>next.jdbc</code> no longer
+depends on <code>tools.logging</code>, reducing the chance of conflicts for users of
+either library.</p>
 </div>
 
 <div id="post-tags">
@@ -113,21 +164,29 @@ now be used with <code>:local/root</code> dependencies for all editors and tools
     
     <a href="/tags/clojure/">clojure</a>
     
-    <a href="/tags/polylith/">polylith</a>
+    <a href="/tags/expectations/">expectations</a>
     
-    <a href="/tags/tools.build/">tools.build</a>
+    <a href="/tags/community/">community</a>
     
-    <a href="/tags/monorepo/">monorepo</a>
+    <a href="/tags/jdbc/">jdbc</a>
+    
+    <a href="/tags/honeysql/">honeysql</a>
+    
+    <a href="/tags/clojurists%20together/">clojurists together</a>
+    
+    <a href="/tags/clojure-doc.org/">clojure-doc.org</a>
+    
+    <a href="/tags/watson/">watson</a>
+    
+    <a href="/tags/open%20source/">open source</a>
     
 </div>
 
 
     <div id="prev-next">
         
-        <a href="/blog/2023/08/31/long-term-funding-4/">&laquo; Long-Term Funding, Update #4</a>
         
-        
-        <a class="right" href="/blog/2023/06/30/long-term-funding-3/">Long-Term Funding, Update #3 &raquo;</a>
+        <a class="right" href="/blog/2023/10/31/long-term-funding-5/">Long-Term Funding, Update #5 &raquo;</a>
         
     </div>
 
@@ -135,8 +194,8 @@ now be used with <code>:local/root</code> dependencies for all editors and tools
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/";
-            this.page.identifier = "deps.edn and monorepos XI (Polylith)";
+            this.page.url = "https://corfield.org/blog/2023/12/31/long-term-funding-6/";
+            this.page.identifier = "Long-Term Funding, Update #6";
         };
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

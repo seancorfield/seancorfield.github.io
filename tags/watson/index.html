@@ -2,23 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>An Architect&#39;s View: deps.edn and monorepos XI (Polylith)</title>
+    <title>An Architect&#39;s View: Posts Tagged &quot;watson&quot;</title>
     
-<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
-
-<meta name="description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-deps.edn, and Polylith, with our monorepo at
-World Singles Networks.">
-
-<meta property="og:description" content="This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-deps.edn, and Polylith, with our monorepo at
-World Singles Networks.">
-
-<meta property="og:url" content="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/" />
-<meta property="og:title" content="deps.edn and monorepos XI (Polylith)" />
-<meta property="og:type" content="article" />
-
-    <link rel="canonical" href="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/">
+    <meta name="description" content="Clojure, Software Design, Frameworks and more...">
+    <meta name="keywords" content="">
+    
+    <link rel="canonical" href="https://corfield.org/tags/watson/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
           type="text/css">
@@ -67,86 +56,17 @@ World Singles Networks.">
         <div class="col-lg-9">
             <div id="content">
                 
-<div id="post">
-    <div class="post-header">
-    <div id="post-meta" class="row">
-        <div class="col-lg-6">July 15, 2023</div>
-        
+<div id="posts-by-tag">
+    <div id="page-header">
+        <h2>Posts Tagged &quot;watson&quot;</h2>
     </div>
-    <h2>deps.edn and monorepos XI (Polylith)</h2>
-</div>
-<div>
+    <ul>
     
-    <p>This is part of an ongoing series of blog posts about our ever-evolving use of the Clojure CLI,
-<code>deps.edn</code>, and <a href="https://polylith.gitbook.io/">Polylith</a>, with our monorepo at
-<a href="https://worldsinglesnetworks.com">World Singles Networks</a>.<!--more--></p><h3 id="the-monorepopolylith-series">The Monorepo/Polylith Series</h3><p><em>This blog post is part of an ongoing series following our experiences with our Clojure monorepo and our migration to Polylith:</em></p><ol><li><em><a href="https://corfield.org/blog/2021/02/23/deps-edn-monorepo/">deps.edn and monorepos</a></em></li><li><em><a href="https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/">deps.edn and monorepos II</a></em></li><li><em><a href="https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/">deps.edn and monorepos III (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/">deps.edn and monorepos IV</a></em></li><li><em><a href="https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/">deps.edn and monorepos V (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/">deps.edn and monorepos VI (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/">deps.edn and monorepos VII (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/">deps.edn and monorepos VIII (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2022/11/05/deps-edn-monorepo-9/">deps.edn and monorepos IX (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2022/12/07/deps-edn-monorepo-10/">deps.edn and monorepos X (Polylith)</a></em></li><li><em><a href="https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/">deps.edn and monorepos XI (Polylith)</a> (this post)</em></li></ol><h2 id="part-xi">Part XI</h2><p>In my last post -- about eight months ago -- I said we were about 86% through
-our migration with 114,114 lines of code converted to Polylith. We completed
-it a while back but I've been lax about writing the "final" (maybe) chapter
-of this series.</p><p>We completed the migration a few weeks after I posted my last update, moving the
-last two large applications into <code>bases</code> and renaming all the namespaces,
-then migrated the shared subproject to a <code>component</code>. Initially, we kept all
-the shared code in the <code>interface</code>, but then we made several refactoring
-passes over this code to split it into smaller components, as well as breaking the
-code into <code>interface</code> and <code>impl</code> namespaces. This allowed us to simplify our
-<code>build.clj</code> file since everything was now part of the Polylith structure:
-no special "billing artifacts" to deal with, and we also streamlined our CI
-pipelines since we no longer had to test and build the billing applications
-separately.</p><p>We currently have 138,497 lines of Clojure code in Polylith now. We build 21
-projects from 21 bases and 144 components. We have 1,160 Clojure files
-(source and test).</p><p>Probably our biggest remaining challenge at this point is that we still have
-some <code>components</code> that "do too much" and end up being depended on by too many
-other <code>components</code>. When those change, they trigger a lot of repetitive
-testing and building -- which is indicative of too much coupling. We've started
-teasing some of those apart, often along Command/Query lines (a la CQRS), but
-it's a slow process. It emphasizes the importance of <code>components</code> doing just
-one thing and being as self-contained as possible!</p><h2 id="polylith">Polylith</h2><p>Polylith itself has had a number of enhancements over the past seven months:</p><ul><li>It reports unnecessary component dependencies (previously, it only reported missing dependencies).</li><li>It checks and reports missing and unnecessary component <code>:test</code> dependencies separately.</li><li>It checks and reports missing and unnecessary base dependencies separately.</li><li>It uses <a href="https://github.com/borkdude/edamame">edamame</a> so its parsing is more robust and it now supports reader conditionals.</li><li>It can show outdated library dependencies (leveraging <a href="https://github.com/liquidz/antq">antq</a>).</li><li>The parsing and dependency analysis have been dramatically speeded up -- which makes a big difference on a project our size!</li></ul><p>I'm currently working with the Polylith team on moving the project and all the
-documentation away from my <code>tools.build</code> wrapper (<code>build-clj</code>) so that it uses
-a more standard approach to the core Clojure tooling.</p><p><a href="https://groups.google.com/g/cursive/c/9dTn12AkHzA/m/R_dj2fzRBAAJ">Cursive 1.13.0</a>
-introduces a lot of changes to <code>deps.edn</code> support that make it much easier to
-work with Polylith projects. In particular, the workaround of using <code>:extra-paths</code>
-for component dependencies in <code>:dev</code> is no longer necessary! <code>:extra-deps</code> can
-now be used with <code>:local/root</code> dependencies for all editors and tools.</p>
-</div>
-
-<div id="post-tags">
-    <b>Tags: </b>
+        <li>
+            <a href="/blog/2023/12/31/long-term-funding-6/">Long-Term Funding, Update #6</a>
+        </li>
     
-    <a href="/tags/clojure/">clojure</a>
-    
-    <a href="/tags/polylith/">polylith</a>
-    
-    <a href="/tags/tools.build/">tools.build</a>
-    
-    <a href="/tags/monorepo/">monorepo</a>
-    
-</div>
-
-
-    <div id="prev-next">
-        
-        <a href="/blog/2023/08/31/long-term-funding-4/">&laquo; Long-Term Funding, Update #4</a>
-        
-        
-        <a class="right" href="/blog/2023/06/30/long-term-funding-3/">Long-Term Funding, Update #3 &raquo;</a>
-        
-    </div>
-
-    
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_config = function () {
-            this.page.url = "https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/";
-            this.page.identifier = "deps.edn and monorepos XI (Polylith)";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//seancorfield.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    
-
-
+    </ul>
 </div>
 
             </div>
