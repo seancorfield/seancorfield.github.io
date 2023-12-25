@@ -10,7 +10,7 @@ section.<!--more-->
 ## `clojure-doc.org`
 
 I reviewed and updated the cookbooks for
-[Files and Directories](https://clojure-doc.org/articles/cookbooks/files_and_directories/)
+[Files and Directories](https://clojure-doc.org/articles/cookbooks/files_and_directories/),
 [Mathematics](https://clojure-doc.org/articles/cookbooks/math/),
 [Middleware](https://clojure-doc.org/articles/cookbooks/middleware/),
 [Parsing XML in Clojure](https://clojure-doc.org/articles/cookbooks/parsing_xml_with_zippers/), and
@@ -111,7 +111,7 @@ changes to use the new version of the library -- and to provide an easier
 way for users to specify their own NVD API key.
 
 Although the `clj-watson` maintainer has moved on from Clojure,
-they've been receptive to Pull Requests to update the documentation,
+they've been receptive to my Pull Requests to update the documentation,
 update the library dependencies, add a new, optional properties file that
 users can provide to override defaults, as well as a new command line option
 to specify that file, if you don't want it on the classpath, and to update
