@@ -1,5 +1,5 @@
 {:title "Long-Term Funding, Update #6",
- :date "2023-12-24 15:15:00", :draft? true,
+ :date "2023-12-25 12:15:00",
  :tags ["clojure" "clojure-doc.org" "expectations" "honeysql" "jdbc" "open source" "community" "clojurists together" "watson"]}
 
 In my [previous Long-Term Funding update](https://corfield.org/blog/2023/10/31/long-term-funding-5/)
@@ -66,9 +66,8 @@ interop!
 
 ## `deps-new`
 
-Although I haven't cut a new release of
-[`deps-new`](https://github.com/seancorfield/deps-new/)
-yet, it has had several
+[`deps-new`](https://github.com/seancorfield/deps-new/) 0.6.0 was released
+with several
 documentation updates, a new `:src-dirs` option to make it
 easier to use `deps-new` as a library and use templates from the local
 file system, and a new `:post-process-fn` to make it possible to modify
