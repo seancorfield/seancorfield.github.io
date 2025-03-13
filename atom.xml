@@ -1,4 +1,15 @@
-<?xml version='1.0' encoding='UTF-8'?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Tue, 12 Nov 2024 11:26:55 -0800</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2024/11/09/conj-2024/</guid><link>https://corfield.org/blog/2024/11/09/conj-2024/</link><title>Clojure/conj 2024</title><description>After last year's regular posts about my
+<?xml version='1.0' encoding='UTF-8'?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://corfield.org/" rel="self" type="application/rss+xml"/><title>An Architect's View</title><link>https://corfield.org/</link><description>Clojure, Software Design, Frameworks and more...</description><lastBuildDate>Wed, 12 Mar 2025 18:01:33 -0700</lastBuildDate><generator>clj-rss</generator><item><guid>https://corfield.org/blog/2025/03/12/lazytest/</guid><link>https://corfield.org/blog/2025/03/12/lazytest/</link><title>Migrating to LazyTest</title><description>I've been using the Expectations
+testing library since early 2019 -- over six years. I love the expressiveness of
+it, compared to clojure.test, and it exists because "Classic Expectations"
+was not compatible with clojure.test tooling. At work, our tests use a
+mixture of clojure.test and Expectations, but in my open source projects,
+I've mostly stuck with clojure.test for familiarity's sake for contributors.Being compatible with clojure.test comes at a price, though. Expectations
+uses macros to produce clojure.test-compatible code under the hood, so it
+is limited by the same reporting as clojure.test and the same potential
+problems with tooling that tries to override parts of clojure.test's
+behavior -- namely that multiple tools do not play well together, so I've
+had to avoid "improving" the expressiveness or reporting in ways that would
+break compatibility with that tooling.</description><pubDate>Wed, 12 Mar 2025 00:00:00 -0700</pubDate></item><item><guid>https://corfield.org/blog/2024/11/09/conj-2024/</guid><link>https://corfield.org/blog/2024/11/09/conj-2024/</link><title>Clojure/conj 2024</title><description>After last year's regular posts about my
 Clojurists Together-funded work on
 clojure-doc.org and other projects, and the end
 of my monorepo/polylith series,

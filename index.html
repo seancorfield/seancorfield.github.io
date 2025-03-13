@@ -59,6 +59,28 @@
 <div id="post">
     
     <div class="post-header">
+        <h2><a href="/blog/2025/03/12/lazytest/">Migrating to LazyTest</a></h2>
+        <div id="post-meta">
+            
+            <div class="date">March 12, 2025</div>
+        </div>
+    </div>
+    <p>I've been using the <a href="https://github.com/clojure-expectations/clojure-test">Expectations</a>
+testing library since early 2019 -- over six years. I love the expressiveness of
+it, compared to <code>clojure.test</code>, and it exists because "Classic Expectations"
+was not compatible with <code>clojure.test</code> tooling. At work, our tests use a
+mixture of <code>clojure.test</code> and Expectations, but in my open source projects,
+I've mostly stuck with <code>clojure.test</code> for familiarity's sake for contributors.</p><p>Being compatible with <code>clojure.test</code> comes at a price, though. Expectations
+uses macros to produce <code>clojure.test</code>-compatible code under the hood, so it
+is limited by the same reporting as <code>clojure.test</code> and the same potential
+problems with tooling that tries to override parts of <code>clojure.test</code>'s
+behavior -- namely that multiple tools do not play well together, so I've
+had to avoid "improving" the expressiveness or reporting in ways that would
+break compatibility with that tooling.</p>
+    <a href="/blog/2025/03/12/lazytest/">Continue reading &#8594;</a>
+    <hr>
+    
+    <div class="post-header">
         <h2><a href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024</a></h2>
         <div id="post-meta">
             
@@ -205,28 +227,6 @@ powered by <a href="https://cryogenweb.org/">Cryogen</a>.</p>
     <a href="/blog/2023/02/28/long-term-funding-1/">Continue reading &#8594;</a>
     <hr>
     
-    <div class="post-header">
-        <h2><a href="/blog/2022/12/18/calva-joyride-portal/">Calva, Joyride, and Portal</a></h2>
-        <div id="post-meta">
-            
-            <div class="date">December 18, 2022</div>
-        </div>
-    </div>
-    <p><em>An updated version of this post <a href="https://corfield.org/blog/2023/04/16/calva-joyride-portal/">describes my latest Calva, Joyride, and Portal setup</a>.</em></p><p>I've mentioned in several posts over the years that I switched my
-development setup from Emacs to Atom, initially with ProtoREPL and later
-with Chlorine, and then to VS Code, initially with Clover (a port of
-Chlorine) and more recently with
-<a href="https://marketplace.visualstudio.com/items?itemName=betterthantomorrow.calva">Calva</a>.
-There were several detours along the way, but that is the overall arc.</p><p>I've also mentioned a couple of times that I use
-<a href="https://marketplace.visualstudio.com/items?itemName=djblue.portal">Portal</a>
-now, as an extension inside VS Code (after previously using Reveal and, before
-that, Cognitect's REBL).</p><p>I've also published my
-<a href="https://github.com/seancorfield/vscode-calva-setup">VS Code and Calva setup</a>
-files on GitHub.</p><p>But I haven't really talked about what that experience is like on a
-day-to-day basis or any specifics of my integrated workflow.</p>
-    <a href="/blog/2022/12/18/calva-joyride-portal/">Continue reading &#8594;</a>
-    <hr>
-    
 
     <div id="prev-next">
         
@@ -250,6 +250,8 @@ day-to-day basis or any specifics of my integrated workflow.</p>
                     <h3>Recent Posts</h3>
                     <ul>
                         
+                        <li><a href="/blog/2025/03/12/lazytest/">Migrating to LazyTest</a></li>
+                        
                         <li><a href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024</a></li>
                         
                         <li><a href="/blog/2023/12/31/long-term-funding-6/">Long-Term Funding, Update #6</a></li>
@@ -257,8 +259,6 @@ day-to-day basis or any specifics of my integrated workflow.</p>
                         <li><a href="/blog/2023/10/31/long-term-funding-5/">Long-Term Funding, Update #5</a></li>
                         
                         <li><a href="/blog/2023/08/31/long-term-funding-4/">Long-Term Funding, Update #4</a></li>
-                        
-                        <li><a href="/blog/2023/07/15/deps-edn-monorepo-11/">deps.edn and monorepos XI (Polylith)</a></li>
                         
                     </ul>
                 </div>
@@ -374,7 +374,7 @@ day-to-day basis or any specifics of my integrated workflow.</p>
             </div>
         </div>
     </div>
-    <footer>Copyright &copy; 2024 Sean Corfield
+    <footer>Copyright &copy; 2025 Sean Corfield
         <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
 </div>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>

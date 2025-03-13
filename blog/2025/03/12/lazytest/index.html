@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: Migrating to LazyTest</title>
+    
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
+
+<meta name="description" content="I&#39;ve been using the Expectations
+testing library since early 2019 -- over six years. I love the expressiveness of
+it, compared to clojure.test, and it exists because &quot;Classic Expectations&quot;
+was not compatible with clojure.test tooling. At work, our tests use a
+mixture of clojure.test and Expectations, but in my open source projects,
+I&#39;ve mostly stuck with clojure.test for familiarity&#39;s sake for contributors.Being compatible with clojure.test comes at a price, though. Expectations
+uses macros to produce clojure.test-compatible code under the hood, so it
+is limited by the same reporting as clojure.test and the same potential
+problems with tooling that tries to override parts of clojure.test&#39;s
+behavior -- namely that multiple tools do not play well together, so I&#39;ve
+had to avoid &quot;improving&quot; the expressiveness or reporting in ways that would
+break compatibility with that tooling.">
+
+<meta property="og:description" content="I&#39;ve been using the Expectations
+testing library since early 2019 -- over six years. I love the expressiveness of
+it, compared to clojure.test, and it exists because &quot;Classic Expectations&quot;
+was not compatible with clojure.test tooling. At work, our tests use a
+mixture of clojure.test and Expectations, but in my open source projects,
+I&#39;ve mostly stuck with clojure.test for familiarity&#39;s sake for contributors.Being compatible with clojure.test comes at a price, though. Expectations
+uses macros to produce clojure.test-compatible code under the hood, so it
+is limited by the same reporting as clojure.test and the same potential
+problems with tooling that tries to override parts of clojure.test&#39;s
+behavior -- namely that multiple tools do not play well together, so I&#39;ve
+had to avoid &quot;improving&quot; the expressiveness or reporting in ways that would
+break compatibility with that tooling.">
+
+<meta property="og:url" content="https://corfield.org/blog/2025/03/12/lazytest/" />
+<meta property="og:title" content="Migrating to LazyTest" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2025/03/12/lazytest/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a rel="me" href="https://tech.lgbt/@seancorfield">tech.lgbt</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">March 12, 2025</div>
+        
+    </div>
+    <h2>Migrating to LazyTest</h2>
+</div>
+<div>
+    
+    <p>I've been using the <a href="https://github.com/clojure-expectations/clojure-test">Expectations</a>
+testing library since early 2019 -- over six years. I love the expressiveness of
+it, compared to <code>clojure.test</code>, and it exists because "Classic Expectations"
+was not compatible with <code>clojure.test</code> tooling. At work, our tests use a
+mixture of <code>clojure.test</code> and Expectations, but in my open source projects,
+I've mostly stuck with <code>clojure.test</code> for familiarity's sake for contributors.</p><p>Being compatible with <code>clojure.test</code> comes at a price, though. Expectations
+uses macros to produce <code>clojure.test</code>-compatible code under the hood, so it
+is limited by the same reporting as <code>clojure.test</code> and the same potential
+problems with tooling that tries to override parts of <code>clojure.test</code>'s
+behavior -- namely that multiple tools do not play well together, so I've
+had to avoid "improving" the expressiveness or reporting in ways that would
+break compatibility with that tooling.</p><p>Those limitations have gradually become more frustrating, and I've been
+watching Noah Bogart's work on <a href="https://github.com/NoahTheDuke/lazytest">LazyTest</a>
+with interest as he has resurrected and evolved
+<a href="https://github.com/stuartsierra/lazytest">S Sierra's old LazyTest project</a>
+that had been archived back in 2017. At first, I was skeptical because it
+is <strong>not</strong> compatible with <code>clojure.test</code> tooling: it has its own test runner
+and that isn't supported by any of the editors, nor the various test runners
+that exist for <code>clojure.test</code>
+(<a href="https://github.com/cognitect-labs/test-runner">Cognitect's</a>,
+<a href="https://github.com/lambdaisland/kaocha">Kaocha</a>), nor
+<a href="https://github.com/polyfy/polylith">Polylith's</a> incremental test runner.</p><p>We rely on the latter heavily at work, but we already use my
+<a href="https://github.com/seancorfield/polylith-external-test-runner">external test runner</a>
+to avoid classloader and memory issues, so I figured I could adapt that to
+also run LazyTest tests and experiment with it at work.</p><p>LazyTest provides its own DSL for writing tests -- <code>describe</code>, <code>it</code>, <code>expect</code> --
+and it also has extension namespaces that provide a compatibility layer for
+most of Expectations and also
+<a href="https://github.com/nubank/matcher-combinators">Nubank's matcher-combinators</a>,
+as well as experimental namespaces that provide a migration path for
+<code>clojure.test</code> and parts of Midje, Qunit, and Xunit.</p><p>I migrated a few of our Expectations-based test namespaces over to LazyTest
+and started using LazyTest's core DSL for new tests. I really like the
+expressiveness of the DSL and the way it reports test results. I also like
+the way it handles test fixtures -- as a "context" for tests that can be
+applied before, after, or around each test or group of tests. LazyTest has
+multiple reporting options, so you can pick different styles of output for
+working in the REPL, for running tests locally, and for running tests in CI,
+for example.</p><p>The next step was to see what it would take for Cognitect's test runner to
+support LazyTest. As a proof of concept, I hacked up a version that followed
+the pattern I'd used in my external test runner. It worked fine but the code
+was ugly, and when I talked to <a href="https://github.com/puredanger">Alex Miller</a>
+about it, he quite rightly wanted to see a more extensible approach that
+would allow others in the community to provide integrations for additional
+test libraries and/or runners. There's a
+<a href="https://github.com/cognitect-labs/test-runner/pull/49">pull request</a>
+awaiting review that adds a protocol for test runners and a default
+implementation that supports <code>clojure.test</code>. I've also written a quick
+<a href="https://github.com/seancorfield/lazytest-runner">lazytest-runner</a>
+implementation, so that <code>test-runner</code> can run either <code>clojure.test</code> tests
+or LazyTest tests or both. If the PR gets merged, this implementation should
+be added directly into LazyTest.</p><p>The next step for me was to migrate one of my open source projects to
+LazyTest. Since LazyTest does not (currently) support ClojureScript, that
+meant HoneySQL was off the table, so I picked
+<a href="https://github.com/seancorfield/next-jdbc"><code>next.jdbc</code></a>.</p><p>It's tests all used <code>clojure.test</code>, so I used the LazyTest experimental
+compatibility namespace for the migration. You can look at the
+<a href="https://github.com/seancorfield/next-jdbc/pull/297">pull request for the migration</a>
+for the gory details but here's the summary of how little I had to do:</p><ul><li>switch from <code>clojure -X:test</code> usage to <code>clojure -M:test:runner</code> usage</li><li>switch Cognitect <code>test-runner</code> references to LazyTest's equivalent (deps, <code>-m</code> namespace for running tests)</li><li>switch require of <code>[clojure.test :refer [deftest is testing]]</code> to <code>[lazytest.experimental.interfaces.clojure-test :refer [deftest is testing]]</code></li><li>where I used <code>clojure.test/use-fixtures :once</code>, I added a require for <code>[lazytest.core :refer [around set-ns-context!]]</code> and changed the <code>use-fixtures</code> call to <code>set-ns-context!</code></li><li>where I used <code>clojure.test/use-fixtures :each</code>, I added a require for <code>[lazytest.core :refer [around]]</code>, removed the <code>use-fixtures</code> call, and added an <code>around</code> context to each test</li></ul><p>What's with the <code>-X</code> / <code>-M</code> change, you ask? I like that I can have a <code>:test</code>
+alias in my <code>deps.edn</code> that includes the test runner and the test dependencies,
+but uses <code>:exec-fn</code> to identify the function to run -- so that the same alias
+can be used with <code>-M</code> as part of commands that run a different main function
+(such as starting an nREPL server). If I had stuck with <code>-M</code> for Cognitect's
+<code>test-runner</code>, I would have already had a separate <code>:runner</code> alias that
+provided just the <code>:main-opts</code> for <code>-m</code> (and the main namespace to run).
+LazyTest doesn't have a <code>-X</code>-compatible API, but it does expose functions to
+run tests programmatically, so it doesn't really need to support <code>:exec-fn</code>.</p><p>Along the way, I did hit some bumps: version 1.5.0 of LazyTest did not
+support Clojure 1.10 and I still needed to test <code>next.jdbc</code> against that.
+LazyTest provides <code>throws?</code> (and <code>throws-with-msg?</code>) but it didn't support
+<code>clojure.test</code>'s <code>thrown?</code> macro. <code>lazytest.core/throws?</code> expects an exception
+type and a no-arg function to call, containing the code under test.
+In <code>clojure.test</code>, <code>thrown?</code> is just "syntax" that <code>is</code> understands but it
+takes an exception type and a form to evaluate, making the migration a bit
+harder: <code>(is (thrown? Exception (some-expr :here)))</code> changed to
+<code>(throws? Exception #(some-expr :here))</code>. Noah is very receptive to feedback
+(and pull requests) so version 1.6.1 of LazyTest addresses both of those
+concerns: it supports Clojure 1.10 and it provides a <code>thrown?</code> macro in the
+experimental compatibility namespace (that maps the code to use <code>throws?</code>).</p><p>As I work on <code>next.jdbc</code> tests moving forward, I'll be able to mix'n'match
+LazyTest's more expressive DSL for tests with the existing <code>clojure.test</code>
+style of tests, and I'll probably migrate the latter to use the former over
+time.</p><p>FYI: when I'm working with VS Code and Calva, I use a custom REPL snippet
+to run tests in the REPL, in a way that supports both <code>clojure.test</code> and
+LazyTest tests -- see this
+<a href="https://github.com/seancorfield/vscode-calva-setup/blob/e46f1ebd6984fb822ca7556362a0e51c99192d48/calva/config.edn#L118-L133">snippet</a> for details.
+It runs <code>clojure.test/run-tests</code> first for the current namespace, then it
+runs <code>lazytest.repl/run-tests</code> for that namespace, and merges the results
+summary.</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/expectations/">expectations</a>
+    
+    <a href="/tags/jdbc/">jdbc</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024 &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2025/03/12/lazytest/";
+            this.page.identifier = "Migrating to LazyTest";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2025/03/12/lazytest/">Migrating to LazyTest</a></li>
+                        
+                        <li><a href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024</a></li>
+                        
+                        <li><a href="/blog/2023/12/31/long-term-funding-6/">Long-Term Funding, Update #6</a></li>
+                        
+                        <li><a href="/blog/2023/10/31/long-term-funding-5/">Long-Term Funding, Update #5</a></li>
+                        
+                        <li><a href="/blog/2023/08/31/long-term-funding-4/">Long-Term Funding, Update #4</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/strange%20loop/">strange loop</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/polylith/">polylith</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/expectations/">expectations</a></li>
+                        
+                        <li><a href="/tags/editors/">editors</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
+                        <li><a href="/tags/personal/">personal</a></li>
+                        
+                        <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
+                        
+                        <li><a href="/tags/windows/">windows</a></li>
+                        
+                        <li><a href="/tags/monorepo/">monorepo</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/honeysql/">honeysql</a></li>
+                        
+                        <li><a href="/tags/portal/">portal</a></li>
+                        
+                        <li><a href="/tags/clojurists%20together/">clojurists together</a></li>
+                        
+                        <li><a href="/tags/clojure-doc.org/">clojure-doc.org</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/observability/">observability</a></li>
+                        
+                        <li><a href="/tags/clojure-clr/">clojure-clr</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                        <li><a href="/tags/new%20relic/">new relic</a></li>
+                        
+                        <li><a href="/tags/watson/">watson</a></li>
+                        
+                        <li><a href="/tags/vs%20code/">vs code</a></li>
+                        
+                        <li><a href="/tags/clj-commons/">clj-commons</a></li>
+                        
+                        <li><a href="/tags/open%20source/">open source</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2025 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
