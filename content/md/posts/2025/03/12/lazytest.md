@@ -99,7 +99,7 @@ type and a no-arg function to call, containing the code under test.
 In `clojure.test`, `thrown?` is just "syntax" that `is` understands but it
 takes an exception type and a form to evaluate, making the migration a bit
 harder: `(is (thrown? Exception (some-expr :here)))` changed to
-`(throws? Exception #(some-expr :here))`. Noah is very receptive to feedback
+`(is (throws? Exception #(some-expr :here)))`. Noah is very receptive to feedback
 (and pull requests) so version 1.6.1 of LazyTest addresses both of those
 concerns: it supports Clojure 1.10 and it provides a `thrown?` macro in the
 experimental compatibility namespace (that maps the code to use `throws?`).
