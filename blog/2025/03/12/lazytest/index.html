@@ -166,7 +166,7 @@ type and a no-arg function to call, containing the code under test.
 In <code>clojure.test</code>, <code>thrown?</code> is just "syntax" that <code>is</code> understands but it
 takes an exception type and a form to evaluate, making the migration a bit
 harder: <code>(is (thrown? Exception (some-expr :here)))</code> changed to
-<code>(throws? Exception #(some-expr :here))</code>. Noah is very receptive to feedback
+<code>(is (throws? Exception #(some-expr :here)))</code>. Noah is very receptive to feedback
 (and pull requests) so version 1.6.1 of LazyTest addresses both of those
 concerns: it supports Clojure 1.10 and it provides a <code>thrown?</code> macro in the
 experimental compatibility namespace (that maps the code to use <code>throws?</code>).</p><p>As I work on <code>next.jdbc</code> tests moving forward, I'll be able to mix'n'match
