@@ -1,5 +1,4 @@
-*.code-workspace
-*jar
+.calva/mcp-server/port
 .calva/repl.calva-repl
 .clj-kondo/.cache
 .cpcache
@@ -10,6 +9,8 @@
 .lsp/.cache
 .nrepl-port
 .portal
+*.code-workspace
+*jar
 /checkouts/
 /classes/
 /lib/
