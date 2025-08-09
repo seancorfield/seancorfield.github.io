@@ -117,13 +117,74 @@ If the same alias is defined in multiple files, you'll see that in the output
 ...
 ```
 
-This tells me there is a `:test` alias in the root (as noted above), and in my
+This tells us there is a `:test` alias in the root (as noted above), and in the
 user `deps.edn`, and in the project itself -- the latter version will be used.
 
+## find-versions
+
+When you add a new dependency to your project, how do you figure out the most
+recent version so that you can specify that in `deps.edn`? Do you look in the
+project README? Do you look on Clojars? Do you look at the releases (or tags)
+page on GitHub?
+
+Why not use a tool you already have right there on the command-line?
+
+```
+> clojure -X:deps help/doc :fn find-versions
+-------------------------
+clojure.tools.deps.cli.api/find-versions
+([{:keys [lib tool n], :or {n 8}, :as args}])
+  Find available tool versions given either a lib (with :lib) or
+  existing installed tool (with :tool). If lib, check all registered
+  procurers and print one coordinate per line when found.
+
+  Options:
+    :lib  Qualified lib symbol
+    :tool Tool name for installed tool
+    :n    Number of coordinates to return, default = 8, :all for all
+```
+
+For example, what version of Hiccup should we use?
+
+```
+> clojure -X:deps find-versions :lib hiccup/hiccup
+Downloading: hiccup/hiccup/maven-metadata.xml from clojars
+{:mvn/version "2.0.0-alpha1"}
+{:mvn/version "2.0.0-alpha2"}
+{:mvn/version "2.0.0-RC1"}
+{:mvn/version "2.0.0-RC2"}
+{:mvn/version "2.0.0-RC3"}
+{:mvn/version "2.0.0-RC4"}
+{:mvn/version "2.0.0-RC5"}
+{:mvn/version "2.0.0"}
+```
+
+Less useful perhaps, but you can also use this to lookup versions of tools
+you have installed (with `clojure -Ttools install...`):
+
+```
+> clojure -X:deps find-versions :tool tools :n 3
+{:git/tag "v0.3.2", :git/sha "886f893"}
+{:git/tag "v0.3.3", :git/sha "2f4d299"}
+{:git/tag "v0.3.4", :git/sha "0e9e6c8"}
+```
+
+## git-resolve-tags
+
+This is a weird one. It takes no arguments: it reads your (project) `deps.edn`
+file and if you have `:git/tag` versions with no `:git/sha`, it will
+**rewrite your `deps.edn` file** to add the appropriate `:git/sha` to those
+`:git/tag` versions.
+
+That rewrite will _remove any comments_ in your `deps.edn` and completely
+reformat it, likely changing the order of any hash map keys in it.
+
+I cannot imagine using this on any of my projects, since I often have comments
+in `deps.edn` and I generally take care to order my `:aliases` alphabetically.
+
+## list
+
 =====
-find-versions
-git-resolve-tags
-list
 mvn-install
 mvn-pom
 prep
