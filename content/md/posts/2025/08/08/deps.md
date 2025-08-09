@@ -184,6 +184,41 @@ in `deps.edn` and I generally take care to order my `:aliases` alphabetically.
 
 ## list
 
+In its simplest form, this produces an alphabetical list of the libraries
+that your project depends on, including transitive dependencies, along with
+the version selected and an indication of the license for each library.
+
+```
+> clojure -X:deps help/doc :fn list
+-------------------------
+clojure.tools.deps.cli.api/list
+([params])
+  List all deps on the classpath, optimized for knowing the final set of included
+  libs. The `tree` program can provide more info on why or why not a particular
+  lib is included.
+...
+```
+
+The license information can omitted (`:license :none`) or expanded
+(`:license :full`). You can get the output as EDN if you want (`:format :edn`).
+
+You can use the `:aliases` option to show all your test dependencies (for
+example, from the `next.jdbc` project):
+
+```
+> clojure -X:deps list :aliases '[:test]' | head
+camel-snake-kebab/camel-snake-kebab 0.4.3  (EPL-1.0)
+com.google.protobuf/protobuf-java 4.31.1  (BSD-3-Clause)
+com.h2database/h2 2.3.232  (MPL 2.0)
+com.mchange/c3p0 0.11.2  (LGPL-2.1-or-later)
+com.mchange/mchange-commons-java 0.3.2  (GNU Lesser General Public License, Version 2.1)
+com.microsoft.sqlserver/mssql-jdbc 12.10.0.jre11  (MIT)
+com.mysql/mysql-connector-j 9.4.0  (The GNU General Public License, v2 with Universal FOSS Exception, v1.0)
+com.zaxxer/HikariCP 7.0.1  (Apache-2.0)
+commons-codec/commons-codec 1.17.1  (Apache-2.0)
+commons-io/commons-io 2.16.1  (Apache-2.0)
+```
+
 =====
 mvn-install
 mvn-pom
