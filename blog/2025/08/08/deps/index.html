@@ -108,7 +108,8 @@ mvn-install
 mvn-pom
 prep
 tree
-</code></pre><p>We can use <code>help/doc</code> on a whole namespace or just a specific function:</p><pre><code>&gt; clojure -X:deps help/doc :ns help :fn help/dir
+</code></pre><p>We can use <code>help/doc</code> on a whole namespace (via <code>:ns</code>) or just a specific
+function (via <code>:fn</code>):</p><pre><code>&gt; clojure -X:deps help/doc :fn help/dir
 -------------------------
 clojure.tools.deps.cli.help/dir
 ([{:keys [ns], :as args}])
