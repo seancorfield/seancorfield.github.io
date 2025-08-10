@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: The power of the :deps alias</title>
+    
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
+
+<meta name="description" content="Most of us who use the Clojure CLI are familiar with the -M (main), -X
+(exec), and -T (tool) options, and may have used clojure -X:deps tree at
+some point to figure out version conflicts in our dependencies. The :deps
+alias can do a lot more, so let&#39;s take a look!First off, what is the :deps alias and where does it come from?">
+
+<meta property="og:description" content="Most of us who use the Clojure CLI are familiar with the -M (main), -X
+(exec), and -T (tool) options, and may have used clojure -X:deps tree at
+some point to figure out version conflicts in our dependencies. The :deps
+alias can do a lot more, so let&#39;s take a look!First off, what is the :deps alias and where does it come from?">
+
+<meta property="og:url" content="https://corfield.org/blog/2025/08/08/deps/" />
+<meta property="og:title" content="The power of the :deps alias" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2025/08/08/deps/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a rel="me" href="https://tech.lgbt/@seancorfield">tech.lgbt</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">August 8, 2025</div>
+        
+    </div>
+    <h2>The power of the :deps alias</h2>
+</div>
+<div>
+    
+    <p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
+(exec), and <code>-T</code> (tool) options, and may have used <code>clojure -X:deps tree</code> at
+some point to figure out version conflicts in our dependencies. The <code>:deps</code>
+alias can do a lot more, so let's take a look!</p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
+<code>clojure -Sdescribe</code>, it'll show you the <code>:config-files</code> it uses: the "root",
+the "user" (see <code>:config-user</code> in the output of that command), and if you are
+in a project folder, the "project" <code>deps.edn</code> file (see also <code>:config-project</code>).
+Even though the "root" <code>deps.edn</code> file exists, that isn't the "source of truth"
+as the real root <code>deps.edn</code> file is a resource inside the <code>tools.deps</code> project:</p><p>The <a href="https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn">root <code>deps.edn</code> resource</a>
+contains two <code>:aliases</code>: <code>:deps</code> and <code>:test</code>. The latter is a convenience
+that adds the <code>test</code> folder to your classpath. The former has the following
+entries:</p><ul><li><code>:replace-paths []</code></li><li><code>:replace-deps {org.clojure/tools.deps.cli {:mvn/version "0.11.93"}}</code> (as of August 8th, 2025)</li><li><code>:ns-default clojure.tools.deps.cli.api</code></li><li><code>:ns-aliases {help clojure.tools.deps.cli.help}</code></li></ul><p>The first two entries ensure that when you use <code>-X:deps</code>, your user/project
+paths and dependencies are ignored -- so that the <code>deps</code> tooling can operate
+in a clean environment without any interference from your local setup.</p><p>The <code>:ns-default</code> entry is what allows <code>-X:deps tree</code> to run, without needing
+to specify the namespace explicitly (so it executes <code>clojure.tools.deps.cli.api/tree</code>).</p><p>The <code>:ns-aliases</code> entry allows you to use the <code>help</code> alias instead of the full
+namespace when invoking functions within <code>clojure.tools.deps.cli.help</code>.</p><p>The <code>help</code> namespace provides two public functions:</p><ul><li><code>dir</code> -- lists the (public) functions available in a namespace</li><li><code>doc</code> -- displays the docstrings for (public) functions in a namespace</li></ul><pre><code>&gt; clojure -X:deps help/dir :ns help
+dir
+doc
+</code></pre><p>We specify <code>:ns</code> so that the <code>help</code> alias (namespace) is used when looking up
+the functions. Without <code>:ns</code>, we get the functions from the CLI API namespace
+instead:</p><pre><code>&gt; clojure -X:deps help/dir
+aliases
+find-versions
+git-resolve-tags
+list
+mvn-install
+mvn-pom
+prep
+tree
+</code></pre><p>We can use <code>help/doc</code> on a whole namespace or just a specific function:</p><pre><code>&gt; clojure -X:deps help/doc :ns help :fn help/dir
+-------------------------
+clojure.tools.deps.cli.help/dir
+([{:keys [ns], :as args}])
+  Prints a sorted directory of public vars in a namespace. If a namespace is not
+  specified :ns-default is used instead.
+</code></pre><h2 id="deps-functions"><code>:deps</code> functions</h2><p>We're going to look at each of the functions listed above, in turn, to see
+what they can be used for and, hopefully, provide some tips and tricks you
+might not expect.</p><h3 id="aliases">aliases</h3><p>Let's see what that <code>aliases</code> function is about:</p><pre><code>&gt; clojure -X:deps help/doc :fn aliases
+-------------------------
+clojure.tools.deps.cli.api/aliases
+([params])
+  List all aliases available for use with the CLI using -M, -X or -T execution
+  (note that some aliases may be usable with more than one of these). Also, the
+  deps.edn sources of the alias are specified.
+...
+</code></pre><p>The docstring is much longer than that, and it shows you how to exclude the
+root, user, and/or project <code>deps.edn</code> from consideration. For example, if we
+want to see the aliases available from just the root and project deps, we can
+run:</p><pre><code>&gt; clojure -X:deps aliases :user nil
+:deps (root)
+:test (root)
+:build (project)
+:fast (project)
+:serve (project)
+</code></pre><p>There are <code>:deps</code> and <code>:test</code> as mentioned above from the root file and for
+my blog project (which uses Cryogen), there are <code>:build</code>, <code>:fast</code>, and <code>:serve</code>
+aliases.</p><p>If the same alias is defined in multiple files, you'll see that in the output
+(this was run in the <code>next.jdbc</code> project):</p><pre><code>&gt; clojure -X:deps aliases
+...
+:test (root, user, project)
+...
+</code></pre><p>This tells us there is a <code>:test</code> alias in the root (as noted above), and in the
+user <code>deps.edn</code>, and in the project itself -- the latter version will be used.</p><h3 id="find-versions">find-versions</h3><p>When you add a new dependency to your project, how do you figure out the most
+recent version so that you can specify that in <code>deps.edn</code>? Do you look in the
+project README? Do you look on Clojars? Do you look at the releases (or tags)
+page on GitHub?</p><p>Why not use a tool you already have right there on the command-line?</p><pre><code>&gt; clojure -X:deps help/doc :fn find-versions
+-------------------------
+clojure.tools.deps.cli.api/find-versions
+([{:keys [lib tool n], :or {n 8}, :as args}])
+  Find available tool versions given either a lib (with :lib) or
+  existing installed tool (with :tool). If lib, check all registered
+  procurers and print one coordinate per line when found.
+
+  Options:
+    :lib  Qualified lib symbol
+    :tool Tool name for installed tool
+    :n    Number of coordinates to return, default = 8, :all for all
+</code></pre><p>For example, what version of Hiccup should we use?</p><pre><code>&gt; clojure -X:deps find-versions :lib hiccup/hiccup
+Downloading: hiccup/hiccup/maven-metadata.xml from clojars
+{:mvn/version "2.0.0-alpha1"}
+{:mvn/version "2.0.0-alpha2"}
+{:mvn/version "2.0.0-RC1"}
+{:mvn/version "2.0.0-RC2"}
+{:mvn/version "2.0.0-RC3"}
+{:mvn/version "2.0.0-RC4"}
+{:mvn/version "2.0.0-RC5"}
+{:mvn/version "2.0.0"}
+</code></pre><p>Less useful perhaps, but you can also use this to lookup versions of tools
+you have installed (with <code>clojure -Ttools install...</code>):</p><pre><code>&gt; clojure -X:deps find-versions :tool tools :n 3
+{:git/tag "v0.3.2", :git/sha "886f893"}
+{:git/tag "v0.3.3", :git/sha "2f4d299"}
+{:git/tag "v0.3.4", :git/sha "0e9e6c8"}
+</code></pre><h3 id="git-resolve-tags">git-resolve-tags</h3><p>This is a weird one. It takes no arguments: it reads your (project) <code>deps.edn</code>
+file and if you have <code>:git/tag</code> versions with no <code>:git/sha</code>, it will
+<strong>rewrite your <code>deps.edn</code> file</strong> to add the appropriate <code>:git/sha</code> to those
+<code>:git/tag</code> versions.</p><p>That rewrite will <em>remove any comments</em> in your <code>deps.edn</code> and completely
+reformat it, likely changing the order of any hash map keys in it.</p><p>I cannot imagine using this on any of my projects, since I often have comments
+in <code>deps.edn</code> and I generally take care to order my <code>:aliases</code> alphabetically.</p><h3 id="list">list</h3><p>In its simplest form, this produces an alphabetical list of the libraries
+that your project depends on, including transitive dependencies, along with
+the version selected and an indication of the license for each library.</p><pre><code>&gt; clojure -X:deps help/doc :fn list
+-------------------------
+clojure.tools.deps.cli.api/list
+([params])
+  List all deps on the classpath, optimized for knowing the final set of included
+  libs. The `tree` program can provide more info on why or why not a particular
+  lib is included.
+...
+</code></pre><p>The license information can omitted (<code>:license :none</code>) or expanded
+(<code>:license :full</code>). You can get the output as EDN if you want (<code>:format :edn</code>).</p><p>You can use the <code>:aliases</code> option to show all your test dependencies (for
+example, from the <code>next.jdbc</code> project):</p><pre><code>&gt; clojure -X:deps list :aliases '[:test]' | head
+camel-snake-kebab/camel-snake-kebab 0.4.3  (EPL-1.0)
+com.google.protobuf/protobuf-java 4.31.1  (BSD-3-Clause)
+com.h2database/h2 2.3.232  (MPL 2.0)
+com.mchange/c3p0 0.11.2  (LGPL-2.1-or-later)
+com.mchange/mchange-commons-java 0.3.2  (GNU Lesser General Public License, Version 2.1)
+com.microsoft.sqlserver/mssql-jdbc 12.10.0.jre11  (MIT)
+com.mysql/mysql-connector-j 9.4.0  (The GNU General Public License, v2 with Universal FOSS Exception, v1.0)
+com.zaxxer/HikariCP 7.0.1  (Apache-2.0)
+commons-codec/commons-codec 1.17.1  (Apache-2.0)
+commons-io/commons-io 2.16.1  (Apache-2.0)
+</code></pre><h3 id="mvn-install">mvn-install</h3><p>This function will install a JAR file into your local Maven cache. You must
+specify a <code>:jar</code> option (a string that specifies the relative path to the
+JAR file). If you have a fully-fleshed out <code>pom.xml</code> file, you can use the
+<code>:pom</code> option to specify its location, or you can specify the group/artifact
+ID via the <code>:lib</code> option and the library <code>:version</code>. You can also specify the
+<code>:classifier</code> option, if needed:</p><pre><code>clojure -X:deps mvn-install :jar '"target/my.jar"' :lib my.cool/new.library :version '"1.2.3"'
+</code></pre><h3 id="mvn-pom">mvn-pom</h3><p>This function will generate a minimal <code>pom.xml</code> file with the <code>&lt;dependencies&gt;</code>
+populated from your <code>deps.edn</code> file. If a <code>pom.xml</code> already exists, it will
+just update that file with the latest <code>&lt;dependencies&gt;</code> from <code>deps.edn</code>.</p><p>This minimal <code>pom.xml</code> is not sufficient for most libraries -- the <code>groupId</code>
+and <code>artifactId</code> are derived from the project directory name, and a lot of the
+information required by <a href="https://cljdoc.org/">cljdoc</a> is not included. Unlike
+the <code>mvn-install</code> function above, <code>mvn-pom</code> does not let you specify <code>:lib</code>,
+<code>:version</code>, or <code>:classifier</code>.</p><p>You are better off using
+<a href="https://github.com/clojure/tools.build/blob/80868cd98af5fdef5386d45490be604f8931f666/src/main/clojure/clojure/tools/build/api.clj#L369"><code>clojure.tools.build.api/write-pom</code></a>
+in your <code>build.clj</code>
+file, so that you have more control over the generated POM file,
+specifying the <code>groupId</code>, <code>artifactId</code>, and SCM information (via <code>:pom-data</code>).</p><h3 id="prep">prep</h3><p>For projects / libraries that are made available in source form, as <code>git</code>
+dependencies, there are situations where they need a step to be performed
+before they can be used, such as compiling some code to class files.</p><p>Those projects will have a <code>:deps/prep-lib</code> key in their <code>deps.edn</code> file, that
+specifies a function to run (via <code>:fn</code>), with an <code>:alias</code> (for <code>-T</code> invocation)
+and an <code>:ensure</code> key that specifies a directory whose existence determines
+whether the library needs to be "prepared".</p><p>From a consumer point of view, if you try to use such a library before it has
+been "prepared", you'll get an error like:</p><pre><code>Error building classpath. The following libs must be prepared before use: ...
+</code></pre><p>You can usually run <code>clojure -X:deps prep</code> to run the preparation steps across
+any such libraries you are depending on.</p><p>Sometimes, it might be one of your test dependencies, in which case the above
+won't work (it will only prepare your non-test dependencies). <code>prep</code> accepts
+<code>:aliases</code> to specify the dependencies you need prepared:</p><pre><code>clojure -X:deps prep :aliases '[:test]'
+</code></pre><p>If you are working on a project that needs to be prepared before use, you can
+ensure that your <code>:deps/prep-lib</code> configuration is correct by running <code>prep</code>
+for that local project:</p><pre><code>clojure -X:deps prep :current true
+</code></pre><p>You may also need to re-run the preparation step, and instead of manually
+deleting the <code>:ensure</code> directory, you can force the preparation step to run again:</p><pre><code>clojure -X:deps prep :current true :force true
+</code></pre><blockquote><p>Note: you can use <code>:force true</code> to re-run the preparation step for dependencies too, of course, if needed.</p></blockquote><p>Check the full docstring for additional options you can use, such as <code>:log</code>
+which can help you debug problems with the preparation step:</p><pre><code>&gt; clojure -X:deps help/doc :fn prep
+-------------------------
+clojure.tools.deps.cli.api/prep
+([{:keys [force log current], :or {log :info, current false}, :as params}])
+  Prep the unprepped libs found in the transitive lib set of basis.
+
+  This program accepts the same basis-modifying arguments from the `basis` program.
+  Each dep source value can be :standard, a string path, a deps edn map, or nil.
+  Sources are merged in the order - :root, :user, :project, :extra.
+
+  Options:
+    :force - flag on whether to force prepped libs to re-prep (default = false)
+    :current - flag on whether to prep current project too (default = false)
+    :log - :none, :info (default), or :debug
+...
+</code></pre><p>(basis options omitted for brevity)</p><h3 id="tree">tree</h3><p>As noted at the start of this post, this is probably the <code>:deps</code> function
+that most of us have used at some point to try to debug our dependencies.
+Where <code>list</code> shows us the "finished product", in terms of dependency versions,
+<code>tree</code> shows us how those versions are selected and the output is usually a lot
+more verbose than <code>list</code>.</p><p>Going back to the <code>next.jdbc</code> project, here's the default <code>tree</code> output:</p><pre><code>&gt; clojure -X:deps tree
+org.clojure/clojure 1.10.3
+  . org.clojure/spec.alpha 0.2.194
+  . org.clojure/core.specs.alpha 0.2.56
+org.clojure/java.data 1.3.113
+camel-snake-kebab/camel-snake-kebab 0.4.3
+</code></pre><p>Transitive dependencies are shown indented with <code>.</code> indicating the version
+was included and <code>X</code> indicating it was excluded, and a reason will be present
+for exclusions (and some inclusions, when there are multiple versions in play).</p><p>Like <code>list</code>, the <code>tree</code> function accepts a <code>:format</code> output that can be used
+to produce EDN output. In addition, <code>tree</code> accepts <code>:indent</code> (how many spaces
+to use for indentation if you don't like the default of <code>2</code>) and <code>:hide-libs</code>
+that lets you exclude transitive subtrees from the output (not top-level
+dependencies). By default, any transitive dependencies on Clojure itself are
+omitted.</p><p>As always, check the full docstring for other available options:</p><pre><code>&gt; clojure -X:deps help/doc :fn tree
+-------------------------
+clojure.tools.deps.cli.api/tree
+([opts])
+  Print deps tree for the current project's deps.edn built from either the
+  a basis, or if provided, the trace file.
+
+  This program accepts the same basis-modifying arguments from the `basis` program.
+  Each dep source value can be :standard, a string path, a deps edn map, or nil.
+  Sources are merged in the order - :root, :user, :project, :extra.
+...
+</code></pre><h2 id="buildclj-help">build.clj help</h2><p>The mighty <code>:deps</code> alias can help you learn about the <code>build.clj</code> file in a project.</p><p>For example, if we <code>git clone</code> the <code>next.jdbc</code> project, we can run the
+following command to see what tasks are defined:</p><pre><code>&gt; clojure -T:deps:build help/dir
+deploy
+jar
+</code></pre><p>We need both the <code>tools.deps.cli</code> library and the <code>build</code> namespace on the classpath,
+which means we need to use <code>-T</code> so that the current directory is on the classpath in
+order for the <code>build.clj</code> file to be found.</p><p>We could also use the more verbose <code>clojure -A:deps -T:build help/dir</code> here.</p><p>Now, we can use <code>help/doc</code> to see the full docstrings for the namespace and those
+functions:</p><pre><code>&gt; clojure -T:deps:build help/doc
+next.jdbc's build script.
+
+  clojure -T:build jar
+  clojure -T:build deploy
+
+  Run tests via:
+  bb test
+
+  For more information, run:
+
+  clojure -A:deps -T:build help/doc
+
+-------------------------
+build/deploy
+([opts])
+  Deploy the JAR to Clojars.
+-------------------------
+build/jar
+([opts])
+  Build the JAR file.
+</code></pre><h2 id="project-help">Project help</h2><p>Since <code>-X:deps</code> replaces the paths/deps to avoid interference from your
+local setup, you cannot use it directly to get help for your project's
+source namespaces:</p><pre><code>&gt; clojure -X:deps help/dir :ns next.jdbc
+Execution error (FileNotFoundException) at clojure.tools.deps.cli.help/dir (help.clj:76).
+Could not locate next/jdbc__init.class, next/jdbc.clj or next/jdbc.cljc on classpath.
+</code></pre><p>However, the CLI allows you to specify extra <code>deps.edn</code> data on the command-line
+so we can add our project back in like this:</p><pre><code>&gt; clojure -Sdeps '{:deps {this/project {:local/root "."}}}' -X:deps help/dir :ns next.jdbc
+active-tx?
+execute!
+execute-batch!
+execute-one!
+get-connection
+get-datasource
+on-connection
+on-connection+options
+plan
+prepare
+transact
+with-logging
+with-options
+with-transaction
+with-transaction+options
+</code></pre><p>We can make that cleaner by adding an alias to our user <code>deps.edn</code> file:</p><pre><code class="clojure">  :this {:deps {this/project {:local/root "."}}}
+</code></pre><p>Now we can run:</p><pre><code>&gt; clojure -X:deps:this help/dir :ns next.jdbc
+active-tx?
+execute!
+execute-batch!
+execute-one!
+...
+</code></pre><blockquote><p>Note: I have <code>:this</code> in my
+<a href="https://github.com/seancorfield/dot-clojure/blob/b3076b6b32de99220e904478b3fcb6c3ddfe6c66/deps.edn#L8">dot-clojure <code>deps.edn</code> file</a>.</p></blockquote>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2025/03/12/lazytest/">Migrating to LazyTest &raquo;</a>
+        
+    </div>
+
+    
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_config = function () {
+            this.page.url = "https://corfield.org/blog/2025/08/08/deps/";
+            this.page.identifier = "The power of the :deps alias";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//seancorfield.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2025/08/08/deps/">The power of the :deps alias</a></li>
+                        
+                        <li><a href="/blog/2025/03/12/lazytest/">Migrating to LazyTest</a></li>
+                        
+                        <li><a href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024</a></li>
+                        
+                        <li><a href="/blog/2023/12/31/long-term-funding-6/">Long-Term Funding, Update #6</a></li>
+                        
+                        <li><a href="/blog/2023/10/31/long-term-funding-5/">Long-Term Funding, Update #5</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/strange%20loop/">strange loop</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/polylith/">polylith</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/expectations/">expectations</a></li>
+                        
+                        <li><a href="/tags/editors/">editors</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
+                        <li><a href="/tags/personal/">personal</a></li>
+                        
+                        <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
+                        
+                        <li><a href="/tags/windows/">windows</a></li>
+                        
+                        <li><a href="/tags/monorepo/">monorepo</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/honeysql/">honeysql</a></li>
+                        
+                        <li><a href="/tags/portal/">portal</a></li>
+                        
+                        <li><a href="/tags/clojurists%20together/">clojurists together</a></li>
+                        
+                        <li><a href="/tags/clojure-doc.org/">clojure-doc.org</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/observability/">observability</a></li>
+                        
+                        <li><a href="/tags/clojure-clr/">clojure-clr</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                        <li><a href="/tags/new%20relic/">new relic</a></li>
+                        
+                        <li><a href="/tags/watson/">watson</a></li>
+                        
+                        <li><a href="/tags/vs%20code/">vs code</a></li>
+                        
+                        <li><a href="/tags/clj-commons/">clj-commons</a></li>
+                        
+                        <li><a href="/tags/open%20source/">open source</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2025 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
