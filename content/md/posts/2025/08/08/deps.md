@@ -63,10 +63,11 @@ prep
 tree
 ```
 
-We can use `help/doc` on a whole namespace or just a specific function:
+We can use `help/doc` on a whole namespace (via `:ns`) or just a specific
+function (via `:fn`):
 
 ```
-> clojure -X:deps help/doc :ns help :fn help/dir
+> clojure -X:deps help/doc :fn help/dir
 -------------------------
 clojure.tools.deps.cli.help/dir
 ([{:keys [ns], :as args}])
