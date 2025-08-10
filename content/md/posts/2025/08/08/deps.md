@@ -300,6 +300,49 @@ clojure.tools.deps.cli.api/prep
 
 ### tree
 
+As noted at the start of this post, this is probably the `:deps` function
+that most of us have used at some point to try to debug our dependencies.
+Where `list` shows us the "finished product", in terms of dependency versions,
+`tree` shows us how those versions are selected and the output is usually a lot
+more verbose than `list`.
+
+Going back to the `next.jdbc` project, here's the default `tree` output:
+
+```
+> clojure -X:deps tree
+org.clojure/clojure 1.10.3
+  . org.clojure/spec.alpha 0.2.194
+  . org.clojure/core.specs.alpha 0.2.56
+org.clojure/java.data 1.3.113
+camel-snake-kebab/camel-snake-kebab 0.4.3
+```
+
+Transitive dependencies are shown indented with `.` indicating the version
+was included and `X` indicating it was excluded, and a reason will be present
+for exclusions (and some inclusions, when there are multiple versions in play).
+
+Like `list`, the `tree` function accepts a `:format` output that can be used
+to produce EDN output. In addition, `tree` accepts `:indent` (how many spaces
+to use for indentation if you don't like the default of `2`) and `:hide-libs`
+that lets you exclude transitive subtrees from the output (not top-level
+dependencies). By default, any transitive dependencies on Clojure itself are
+omitted.
+
+As always, check the full docstring for other available options:
+
+```
+> clojure -X:deps help/doc :fn tree
+-------------------------
+clojure.tools.deps.cli.api/tree
+([opts])
+  Print deps tree for the current project's deps.edn built from either the
+  a basis, or if provided, the trace file.
+
+  This program accepts the same basis-modifying arguments from the `basis` program.
+  Each dep source value can be :standard, a string path, a deps edn map, or nil.
+  Sources are merged in the order - :root, :user, :project, :extra.
+...
+```
 
 ## build.clj help
 
