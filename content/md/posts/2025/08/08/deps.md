@@ -2,7 +2,7 @@
  :date "2025-08-08 17:00:00",
  :tags ["clojure"]}
 
-Most of us who use the Clojure CLI, are familiar with the `-M` (main), `-X`
+Most of us who use the Clojure CLI are familiar with the `-M` (main), `-X`
 (exec), and `-T` (tool) options, and may have used `clojure -X:deps tree` at
 some point to figure out version conflicts in our dependencies. The `:deps`
 alias can do a lot more, so let's take a look!
@@ -74,7 +74,13 @@ clojure.tools.deps.cli.help/dir
   specified :ns-default is used instead.
 ```
 
-## aliases
+## `:deps` functions
+
+We're going to look at each of the functions listed above, in turn, to see
+what they can be used for and, hopefully, provide some tips and tricks you
+might not expect.
+
+### aliases
 
 Let's see what that `aliases` function is about:
 
@@ -120,7 +126,7 @@ If the same alias is defined in multiple files, you'll see that in the output
 This tells us there is a `:test` alias in the root (as noted above), and in the
 user `deps.edn`, and in the project itself -- the latter version will be used.
 
-## find-versions
+### find-versions
 
 When you add a new dependency to your project, how do you figure out the most
 recent version so that you can specify that in `deps.edn`? Do you look in the
@@ -169,7 +175,7 @@ you have installed (with `clojure -Ttools install...`):
 {:git/tag "v0.3.4", :git/sha "0e9e6c8"}
 ```
 
-## git-resolve-tags
+### git-resolve-tags
 
 This is a weird one. It takes no arguments: it reads your (project) `deps.edn`
 file and if you have `:git/tag` versions with no `:git/sha`, it will
@@ -182,7 +188,7 @@ reformat it, likely changing the order of any hash map keys in it.
 I cannot imagine using this on any of my projects, since I often have comments
 in `deps.edn` and I generally take care to order my `:aliases` alphabetically.
 
-## list
+### list
 
 In its simplest form, this produces an alphabetical list of the libraries
 that your project depends on, including transitive dependencies, along with
@@ -219,11 +225,11 @@ commons-codec/commons-codec 1.17.1  (Apache-2.0)
 commons-io/commons-io 2.16.1  (Apache-2.0)
 ```
 
-## mvn-install
+### mvn-install
 
-## mvn-pom
+### mvn-pom
 
-## prep
+### prep
 
 For projects / libraries that are made available in source form, as `git`
 dependencies, there are situations where they need a step to be performed
@@ -292,12 +298,12 @@ clojure.tools.deps.cli.api/prep
 
 (basis options omitted for brevity)
 
-## tree
+### tree
 
 
 ## build.clj help
 
-The mighty `:deps` alias can help you learn about the `build.clj` in a project.
+The mighty `:deps` alias can help you learn about the `build.clj` file in a project.
 
 For example, if we `git clone` the `next.jdbc` project, we can run the
 following command to see what tasks are defined:
@@ -308,9 +314,9 @@ deploy
 jar
 ```
 
-We need both the `tools.deps` library and the `build` namespace on the classpath,
-and we need to use `-T` so that the current directory is on the classpath so
-that the `build.clj` file can be found.
+We need both the `tools.deps.cli` library and the `build` namespace on the classpath,
+which means we need to use `-T` so that the current directory is on the classpath in
+order for the `build.clj` file to be found.
 
 We could also use the more verbose `clojure -A:deps -T:build help/dir` here.
 
