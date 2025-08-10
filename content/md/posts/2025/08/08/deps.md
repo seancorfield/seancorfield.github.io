@@ -227,7 +227,34 @@ commons-io/commons-io 2.16.1  (Apache-2.0)
 
 ### mvn-install
 
+This function will install a JAR file into your local Maven cache. You must
+specify a `:jar` option (a string that specifies the relative path to the
+JAR file). If you have a fully-fleshed out `pom.xml` file, you can use the
+`:pom` option to specify its location, or you can specify the group/artifact
+ID via the `:lib` option and the library `:version`. You can also specify the
+`:classifier` option, if needed:
+
+```
+clojure -X:deps mvn-install :jar '"target/my.jar"' :lib my.cool/new.library :version '"1.2.3"'
+```
+
 ### mvn-pom
+
+This function will generate a minimal `pom.xml` file with the `<dependencies>`
+populated from your `deps.edn` file. If a `pom.xml` already exists, it will
+just update that file with the latest `<dependencies>` from `deps.edn`.
+
+This minimal `pom.xml` is not sufficient for most libraries -- the `groupId`
+and `artifactId` are derived from the project directory name, and a lot of the
+information required by [cljdoc](https://cljdoc.org/) is not included. Unlike
+the `mvn-install` function above, `mvn-pom` does not let you specify `:lib`,
+`:version`, or `:classifier`.
+
+You are better off using
+[`clojure.tools.build.api/write-pom`](https://github.com/clojure/tools.build/blob/80868cd98af5fdef5386d45490be604f8931f666/src/main/clojure/clojure/tools/build/api.clj#L369)
+in your `build.clj`
+file, so that you have more control over the generated POM file,
+specifying the `groupId`, `artifactId`, and SCM information (via `:pom-data`).
 
 ### prep
 
