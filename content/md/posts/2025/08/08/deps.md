@@ -225,6 +225,73 @@ commons-io/commons-io 2.16.1  (Apache-2.0)
 
 ## prep
 
+For projects / libraries that are made available in source form, as `git`
+dependencies, there are situations where they need a step to be performed
+before they can be used, such as compiling some code to class files.
+
+Those projects will have a `:deps/prep-lib` key in their `deps.edn` file, that
+specifies a function to run (via `:fn`), with an `:alias` (for `-T` invocation)
+and an `:ensure` key that specifies a directory whose existence determines
+whether the library needs to be "prepared".
+
+From a consumer point of view, if you try to use such a library before it has
+been "prepared", you'll get an error like:
+
+```
+Error building classpath. The following libs must be prepared before use: ...
+```
+
+You can usually run `clojure -X:deps prep` to run the preparation steps across
+any such libraries you are depending on.
+
+Sometimes, it might be one of your test dependencies, in which case the above
+won't work (it will only prepare your non-test dependencies). `prep` accepts
+`:aliases` to specify the dependencies you need prepared:
+
+```
+clojure -X:deps prep :aliases '[:test]'
+```
+
+If you are working on a project that needs to be prepared before use, you can
+ensure that your `:deps/prep-lib` configuration is correct by running `prep`
+for that local project:
+
+```
+clojure -X:deps prep :current true
+```
+
+You may also need to re-run the preparation step, and instead of manually
+deleting the `:ensure` directory, you can force the preparation step to run again:
+
+```
+clojure -X:deps prep :current true :force true
+```
+
+> Note: you can use `:force true` to re-run the preparation step for dependencies too, of course, if needed.
+
+Check the full docstring for additional options you can use, such as `:log`
+which can help you debug problems with the preparation step:
+
+```
+> clojure -X:deps help/doc :fn prep
+-------------------------
+clojure.tools.deps.cli.api/prep
+([{:keys [force log current], :or {log :info, current false}, :as params}])
+  Prep the unprepped libs found in the transitive lib set of basis.
+
+  This program accepts the same basis-modifying arguments from the `basis` program.
+  Each dep source value can be :standard, a string path, a deps edn map, or nil.
+  Sources are merged in the order - :root, :user, :project, :extra.
+
+  Options:
+    :force - flag on whether to force prepped libs to re-prep (default = false)
+    :current - flag on whether to prep current project too (default = false)
+    :log - :none, :info (default), or :debug
+...
+```
+
+(basis options omitted for brevity)
+
 ## tree
 
 
