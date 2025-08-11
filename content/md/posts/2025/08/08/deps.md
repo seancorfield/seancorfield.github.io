@@ -10,11 +10,12 @@ alias can do a lot more, so let's take a look!
 First off, what is the `:deps` alias and where does it come from?
 
 The "root" `deps.edn` file is where the `:deps` alias is defined. If you run
-`clojure -Sdescribe`, it'll show you the `:config-files` it uses: the "root",
-the "user" (see `:config-user` in the output of that command), and if you are
-in a project folder, the "project" `deps.edn` file (see also `:config-project`).
+`clojure` or `clj` with the `-Sverbose` option, it'll show you the `config_paths`
+it uses: the "root", the "user" (see `user_deps` in the output of that command), and if you are
+in a project folder, the "project" `deps.edn` file (see `project_deps` in the output).
 Even though the "root" `deps.edn` file exists, that isn't the "source of truth"
-as the real root `deps.edn` file is a resource inside the `tools.deps` project:
+as the real root `deps.edn` file is a resource inside the `clojure-tools` JAR
+(`root_deps`), and you can see it in the `tools.deps` project:
 
 The [root `deps.edn` resource](https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn)
 contains two `:aliases`: `:deps` and `:test`. The latter is a convenience
