@@ -83,12 +83,10 @@ alias can do a lot more, so let&#39;s take a look!First off, what is the :deps a
 (exec), and <code>-T</code> (tool) options, and may have used <code>clojure -X:deps tree</code> at
 some point to figure out version conflicts in our dependencies. The <code>:deps</code>
 alias can do a lot more, so let's take a look!</p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
-<code>clojure</code> or <code>clj</code> with the <code>-Sverbose</code> option, it'll show you the <code>config_paths</code>
-it uses: the "root", the "user" (see <code>user_deps</code> in the output of that command), and if you are
-in a project folder, the "project" <code>deps.edn</code> file (see <code>project_deps</code> in the output).
-Even though the "root" <code>deps.edn</code> file exists, that isn't the "source of truth"
-as the real root <code>deps.edn</code> file is a resource inside the <code>clojure-tools</code> JAR
-(<code>root_deps</code>), and you can see it in the <code>tools.deps</code> project:</p><p>The <a href="https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn">root <code>deps.edn</code> resource</a>
+<code>clojure</code> or <code>clj</code> with the <code>-Sverbose</code> option, it'll show you the <code>root_deps</code>
+is the <code>clojure-tools</code> JAR, the "user" <code>deps.edn</code> (as <code>user_deps</code>), and if you are
+in a project folder, the "project" <code>deps.edn</code> file (as <code>project_deps</code>).
+You can see the "root" <code>deps.edn</code> file as a resource in the <code>tools.deps</code> project:</p><p>The <a href="https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn">root <code>deps.edn</code> resource</a>
 contains two <code>:aliases</code>: <code>:deps</code> and <code>:test</code>. The latter is a convenience
 that adds the <code>test</code> folder to your classpath. The former has the following
 entries:</p><ul><li><code>:replace-paths []</code></li><li><code>:replace-deps {org.clojure/tools.deps.cli {:mvn/version "0.11.93"}}</code> (as of August 8th, 2025)</li><li><code>:ns-default clojure.tools.deps.cli.api</code></li><li><code>:ns-aliases {help clojure.tools.deps.cli.help}</code></li></ul><p>The first two entries ensure that when you use <code>-X:deps</code>, your user/project
