@@ -2,6 +2,8 @@
  :date "2025-08-08 17:00:00",
  :tags ["clojure"]}
 
+> Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the `basis` function.
+
 Most of us who use the Clojure CLI are familiar with the `-M` (main), `-X`
 (exec), and `-T` (tool) options, and may have used `clojure -X:deps tree` at
 some point to figure out version conflicts in our dependencies. The `:deps`
@@ -53,6 +55,7 @@ instead:
 ```
 > clojure -X:deps help/dir
 aliases
+basis
 find-versions
 git-resolve-tags
 list
@@ -61,6 +64,8 @@ mvn-pom
 prep
 tree
 ```
+
+> Note: `basis` was added in CLI 1.12.1.1561.
 
 We can use `help/doc` on a whole namespace (via `:ns`) or just a specific
 function (via `:fn`):
@@ -125,6 +130,15 @@ If the same alias is defined in multiple files, you'll see that in the output
 
 This tells us there is a `:test` alias in the root (as noted above), and in the
 user `deps.edn`, and in the project itself -- the latter version will be used.
+
+### basis
+
+This prints out the entire computed basis for execution as EDN.
+
+Like other commands here that deal with the basis, you can specify `:aliases`
+and disable the root, user, and/or project `deps.edn` from consideration, as
+well as providing `:extra` deps EDN content, or specifying the `:dir` directory
+to consider as the project.
 
 ### find-versions
 
