@@ -6,15 +6,15 @@
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
 
-<meta name="description" content="Most of us who use the Clojure CLI are familiar with the -M (main), -X
+<meta name="description" content="Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.Most of us who use the Clojure CLI are familiar with the -M (main), -X
 (exec), and -T (tool) options, and may have used clojure -X:deps tree at
 some point to figure out version conflicts in our dependencies. The :deps
-alias can do a lot more, so let&#39;s take a look!First off, what is the :deps alias and where does it come from?">
+alias can do a lot more, so let&#39;s take a look!">
 
-<meta property="og:description" content="Most of us who use the Clojure CLI are familiar with the -M (main), -X
+<meta property="og:description" content="Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.Most of us who use the Clojure CLI are familiar with the -M (main), -X
 (exec), and -T (tool) options, and may have used clojure -X:deps tree at
 some point to figure out version conflicts in our dependencies. The :deps
-alias can do a lot more, so let&#39;s take a look!First off, what is the :deps alias and where does it come from?">
+alias can do a lot more, so let&#39;s take a look!">
 
 <meta property="og:url" content="https://corfield.org/blog/2025/08/08/deps/" />
 <meta property="og:title" content="The power of the :deps alias" />
@@ -79,7 +79,7 @@ alias can do a lot more, so let&#39;s take a look!First off, what is the :deps a
 </div>
 <div>
     
-    <p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
+    <blockquote><p>Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the <code>basis</code> function.</p></blockquote><p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
 (exec), and <code>-T</code> (tool) options, and may have used <code>clojure -X:deps tree</code> at
 some point to figure out version conflicts in our dependencies. The <code>:deps</code>
 alias can do a lot more, so let's take a look!</p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
@@ -100,6 +100,7 @@ doc
 the functions. Without <code>:ns</code>, we get the functions from the CLI API namespace
 instead:</p><pre><code>&gt; clojure -X:deps help/dir
 aliases
+basis
 find-versions
 git-resolve-tags
 list
@@ -107,7 +108,7 @@ mvn-install
 mvn-pom
 prep
 tree
-</code></pre><p>We can use <code>help/doc</code> on a whole namespace (via <code>:ns</code>) or just a specific
+</code></pre><blockquote><p>Note: <code>basis</code> was added in CLI 1.12.1.1561.</p></blockquote><p>We can use <code>help/doc</code> on a whole namespace (via <code>:ns</code>) or just a specific
 function (via <code>:fn</code>):</p><pre><code>&gt; clojure -X:deps help/doc :fn help/dir
 -------------------------
 clojure.tools.deps.cli.help/dir
@@ -141,7 +142,10 @@ aliases.</p><p>If the same alias is defined in multiple files, you'll see that i
 :test (root, user, project)
 ...
 </code></pre><p>This tells us there is a <code>:test</code> alias in the root (as noted above), and in the
-user <code>deps.edn</code>, and in the project itself -- the latter version will be used.</p><h3 id="find-versions">find-versions</h3><p>When you add a new dependency to your project, how do you figure out the most
+user <code>deps.edn</code>, and in the project itself -- the latter version will be used.</p><h3 id="basis">basis</h3><p>This prints out the entire computed basis for execution as EDN.</p><p>Like other commands here that deal with the basis, you can specify <code>:aliases</code>
+and disable the root, user, and/or project <code>deps.edn</code> from consideration, as
+well as providing <code>:extra</code> deps EDN content, or specifying the <code>:dir</code> directory
+to consider as the project.</p><h3 id="find-versions">find-versions</h3><p>When you add a new dependency to your project, how do you figure out the most
 recent version so that you can specify that in <code>deps.edn</code>? Do you look in the
 project README? Do you look on Clojars? Do you look at the releases (or tags)
 page on GitHub?</p><p>Why not use a tool you already have right there on the command-line?</p><pre><code>&gt; clojure -X:deps help/doc :fn find-versions
