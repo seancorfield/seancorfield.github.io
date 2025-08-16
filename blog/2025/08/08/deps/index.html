@@ -117,7 +117,13 @@ clojure.tools.deps.cli.help/dir
   specified :ns-default is used instead.
 </code></pre><h2 id="deps-functions"><code>:deps</code> functions</h2><p>We're going to look at each of the functions listed above, in turn, to see
 what they can be used for and, hopefully, provide some tips and tricks you
-might not expect.</p><h3 id="aliases">aliases</h3><p>Let's see what that <code>aliases</code> function is about:</p><pre><code>&gt; clojure -X:deps help/doc :fn aliases
+might not expect.</p><h3 id="common-options">Common Options</h3><p>First off, it's worth noting that many of these functions accept what are
+called "Basis options" that let you
+control the execution environment for the function. These are all optional:</p><ul><li><code>:dir</code> -- the project directory, defaults to current directory</li><li><code>:root</code> -- if set to <code>nil</code>, the root <code>deps.edn</code> will be ignored</li><li><code>:user</code> -- if set to <code>nil</code>, the user <code>deps.edn</code> will be ignored</li><li><code>:project</code> -- if set to <code>nil</code>, the project <code>deps.edn</code> will be ignored</li><li><code>:extra</code> -- specify additional <code>deps.edn</code> content as EDN</li><li><code>:aliases</code> -- specify aliases to use, as a sequence of keywords</li></ul><p>Check each function's docstring for applicability. The <code>:root</code>, <code>:user</code>, and
+<code>:project</code> options can be <code>nil</code> (to ignore), <code>:standard</code> (use the appropriate
+<code>deps.edn</code> file), EDN (use that instead of a file),
+or a path to a <code>deps.edn</code> file as a string. The <code>:extra</code>
+option should be used instead of <code>-Sdeps</code> to specify additional dependencies.</p><h3 id="aliases">aliases</h3><p>Let's see what that <code>aliases</code> function is about:</p><pre><code>&gt; clojure -X:deps help/doc :fn aliases
 -------------------------
 clojure.tools.deps.cli.api/aliases
 ([params])
@@ -268,7 +274,19 @@ to produce EDN output. In addition, <code>tree</code> accepts <code>:indent</cod
 to use for indentation if you don't like the default of <code>2</code>) and <code>:hide-libs</code>
 that lets you exclude transitive subtrees from the output (not top-level
 dependencies). By default, any transitive dependencies on Clojure itself are
-omitted.</p><p>As always, check the full docstring for other available options:</p><pre><code>&gt; clojure -X:deps help/doc :fn tree
+omitted.</p><p>If you want to check the dependencies of a specific library, you can do so via
+the <code>:extra</code> option:</p><pre><code>&gt; clojure -X:deps tree :project nil :extra '{:deps {com.github.seancorfield/next.jdbc {:mvn/version "1.3.1048"}}}'
+org.clojure/clojure 1.12.1
+  . org.clojure/spec.alpha 0.5.238
+  . org.clojure/core.specs.alpha 0.4.74
+com.github.seancorfield/next.jdbc 1.3.1048
+  . org.clojure/java.data 1.3.113
+  . camel-snake-kebab/camel-snake-kebab 0.4.3
+</code></pre><blockquote><p>Note: using <code>-Sdeps</code> would not work here:</p></blockquote><pre><code>&gt; clojure -Sdeps '{:deps {com.github.seancorfield/next.jdbc {:mvn/version "1.3.1048"}}}' -X:deps tree :project nil
+org.clojure/clojure 1.12.1
+  . org.clojure/spec.alpha 0.5.238
+  . org.clojure/core.specs.alpha 0.4.74
+</code></pre><p>As always, check the full docstring for other available options:</p><pre><code>&gt; clojure -X:deps help/doc :fn tree
 -------------------------
 clojure.tools.deps.cli.api/tree
 ([opts])
