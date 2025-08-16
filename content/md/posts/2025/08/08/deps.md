@@ -80,6 +80,25 @@ We're going to look at each of the functions listed above, in turn, to see
 what they can be used for and, hopefully, provide some tips and tricks you
 might not expect.
 
+### Common Options
+
+First off, it's worth noting that many of these functions accept what are
+called "Basis options" that let you
+control the execution environment for the function. These are all optional:
+
+* `:dir` -- the project directory, defaults to current directory
+* `:root` -- if set to `nil`, the root `deps.edn` will be ignored
+* `:user` -- if set to `nil`, the user `deps.edn` will be ignored
+* `:project` -- if set to `nil`, the project `deps.edn` will be ignored
+* `:extra` -- specify additional `deps.edn` content as EDN
+* `:aliases` -- specify aliases to use, as a sequence of keywords
+
+Check each function's docstring for applicability. The `:root`, `:user`, and
+`:project` options can be `nil` (to ignore), `:standard` (use the appropriate
+`deps.edn` file), EDN (use that instead of a file),
+or a path to a `deps.edn` file as a string. The `:extra`
+option should be used instead of `-Sdeps` to specify additional dependencies.
+
 ### aliases
 
 Let's see what that `aliases` function is about:
@@ -354,6 +373,28 @@ to use for indentation if you don't like the default of `2`) and `:hide-libs`
 that lets you exclude transitive subtrees from the output (not top-level
 dependencies). By default, any transitive dependencies on Clojure itself are
 omitted.
+
+If you want to check the dependencies of a specific library, you can do so via
+the `:extra` option:
+
+```
+> clojure -X:deps tree :project nil :extra '{:deps {com.github.seancorfield/next.jdbc {:mvn/version "1.3.1048"}}}'
+org.clojure/clojure 1.12.1
+  . org.clojure/spec.alpha 0.5.238
+  . org.clojure/core.specs.alpha 0.4.74
+com.github.seancorfield/next.jdbc 1.3.1048
+  . org.clojure/java.data 1.3.113
+  . camel-snake-kebab/camel-snake-kebab 0.4.3
+```
+
+> Note: using `-Sdeps` would not work here:
+
+```
+> clojure -Sdeps '{:deps {com.github.seancorfield/next.jdbc {:mvn/version "1.3.1048"}}}' -X:deps tree :project nil
+org.clojure/clojure 1.12.1
+  . org.clojure/spec.alpha 0.5.238
+  . org.clojure/core.specs.alpha 0.4.74
+```
 
 As always, check the full docstring for other available options:
 
