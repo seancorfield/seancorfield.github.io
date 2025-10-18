@@ -6,15 +6,9 @@
     
 <meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
 
-<meta name="description" content="Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.Most of us who use the Clojure CLI are familiar with the -M (main), -X
-(exec), and -T (tool) options, and may have used clojure -X:deps tree at
-some point to figure out version conflicts in our dependencies. The :deps
-alias can do a lot more, so let&#39;s take a look!">
+<meta name="description" content="Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to prep a tool.Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.">
 
-<meta property="og:description" content="Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.Most of us who use the Clojure CLI are familiar with the -M (main), -X
-(exec), and -T (tool) options, and may have used clojure -X:deps tree at
-some point to figure out version conflicts in our dependencies. The :deps
-alias can do a lot more, so let&#39;s take a look!">
+<meta property="og:description" content="Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to prep a tool.Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the basis function.">
 
 <meta property="og:url" content="https://corfield.org/blog/2025/08/08/deps/" />
 <meta property="og:title" content="The power of the :deps alias" />
@@ -79,7 +73,7 @@ alias can do a lot more, so let&#39;s take a look!">
 </div>
 <div>
     
-    <blockquote><p>Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the <code>basis</code> function.</p></blockquote><p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
+    <blockquote><p>Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to <code>prep</code> a tool.</p></blockquote><blockquote><p>Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the <code>basis</code> function.</p></blockquote><p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
 (exec), and <code>-T</code> (tool) options, and may have used <code>clojure -X:deps tree</code> at
 some point to figure out version conflicts in our dependencies. The <code>:deps</code>
 alias can do a lot more, so let's take a look!</p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
@@ -236,7 +230,10 @@ been "prepared", you'll get an error like:</p><pre><code>Error building classpat
 any such libraries you are depending on.</p><p>Sometimes, it might be one of your test dependencies, in which case the above
 won't work (it will only prepare your non-test dependencies). <code>prep</code> accepts
 <code>:aliases</code> to specify the dependencies you need prepared:</p><pre><code>clojure -X:deps prep :aliases '[:test]'
-</code></pre><p>If you are working on a project that needs to be prepared before use, you can
+</code></pre><p>As of Clojure CLI 1.12.2.1571, you can also prepare installed tools and their
+dependencies:</p><pre><code>clojure -X:deps prep :tool sometool
+</code></pre><p>This will prepare <code>sometool</code> -- installed via <code>clojure -Ttools install ...</code> -- and
+all its dependencies.</p><p>If you are working on a project that needs to be prepared before use, you can
 ensure that your <code>:deps/prep-lib</code> configuration is correct by running <code>prep</code>
 for that local project:</p><pre><code>clojure -X:deps prep :current true
 </code></pre><p>You may also need to re-run the preparation step, and instead of manually
