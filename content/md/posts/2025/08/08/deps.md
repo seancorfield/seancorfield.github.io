@@ -2,6 +2,8 @@
  :date "2025-08-08 17:00:00",
  :tags ["clojure"]}
 
+> Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to `prep` a tool.
+
 > Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the `basis` function.
 
 Most of us who use the Clojure CLI are familiar with the `-M` (main), `-X`
@@ -317,6 +319,16 @@ won't work (it will only prepare your non-test dependencies). `prep` accepts
 ```
 clojure -X:deps prep :aliases '[:test]'
 ```
+
+As of Clojure CLI 1.12.2.1571, you can also prepare installed tools and their
+dependencies:
+
+```
+clojure -X:deps prep :tool sometool
+```
+
+This will prepare `sometool` -- installed via `clojure -Ttools install ...` -- and
+all its dependencies.
 
 If you are working on a project that needs to be prepared before use, you can
 ensure that your `:deps/prep-lib` configuration is correct by running `prep`
