@@ -9,7 +9,7 @@
 Most of us who use the Clojure CLI are familiar with the `-M` (main), `-X`
 (exec), and `-T` (tool) options, and may have used `clojure -X:deps tree` at
 some point to figure out version conflicts in our dependencies. The `:deps`
-alias can do a lot more, so let's take a look!
+alias can do a lot more, so let's take a look!<!-- more -->
 
 First off, what is the `:deps` alias and where does it come from?
 
