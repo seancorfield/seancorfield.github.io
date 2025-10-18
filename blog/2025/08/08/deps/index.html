@@ -76,7 +76,7 @@
     <blockquote><p>Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to <code>prep</code> a tool.</p></blockquote><blockquote><p>Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the <code>basis</code> function.</p></blockquote><p>Most of us who use the Clojure CLI are familiar with the <code>-M</code> (main), <code>-X</code>
 (exec), and <code>-T</code> (tool) options, and may have used <code>clojure -X:deps tree</code> at
 some point to figure out version conflicts in our dependencies. The <code>:deps</code>
-alias can do a lot more, so let's take a look!</p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
+alias can do a lot more, so let's take a look!<!-- more --></p><p>First off, what is the <code>:deps</code> alias and where does it come from?</p><p>The "root" <code>deps.edn</code> file is where the <code>:deps</code> alias is defined. If you run
 <code>clojure</code> or <code>clj</code> with the <code>-Sverbose</code> option, it'll show you the <code>root_deps</code>
 is the <code>clojure-tools</code> JAR, the "user" <code>deps.edn</code> (as <code>user_deps</code>), and if you are
 in a project folder, the "project" <code>deps.edn</code> file (as <code>project_deps</code>).
