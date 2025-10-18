@@ -2,8 +2,7 @@
  :date "2025-08-08 17:00:00",
  :tags ["clojure"]}
 
-> Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to `prep` a tool.
-
+> Updated 2025-10-18, for Clojure CLI 1.12.2.1571, which added the ability to `prep` a tool.<br>
 > Updated 2025-08-14 for Clojure CLI 1.12.1.1561, which added the `basis` function.
 
 Most of us who use the Clojure CLI are familiar with the `-M` (main), `-X`
