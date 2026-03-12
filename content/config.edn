@@ -20,8 +20,8 @@
  :theme                        "coit"
  :resources                    ["articles" "bodyart" "camera" "images" "img" "js" "CNAME" "favicon.ico" "robots.txt"]
  :keep-files                   [".git" "README.md"]
- :disqus?                      true
- :disqus-shortname             "seancorfield"
+ ;;:disqus?                      true
+ ;;:disqus-shortname             "seancorfield"
  :ignored-files                [#"\.#.*" #".*\.swp$"]
  :sitemap-ignored-paths        [#"bodyart"]
  :previews?                    true
