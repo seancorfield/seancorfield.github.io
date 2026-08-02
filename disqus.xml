@@ -1,0 +1,4487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<disqus xmlns="http://disqus.com" xmlns:dsq="http://disqus.com/disqus-internals" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://disqus.com/api/schemas/1.0/disqus.xsd http://disqus.com/api/schemas/1.0/disqus-internals.xsd">
+<category dsq:id="3119784">
+<forum>seancorfield</forum>
+<title>General</title>
+<isDefault>true</isDefault>
+</category>
+<thread dsq:id="2782624957">
+<id>http://seancorfield.github.io/blog/2014/06/20/is-this-thing-on/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/06/20/is-this-thing-on/</link>
+<title>Is This Thing On? - An Architect's View</title>
+<message />
+<createdAt>2014-06-21T00:51:15Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="2782628731">
+<id>http://seancorfield.github.io/presentations/index.html</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/presentations/index.html</link>
+<title>Presentations - An Architect's View</title>
+<message />
+<createdAt>2014-06-21T00:53:48Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="2782690200">
+<id>http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/06/20/some-thoughts-on-java-8/</link>
+<title>Some Thoughts on Java 8 - An Architect's View</title>
+<message />
+<createdAt>2014-06-21T01:35:19Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="2782705923">
+<id>http://seancorfield.github.io/blog/2014/06/03/getting-started/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/06/03/getting-started/</link>
+<title>Getting Started - An Architect's View</title>
+<message />
+<createdAt>2014-06-21T01:45:39Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="2785248080">
+<id>http://seancorfield.github.io/blog/2014/06/21/clojurebridge/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/06/21/clojurebridge/</link>
+<title>ClojureBridge - An Architect's View</title>
+<message />
+<createdAt>2014-06-22T03:14:05Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3038400780">
+<id>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/09/20/powered-by-javascript/</link>
+<title>Powered by JavaScript - An Architect's View</title>
+<message />
+<createdAt>2014-09-21T05:52:05Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3043247337">
+<id>http://seancorfield.github.io/blog/2014/09/21/clojure-in-the-enterprise/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/09/21/clojure-in-the-enterprise/</link>
+<title>Clojure in the Enterprise? - An Architect's View</title>
+<message />
+<createdAt>2014-09-22T17:29:06Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3055009498">
+<id>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/09/23/clojure-in-the-enterprise/</link>
+<title>Clojure in the Enterprise? - An Architect's View</title>
+<message />
+<createdAt>2014-09-26T05:32:59Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3055013935">
+<id>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2014/09/25/the-strange-loop-2014/</link>
+<title>The Strange Loop 2014 - An Architect's View</title>
+<message />
+<createdAt>2014-09-26T05:35:27Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3058000275">
+<id>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</link>
+<title>Instrumenting Clojure for New Relic Monitoring</title>
+<message />
+<createdAt>2014-09-27T03:40:28Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="3498809029">
+<id>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2015/02/13/frege-and-clojure/</link>
+<title>Frege (and Clojure) - An Architect's View</title>
+<message />
+<createdAt>2015-02-09T08:53:06Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4458611204">
+<id>http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/01/01/where-did-2015-go/</link>
+<title>Where Did 2015 Go? - An Architect's View</title>
+<message />
+<createdAt>2016-01-03T22:05:40Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4458832065">
+<id>http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/01/03/where-did-2015-go/</link>
+<title>Where Did 2015 Go? - An Architect's View</title>
+<message />
+<createdAt>2016-01-04T00:01:25Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4535771711">
+<id>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/01/29/rebooting-clojure/</link>
+<title>Rebooting Clojure - An Architect's View</title>
+<message />
+<createdAt>2016-01-30T06:31:30Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4538300682">
+<id>http://seancorfield.github.io/blog/2016/01/30/building-on-boot/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/01/30/building-on-boot/</link>
+<title>Building on Boot - An Architect's View</title>
+<message />
+<createdAt>2016-01-31T07:01:57Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4540293654">
+<id>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/01/31/testing-with-boot/</link>
+<title>Testing With Boot - An Architect's View</title>
+<message />
+<createdAt>2016-02-01T00:07:13Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4546883750">
+<id>http://seancorfield.github.io/blog/2016/02/02/boot-new/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/02/02/boot-new/</link>
+<title>An Architect's View</title>
+<message />
+<createdAt>2016-02-03T02:40:07Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4919599479">
+<id>http://seancorfield.github.io/blog/2016/06/17/more-boot/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/06/17/more-boot/</link>
+<title>An Architect's View</title>
+<message />
+<createdAt>2016-06-18T05:42:22Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4921094313">
+<id>http://seancorfield.github.io/blog/2016/06/18/my-increasing-frustration/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/06/18/my-increasing-frustration/</link>
+<title>My Increasing Frustration... - An Architect's View</title>
+<message />
+<createdAt>2016-06-18T21:25:14Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="4995554713">
+<id>http://seancorfield.github.io/blog/2016/07/18/start-your-engine/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/07/18/start-your-engine/</link>
+<title>Start Your Engine - An Architect's View</title>
+<message />
+<createdAt>2016-07-18T19:06:12Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5025709641">
+<id>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2016/07/29/clojure-new-relic-slow-startup/</link>
+<title>Clojure, New Relic, and Slow Application Startup</title>
+<message />
+<createdAt>2016-07-30T03:50:05Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5477787190">
+<id>http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/</link>
+<title>Seancorfield/boot-new Has Moved to Boot/new</title>
+<message />
+<createdAt>2017-01-20T04:46:28Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="5995401573">
+<id>http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2017/07/17/clojure-java-jdbc-0-7-0/</link>
+<title>Release 0.7.0 of clojure.java.jdbc</title>
+<message />
+<createdAt>2017-07-17T17:55:43Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6291545553">
+<id>http://seancorfield.github.io/blog/2017/11/17/boot-localrepo/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2017/11/17/boot-localrepo/</link>
+<title>Boot Localrepo? - An Architect's View</title>
+<message />
+<createdAt>2017-11-17T23:59:49Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6621023264">
+<id>http://seancorfield.github.io/blog/2018/04/18/all-the-paths/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2018/04/18/all-the-paths/</link>
+<title>All the Paths - An Architect's View</title>
+<message />
+<createdAt>2018-04-18T17:55:47Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6644481917">
+<id>http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2013/09/22/the-strange-loop-2013/</link>
+<title>The Strange Loop 2013 - An Architect's View</title>
+<message />
+<createdAt>2018-05-01T00:26:35Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="6994878026">
+<id>http://seancorfield.github.io/blog/2018/10/25/clojure-conj/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2018/10/25/clojure-conj/</link>
+<title>Excited About Clojure/conj - An Architect's View</title>
+<message />
+<createdAt>2018-10-25T08:29:36Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010427517">
+<id>boot-new</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/02/02/boot-new/</link>
+<title>An Architect's View</title>
+<message />
+<createdAt>2018-10-31T22:04:19Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010427798">
+<id>Some thoughts on Java 8</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/06/20/some-thoughts-on-java-8/</link>
+<title>Some Thoughts on Java 8 - An Architect's View</title>
+<message />
+<createdAt>2018-10-31T22:04:29Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010522179">
+<id>Excited About Clojure/conj</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2018/10/25/clojure-conj/</link>
+<title>Excited About Clojure/conj - An Architect's View</title>
+<message />
+<createdAt>2018-10-31T23:02:50Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010612057">
+<id>Testing With Boot</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/01/31/testing-with-boot/</link>
+<title>Testing With Boot - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T00:06:41Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010697335">
+<id>More Boot</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/06/17/more-boot/</link>
+<title>An Architect's View</title>
+<message />
+<createdAt>2018-11-01T01:12:08Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010810916">
+<id>All The Paths</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2018/04/18/all-the-paths/</link>
+<title>All the Paths - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T02:42:45Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7010839318">
+<id>Rebooting Clojure</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/01/29/rebooting-clojure/</link>
+<title>Rebooting Clojure - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T03:06:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7011085885">
+<id>http://corfield.org/presentations/index.html</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/presentations/index.html</link>
+<title>Presentations - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T06:55:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012635286">
+<id>Boot localrepo?</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2017/11/17/boot-localrepo/</link>
+<title>Boot Localrepo? - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T22:20:01Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012635556">
+<id>Release 0.7.0 of clojure.java.jdbc</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/</link>
+<title>Release 0.7.0 of clojure.java.jdbc</title>
+<message />
+<createdAt>2018-11-01T22:20:13Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012635915">
+<id>seancorfield/boot-new has moved to boot/new</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2017/01/19/boot-new-moved/</link>
+<title>Seancorfield/boot-new Has Moved to Boot/new</title>
+<message />
+<createdAt>2018-11-01T22:20:28Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012636072">
+<id>Clojure, New Relic, and Slow Application Startup</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/07/29/clojure-new-relic-slow-startup/</link>
+<title>Clojure, New Relic, and Slow Application Startup</title>
+<message />
+<createdAt>2018-11-01T22:20:33Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012636255">
+<id>http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2013/05/01/instrumenting-clojure-for-new-relic-monitoring/</link>
+<title>Instrumenting Clojure for New Relic Monitoring</title>
+<message />
+<createdAt>2018-11-01T22:20:40Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7012636582">
+<id>Start Your Engine</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/07/18/start-your-engine/</link>
+<title>Start Your Engine - An Architect's View</title>
+<message />
+<createdAt>2018-11-01T22:20:52Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7014346147">
+<id>Clojure in the Enterprise?</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/</link>
+<title>Clojure in the Enterprise? - An Architect's View</title>
+<message />
+<createdAt>2018-11-02T17:47:46Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7014843424">
+<id>Building On Boot</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/01/30/building-on-boot/</link>
+<title>Building on Boot - An Architect's View</title>
+<message />
+<createdAt>2018-11-02T21:06:23Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7016299988">
+<id>http://corfield.org/blog/2015/02/13/frege-and-clojure/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2015/02/13/frege-and-clojure/</link>
+<title>Frege (and Clojure) - An Architect's View</title>
+<message />
+<createdAt>2018-11-03T11:32:24Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7024106705">
+<id>Getting Started</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/06/03/getting-started/</link>
+<title>Getting Started - An Architect's View</title>
+<message />
+<createdAt>2018-11-06T17:32:11Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7029280032">
+<id>The Strange Loop 2014</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/09/25/the-strange-loop-2014/</link>
+<title>The Strange Loop 2014 - An Architect's View</title>
+<message />
+<createdAt>2018-11-08T17:03:32Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7044336191">
+<id>ClojureBridge</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/06/21/clojurebridge/</link>
+<title>ClojureBridge - An Architect's View</title>
+<message />
+<createdAt>2018-11-14T14:24:49Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7051827355">
+<id>Powered by JavaScript</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2014/09/20/powered-by-javascript/</link>
+<title>Powered by JavaScript - An Architect's View</title>
+<message />
+<createdAt>2018-11-17T10:33:29Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7057468901">
+<id>Where Did 2015 Go?</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2016/01/03/where-did-2015-go/</link>
+<title>Where Did 2015 Go? - An Architect's View</title>
+<message />
+<createdAt>2018-11-19T16:40:18Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7086043166">
+<id>Clojure 1.10&amp;#39;s datafy and nav</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2018/12/03/datafy-nav/</link>
+<title>Clojure 1.10's Datafy and Nav - An Architect's View</title>
+<message />
+<createdAt>2018-12-04T02:07:16Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7091106651">
+<id>SQL NULL, s/nilable, and optionality</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2018/12/06/null-nilable-optionality/</link>
+<title>SQL NULL, S/nilable, and Optionality</title>
+<message />
+<createdAt>2018-12-06T20:41:10Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7116197686">
+<id>Chlorine: Clojure integration for Atom</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2018/12/19/atom-chlorine/</link>
+<title>Chlorine: Clojure Integration for Atom</title>
+<message />
+<createdAt>2018-12-20T08:00:22Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7183622313">
+<id>Atom, Chlorine, and Windows</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/01/22/atom-chlorine-windows/</link>
+<title>Atom, Chlorine, and Windows - An Architect's View</title>
+<message />
+<createdAt>2019-01-23T05:54:48Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7225846124">
+<id>Clojurians Slack Alternatives</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/</link>
+<title>Clojurians Slack Alternatives - An Architect's View</title>
+<message />
+<createdAt>2019-02-11T21:01:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7372872276">
+<id>Next.JDBC</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/04/21/next-jdbc/</link>
+<title>An Architect's View</title>
+<message />
+<createdAt>2019-04-22T06:09:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7438949555">
+<id>Next.JDBC Beta 1</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/05/25/next-jdbc/</link>
+<title>Next.JDBC Beta 1 - An Architect's View</title>
+<message />
+<createdAt>2019-05-25T22:13:21Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7458501908">
+<id>Next.JDBC Release Candidate 1</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/06/04/next-jdbc/</link>
+<title>Next.JDBC Release Candidate 1 - An Architect's View</title>
+<message />
+<createdAt>2019-06-05T01:50:06Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7514785292">
+<id>Next.JDBC to 1.0.0 and Beyond!</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/07/04/next-jdbc/</link>
+<title>Next.JDBC to 1.0.0 and Beyond! - An Architect's View</title>
+<message />
+<createdAt>2019-07-04T17:45:12Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7559243082">
+<id>The Strange Loop 2013</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2013/09/22/the-strange-loop-2013/</link>
+<title>The Strange Loop 2013 - An Architect's View</title>
+<message />
+<createdAt>2019-07-29T09:03:33Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7576033673">
+<id>Release! Release! Release!</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/08/07/releases/</link>
+<title>Release! Release! Release! - An Architect's View</title>
+<message />
+<createdAt>2019-08-07T22:48:01Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7633344680">
+<id>How do you use clojure.spec</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/09/13/using-spec/</link>
+<title>How Do You Use clojure.spec - An Architect's View</title>
+<message />
+<createdAt>2019-09-13T18:56:33Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7792436712">
+<id>Happy New Releases!</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://corfield.org/blog/2019/12/31/releases/</link>
+<title>Happy New Releases! - An Architect's View</title>
+<message />
+<createdAt>2020-01-01T04:51:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7922898498">
+<id>https://online.pubhtml5.com/ginq/sywt/</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://online.pubhtml5.com/ginq/sywt/</link>
+<title>hack de clash royale</title>
+<message />
+<createdAt>2020-03-19T08:18:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7925194432">
+<id>https://clyp.it/user/bk1zl31n</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://clyp.it/user/bk1zl31n</link>
+<title>cheats 8 ball pool</title>
+<message />
+<createdAt>2020-03-20T15:29:23Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="7947492724">
+<id>https://rankgamers.com/cheats/dragoncity</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://rankgamers.com/cheats/dragoncity</link>
+<title>dragon city hack apk</title>
+<message />
+<createdAt>2020-04-02T15:58:52Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8039905650">
+<id>next.jdbc Compendium</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/05/23/next-jdbc/</link>
+<title>next.jdbc Compendium - An Architect's View</title>
+<message />
+<createdAt>2020-05-23T21:58:38Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8252706058">
+<id>next.jdbc Compendium II</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/posts-output/2020-10-25-next-jdbc/</link>
+<title>An Architect's View: next.jdbc Compendium II</title>
+<message />
+<createdAt>2020-10-25T23:40:44Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8253850536">
+<id>Instrumenting Clojure for New Relic Monitoring</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/instrumenting-clojure-for-new-relic-monitoring/</link>
+<title>An Architect's View: Instrumenting Clojure for New Relic Monitoring</title>
+<message />
+<createdAt>2020-10-26T22:30:17Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8253853982">
+<id>next.jdbc compendium</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/10/25/next-jdbc/</link>
+<title>An Architect's View: next.jdbc compendium</title>
+<message />
+<createdAt>2020-10-26T22:34:31Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8253903588">
+<id>Lessons of Open Source Maintenance</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/08/11/api-lessons/</link>
+<title>An Architect's View: Lessons of Open Source Maintenance</title>
+<message />
+<createdAt>2020-10-26T23:25:55Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8254111240">
+<id>Quick Start Guide</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2016-01-07-docs/</link>
+<title>An Architect's View: Quick Start Guide</title>
+<message />
+<createdAt>2020-10-27T04:03:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8270565525">
+<id>VS Code and Clover</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/11/09/vscode-clover/</link>
+<title>An Architect's View: VS Code and Clover</title>
+<message />
+<createdAt>2020-11-10T01:22:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8271051037">
+<id>Frege (and Clojure)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2015/02/08/frege-and-clojure/</link>
+<title>An Architect's View: Frege (and Clojure)</title>
+<message />
+<createdAt>2020-11-10T11:48:44Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8289459936">
+<id>Talks: Clojure&amp;#39;s Superpower</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/11/24/talks-clojures-superpower/</link>
+<title>An Architect's View: Talks: Clojure's Superpower</title>
+<message />
+<createdAt>2020-11-24T17:27:58Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8411112727">
+<id>deps.edn and monorepos</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/02/23/deps-edn-monorepo/</link>
+<title>An Architect's View: deps.edn and monorepos</title>
+<message />
+<createdAt>2021-02-24T01:41:41Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8452312829">
+<id>It&amp;#39;s the &amp;quot;Little Things&amp;quot;...</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/03/25/little-things/</link>
+<title>An Architect's View: It's the "Little Things"...</title>
+<message />
+<createdAt>2021-03-26T04:45:48Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8487267304">
+<id>deps.edn and monorepos II</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/</link>
+<title>An Architect's View: deps.edn and monorepos II</title>
+<message />
+<createdAt>2021-04-22T04:46:20Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8534024049">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://localhost:3000/blog/2021/04/21/deps-edn-monorepo-2/</link>
+<title />
+<message />
+<createdAt>2021-05-19T22:34:44Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8580288308">
+<id>deps.edn and monorepos III (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/06/06/deps-edn-monorepo-3/</link>
+<title>An Architect's View: deps.edn and monorepos III (Polylith)</title>
+<message />
+<createdAt>2021-06-08T06:17:13Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8667650595">
+<id>deps.edn and monorepos IV</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/</link>
+<title>An Architect's View: deps.edn and monorepos IV</title>
+<message />
+<createdAt>2021-07-24T07:26:24Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8689529698">
+<id>tools.build</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/08/02/tools-build/</link>
+<title>An Architect's View: tools.build</title>
+<message />
+<createdAt>2021-08-03T05:34:51Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8713039679">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/08/02/tools-build/?1</link>
+<title>An Architect's View: tools.build</title>
+<message />
+<createdAt>2021-08-13T18:53:21Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8738543684">
+<id>deps.edn and monorepos V (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/</link>
+<title>An Architect's View: deps.edn and monorepos V (Polylith)</title>
+<message />
+<createdAt>2021-08-26T01:57:12Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8805368066">
+<id>deps.edn and monorepos VI (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/10/01/deps-edn-monorepo-6/</link>
+<title>An Architect's View: deps.edn and monorepos VI (Polylith)</title>
+<message />
+<createdAt>2021-10-02T06:12:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8825459442">
+<id>deps.edn and monorepos VII (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/</link>
+<title>An Architect's View: deps.edn and monorepos VII (Polylith)</title>
+<message />
+<createdAt>2021-10-14T06:51:12Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8862238364">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/07/04/next-jdbc/index.html</link>
+<title>An Architect's View: Next.JDBC to 1.0.0 and Beyond!</title>
+<message />
+<createdAt>2021-11-04T14:01:21Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8862557018">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/09/13/using-spec/index.html</link>
+<title>An Architect's View: How do you use clojure.spec</title>
+<message />
+<createdAt>2021-11-04T17:28:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8864584535">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/05/25/next-jdbc/index.html</link>
+<title>An Architect's View: Next.JDBC Beta 1</title>
+<message />
+<createdAt>2021-11-05T19:46:20Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8866078599">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2018/12/03/datafy-nav/index.html</link>
+<title>An Architect's View: Clojure 1.10's datafy and nav</title>
+<message />
+<createdAt>2021-11-06T16:50:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8868594140">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2014/09/20/powered-by-javascript/index.html</link>
+<title>An Architect's View: Powered by JavaScript</title>
+<message />
+<createdAt>2021-11-08T02:16:55Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8868700366">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2016/01/31/testing-with-boot/index.html</link>
+<title>An Architect's View: Testing With Boot</title>
+<message />
+<createdAt>2021-11-08T03:50:24Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8869817201">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2017/11/17/boot-localrepo/index.html</link>
+<title>An Architect's View: Boot localrepo?</title>
+<message />
+<createdAt>2021-11-08T17:58:54Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8870838263">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2017/07/17/clojure-java-jdbc-0-7-0/index.html</link>
+<title>An Architect's View: Release 0.7.0 of clojure.java.jdbc</title>
+<message />
+<createdAt>2021-11-09T07:21:49Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8871541820">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2015/02/08/frege-and-clojure/index.html</link>
+<title>An Architect's View: Frege (and Clojure)</title>
+<message />
+<createdAt>2021-11-09T16:44:11Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8871715481">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2016/01/30/building-on-boot/index.html</link>
+<title>An Architect's View: Building On Boot</title>
+<message />
+<createdAt>2021-11-09T18:48:13Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8873847192">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2017/01/19/boot-new-moved/index.html</link>
+<title>An Architect's View: seancorfield/boot-new has moved to boot/new</title>
+<message />
+<createdAt>2021-11-11T01:32:55Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8873871871">
+<id>Social Media</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/11/10/social-media/</link>
+<title>An Architect's View: Social Media</title>
+<message />
+<createdAt>2021-11-11T01:59:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8877296518">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/11/24/talks-clojures-superpower/index.html</link>
+<title>An Architect's View: Talks: Clojure's Superpower</title>
+<message />
+<createdAt>2021-11-13T04:31:26Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8880093317">
+<id>The new clojure-doc web site</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/11/14/clojure-doc/</link>
+<title>An Architect's View: The new clojure-doc web site</title>
+<message />
+<createdAt>2021-11-15T00:03:42Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8902459245">
+<id>deps.edn and monorepos VIII (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/11/28/deps-edn-monorepo-8/</link>
+<title>An Architect's View: deps.edn and monorepos VIII (Polylith)</title>
+<message />
+<createdAt>2021-11-29T06:19:52Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8911896055">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/07/21/deps-edn-monorepo-4/?__proto__[98765]=testv&amp;__proto__.98765=testv&amp;constructor[prototype][98765]=testv</link>
+<title>An Architect's View: deps.edn and monorepos IV</title>
+<message />
+<createdAt>2021-12-05T06:46:28Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8937141273">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield-org.translate.goog/blog/2021/02/23/deps-edn-monorepo/?_x_tr_sl=auto&amp;_x_tr_tl=zh-CN&amp;_x_tr_hl=zh-CN</link>
+<title>An Architect's View: deps.edn and monorepos</title>
+<message />
+<createdAt>2021-12-22T06:32:21Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8962152631">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/04/21/deps-edn-monorepo-2/?1</link>
+<title>An Architect's View: deps.edn and monorepos II</title>
+<message />
+<createdAt>2022-01-08T19:12:03Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="8962152867">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/10/13/deps-edn-monorepo-7/?1</link>
+<title>An Architect's View: deps.edn and monorepos VII (Polylith)</title>
+<message />
+<createdAt>2022-01-08T19:12:16Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9225912988">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2018/12/06/null-nilable-optionality/index.html</link>
+<title>An Architect's View: SQL NULL, s/nilable, and optionality</title>
+<message />
+<createdAt>2022-06-20T01:23:33Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9376183890">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield-org.translate.goog/blog/2018/12/03/datafy-nav/?_x_tr_sl=en&amp;_x_tr_tl=pt&amp;_x_tr_hl=pt-BR&amp;_x_tr_pto=sc</link>
+<title>An Architect's View: Clojure 1.10's datafy and nav</title>
+<message />
+<createdAt>2022-09-30T05:46:41Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9423584095">
+<id>Social Media Revisited</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/10/30/social-media/</link>
+<title>An Architect's View: Social Media Revisited</title>
+<message />
+<createdAt>2022-10-31T00:06:51Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9433017140">
+<id>deps.edn and monorepos IX (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/11/05/deps-edn-monorepo-9/</link>
+<title>An Architect's View: deps.edn and monorepos IX (Polylith)</title>
+<message />
+<createdAt>2022-11-06T05:40:34Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9449884082">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/10/30/social-media/index.html</link>
+<title>An Architect's View: Social Media Revisited</title>
+<message />
+<createdAt>2022-11-17T10:17:15Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9452878447">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield-org.translate.goog/blog/2021/03/25/little-things/?_x_tr_sl=en&amp;_x_tr_tl=pl&amp;_x_tr_hl=pl&amp;_x_tr_pto=wapp</link>
+<title>An Architect's View: It's the "Little Things"...</title>
+<message />
+<createdAt>2022-11-19T08:57:12Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9456609823">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/08/02/tools-build/index.html</link>
+<title>An Architect's View: tools.build</title>
+<message />
+<createdAt>2022-11-21T17:03:01Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9481106852">
+<id>deps.edn and monorepos X (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/07/deps-edn-monorepo-10/</link>
+<title>An Architect's View: deps.edn and monorepos X (Polylith)</title>
+<message />
+<createdAt>2022-12-08T00:55:04Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9481297303">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/07/deps-edn-monorepo-10/index.html</link>
+<title>An Architect's View: deps.edn and monorepos X (Polylith)</title>
+<message />
+<createdAt>2022-12-08T04:48:52Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9496301763">
+<id>Calva, Joyride, and Portal</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2022-12-18T18:10:49Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9497768052">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/index.html</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2022-12-19T18:03:38Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9498394711">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2014/06/21/clojurebridge/index.html</link>
+<title>An Architect's View: ClojureBridge</title>
+<message />
+<createdAt>2022-12-20T05:26:44Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9598034375">
+<id>Long-Term Funding, Update #1</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/02/28/long-term-funding-1/</link>
+<title>An Architect's View: Long-Term Funding, Update #1</title>
+<message />
+<createdAt>2023-02-28T19:32:41Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9625520090">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/?vscodeBrowserReqId=1679336719857</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2023-03-20T18:25:22Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9628236579">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2022/12/18/calva-joyride-portal/?vscodeBrowserReqId=1679512424321</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2023-03-22T19:13:46Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9661305382">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/04/16/calva-joyride-portal/</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2023-04-16T21:15:39Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9661425438">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/04/16/calva-joyride-portal/?s=09</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2023-04-16T23:37:26Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9664558163">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/04/16/calva-joyride-portal/index.html</link>
+<title>An Architect's View: Calva, Joyride, and Portal</title>
+<message />
+<createdAt>2023-04-19T09:29:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9672273205">
+<id>Long-Term Funding, Update #2</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/04/30/long-term-funding-2/</link>
+<title>An Architect's View: Long-Term Funding, Update #1</title>
+<message />
+<createdAt>2023-04-25T17:43:14Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9754590958">
+<id>Long-Term Funding, Update #3</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/06/30/long-term-funding-3/</link>
+<title>An Architect's View: Long-Term Funding, Update #3</title>
+<message />
+<createdAt>2023-06-29T18:56:38Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9775206886">
+<id>deps.edn and monorepos XI (Polylith)</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/</link>
+<title>An Architect's View: deps.edn and monorepos XI (Polylith)</title>
+<message />
+<createdAt>2023-07-15T18:15:44Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9794530930">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/?x=123</link>
+<title>An Architect's View: deps.edn and monorepos XI (Polylith)</title>
+<message />
+<createdAt>2023-07-31T03:36:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9794531505">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/07/15/deps-edn-monorepo-11/?x=456</link>
+<title>An Architect's View: deps.edn and monorepos XI (Polylith)</title>
+<message />
+<createdAt>2023-07-31T03:36:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9835466980">
+<id>Long-Term Funding, Update #4</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/08/31/long-term-funding-4/</link>
+<title>An Architect's View: Long-Term Funding, Update #4</title>
+<message />
+<createdAt>2023-08-30T20:08:56Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9842439067">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://localhost:3000/blog/2023/07/15/deps-edn-monorepo-11/</link>
+<title />
+<message />
+<createdAt>2023-09-05T04:45:58Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9842439345">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://localhost:3000/blog/2021/08/02/tools-build/</link>
+<title />
+<message />
+<createdAt>2023-09-05T04:46:21Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9912278086">
+<id>Long-Term Funding, Update #5</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/10/31/long-term-funding-5/</link>
+<title>An Architect's View: Long-Term Funding, Update #5</title>
+<message />
+<createdAt>2023-10-28T22:21:06Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9934203812">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/03/25/little-things/?_sm_pdc=1&amp;_sm_rid=2BJMJN343HDfjDQvrtF0qWtf4Hvj76JN40f27MP</link>
+<title>An Architect's View: It's the "Little Things"...</title>
+<message />
+<createdAt>2023-11-14T15:40:50Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9936977442">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://webcache.googleusercontent.com/search?q=cache:51nlYawlpV4J:https://corfield.org/blog/2020/05/23/next-jdbc/&amp;gl=us</link>
+<title>An Architect's View: next.jdbc Compendium</title>
+<message />
+<createdAt>2023-11-16T17:15:22Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9955002519">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2018/04/18/all-the-paths/index.html</link>
+<title>An Architect's View: All The Paths</title>
+<message />
+<createdAt>2023-11-29T10:56:29Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9955002689">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/08/25/deps-edn-monorepo-5/index.html</link>
+<title>An Architect's View: deps.edn and monorepos V (Polylith)</title>
+<message />
+<createdAt>2023-11-29T10:56:38Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9955002722">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/02/11/clojurians-slack-alternatives/index.html</link>
+<title>An Architect's View: Clojurians Slack Alternatives</title>
+<message />
+<createdAt>2023-11-29T10:56:39Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9955168165">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2016/07/18/start-your-engine/index.html</link>
+<title>An Architect's View: Start Your Engine</title>
+<message />
+<createdAt>2023-11-29T13:17:41Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9955168332">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2021/02/23/deps-edn-monorepo/index.html</link>
+<title>An Architect's View: deps.edn and monorepos</title>
+<message />
+<createdAt>2023-11-29T13:17:49Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="9996285932">
+<id>Long-Term Funding, Update #6</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2023/12/31/long-term-funding-6/</link>
+<title>An Architect's View: Long-Term Funding, Update #6</title>
+<message />
+<createdAt>2023-12-25T20:32:05Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10315850138">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/04/21/next-jdbc/index.html</link>
+<title>An Architect's View: Next.JDBC</title>
+<message />
+<createdAt>2024-09-11T00:56:34Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10326892160">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/01/22/atom-chlorine-windows/index.html</link>
+<title>An Architect's View: Atom, Chlorine, and Windows</title>
+<message />
+<createdAt>2024-09-21T17:24:47Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10373488658">
+<id>Clojure/conj 2024</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2024/11/09/conj-2024/</link>
+<title>An Architect's View: Clojure/conj 2024</title>
+<message />
+<createdAt>2024-11-10T04:37:19Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10473038500">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield-org.translate.goog/blog/2019/09/13/using-spec/?_x_tr_sl=auto&amp;_x_tr_tl=ja&amp;_x_tr_hl=ja</link>
+<title>An Architect's View: How do you use clojure.spec</title>
+<message />
+<createdAt>2025-02-25T18:30:55Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10489321286">
+<id>Migrating to LazyTest</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2025/03/12/lazytest/</link>
+<title>An Architect's View: Migrating to LazyTest</title>
+<message />
+<createdAt>2025-03-13T01:03:31Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10599008481">
+<id>The power of the :deps alias</id>
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2025/08/08/deps/</link>
+<title>An Architect's View: The power of the :deps alias</title>
+<message />
+<createdAt>2025-08-10T02:12:50Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10607233652">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2014/09/23/clojure-in-the-enterprise/index.html</link>
+<title>An Architect's View: Clojure in the Enterprise?</title>
+<message />
+<createdAt>2025-08-22T21:58:18Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10610684041">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2016/06/17/more-boot/index.html</link>
+<title>An Architect's View: More Boot</title>
+<message />
+<createdAt>2025-08-28T17:42:10Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10655804749">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2019/06/04/next-jdbc/index.html</link>
+<title>An Architect's View: Next.JDBC Release Candidate 1</title>
+<message />
+<createdAt>2025-10-11T00:35:03Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10690980790">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2014/09/25/the-strange-loop-2014/index.html</link>
+<title>An Architect's View: The Strange Loop 2014</title>
+<message />
+<createdAt>2025-10-25T11:48:05Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10691195905">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2013/09/22/the-strange-loop-2013/index.html</link>
+<title>An Architect's View: The Strange Loop 2013</title>
+<message />
+<createdAt>2025-10-25T13:38:00Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10695447354">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2014/06/03/getting-started/index.html</link>
+<title>An Architect's View: Getting Started</title>
+<message />
+<createdAt>2025-10-27T02:49:33Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10738138774">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/10/25/next-jdbc/index.html</link>
+<title>An Architect's View: next.jdbc Compendium II</title>
+<message />
+<createdAt>2025-11-09T15:36:35Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10739864775">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://corfield.org/blog/2020/11/09/vscode-clover/index.html</link>
+<title>An Architect's View: VS Code and Clover</title>
+<message />
+<createdAt>2025-11-10T03:05:04Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10755674586">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://cur.at/5IZoA8K?m=web</link>
+<title>An Architect's View: deps.edn and monorepos VII (Polylith)</title>
+<message />
+<createdAt>2025-11-15T02:12:35Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10840644543">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>http://seancorfield.github.io/blog/2024/11/09/conj-2024/</link>
+<title>An Architect's View: Clojure/conj 2024</title>
+<message />
+<createdAt>2025-12-23T11:02:46Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<thread dsq:id="10891416206">
+<id />
+<forum>seancorfield</forum>
+<category dsq:id="3119784" />
+<link>https://seancorfield.github.io/blog/2021/11/14/clojure-doc/</link>
+<title>An Architect's View: The new clojure-doc web site</title>
+<message />
+<createdAt>2026-01-23T06:22:11Z</createdAt>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<isClosed>false</isClosed>
+<isDeleted>false</isDeleted>
+</thread>
+<post dsq:id="1447277305">
+<id />
+<message><![CDATA[<p>Interesting...</p>]]></message>
+<createdAt>2014-06-21T06:58:01Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Manuel Avelar</name>
+<isAnonymous>false</isAnonymous>
+<username>manuelavelardeleon</username>
+</author>
+<thread dsq:id="2782690200" />
+</post>
+<post dsq:id="1474506026">
+<id />
+<message />
+<createdAt>2014-07-08T14:57:01Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name />
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="2782705923" />
+</post>
+<post dsq:id="1590704987">
+<id />
+<message><![CDATA[<p>Sean: thanks for concise and cogent impressions. I have just started dipping my toes in Clojure and Scala and appreciate frank, workaday takes on the languages. </p>]]></message>
+<createdAt>2014-09-15T23:53:30Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Thomas Beek</name>
+<isAnonymous>false</isAnonymous>
+<username>tombeek</username>
+</author>
+<thread dsq:id="2782690200" />
+</post>
+<post dsq:id="1607795925">
+<id />
+<message><![CDATA[<p>Sean, thanks for the shout-out! Yours is honestly the best single summary of what Amanda and I were trying to convey I've seen. It's very gratifying!</p>]]></message>
+<createdAt>2014-09-27T01:12:53Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>psnively</name>
+<isAnonymous>false</isAnonymous>
+<username>psnively</username>
+</author>
+<thread dsq:id="3055013935" />
+</post>
+<post dsq:id="1845941366">
+<id />
+<message><![CDATA[<p>First time I read a blog post from the future!</p><p>Great, Sean!</p><p>One remark: the code would get less complex IMHO if you just annotated <br>    fibonacci :: [Long]<br>or<br>    fibs :: Long -&gt; Long -&gt; [Long]</p><p>This way, you could save the conversions from and to Int.<br>And as the numbers grow rapidly, Long is better anyway!</p>]]></message>
+<createdAt>2015-02-10T17:42:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ingo Wechsung</name>
+<isAnonymous>false</isAnonymous>
+<username>ingowechsung</username>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="1846036219">
+<id />
+<message><![CDATA[<p>Thanks for looking over the code. I'll update that... I just wanted to avoid type annotations except for the API but if annotating `fibs` is all it takes to make the whole thing work on `Long`, including the static method `fib`, that would be nicer. BTW, am I correct about the lack of stack overflow potential with the lazy recursive call? I read your post on the list and wondered if the deferred additions could cause a stack overflow when forced...</p>]]></message>
+<createdAt>2015-02-10T18:31:23Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="1845941366" />
+</post>
+<post dsq:id="1846058574">
+<id />
+<message><![CDATA[<p>You can probably get away without any annotations when you write the integer constants with a trailing L.</p><p>Oh, I see now that you use the input Long as index, so we need to convert this to an Int (unless you use genericDrop from Data.List instead of drop), but we can still avoid holding the data as Ints, which will overflow rather quickly.</p><p>I guess the stack could overflow if you index into the list with a big enough index.<br>One way to avoid this would be to decorate the b argument of fibs with a bang. This would force calculation of (a+b) before the next list node is constructed.</p>]]></message>
+<createdAt>2015-02-10T18:42:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ingo Wechsung</name>
+<isAnonymous>false</isAnonymous>
+<username>ingowechsung</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="1846036219" />
+</post>
+<post dsq:id="1846082207">
+<id />
+<message><![CDATA[<p>If I annotate `fibs` as `Long -&gt; Long -&gt; [Long]`, it does indeed infer `Long` everywhere, but then I need to add a cast on the argument of `drop`:</p><p>fib n = head $ drop (<a href="http://Long.int" rel="nofollow noopener" target="_blank" title="Long.int">Long.int</a> n) $ fibonacci</p><p>You're also correct that defining:</p><p>fibonacci = fibs 0L 1L</p><p>let's me omit the annotation on `fibs` -- nice!</p><p>Good to know about `!` on `b`. Maybe I'll update the blog post to clarify that, one way or another.</p>]]></message>
+<createdAt>2015-02-10T18:53:06Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="1845941366" />
+</post>
+<post dsq:id="1846090586">
+<id />
+<message><![CDATA[<p>You are so bad a55. Always impressed and inspired.</p>]]></message>
+<createdAt>2015-02-10T18:57:32Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>John Allen</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_uunjLgj1n9</username>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="1851102342">
+<id />
+<message><![CDATA[<p>&gt;haven’t really been able to get deeply into Python<br>Did you try Jython? I never tried it myself so I'm not sure how usable is it.<br>There was some SML for JVM too. :)</p><p>Ability to call Frege from Clojure is impressive, but what I find sad is that any FFIs are now limited to primitive types, or, at best, to method calls between languages with same object system.</p><p>Making an FFI algebraic type aware is surely a nontrivial task, but it's probably worth research. More and more languages pick up the idea (Scala, Rust, Swift...), but you still can't call say ML code from Haskell despite the absense of theoretical obstacles for doing so. Maybe with some language-agnostic constructor tag to int mapping files it can be done for languages that run on the same VM. Maybe we need a radically new OS design not centered around a language that was, from language theory point of view, born outdated. ;)</p>]]></message>
+<createdAt>2015-02-13T03:38:59Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>dmbaturin</name>
+<isAnonymous>false</isAnonymous>
+<username>dmbaturin</username>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="1864852965">
+<id />
+<message />
+<createdAt>2015-02-20T00:35:03Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name />
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="1864893944">
+<id />
+<message><![CDATA[<p>Jython was lagging far enough behind regular Python that I didn't want to waste time on it (and it wasn't clear how good the interop would be between Jython and other JVM languages since that's generally a pain point with languages that get _ported_ to the JVM instead of being written _for_ the JVM).</p>]]></message>
+<createdAt>2015-02-20T01:08:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="1851102342" />
+</post>
+<post dsq:id="1929028457">
+<id />
+<message><![CDATA[<p><a href="https://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/" rel="nofollow noopener" target="_blank" title="https://existentialtype.wordpress.com/2011/03/19/dynamic-languages-are-static-languages/">https://existentialtype.wor...</a></p><p>I've been interested in this dynamic vs static languages debate for a while now and I've consistently found that the static side has the better arguments...</p>]]></message>
+<createdAt>2015-03-26T12:45:08Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+</post>
+<post dsq:id="1932145836">
+<id />
+<message><![CDATA[<p>Not really a relevant comment for this post but I decided to allow it anyway. I've read Harper's piece before (several times) and whilst there is some accuracy in trying to describe a dynamic type system as being a static type system with an "any" unitype, that really misses the point. Google for arguments against Harper's view - you'll find some really good insights into the value of dynamically typed languages. </p>]]></message>
+<createdAt>2015-03-27T22:07:49Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1929028457" />
+</post>
+<post dsq:id="1935894980">
+<id />
+<message><![CDATA[<p>I would say lambda's and Clojure are very closely related to the typing debate, but I suppose I'm no expert.</p>]]></message>
+<createdAt>2015-03-30T13:31:56Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1932145836" />
+</post>
+<post dsq:id="1938719524">
+<id />
+<message><![CDATA[<p>Lambdas appear in both statically typed and dynamically typed languages so that is why I felt a link to a "static vs dynamic" blog post was not really relevant.</p><p>Not sure what Clojure has to do with this either...?</p>]]></message>
+<createdAt>2015-03-31T20:58:46Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1935894980" />
+</post>
+<post dsq:id="1938748177">
+<id />
+<message><![CDATA[<p>What do you mean by "this" in the sentence "Not sure what Clojure has to do with this..."?</p><p>You can read your article above to see how they are related.</p>]]></message>
+<createdAt>2015-03-31T21:13:26Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1938719524" />
+</post>
+<post dsq:id="1938754502">
+<id />
+<message><![CDATA[<p>I meant in connection with your comments. You're not explaining yourself very well and you're neither asking any actual questions nor making relevant comments as far as I can see.</p><p>Can you perhaps elaborate on your point -- if you have one -- so that we can have an actual discussion?</p>]]></message>
+<createdAt>2015-03-31T21:17:22Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1938748177" />
+</post>
+<post dsq:id="1939888823">
+<id />
+<message><![CDATA[<p>Just that Java 8, with it's inclusion of lambda's, pushes the language toward the direction of less verbosity at the expense of clarity.</p><p>I see this situation as being closely related to types, as the same arguments are generally used for and against static vs dynamic languages.</p><p>I don't think that's an outrageous inference to make.</p>]]></message>
+<createdAt>2015-04-01T13:42:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1938754502" />
+</post>
+<post dsq:id="1940196761">
+<id />
+<message><![CDATA[<p>Ah, I see where you're coming from now! I'm not sure I'd agree with your assertion that verbosity vs clarity is the same argument used in the static vs dynamic languages discussion tho'...</p><p>Scala is much less verbose than Java but both are statically typed languages. Haskell -- which has been around a quarter century now! -- is also statically typed and much less verbose than Java. Static typing really has nothing to do with how verbose a language needs to be: Java's verbosity is due to its design and its very simplistic compiler. It's a nursemaid for an army of mediocre "enterprise" developers.</p><p>Most statically typed languages rely on type inference to avoid the need to write down the types. You can provide type annotations but generally you don't have to. Java requires type annotations and is often held up as "static typing is bad" but really it's "Java is bad".</p><p>I'd argue that Java's verbosity actually detracts from its clarity. I think code written in Scala / Haskell / Frege / Elm / PureScript / etc has much better clarity because it has less "noise" (I'll concede that very dense, obtuse code can be written in those languages, but I've seen dense, obtuse, and VERBOSE Java code too).</p><p>Arguing that dynamic languages and less verbose than static languages is not really valid. Nor that dynamic languages are "just" uni-typed static languages. Both of those miss the real benefit of a dynamic language: malleability. The ability to grow and evolve solutions "on the fly" is why developers move to dynamic languages.</p><p>Bear in mind that dynamic languages are nearly always still strongly typed: this isn't an issue of typed vs not-typed. Dynamic languages just trade off where the type checking is performed. The upside is the malleability, the downside is that you need to exercise code at runtime to ensure it type-checks. That means more tests -- larger test suites -- unless you have other language design features at play that reduce the need for testing (such as persistent, immutable data structures, and pure functions).</p><p>Java 8 has added some type inference in order to make functional idioms less painful to use -- anonymous functions don't need as much type annotation as "regular" Java code -- and they've introduced a number of "behind the scenes" type coercions so that "functional interfaces" can be automatically derived as needed. It's a good compromise, and why I think Java 8 is such an impressive step forward.</p><p>But it's still not functional enough for my tastes and that's why I prefer Clojure. Computations that are idiomatic (and efficient) in Clojure are still pretty ugly in Java -- and that has nothing to do with the type system per se.</p><p>I would probably have started using Haskell years ago if it ran on the JVM -- and that's why I'm interested in Frege these days (essentially Haskell for the JVM) and why I created lein-fregec as a way to mix Frege into my Clojure code. There's a benefit to having a static type system which can prevent whole classes of errors even getting into your code (no Null Pointer Exceptions!). Java doesn't have that benefit tho'...</p>]]></message>
+<createdAt>2015-04-01T16:24:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1939888823" />
+</post>
+<post dsq:id="1949187715">
+<id />
+<message><![CDATA[<p>Interesting perspective. I see the verbosity of Java as a feature, not a failure.<br>That's just a symptom of having a language that systematically describes the author's intent.<br>Though I agree that I would have preferred a language that didn't allow mutability at all..<br>Frege looks very cool, though I know next to nothing about functional programming except most people say it's very hard to read.</p>]]></message>
+<createdAt>2015-04-06T16:25:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1940196761" />
+</post>
+<post dsq:id="1949229370">
+<id />
+<message><![CDATA[<p>I think that depends on which "most people" you talk to. As part of ClojureBridge, we've had great success teaching Clojure to folks who are new to programming and they don't find it hard. However, people with (only) a strong OOP background really struggle with immutability (more so than the functional part) because they're so used to encapsulated state and mutating it to get anything done -- they focus on state and side-effects instead of behavior and data transformation.</p><p>When a functional language is taught as a first language, "most people" take to it really well -- and then find OOP fairly easy to pick up later. The reverse is not true, as OOP teaches some "bad thinking" that gets in the way of learning the functional principles. I base these observations on watching various people -- from complete newbies to seasoned developers -- learning new programming languages in a variety of courses both in-person and online over the last several years.</p><p>As for Java's verbosity, well, it's certainly a "feature" but no one is going to persuade me this sort of thing is a "good feature":</p><p>HashMap&lt;string, arrraylist&lt;string=""&gt;&gt; m = new HashMap&lt;string, arraylist&lt;string=""&gt;&gt;();</p><p>The complete -- and totally unnecessary -- duplication of type information on both sides?</p><p>And having to provide type information when it's obvious from the function signature:</p><p>Set&lt;map.entry&lt;string,arraylist&lt;string&gt;&gt;&gt; s = m.entrySet();</p><p>Writing that sort of nonsense is just soul-destroying :( Both left hand side annotations are inferable from the right hand side -- repeating them is just noise. The compiler knows the types involved -- it can (and should) keep track of that stuff for you.</p><p>Type inference (like Scala, Haskell, Frege, Elm, Rust, etc) really helps reduce that noise while maintaining type safety.</p>]]></message>
+<createdAt>2015-04-06T16:50:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949187715" />
+</post>
+<post dsq:id="1949230675">
+<id />
+<message><![CDATA[<p>Thankyou Disqus for munging my Java code... hopefully you'll get the intent even tho' the syntax is now illegal :(</p>]]></message>
+<createdAt>2015-04-06T16:51:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949229370" />
+</post>
+<post dsq:id="1949304296">
+<id />
+<message><![CDATA[<p>I don't think...<br>Ya, you don't have to declare the generics on both sides. I don't know what the ="" is for. (Edit: Oh lol, I see now.)<br>HashMap&lt;string, arraylist&lt;string=""&gt;&gt; m = HashMap&lt;&gt;();<br>I think that changed with Java 8, though I don't know for sure. I remember plugging that in out of habit and then my IDE informed me I was being dumb.</p><p>I just wrote a program that creates Voronoi Diagrams and doesn't use any mutable classes or static fields, classes or methods (Except for builders) even though I see source code that leans on these things quite a lot.</p><p>I feel like you blame alot of the shortcomings of programmers on Java while at the same time championing languages that require more competence from the programmer.</p>]]></message>
+<createdAt>2015-04-06T17:35:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949230675" />
+</post>
+<post dsq:id="1949333219">
+<id />
+<message><![CDATA[<p>Yeah, Disqus adds the = "" nonsense and lowercases all the types :(</p><p>It's possible (likely?) the type inference you indicate only came in with Java 8 -- which underlines my point that it's fundamentally unnecessary and could have gone away ages ago. Even so, you still need to repeat the top-level type (HashMap) which is still unnecessary.</p><p>"my IDE informed me I was being dumb" -- and that's another area where I get frustrated with Java and "Java developers": Java is so verbose that IDEs have evolved to provide code generation and all sorts of shortcuts to help developers avoid actual typing and to navigate monstrous codebases full of FactoryVisitorManager OOP nonsense. Anyway, that's a whole 'nother blog post :)</p><p>Do I think that Java has created a generation of dumb developers? Not entirely, but it has _enabled_ a generation of relatively unthinking developers. I see them asking all sorts of basic questions on forums that would have been unthinkable before "Enterprise Java" took hold. Yes, I do champion languages that require more competence. I think our industry as a whole has lowered the threshold, to our detriment: armies of less than mediocre programmers that can churn out millions of lines of dumb Java code, propped up by IDEs that do a lot of their "thinking" for them, does not improve our productivity or our quality.</p><p>Java is not a "good" language -- it is a "mediocre" language -- and the whole ecosystem is designed to support "mediocre" programmers (at best) so that they can churn out "solutions". I've sat in on conversations between these "Enterprise Java Developers" at Java conferences and hearing them talk about how they work, how they build software, makes me die inside a little every time.</p><p>Java 8 is a huge step forward -- for Java -- and it now allows for much more elegant solutions that competent developers can create. Hence my comment about it being "palatable". It's not going to change the direction of the super-tanker tho'. Armies of Java programmers will continue to churn out millions of lines of dumb Java code, just as before.</p><p>Better developers have moved on to better languages in general.</p>]]></message>
+<createdAt>2015-04-06T17:52:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949304296" />
+</post>
+<post dsq:id="1949621141">
+<id />
+<message><![CDATA[<p>I suppose repeating "HashMap" is unnecessary in this case, but it's better programming to point to the interface anyway.<br>Map&lt;string, arraylist&lt;string=""&gt;&gt; = new HashMap&lt;&gt;();<br>In that case it's not something that can or should be inferred.</p><p>I'd like to argue that Java developers are by-and large great programmers that use OOP in the way it was intended to create highly modular, maintainable, and concurrent code but that would be so laughably untrue I don't think the devil could advocate it.</p><p>Hell, I've had almost no formal education in Java, it's just a hobby of mine, and yet I'm sure there are legions of "Java Developers" that don't know what generics are, don't understand how statics harm their applications, don't know what a typing system is, and probably don't even know what "mutability" means.</p><p><a href="http://blog.codinghorror.com/the-nonprogramming-programmer/" rel="nofollow noopener" target="_blank" title="http://blog.codinghorror.com/the-nonprogramming-programmer/">http://blog.codinghorror.co...</a></p><p>The reality is, however, that these monkeys are cooking the spaghetti that "real programmers" have to come in and untangle down the line.</p><p>In my mind, that means the programming language is too flexible. We need to add more training wheels to this thing.</p><p>To you, it means we need to use languages that require the programmer to know what they're doing to just keep all the spaghetti at bay.</p><p>I can't really say that's wrong, but it does seem unrealistic to me.</p><p>As to "better languages" I suspect you're right. Paul Graham made an excellent point that you can always find problems with languages that are less "powerful" than the one you're using, but when you try to defend your language against other's that are more powerful one tends to just make rationalizations like "it's too hard to learn" or "I'm already good with language X".</p><p>I can point to problems in Javascript, Python, and C++ because they lack some feature or other, but I can't do the same thing with Lisp or functional languages because I simply don't know them. So can just resort to "They're weird and slow" with all the force of a wet noodle against a concrete slab.</p><p><a href="http://www.paulgraham.com/avg.html" rel="nofollow noopener" target="_blank" title="http://www.paulgraham.com/avg.html">http://www.paulgraham.com/a...</a></p>]]></message>
+<createdAt>2015-04-06T20:29:09Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949333219" />
+</post>
+<post dsq:id="1949659857">
+<id />
+<message><![CDATA[<p>Amen to most of that -- and Paul Graham's writings are highly recommended (starting with that one). Also worth a read is Joel Spolsky's comments on "Java Schools":</p><p><a href="http://www.joelonsoftware.com/articles/ThePerilsofJavaSchools.html" rel="nofollow noopener" target="_blank" title="http://www.joelonsoftware.com/articles/ThePerilsofJavaSchools.html">http://www.joelonsoftware.c...</a></p><p>Part of the problem is that neither Java nor C++ are what was intended when OOP was "invented". OOP was supposed to be about autonomous "objects" that communicate by sending messages to each other. Instead we've built an industry on top of Java (and C++ and C#) that is considered "OOP" and, as you hint above, it's so far from what was intended that it would be laughable if it wasn't so soul-crushingly sad (and, oh, the billions it's cost us!).</p><p>I think our industry would do better with fewer people in it -- but better people, taught properly -- so I don't think "training wheels" are the answer. Beginners _can_ learn Haskell or Clojure or whatever. There's nothing inherently "complicated" about those languages or the concepts of FP on which they are built. The problem is how people are taught -- or at least the materials to which they are exposed. We almost need to burn down entire programming libraries to get rid of the bad stuff at this point. Sigh.</p><p>But well-taught programmers, with an aptitude for problem-solving, working in high-level languages -- and I mean higher than Java -- can be so much more productive than the armies of Java developers that inhabit corporate IT today.</p><p>Unrealistic? Yeah, you're probably right. But I can dream of a better future, eh? :)</p>]]></message>
+<createdAt>2015-04-06T20:52:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949621141" />
+</post>
+<post dsq:id="2006582484">
+<id />
+<message><![CDATA[<p>Hey Sean, I know this is pseudo-unrelated to this conversation, but I wasn't sure how else to contact you.<br>I've been playing with Elm (Prodded somewhat by this conversatoin.) and what I noticed is that the structure of the programming is actually what the structure of a good Java program looks like (though less verbose.) and I'm definately seeing first hand what you were saying here.<br>Functional programming forces the programmer to do the things I wish people would do more of in Java and it's actually the very things I was thinking were designed to help the bad programmer that was actually enabling the bad behavior... Not defending against it.</p><p>However, there's also something else I'm noticing. Since everything in functional programming is immutable you can get away with swapping functions all over the place which is really cool first of all, but it also presents a situation where you're defining functions in some mysterious place and then pulling them out magically out of thin air and I'm not seeing a good way of tracking down where the implementation details of that function are coming from, nor is there an easy way to figure out what operations are available to me from a given library.</p><p>In Java, I could use my IDE to just right click and do a "show source" or manually follow an import.<br>In Elm there's constantly these functions that are being pulled out of a mysterious ass. For example;</p><p><a href="http://elm-lang.org/edit/examples/Reactive/Transforms.elm" rel="nofollow noopener" target="_blank" title="http://elm-lang.org/edit/examples/Reactive/Transforms.elm">http://elm-lang.org/edit/ex...</a><br>In there, I see "ngon", "filled", "collage", "move",  and "toFloat"</p><p>Most of those are obvious in this case, but I can't immediately see where they are coming from, what they return, how they're implemented, or what other operations I can perform on a given returned function.</p><p>Sure, the type declaration's are certainly useful for figuring this stuff out, but it is tremendously easier to do in Java.</p><p>I think this is just a current limitation of Elm and not an inherent problem with Functional programming, is that right?</p>]]></message>
+<createdAt>2015-05-05T18:41:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949659857" />
+</post>
+<post dsq:id="2006628853">
+<id />
+<message><![CDATA[<p>Wildcard imports are considered poor practice (but you often see them in toy examples). In any real code base, you'd either see specific imports (so the functions being imported would be itemized in the import itself) or aliases (so the import would create a short alias and you'd see that if every call).</p><p>A common example from Clojure is to (:require [clojure.string :as str]) and then you'll see (str/replace foo patt replacement) -- so it's obvious where replace comes from.</p>]]></message>
+<createdAt>2015-05-05T18:55:46Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="2006582484" />
+</post>
+<post dsq:id="2006694004">
+<id />
+<message><![CDATA[<p>It doesn't look like my last reply went through...</p><p>This is kind of unrelated but I was playing with Elm somewhat in response to this conversation and I'm seeing some of my failings. The tools in Java that were meant to help the bad programmer do good code was actually enabling the bad behavior.<br>The kinds of things I'd like to see people do more in Java is absolutely enforced in functional programming.</p><p>There's one thing that's really annoying me though. Elm doesn't have an easy way of figuring out what's being returned, what functions can be performed on what's returned, what the implementation details of an imported function are, or even exactly where a function is being imported from (Sometimes).</p><p>"Learn the libraries" is certainly valid to a point but I definitely see room for a solid IDE to help the programmer navigate a codebase. This isn't an inherent problem of functional programming is it?</p><p>Here's a very simple example;<br><a href="http://elm-lang.org/edit/examples/Elements/ToForm.elm" rel="nofollow noopener" target="_blank" title="http://elm-lang.org/edit/examples/Elements/ToForm.elm">http://elm-lang.org/edit/ex...</a></p><p>Degrees, rotate, toForm, and show are all functions. Most of them I don't immediately know what they're accepting or returning. Can I replace "rotate (degrees 20)" with "scale 2"? (Turns out I can...) Can I replace it with "skew (90,90)"? Nope.</p><p>This makes me miss my builder patterns and step builder patterns. :l</p>]]></message>
+<createdAt>2015-05-05T19:13:42Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="1949659857" />
+</post>
+<post dsq:id="2006809389">
+<id />
+<message><![CDATA[<p>I don't recognize that Clojure syntax, but the concepts make sense to me. Thanks.</p>]]></message>
+<createdAt>2015-05-05T19:43:00Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>yor mom</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_GLiACqlmEe</username>
+</author>
+<thread dsq:id="2782690200" />
+<parent dsq:id="2006628853" />
+</post>
+<post dsq:id="2484893488">
+<id />
+<message><![CDATA[<p>Sean, do you have an example of this - "move all of our persistence from CFML’s “query” functionality to a Clojure “data mapper” based on clojure.java.jdbc."</p><p>I want to renew my effort to get into clojure. I went through a big chunk of "120 hours..." tutorial last year and didn't use any of it yet. Feel like I am loosing it all. I have a biggish project on FW1 with a lot of data. Is there a way to learn more about what problems Clojure helped you solve at world Singles?</p>]]></message>
+<createdAt>2016-01-29T14:52:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ilya Fedotov</name>
+<isAnonymous>false</isAnonymous>
+<username>ilya_fedotov</username>
+</author>
+<thread dsq:id="4458832065" />
+</post>
+<post dsq:id="2485035563">
+<id />
+<message><![CDATA[<p>Here's the CFML part of that equation: <a href="https://github.com/seancorfield/datamapper" rel="nofollow noopener" target="_blank" title="https://github.com/seancorfield/datamapper">https://github.com/seancorf...</a></p><p>The Clojure part is called from that code and is a thin wrapper around the clojure.java.jdbc library (providing connection pooling for our data sources).</p><p>I've spoken at conferences and user groups about our use of Clojure so check out the Presentations page on my blog and I think there's a video of one of my talks up on InfoQ (from Clojure/West 2012?).</p>]]></message>
+<createdAt>2016-01-29T16:19:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4458832065" />
+<parent dsq:id="2484893488" />
+</post>
+<post dsq:id="2486649834">
+<id />
+<message><![CDATA[<p>Hi,</p><p>I am curious why you decided to switch to boot after the two weeks spike. I don't see anything like a pros / cons list or some other facts. Could you please elaborate on what made you happy?</p><p>Thanks,<br>Sven</p>]]></message>
+<createdAt>2016-01-30T16:16:46Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sven Richter</name>
+<isAnonymous>false</isAnonymous>
+<username>sveri80</username>
+</author>
+<thread dsq:id="4535771711" />
+</post>
+<post dsq:id="2487348421">
+<id />
+<message><![CDATA[<p>Per the benefits I list in the article:</p><p>* "the build script is straightforward executable Clojure, and tasks are just functions"<br>* "composability is baked right into the core of Boot"<br>* "having just a single JVM up and running was a win all round: every process started up faster, our task and automation code was simpler"</p><p>And "In the next blog post, I’ll talk about some of the specifics in our Boot infrastructure and the tasks we’re writing" -- so watch this space! :)</p>]]></message>
+<createdAt>2016-01-31T02:03:22Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2486649834" />
+</post>
+<post dsq:id="2487588956">
+<id />
+<message><![CDATA[<p>The next in the series: <a href="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/" rel="nofollow noopener" target="_blank" title="http://seancorfield.github.io/blog/2016/01/30/building-on-boot/">http://seancorfield.github....</a></p>]]></message>
+<createdAt>2016-01-31T07:15:22Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2487348421" />
+</post>
+<post dsq:id="2489073081">
+<id />
+<message><![CDATA[<p>I'm surprised to hear you aren't having any problem on Windows.  Just a few days ago, based on your endorsement, I downloaded boot on Windows 10 and started working through the hoplon tutorial.  Early in the tutorial, I started encountering errors and insurmountable problems.  The boot guys don't use Windows, so there's really no support for that platform.  I gave up.</p>]]></message>
+<createdAt>2016-02-01T07:44:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Mark Engelberg</name>
+<isAnonymous>false</isAnonymous>
+<username>markengelberg</username>
+</author>
+<thread dsq:id="4535771711" />
+</post>
+<post dsq:id="2489084791">
+<id />
+<message><![CDATA[<p>Sounds like a problem with the Hoplon template / tutorial? I've had no problems while developing and testing boot-expectations or boot-new on Windows 10 - but I do all my World Singles work on OS X and deploy on Linux. </p>]]></message>
+<createdAt>2016-02-01T08:03:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2489073081" />
+</post>
+<post dsq:id="2489232467">
+<id />
+<message><![CDATA[<p>Thanks for providing more insights :-)</p>]]></message>
+<createdAt>2016-02-01T09:29:53Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sven Richter</name>
+<isAnonymous>false</isAnonymous>
+<username>sveri80</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2487588956" />
+</post>
+<post dsq:id="2489234430">
+<id />
+<message><![CDATA[<p>The same is valid for me on W7 and still, the number of issues for Windows just rises: <a href="https://github.com/boot-clj/boot/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+is%3Aopen++windows" rel="nofollow noopener" target="_blank" title="https://github.com/boot-clj/boot/issues?utf8=%E2%9C%93&amp;q=is%3Aissue+is%3Aopen++windows">https://github.com/boot-clj...</a><br>I have been concerned about that for over a year, but it seems like the boot folks are not interested yet in supporting windows.<br>Still, I like their approach. Well, however, we will see what the future brings.</p>]]></message>
+<createdAt>2016-02-01T09:32:48Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sven Richter</name>
+<isAnonymous>false</isAnonymous>
+<username>sveri80</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2489073081" />
+</post>
+<post dsq:id="2489717290">
+<id />
+<message><![CDATA[<p>Windows is not very friendly to tooling, to be honest. Leiningen was an appalling experience on Windows for a very long time and Boot was originally completely unusable on Windows. The Boot folks have been asking for help in fixing the Windows issues -- and Windows 7 causes problems that have gone away in Windows 10.</p><p>The vast majority of Clojure developers use OS X / Linux. If you want the Windows experience to get better, you're going to need to roll up your sleeves and debug the problems and submit Pull Requests to projects.</p><p>That said, I've successfully installed and used Boot for simple stuff on VMs running Windows 10, Windows 8.1, and Windows XP, as well as Windows 10 on my laptop. I just don't use Windows for any "real" development.</p>]]></message>
+<createdAt>2016-02-01T16:27:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2489234430" />
+</post>
+<post dsq:id="2490243742">
+<id />
+<message><![CDATA[<p>You are right in every regard. Actually, when they initially released boot I looked into it, saw the problems and thought about contributing, but decided against it for lukff reasons.</p><p>1. I think the design of boot relies too much on stuff that does not work on W7 like file locks and stuff. So changing that, might mean, I have to change the design, which I dont think I can do. Of course I might be wrong here, but, that was my impression.<br>2. I also tried to run the make script, but, like you said, they develop on Linux / OSX and so are their scripts, no sight of OS independence.</p><p>3. I just don't have the time to support a build tool on windows:</p><p>Also, I don't need boot, I just like fooling around with stuff. It's just as I said, the more projects switch to boot, the more people you will exclude.</p><p>And again, I don't want to be mean or anything, they are doing a great job, I just want to point at the consequences.</p>]]></message>
+<createdAt>2016-02-01T21:26:47Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sven Richter</name>
+<isAnonymous>false</isAnonymous>
+<username>sveri80</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2489717290" />
+</post>
+<post dsq:id="2490296486">
+<id />
+<message><![CDATA[<p>"I just don't have the time to support a build tool on windows:" -- I think this gets to the heart of the issue across the whole Clojure ecosystem. There just aren't enough Clojure developers using Windows who care enough about the experience to help make it better. We can debate the reasons for that but the bottom line is that until more Windows users decide to step up and help those project maintainers who only run OS X / Linux, the situation just isn't going to improve.</p><p>Folks for whom the tools work really well -- folks who, almost by definition, are not on Windows -- tend to not know enough about Windows to be able to make those tools work well on Windows. Although I've _used_ every version of Windows since 3.1, I've almost never _developed_ on Windows and I certainly don't understand enough of Windows' peculiarities to debug and fix problems I encounter there. Nor do I have much incentive to learn that much about Windows: I've always developed either on Unix or OS X and I've always targeted Unix / Linux for deployment.</p><p>Even back in the early 90's when I had Macs at home as my primary systems, I ran Tenon Intersystems' MachTen as a guest on them so I had a nice BSD Unix development environment.</p><p>I think Microsoft have steadily improved over the years in consumer-focused software: I even run Outlook as my primary email client on both iOS and OS X, for example. Windows has steadily improved too (well, excepting Windows ME and Vista!), and I used Windows 8 from early in the prerelease as a consumer O/S, moved to 8.1 as soon as that was available, and started using Windows 10 in prerelease about a year ago. Running Fast Ring Insider builds means I sometimes have to reinstall the O/S so I don't tend to get too invested in customizing that laptop and I certainly can't rely on it for anything more than a bit of hobby-level development in the evenings in front of the TV! Boot works well enough on Windows 10 for me that I'm satisfied. I have not run into any of the problems others are reporting (and some of those seem specific to ClojureScript projects and tooling -- which I don't use, even on OS X).</p>]]></message>
+<createdAt>2016-02-01T21:55:44Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4535771711" />
+<parent dsq:id="2490243742" />
+</post>
+<post dsq:id="2497213307">
+<id />
+<message><![CDATA[<p>Great job! For more inspiration you may look into NodeJS land for Yeoman (<a href="http://yeoman.io/" rel="nofollow noopener" target="_blank" title="http://yeoman.io/">http://yeoman.io/</a> - a very powerful generator) or Slush (<a href="http://slushjs.github.io/" rel="nofollow noopener" target="_blank" title="http://slushjs.github.io/">http://slushjs.github.io/</a> &amp; <a href="https://github.com/slushjs/slush" rel="nofollow noopener" target="_blank" title="https://github.com/slushjs/slush">https://github.com/slushjs/...</a> - simpler, that is a gulp.js driven Yeoman alternative). It will be interesting to support template (conditional) configuration using CLI params or user input (ex: <a href="https://github.com/SBoudrias/Inquirer.js)" rel="nofollow noopener" target="_blank" title="https://github.com/SBoudrias/Inquirer.js)">https://github.com/SBoudria...</a></p><p>Keep the good bits coming!</p>]]></message>
+<createdAt>2016-02-05T07:12:23Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jaguard</name>
+<isAnonymous>false</isAnonymous>
+<username>jaguard</username>
+</author>
+<thread dsq:id="4546883750" />
+</post>
+<post dsq:id="2568611943">
+<id />
+<message><![CDATA[<p>Nice Explanation of testing with booting process.Thanks a lot for sharing this unique content which makes me to attain your my knowledge in the right path</p><p><a href="http://www.thinkittraining.in/selenium" rel="nofollow noopener" target="_blank" title="http://www.thinkittraining.in/selenium">Selenium Training in OMR</a></p>]]></message>
+<createdAt>2016-03-14T11:17:50Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Haritha Krishnan</name>
+<isAnonymous>false</isAnonymous>
+<username>shamsheer2</username>
+</author>
+<thread dsq:id="4540293654" />
+</post>
+<post dsq:id="2570422728">
+<id />
+<message><![CDATA[<p>Everything is fine, am happy about your blog. Thanks admin for sharing the unique content, you have done a great job I appreciate your effort and I hope you will get more positive comments from the web users.</p><p>Regards,</p><p>Camellia</p><p><a href="http://www.saptrainingchennai.in/courses/sap-training-in-chennai" rel="nofollow noopener" target="_blank" title="http://www.saptrainingchennai.in/courses/sap-training-in-chennai"> SAP Training in Chennai </a></p>]]></message>
+<createdAt>2016-03-15T09:21:21Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Camellia Canan</name>
+<isAnonymous>false</isAnonymous>
+<username>camelliacanan</username>
+</author>
+<thread dsq:id="4458832065" />
+</post>
+<post dsq:id="2671585469">
+<id />
+<message><![CDATA[<p>thank you for sharing such a great blog with us. expecting for more updation.</p><p><a href="http://www.thinkittraining.in/java-training" rel="nofollow noopener" target="_blank" title="http://www.thinkittraining.in/java-training">Java Training in Chennai</a></p>]]></message>
+<createdAt>2016-05-12T09:36:15Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>sathya</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_N22tHTHy05</username>
+</author>
+<thread dsq:id="4546883750" />
+</post>
+<post dsq:id="2857548039">
+<id />
+<message><![CDATA[<p>Thanks for sharing, we've been having some trouble upgrading and this helped us.</p>]]></message>
+<createdAt>2016-08-24T19:05:32Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Timothy Pratley</name>
+<isAnonymous>false</isAnonymous>
+<username>timothypratley</username>
+</author>
+<thread dsq:id="5025709641" />
+</post>
+<post dsq:id="2892944811">
+<id />
+<message><![CDATA[<p>Interesting find. Have you upgraded since to 3.31.1 to see if this is still an issue?</p>]]></message>
+<createdAt>2016-09-14T00:49:07Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>rymndhng</name>
+<isAnonymous>false</isAnonymous>
+<username>rymndhng</username>
+</author>
+<thread dsq:id="5025709641" />
+</post>
+<post dsq:id="2893057091">
+<id />
+<message><![CDATA[<p>As far as I could tell from talking to the tech @ NR, this is just an inherent issue in how their class loading / instrumenting logic works and it can be affected by various JVM projects that leverage class loaders in a similar manner to how Clojure does things. Yes, we are on the latest New Relic agent now, but we still have that blacklist in place. I've not seen any indication they've "fixed" this, so we haven't bothered trying it without the blacklist in place.</p>]]></message>
+<createdAt>2016-09-14T01:51:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="5025709641" />
+<parent dsq:id="2892944811" />
+</post>
+<post dsq:id="2896111656">
+<id />
+<message><![CDATA[<p>“I’ve often said that I try to follow The Pragmatic Programmer’s advice to learn a new language every year.” PLs copy features from each other. So I try to learn new PL features. It's more frugal.</p>]]></message>
+<createdAt>2016-09-15T17:40:21Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>beroal.in.ua</name>
+<isAnonymous>false</isAnonymous>
+<username>beroal</username>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="2896137532">
+<id />
+<message><![CDATA[<p>Well, with some languages it's not about "features" but about "paradigms" -- Erlang's paradigm of expected failure, Clojure's (and some others') paradigm of immutability and abstraction, Prolog's paradigm of unification, Rust's paradigm of (memory) borrowing... A well-designed PL tends to be more than just the sum of its individual features, and when feature X is "copied" from language Y to language Z it's going to be used within Z's paradigm.</p>]]></message>
+<createdAt>2016-09-15T17:55:07Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="2896111656" />
+</post>
+<post dsq:id="2896192926">
+<id />
+<message><![CDATA[<p>The I call a feature what you call a paradigm. ☺</p>]]></message>
+<createdAt>2016-09-15T18:27:20Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>beroal.in.ua</name>
+<isAnonymous>false</isAnonymous>
+<username>beroal</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="2896137532" />
+</post>
+<post dsq:id="3002468778">
+<id />
+<message><![CDATA[<p>hey,</p><p>- awesome blog-post; pretty useful intro to boot and reasoning behind it's existence. thanks for both boot-new and the post :)<br>- found 2 bugs in the post though,<br>  # link to fw1 is wrong/outdated<br>  # you're missing the `new` keyword before the `-t ...` in your `boot -d ...` commands</p>]]></message>
+<createdAt>2016-11-15T00:27:08Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>spradnyesh</name>
+<isAnonymous>false</isAnonymous>
+<username>spradnyesh</username>
+</author>
+<thread dsq:id="4546883750" />
+</post>
+<post dsq:id="3002721080">
+<id />
+<message><![CDATA[<p>Thank you for reporting the typos -- both fixed now!</p>]]></message>
+<createdAt>2016-11-15T03:54:30Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4546883750" />
+<parent dsq:id="3002468778" />
+</post>
+<post dsq:id="3171396006">
+<id />
+<message><![CDATA[<p>Have you had any experience with using Frege ina Compojure/ring project?  If so, how did you get frege to compile when you gave the command "lein ring server"?</p>]]></message>
+<createdAt>2017-02-23T17:41:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Kevin Weber</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_7irRsozZKR</username>
+</author>
+<thread dsq:id="3498809029" />
+</post>
+<post dsq:id="3171408409">
+<id />
+<message><![CDATA[<p>I haven't touched Frege in a very long time and I never did anything "production-level" in terms of Clojure/Frege integration. I will note that even when we were still using Leiningen (we switched to Boot in late 2015), we never used the "lein ring server" approach -- instead we created an uberjar and ran that directly (and we do the same today with Boot).</p>]]></message>
+<createdAt>2017-02-23T17:48:00Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="3498809029" />
+<parent dsq:id="3171396006" />
+</post>
+<post dsq:id="3236048774">
+<id />
+<message><![CDATA[<p>u sound obnoxious with whole lot of negative attitude . U  might  very high qualification whom companies give free time to put ideal theory in practice but lesser people like me who gives a hoot to PR and Facebook/Twitter u do not make sense except blabber</p><p>What i feel that semantic sugar is at the back burner but syntax/typo sugar are at the forefront without real tangible benefit and somehow it is drying out the essence of programmers who does not believe in memorization . of libraries or syntax sugars ( Ultimately Compiler generates the verbose code which the interpreter can understand ).</p><p>Thread safe architecture,immutability , function as first class should have been the priority instead all kinds of silly things i.e. instead of language it is trying to become a tool .</p><p>Tell me How Scala improves upon that when Java 8 with Default methods, functional interface , paralleled and thread safe collection with some verbosity better it ?? Those so called sugars .</p><p>Any practical Production Environment is constrained by I/O,Mem,Network Bandwidth/maintenance ( Visual/ verbose comments/verbose physical implementation without redundancy as much as possible as Business Analysis,Management /quality management and politics takes away 70% time).</p><p>I am a data modeler in traditional sense i.e. mostly worked with Traditional RDBMs and PL/SQl .<br>Trying to explore both java ,Scala as well as Big data spectrum and i must say mostly Pr and Sugar coating except java 8. Spark RDD except iterative processing for Mlib is it that great or cost effective i doubt .</p><p>Rest NO SQL DBs are single minded . so everyday with good backing of a new promoter a New Db is created. have a good degree and have enough time</p>]]></message>
+<createdAt>2017-04-02T12:29:19Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>sasanka ghosh</name>
+<isAnonymous>false</isAnonymous>
+<username>sasankaghosh</username>
+</author>
+<thread dsq:id="2782690200" />
+</post>
+<post dsq:id="3617877266">
+<id />
+<message><![CDATA[<p>Awesome.  When do you think Boot new will be merged into Boot core? I agree that it belongs there.</p>]]></message>
+<createdAt>2017-11-15T21:03:44Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Nick Mudge</name>
+<isAnonymous>false</isAnonymous>
+<username>nickmudge</username>
+</author>
+<thread dsq:id="4546883750" />
+</post>
+<post dsq:id="3617885926">
+<id />
+<message><![CDATA[<p>Read <a href="http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/" rel="nofollow noopener" target="_blank" title="http://seancorfield.github.io/blog/2017/01/19/boot-new-moved/">http://seancorfield.github....</a></p>]]></message>
+<createdAt>2017-11-15T21:09:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="4546883750" />
+<parent dsq:id="3617877266" />
+</post>
+<post dsq:id="3627775413">
+<id />
+<message><![CDATA[<p>hey Sean,<br>thanks for a nice article. btw, don't you think calling maven like "mvn install:install-file -Dfile=foobar.jar -DgroupId=foo -DartifactId=bar -Dversion=1.0.1 -Dpackaging=jar" would be much simpler? :)</p>]]></message>
+<createdAt>2017-11-22T09:17:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Michał Buczko</name>
+<isAnonymous>false</isAnonymous>
+<username>haksior</username>
+</author>
+<thread dsq:id="6291545553" />
+</post>
+<post dsq:id="3628671458">
+<id />
+<message><![CDATA[<p>Assuming someone has mvn installed and is familiar with it. A lot of Clojure folks use Leiningen or Boot specifically to avoid having to deal with mvn -- and mvn isn't installed by default on Mac or Windows.</p><p>I happen to have mvn installed on my Mac -- but only because some specific OSS project I was working with some time ago required. I don't need/use mvn for anything else.</p>]]></message>
+<createdAt>2017-11-22T19:13:13Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="6291545553" />
+<parent dsq:id="3627775413" />
+</post>
+<post dsq:id="3628986096">
+<id />
+<message><![CDATA[<p>Updated the post to show the newly published boot-localrepo task:</p><p>boot -d seancorfield/boot-localrepo install-artifact -f foobar.jar -P foo/bar -v 1.0.1</p>]]></message>
+<createdAt>2017-11-22T21:05:52Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="6291545553" />
+<parent dsq:id="3627775413" />
+</post>
+<post dsq:id="3939141937">
+<id />
+<message><![CDATA[<p>Do You Need A Loan To Consolidate Your Debt At 1.0%? Or A Personal Loans * Business Loans etc. Interested Parties Should Contact Us For More Information Through Via E-mail: SuiteCapitals@gmail.com ( SuiteCapitals@post.com )</p>]]></message>
+<createdAt>2018-06-11T05:08:49Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>ZZ</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_9dYx8jCdj6</username>
+</author>
+<thread dsq:id="6621023264" />
+</post>
+<post dsq:id="4225008370">
+<id />
+<message><![CDATA[<p>Thank you for the excellent summary "workflow" of datafy and nav.  <br>Someday I would love to see an example of that in the context of nav-ing through a database via clojure.java.jdbc</p>]]></message>
+<createdAt>2018-12-04T17:02:49Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Don Jackson</name>
+<isAnonymous>false</isAnonymous>
+<username>donaldclarkjackson</username>
+</author>
+<thread dsq:id="7086043166" />
+</post>
+<post dsq:id="4225123857">
+<id />
+<message><![CDATA[<p>You can try it out already with REBL and clj/deps.edn since you can depend on the latest commit of org.clojure/java.jdbc!</p>]]></message>
+<createdAt>2018-12-04T18:09:20Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7086043166" />
+<parent dsq:id="4225008370" />
+</post>
+<post dsq:id="4226053188">
+<id />
+<message><![CDATA[<p>Thanks, that was really helpful. :-)</p>]]></message>
+<createdAt>2018-12-05T08:40:22Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Magnar Sveen</name>
+<isAnonymous>false</isAnonymous>
+<username>magnars</username>
+</author>
+<thread dsq:id="7086043166" />
+</post>
+<post dsq:id="4227850275">
+<id />
+<message><![CDATA[<p>How about... on each column, qualify the keyword with the table name. This would then allow the `:id` column of one table to map to (at least some of) its children, and a child table (also using `:id`) to go to its children.<br>Also, child tables in particular. Maybe a vector of vectors in the schema value indicating multiple links to children?<br>Wonderful and very quick work. I can see why you said the schema design would be in flux.</p>]]></message>
+<createdAt>2018-12-06T13:01:47Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ron Lusk</name>
+<isAnonymous>false</isAnonymous>
+<username>ronlusk</username>
+</author>
+<thread dsq:id="7086043166" />
+</post>
+<post dsq:id="4228165756">
+<id />
+<message><![CDATA[<p>Definitely something I'm considering -- for find-by-keys and get-by-id, that would be easy; for the general query case, it would require delving into the resultset metadata.</p><p>I'm actually planning to build a new clojure.java.jdbc2 API that is a lot more streamlined (and higher performance) and incorporate qualified column names and datafy/nav and a number of other things.</p>]]></message>
+<createdAt>2018-12-06T16:47:10Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7086043166" />
+<parent dsq:id="4227850275" />
+</post>
+<post dsq:id="4228607368">
+<id />
+<message><![CDATA[<p>Hi Sean,</p><p>This talk was thought-provoking for me as well: when writing to SQL, like an UPDATE, you do have a use case for nil keys: to overwrite a stored value with NULL.</p><p>Seems like one of the few cases where nil keys are useful?</p>]]></message>
+<createdAt>2018-12-06T21:03:52Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Kah0ona</name>
+<isAnonymous>false</isAnonymous>
+<username>Kah0ona</username>
+</author>
+<thread dsq:id="7091106651" />
+</post>
+<post dsq:id="4228650259">
+<id />
+<message><![CDATA[<p>I'm musing on queries above -- update would continue to use nil values to store NULL in columns -- but there are definitely some use cases even for queries where it might make sense to return nil for a NULL column value. It'll need some exploration.</p>]]></message>
+<createdAt>2018-12-06T21:35:24Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4228607368" />
+</post>
+<post dsq:id="4229197899">
+<id />
+<message><![CDATA[<p>Yes, when you deal with Place Oriented Programming (PLOP) structures there is no way to avoid NULL/null/nil/etc. This is because you have an assigned place for each thing but if you have nothing in the first place what can you put in there?<br>I think this is one of the main point of Rich's talk as well: PLOP structures make the NULL/null/nil/etc problem worse. The alternative is to use data shapes that do not require something to be in a certain place. Hence the use of maps as the most basic data shape: you either have an entry in it, or you don't.<br>Expanding that thinking to databases, and you realise tables is not the right aggregate either, instead you need to go one level down to something that datomic calls datom, or RDF calls a fact.</p>]]></message>
+<createdAt>2018-12-07T07:37:21Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>fmjrey</name>
+<isAnonymous>false</isAnonymous>
+<username>fmjrey</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4228607368" />
+</post>
+<post dsq:id="4229348196">
+<id />
+<message><![CDATA[<p>Sounds interesting!  Maybe it would be useful to collaborate with (or draw inspiration from) Funcool's `clojure.jdbc`?</p><p> We chose to use `clojure.jdbc` over `java.jdbc`, mainly because we prefer its API, it seems to have less legacy built up and it is faster (see <a href="https://funcool.github.io/clojure.jdbc/latest/#why-another-jdbc-wrapper" rel="nofollow noopener" target="_blank" title="https://funcool.github.io/clojure.jdbc/latest/#why-another-jdbc-wrapper">https://funcool.github.io/c...</a> ). Would be nice if there could be a successor which introduces the new Clojure best-practices you describe, but also incorporates the best of both existing libraries.</p>]]></message>
+<createdAt>2018-12-07T11:05:03Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Vincent DM</name>
+<isAnonymous>false</isAnonymous>
+<username>vincent_dm</username>
+</author>
+<thread dsq:id="7091106651" />
+</post>
+<post dsq:id="4229532517">
+<id />
+<message><![CDATA[<p>Interesting. If we have data structure with some optional fields, some queries, definitely, may return null. Does we have any Steve in table with user ID and optional names? Seems, this question consists of two, second is "does we know all names?" We didn't found, false, but we don't know all names - true. It's like information about exceptions in golang. Meaningfull item is better than null, maybe this information is enough, but if not, check rest.</p>]]></message>
+<createdAt>2018-12-07T14:01:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>z8481111</name>
+<isAnonymous>false</isAnonymous>
+<username>z8481111</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4228650259" />
+</post>
+<post dsq:id="4230305535">
+<id />
+<message><![CDATA[<p>It's unfortunate that that library started out by illegally copying `clojure.java.jdbc` code and removing the Eclipse license and copyright attribution (until I called him out, on the Clojure mailing list). Looking over it now, I'm a bit surprised it has had no releases in two and a half years -- and no updates at all in a year and a half. Since then it evolved to have some interesting ideas, as does Ghadi's Squee library and a few others out there.</p>]]></message>
+<createdAt>2018-12-07T22:44:03Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4229348196" />
+</post>
+<post dsq:id="4233336980">
+<id />
+<message><![CDATA[<p>Regarding the whole nilable thing, I have been thinking about optionality, and it seems to me that there are really two different "kinds" of optionality.</p><p>For example, a person may have a first, middle and last name, where middle name is “optional”. However, the absence of a :middle-name key in a map representing a Person is ambiguous and may have two different meanings: Either the information is absent, that is, we do not know in this context whether the person has a middle name, but it could also mean that the person does not have a middle name at all.</p><p>This is IMO an issue regarding the plans for spec. How would you spec a function that calculates the full name of a person? It would be incorrect to only require :first-name and :last-name. That would indicate that we do not need the middle name at all, which is incorrect - we do need the middle name if the person has one.</p><p>So in this situation, one might consider spec’ing :middle-name to be nilable. When the value is nil, the person does not have a middle name, and when the key is absent, it means that the information is absent in that particular context. The same considerations seem to apply to NULLs in databases.</p>]]></message>
+<createdAt>2018-12-10T08:59:47Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Anders Hessellund Jensen</name>
+<isAnonymous>false</isAnonymous>
+<username>andershessellundjensen</username>
+</author>
+<thread dsq:id="7091106651" />
+</post>
+<post dsq:id="4234079222">
+<id />
+<message><![CDATA[<p>I would argue that if you have a column that is "optional" because you don't know whether you have that data or not, you need an explicit piece of data for that, independent of the column itself. And that's exactly one of the things Rich called out in his talk -- don't complect "don't know" with "not present".</p>]]></message>
+<createdAt>2018-12-10T19:04:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4233336980" />
+</post>
+<post dsq:id="4236636308">
+<id />
+<message><![CDATA[<p>Binding this to a graph DB would be fun. Very helpful overview thanks!</p>]]></message>
+<createdAt>2018-12-12T09:38:26Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>codeasone</name>
+<isAnonymous>false</isAnonymous>
+<username>codeasone</username>
+</author>
+<thread dsq:id="7086043166" />
+</post>
+<post dsq:id="4241149829">
+<id />
+<message><![CDATA[<p>Have you started on jdbc2 yet? Can I help??</p>]]></message>
+<createdAt>2018-12-14T15:17:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>stathissideris</name>
+<isAnonymous>false</isAnonymous>
+<username>stathissideris</username>
+</author>
+<thread dsq:id="7086043166" />
+<parent dsq:id="4228165756" />
+</post>
+<post dsq:id="4241442972">
+<id />
+<message><![CDATA[<p>It's mostly a series of sketches, sitting in a separate git repo in OneDrive, right now. It requires quite a bit more hammock time before it becomes useful code. I'm also not sure yet where I'll build it -- in Contrib (as new namespaces in java.jdbc) or out on GitHub somewhere. That decision probably won't get made until after the public discussion/clarification on Contrib that Alex Miller alluded to in his Inside Clojure journal post today.</p>]]></message>
+<createdAt>2018-12-14T18:29:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7086043166" />
+<parent dsq:id="4241149829" />
+</post>
+<post dsq:id="4256777205">
+<id />
+<message><![CDATA[<p>Great finding! I am fond of proto-repl + Atom also. <br>And it is really pity that there is no more it's development. Though it seems normal in clojure world - flash of great idea and then forget it :(<br>And I was looking forward to have some example of Atom plugin made on ClojureScript. I hope that Chlorine for Atom will be good one.</p>]]></message>
+<createdAt>2018-12-26T08:48:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Dima Fomin</name>
+<isAnonymous>false</isAnonymous>
+<username>dima_fomin</username>
+</author>
+<thread dsq:id="7116197686" />
+</post>
+<post dsq:id="4273737660">
+<id />
+<message><![CDATA[<p>Out of the scope of Clojure.</p><p>NULL is "I don't know".</p><p>As you say, if "You know", you must add data. For a middle name, One option is an empty string which you interpret then by your own convention as "I know that person has no middle name". If a NULL is there, it should be interpreted as "Information not provided during measuring, and there is a possibility the person's middle name is Homer with probability X ..." by the Universal convention on NULL.</p>]]></message>
+<createdAt>2019-01-07T16:47:26Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jesús Gómez</name>
+<isAnonymous>false</isAnonymous>
+<username>jgomo3</username>
+</author>
+<thread dsq:id="7091106651" />
+<parent dsq:id="4234079222" />
+</post>
+<post dsq:id="4309652043">
+<id />
+<message><![CDATA[<p>This is a great direction.  Like you, I have been waiting for an editor to utilize the socket repl.   Like you mentioned, hopefully prepl as well.   I have been enjoying my switch from emacs to this atom with chlorine set up</p>]]></message>
+<createdAt>2019-01-27T17:05:35Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Edward Teller</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_JhM3Nf8wfR</username>
+</author>
+<thread dsq:id="7116197686" />
+</post>
+<post dsq:id="4326501644">
+<id />
+<message><![CDATA[<p>I don't know how did I missed this article, but is just what I was looking forward to read. I mean, some light upon the clj tooling and deps. Thank you.</p>]]></message>
+<createdAt>2019-02-07T14:25:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jesús Gómez</name>
+<isAnonymous>false</isAnonymous>
+<username>jgomo3</username>
+</author>
+<thread dsq:id="7010810916" />
+</post>
+<post dsq:id="4434120829">
+<id />
+<message><![CDATA[<p>Alpha 9 is available with a small bug fix (for execute-one! on a PreparedStatement when the :gen-fn option is provided). It also improves the protocol docstrings.</p>]]></message>
+<createdAt>2019-04-23T00:46:32Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7372872276" />
+</post>
+<post dsq:id="4477021326">
+<id />
+<message><![CDATA[<p>Does it have async capabilities? (wait for I/O in async mode)</p>]]></message>
+<createdAt>2019-05-26T02:17:21Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Mike Ananev</name>
+<isAnonymous>false</isAnonymous>
+<username>mikhailananyev</username>
+</author>
+<thread dsq:id="7438949555" />
+</post>
+<post dsq:id="4477032800">
+<id />
+<message><![CDATA[<p>No. That isn't portable across databases (which next.jdbc is).</p>]]></message>
+<createdAt>2019-05-26T02:33:15Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7438949555" />
+<parent dsq:id="4477021326" />
+</post>
+<post dsq:id="4490526594">
+<id />
+<message><![CDATA[<p>FYI, next.jdbc 1.0.0-rc1 includes a new namespace -- next.jdbc.optional -- which includes map result set builders that omit columns with nil values. They're a drop-in replacement for the standard map result set builders in next.jdbc.result-set.</p>]]></message>
+<createdAt>2019-06-05T16:51:59Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7091106651" />
+</post>
+<post dsq:id="4528104207">
+<id />
+<message><![CDATA[<p>Glad to see next.jdbc evolved. Thanks @Sean</p>]]></message>
+<createdAt>2019-07-05T13:03:59Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>stardiviner</name>
+<isAnonymous>false</isAnonymous>
+<username>numbchild</username>
+</author>
+<thread dsq:id="7514785292" />
+</post>
+<post dsq:id="4566530564">
+<id />
+<message><![CDATA[<p>It would be awesome if you wrote a summary of what you learned in those 8 years of maintaining Clojure.java.sql so that we too could take with us some of the lessons and make better APIs 🙏</p>]]></message>
+<createdAt>2019-08-05T13:14:03Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jakub Holý</name>
+<isAnonymous>false</isAnonymous>
+<username>holyjak</username>
+</author>
+<thread dsq:id="7514785292" />
+</post>
+<post dsq:id="4567173717">
+<id />
+<message><![CDATA[<p>You know, I'd sort of thought as I wrote this blog post that it would summarize at least some of that but, now that I read it again in light of your comment, I can see that I really didn't do that at all. I guess that's a future blog post then!</p>]]></message>
+<createdAt>2019-08-05T21:12:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7514785292" />
+<parent dsq:id="4566530564" />
+</post>
+<post dsq:id="4567672012">
+<id />
+<message><![CDATA[<p>Well, it is possible to derive some (e.g. no breaking changes; keep <br>the API minimal; use transducers for performance) but I guess that is <br>just a small part of it. I will be looking forward to it! :-)</p>]]></message>
+<createdAt>2019-08-06T07:25:35Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jakub Holý</name>
+<isAnonymous>false</isAnonymous>
+<username>holyjak</username>
+</author>
+<thread dsq:id="7514785292" />
+<parent dsq:id="4567173717" />
+</post>
+<post dsq:id="4622353712">
+<id />
+<message><![CDATA[<p>Nice article, thanks for sharing!<br>How do you actually do "spec-based coercion"?</p>]]></message>
+<createdAt>2019-09-20T09:43:43Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Juraj Martinka</name>
+<isAnonymous>false</isAnonymous>
+<username>jumarko</username>
+</author>
+<thread dsq:id="7633344680" />
+</post>
+<post dsq:id="4622804860">
+<id />
+<message><![CDATA[<p>The short answer is s/conformer. The longer answer is that I probably ought to open source our coercing specs as an example.</p>]]></message>
+<createdAt>2019-09-20T17:33:47Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7633344680" />
+<parent dsq:id="4622353712" />
+</post>
+<post dsq:id="4623030245">
+<id />
+<message><![CDATA[<p>See <a href="https://github.com/worldsingles/web-specs" rel="nofollow noopener" target="_blank" title="https://github.com/worldsingles/web-specs">https://github.com/worldsin...</a></p>]]></message>
+<createdAt>2019-09-20T20:47:41Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7633344680" />
+<parent dsq:id="4622353712" />
+</post>
+<post dsq:id="4624839303">
+<id />
+<message><![CDATA[<p>Do you have any "general" way of converting  s/explain-data into more friendly messages? I have the exact same problem and I still could not find a better way to make this heuristics not so specific to the validation spec and its predicates.</p>]]></message>
+<createdAt>2019-09-22T17:03:58Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Wanderson Ferreira</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_gztJlRRWsu</username>
+</author>
+<thread dsq:id="7633344680" />
+</post>
+<post dsq:id="4624945352">
+<id />
+<message><![CDATA[<p>Yes, we have a general heuristic process that turns s/explain-data into error codes that are specific to our business domain (and have associated translations). It's data driven: you provide a hash map from "fragments" of predicates to error codes, and the process resolves the explain data into "fragments" and looks for matching error codes, reducing the size of the fragment each time around -- so you can have error codes for very specific failures and error codes for less specific failures.</p><p>Hard to explain in text (and it's fairly complicated code) but I am hoping to be able to open source it at some point, if I can decouple it from our business domain.</p>]]></message>
+<createdAt>2019-09-22T18:41:31Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="7633344680" />
+<parent dsq:id="4624839303" />
+</post>
+<post dsq:id="4747963319">
+<id />
+<message><![CDATA[<p>Thanks a lot for your invaluable work for the community! As Eric says, rock on!</p>]]></message>
+<createdAt>2020-01-07T05:55:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jakub Holý</name>
+<isAnonymous>false</isAnonymous>
+<username>holyjak</username>
+</author>
+<thread dsq:id="7792436712" />
+</post>
+<post dsq:id="4838880151">
+<id />
+<message><![CDATA[<p>61455527475692.09385110162941E+22</p>]]></message>
+<createdAt>2020-03-19T08:19:05Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Ricardo</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_oeOHZp50ua</username>
+</author>
+<thread dsq:id="7922898498" />
+</post>
+<post dsq:id="4840611945">
+<id />
+<message><![CDATA[<p>636818768082888.50078285601959E+23 - 569</p>]]></message>
+<createdAt>2020-03-20T15:29:30Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>meagan jane</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_THWJp51tIR</username>
+</author>
+<thread dsq:id="7925194432" />
+</post>
+<post dsq:id="4858096761">
+<id />
+<message><![CDATA[<p>268967771278319.78821230576756E+23 - 569</p>]]></message>
+<createdAt>2020-04-02T15:59:00Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>hacks</name>
+<isAnonymous>false</isAnonymous>
+<username>ryanzach</username>
+</author>
+<thread dsq:id="7947492724" />
+</post>
+<post dsq:id="4868051349">
+<id />
+<message><![CDATA[<p>Check out <a href="https://github.com/bhb/expound" rel="nofollow noopener" target="_blank" title="https://github.com/bhb/expound">https://github.com/bhb/expound</a> (dev focused) and <a href="https://github.com/alexanderkiel/phrase" rel="nofollow noopener" target="_blank" title="https://github.com/alexanderkiel/phrase">https://github.com/alexande...</a> (end user focused) for approaches to friendlier spec messages</p>]]></message>
+<createdAt>2020-04-09T20:14:49Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>erich oliphant</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_Sjs2ORlYfw</username>
+</author>
+<thread dsq:id="7633344680" />
+<parent dsq:id="4624839303" />
+</post>
+<post dsq:id="5062134726">
+<id />
+<message><![CDATA[<p>Hey, other good Slack alternatives are Webex, R-HUB web video conferencing servers, Gomeetnow, Gotomeeting etc. They work well.</p>]]></message>
+<createdAt>2020-09-08T07:43:59Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jeremias Eichberg</name>
+<isAnonymous>false</isAnonymous>
+<username>jeremiaseichberg</username>
+</author>
+<thread dsq:id="7225846124" />
+</post>
+<post dsq:id="5092606115">
+<id />
+<message><![CDATA[<p>Hey, other good Slack alternatives are Webex, R-HUB web video conferencing servers, Gomeetnow, Gotomeeting etc. They work well.</p>]]></message>
+<createdAt>2020-10-01T10:45:35Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jeremias Eichberg</name>
+<isAnonymous>false</isAnonymous>
+<username>jeremiaseichberg</username>
+</author>
+<thread dsq:id="7225846124" />
+</post>
+<post dsq:id="5192625342">
+<id />
+<message><![CDATA[<p>Is this the "remote" mode feature your were referring to:<br><a href="https://code.visualstudio.com/docs/remote/ssh" rel="nofollow noopener" target="_blank" title="https://code.visualstudio.com/docs/remote/ssh">https://code.visualstudio.c...</a> ?</p>]]></message>
+<createdAt>2020-12-17T16:01:27Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>onetom</name>
+<isAnonymous>false</isAnonymous>
+<username>onetom</username>
+</author>
+<thread dsq:id="8270565525" />
+</post>
+<post dsq:id="5192697349">
+<id />
+<message><![CDATA[<p>This one: <a href="https://code.visualstudio.com/docs/remote/wsl-tutorial" rel="nofollow noopener" target="_blank" title="https://code.visualstudio.com/docs/remote/wsl-tutorial">https://code.visualstudio.c...</a></p>]]></message>
+<createdAt>2020-12-17T17:00:11Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8270565525" />
+<parent dsq:id="5192625342" />
+</post>
+<post dsq:id="5205294555">
+<id />
+<message><![CDATA[<p>Any communication on the Internet cannot be called completely safe. Even in the last month, I have already seen the news that, for example, the service for video calls has already been hacked ...  So I think that now Utopia p2p is the service to intensively start using for the safest way of communication</p>]]></message>
+<createdAt>2020-12-29T12:51:36Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Martin V</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_2z2XexJFFB</username>
+</author>
+<thread dsq:id="7225846124" />
+</post>
+<post dsq:id="5287076185">
+<id />
+<message><![CDATA[<p>Interesting, thanks for the post. I've got a few questions:</p><p>* could you describe your CI setup? E.g. do you have multiple CI pipelines<br> (1 per subproject, or 1 per uberjar, for example)? How long do builds take? <br>* what do you think of the 'big' monorepo tools like bazel?</p><p> * is there a concept of versioning beyond everything being on HEAD (e.g. <br>if the subproject <i>worldsingles</i> wanted to publish artifacts under <br>SemVer coordinates)</p>]]></message>
+<createdAt>2021-03-01T10:20:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>MIJOTHY</name>
+<isAnonymous>false</isAnonymous>
+<username>MIJOTHY</username>
+</author>
+<thread dsq:id="8411112727" />
+</post>
+<post dsq:id="5287750309">
+<id />
+<message><![CDATA[<p>SemVer is broken. I don't follow it for my OSS projects and we wouldn't follow it at work. When we build JAR files, we include a git-related "version" that is based on the most recent tag with an offset (in commits) and a short SHA. We tag, based on date/time, when we make full releases of the system so an individually built &amp; released project might have a "version" like: 2021-02-18_11.54.24-3-ga4805f75c (taken from one of our current production processes: so that is 3 commits past the full build that was done on February 18th, just before noon).</p><p>I've never looked at Bazel -- I don't think I've heard of people using that in the Clojure world?</p><p>"Build" times aren't really relevant here since the actual "build" step is just building a JAR from Clojure source and the libraries it needs. Even with AOT compilation, the whole JAR-building process takes under a minute for any given artifact.</p><p>If you mean how long do test suites take to run, that depends very much on which artifact(s) we're planning to build and how much setup/teardown is done around groups of tests (our test/build process differs quite a bit between different parts of the overall system, especially when you factor in the two legacy apps we have, which aren't mentioned at all in this article, but do depend on a number of subprojects from the Clojure monorepo). So it's rather too complicated to answer questions about CI and timings.</p>]]></message>
+<createdAt>2021-03-01T21:04:52Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5287076185" />
+</post>
+<post dsq:id="5287890530">
+<id />
+<message><![CDATA[<p>Your question about build times made me curious enough to check and, for a CI job to test/build our four primary subprojects against a "warm" test database (where we have the basic schema but tear down and rebuild all tables and their data), it takes about 15 minutes from start to finish (producing four artifacts for release).</p>]]></message>
+<createdAt>2021-03-01T23:18:09Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5287750309" />
+</post>
+<post dsq:id="5291446680">
+<id />
+<message><![CDATA[<p>For a reader in 2021: the mentioned library was released  as <a href="https://github.com/seancorfield/next-jdbc" rel="nofollow noopener" target="_blank" title="https://github.com/seancorfield/next-jdbc">https://github.com/seancorf...</a></p>]]></message>
+<createdAt>2021-03-04T16:43:01Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>nash</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_XdQjx5gXD5</username>
+</author>
+<thread dsq:id="7086043166" />
+<parent dsq:id="4228165756" />
+</post>
+<post dsq:id="5308630599">
+<id />
+<message><![CDATA[<p>Very interesting!<br>Thanks for sharing.<br>How do you avoid building/testing libraries/apps that were not changed (in a CI flow)? do you compute the graph of dependencies for each app in some way?</p>]]></message>
+<createdAt>2021-03-18T15:56:53Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Golan</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_TAn1YtOtu1</username>
+</author>
+<thread dsq:id="8411112727" />
+</post>
+<post dsq:id="5308724828">
+<id />
+<message><![CDATA[<p>We can run a subset of tests based on just building a single app: we can compute the full set of dependencies based on transitively following :local/root dependencies between subprojects. We <i>could</i> use that to compute the downstream subprojects instead and just test/build anything that depends on what changed. But in reality the full test/build pipeline is fast enough for CI that it really doesn't matter and we haven't bothered to optimize it (yet). After all, if we make any changes to our "lower-level" subprojects, <i>everything</i> depends on them and so everything needs to be tested/built anyway (and the tests for those subprojects happen to be very fast so we wouldn't save much by not testing them).</p>]]></message>
+<createdAt>2021-03-18T17:10:40Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5308630599" />
+</post>
+<post dsq:id="5308953485">
+<id />
+<message><![CDATA[<p>Thanks!<br>I found your article very useful.<br>I'm moving a multi-repo environment into a monorepo.<br>We already have a different Clojure monorepo that uses leiningen + lein-monolith but I think this solution is much better.<br>Unfortunately build times are bigger for us so we might need this "optimization" of building just the libs/apps that changed. Maybe using <code>clojure -Stree</code> or some manual DAG building as you suggested.</p>]]></message>
+<createdAt>2021-03-18T20:07:45Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Golan</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_TAn1YtOtu1</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5308724828" />
+</post>
+<post dsq:id="5309007945">
+<id />
+<message><![CDATA[<p>We have a shell script that does some grep/sed stuff on the deps.edn files to build the list of subproject :local/root deps. It would probably be easier to do it in a Clojure script, but figuring out which subprojects depend on each other is pretty simple code either way.</p>]]></message>
+<createdAt>2021-03-18T20:50:10Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5308953485" />
+</post>
+<post dsq:id="5319165131">
+<id />
+<message><![CDATA[<p>Fyi hato is a java.net.http wrapper</p>]]></message>
+<createdAt>2021-03-26T20:40:50Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>henry w</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_APif49WCCV</username>
+</author>
+<thread dsq:id="8452312829" />
+</post>
+<post dsq:id="5319271335">
+<id />
+<message><![CDATA[<p>Yup, I've heard of it -- doesn't help us with the Java 8 restriction but once we're done with our legacy app rewrite, I'll take a look at it and maybe we'll migrate away from http-kit...</p>]]></message>
+<createdAt>2021-03-26T21:17:57Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8452312829" />
+<parent dsq:id="5319165131" />
+</post>
+<post dsq:id="5321404705">
+<id />
+<message><![CDATA[<p>Hmmm, for the third way, what is the purpose of having a subproject level `deps.edn`? It looks like the top level `deps.edn` have dictated (can dictate) all dependency versions.</p><p>Even if a sub project has some unique dependency, we could just modify the root `deps.edn` directly?</p>]]></message>
+<createdAt>2021-03-28T10:33:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Zhming</name>
+<isAnonymous>false</isAnonymous>
+<username>mjzshd</username>
+</author>
+<thread dsq:id="8411112727" />
+</post>
+<post dsq:id="5321883430">
+<id />
+<message><![CDATA[<p>The subprojects specify whatever dependencies they need, independently. The top-level deps.edn file only pins versions for things we care about being the same version across all projects. :override-deps does not specify dependencies, just versions: the subprojects only get the dependencies specified in their own deps.edn files.</p>]]></message>
+<createdAt>2021-03-28T19:41:12Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5321404705" />
+</post>
+<post dsq:id="5333307425">
+<id />
+<message><![CDATA[<p>I was wondering what IDE are you using for development.<br>Seems Intellij + Cursive have some problems with using the override-deps of the main deps.edn file.<br>Seems it tries to process the deps.edn file of each module separately and complains about "No coordinate type found for library" for the pinned-version dependencies.<br>Also some (minor) issues exist when trying to use REPL via Intellij.</p>]]></message>
+<createdAt>2021-04-07T09:08:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Golan</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_TAn1YtOtu1</username>
+</author>
+<thread dsq:id="8411112727" />
+</post>
+<post dsq:id="5333901290">
+<id />
+<message><![CDATA[<p>If you use :override-deps, it will be in an alias (:defaults for us), and you will need to tell Cursive to include that alias when starting your REPL from within Cursive.</p><p>However, we always start our REPL manually from the command-line and just connect to it as needed -- since our REPLs tend to stay running a lot longer than our editors! My work REPL was last restarted on March 24th (so it's been running for two weeks at this point). The REPL I've been using to develop HoneySQL V2 was last restarted on January 31st so it's been running for over two months.</p><p>I currently use VS Code + Clover (+ Calva, but I have the nREPL stuff turned off). Previously I used Atom + Chlorine and before that Atom + ProtoREPL and before that Emacs + nREPL/CIDER.</p>]]></message>
+<createdAt>2021-04-07T18:48:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="5333307425" />
+</post>
+<post dsq:id="5356250520">
+<id />
+<message><![CDATA[<p>Very interesting posts, thanks for sharing Sean. I have a question about the <code>:dev</code> aliases with specific dependencies from team members.</p><p>I noticed that if I add <code>:dev</code> into <code>clojure/deps.edn</code> file and go to <code>activator/dev/user.clj</code> file and try to do <code>cider-jack-in</code> then the dependencies of <code>:dev</code> are not loaded. I had to move it to <code>activator/deps.edn</code> and then it worked.</p><p>I used universal argument in Emacs to specify the aliases as seem here <code> Startup: /home/wanderson/.nix-profile/bin/clojure -A:dev:defaults:test:everything</code>.</p><p>Usually only adding these dev dependencies into <code>.clojure/deps.edn</code> should be enough to load them, right?</p>]]></message>
+<createdAt>2021-04-23T18:36:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Wanderson</name>
+<isAnonymous>false</isAnonymous>
+<username>shumala</username>
+</author>
+<thread dsq:id="8487267304" />
+</post>
+<post dsq:id="5356383092">
+<id />
+<message><![CDATA[<p>Since we want to work with <b>ALL</b> our code with the REPL, we always start our REPLs at the top of the monorepo -- and it's the same approach in Polylith. At work with have an <code>:everything</code> alias at the top level that brings in all the source code via <code>:local/root</code> under <code>:extra-deps</code> and all the test code via <code>:extra-paths</code> plus any test-only dependencies. In Polylith, the equivalent is a <code>:dev</code> alias.</p><p>Any dev can have their own custom tooling and custom code, via aliases in their <i>USER</i> <code>deps.edn</code> files.</p><p>Note: we start our REPLs manually since they tend to outlast our editor sessions (often substantially -- I have one REPL still running from January 31st, used for all my work on HoneySQL).</p>]]></message>
+<createdAt>2021-04-23T20:33:04Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8487267304" />
+<parent dsq:id="5356250520" />
+</post>
+<post dsq:id="5368590707">
+<id />
+<message><![CDATA[<p>Thanks for the great recommendations and the explaining the rationale behind them!</p><p>I'm curious which part of your legacy app is holding back the transition from Java 8 to higher versions?</p><p>We are also trying to stay lean from a dependency perspective and intuitively I was also choosing `clojure.data.json` and `httpkit` too. I was not clear on the drawbacks though, so this analysis was really helpful.</p><p>We are also considering to switch back to Java 8 from Java 11, because of Datomic ions, but that would mean dropping the full-featured and performant `hato` library and not having a HiDPI capable JavaFX version under `vlaaad/reveal`.</p><p>I've enquired about the timeline for Datomic upgrading to Java 11:<br><a href="https://forum.datomic.com/t/eta-of-java-11-for-ions/1835" rel="nofollow noopener" target="_blank" title="https://forum.datomic.com/t/eta-of-java-11-for-ions/1835">https://forum.datomic.com/t...</a></p><p>You can weigh in here if you would like to see such an upgrade:<br><a href="https://ask.datomic.com/index.php/501/java-11-ion-support" rel="nofollow noopener" target="_blank" title="https://ask.datomic.com/index.php/501/java-11-ion-support">https://ask.datomic.com/ind...</a></p>]]></message>
+<createdAt>2021-05-03T07:27:23Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>onetom</name>
+<isAnonymous>false</isAnonymous>
+<username>onetom</username>
+</author>
+<thread dsq:id="8452312829" />
+</post>
+<post dsq:id="5368620513">
+<id />
+<message><![CDATA[<p>Does having a top-level `deps.edn` work with Cursive?</p><p>I can import the top-level `deps.edn` file as an IntelliJ module, but it doesn't consider the `src` directories of the `:local/root` dependencies as `Sources` or `Tests` (under the _Project Structure_ / _Modules_ / _top-level-module_.</p><p>When I to mark these directories manually, I'm getting this error message:</p><p>```<br>Cannot Save Settings</p><p>Module "top-level-module" must not contain source root ".../monrepo/submodule/src".<br>The root already belongs to module "submodule".</p><p>```</p><p>My `monorepo/deps.edn` looks like this:</p><p></p><pre><code><br>{:aliases<br> {:everything<br>  {:extra-deps<br>   {xxx/submodule {:local/root "./submodule"}}}}}<br></code><br></pre><p></p><p>I tried to move the `monorepo/deps.edn` into some subdir, like `monorepo/everything/deps.edn`. I was able to import that and it didn't show `:local/root` deps under the `everything` module's directory structure, but I was still not able to load files from `:local/root` deps into the everything REPL, because Cursive doesn't think they are "not in scope for the module used to start the REPL".</p><p>Sounds like a Cursive bug, but maybe I just misunderstood something?</p>]]></message>
+<createdAt>2021-05-03T08:31:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>onetom</name>
+<isAnonymous>false</isAnonymous>
+<username>onetom</username>
+</author>
+<thread dsq:id="8487267304" />
+</post>
+<post dsq:id="5369172486">
+<id />
+<message><![CDATA[<p>I don't use Cursive so pretty much none of what you said here is comprehensible to me, I'm afraid ("import" a deps.edn file?? "module"??).</p>]]></message>
+<createdAt>2021-05-03T18:30:11Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8487267304" />
+<parent dsq:id="5368620513" />
+</post>
+<post dsq:id="5369238012">
+<id />
+<message><![CDATA[<p>As I said, it's a "legacy, non-Clojure web application" so it's not relevant to the discussion here -- except insofar as we cannot have the Clojure code that it calls (via Clojure's Java API) depend on things that don't work on Java 8.</p>]]></message>
+<createdAt>2021-05-03T19:23:25Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8452312829" />
+<parent dsq:id="5368590707" />
+</post>
+<post dsq:id="5604261277">
+<id />
+<message><![CDATA[<p>Amen, and well done, Sean. It's bloody awful out there most days.</p>]]></message>
+<createdAt>2021-11-11T02:45:33Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>jasefisher</name>
+<isAnonymous>false</isAnonymous>
+<username>jasefisher</username>
+</author>
+<thread dsq:id="8873871871" />
+</post>
+<post dsq:id="5625662238">
+<id />
+<message><![CDATA[<p>Loving these posts, Sean!</p><p>How does one get to use `clojure -X:deps list` ? Is it a specific version of the CLI? When I try with 1.10.3.986:</p><p>"Namespace clojure.tools.cli.api loaded but function not found: list"</p>]]></message>
+<createdAt>2021-11-29T06:25:28Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Robert Stuttaford</name>
+<isAnonymous>false</isAnonymous>
+<username>robertstuttaford</username>
+</author>
+<thread dsq:id="8902459245" />
+</post>
+<post dsq:id="5625665063">
+<id />
+<message><![CDATA[<p>986 is so old, man! :)</p><p>See <a href="https://clojure.org/releases/tools#v1.10.3.1020" rel="nofollow noopener" target="_blank" title="https://clojure.org/releases/tools#v1.10.3.1020">https://clojure.org/release...</a></p>]]></message>
+<createdAt>2021-11-29T06:29:39Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8902459245" />
+<parent dsq:id="5625662238" />
+</post>
+<post dsq:id="5625666107">
+<id />
+<message><![CDATA[<p>Haha I clearly need to up my updating game here :-D</p>]]></message>
+<createdAt>2021-11-29T06:31:13Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Robert Stuttaford</name>
+<isAnonymous>false</isAnonymous>
+<username>robertstuttaford</username>
+</author>
+<thread dsq:id="8902459245" />
+<parent dsq:id="5625665063" />
+</post>
+<post dsq:id="5681887780">
+<id />
+<message />
+<createdAt>2022-01-08T19:49:15Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name />
+<isAnonymous>true</isAnonymous>
+</author>
+<thread dsq:id="8962152867" />
+</post>
+<post dsq:id="5681888361">
+<id />
+<message><![CDATA[<p>Want to play The Witcher рοrո game right now? Get the best new game and play with me. Ѕtаrt рⅼауіոց ոоԝ: <br><br>🔞 witcher︆.life 🔞<br><br><s>367VqQX1nXpgCzqLYpaSka1b6j0azngF</s></p>]]></message>
+<createdAt>2022-01-08T19:49:42Z</createdAt>
+<isDeleted>true</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Mallory</name>
+<isAnonymous>false</isAnonymous>
+<username>jessicapage33</username>
+</author>
+<thread dsq:id="8962152631" />
+</post>
+<post dsq:id="6060338487">
+<id />
+<message><![CDATA[<p>Thank you, Sean, for your kind words! It is exciting to follow your journey through Polylith migration 🙌</p>]]></message>
+<createdAt>2022-12-08T06:58:39Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Furkan Bayraktar</name>
+<isAnonymous>false</isAnonymous>
+<username>furkan3ayraktar</username>
+</author>
+<thread dsq:id="9481106852" />
+</post>
+<post dsq:id="6061857747">
+<id />
+<message><![CDATA[<p>We have a polyglot codebase (no pun intended, I swear!) and we're looking into <a href="https://www.graalvm.org/" rel="nofollow noopener" target="_blank" title="https://www.graalvm.org/">GraalVM</a>'s Python/Ruby interop.</p><p>Wondering if there's some Polylith + GraalVM + Python/Ruby gold to be found...  Can't wait to try.</p>]]></message>
+<createdAt>2022-12-09T22:31:42Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>TheNuclearAlchemist</name>
+<isAnonymous>false</isAnonymous>
+<username>TheNuclearAlchemist</username>
+</author>
+<thread dsq:id="9481106852" />
+</post>
+<post dsq:id="6061969138">
+<id />
+<message><![CDATA[<p>You won't get any tool support (the current poly command-line tool only understands Clojure) but the Polylith architecture can be used with pretty much any language.</p>]]></message>
+<createdAt>2022-12-10T01:52:27Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="9481106852" />
+<parent dsq:id="6061857747" />
+</post>
+<post dsq:id="6125981227">
+<id />
+<message><![CDATA[<p>man, were you ahead of the curve.</p>]]></message>
+<createdAt>2023-02-28T05:32:40Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>rhwalt</name>
+<isAnonymous>false</isAnonymous>
+<username>rhwalt</username>
+</author>
+<thread dsq:id="8873871871" />
+</post>
+<post dsq:id="6142275013">
+<id />
+<message><![CDATA[<p>You can start a REPL without any dialogs.  Just in case you've not seen it, here's how I do it:<br><code>    {<br>        // TODO: add alternate binding that restarts the repl if already connected<br>        "key": "Ctrl+f5",<br>        "command": "calva.jackIn",<br>        "args": {<br>            "name": "basic REPL",<br>            "connectSequence": "basic REPL", // Connect to this without prompting for project type.<br>            "disableAutoSelect": false, // change to true to show menu<br>            "projectType": "Leiningen",<br>            "projectRootPath": ["."], // Use the root of the first folder, in multi-folder workspaces<br>            "autoSelectForJackIn": true,<br>            "autoSelectForConnect": true,<br>            "cljsType": "none",<br>            "afterCLJReplJackInCode": "(println \"Custom started\")",  <br>            "jackInEnv": {<br>                "CUSTOM_ENV_VAR": "Works!", <br>            },<br>            "menuSelections": {<br>                "leinAlias": null,<br>                "leinProfiles": [<br>                    "dev",<br>                    "test",<br>                    "repl"<br>                ]<br>            }<br>        },<br>    },</code></p>]]></message>
+<createdAt>2023-03-20T20:16:19Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Jason Whitlark</name>
+<isAnonymous>false</isAnonymous>
+<username>jason_whitlark</username>
+</author>
+<thread dsq:id="9496301763" />
+</post>
+<post dsq:id="6174730775">
+<id />
+<message><![CDATA[<p>SQL support is quite interesting!</p>]]></message>
+<createdAt>2023-05-01T15:18:13Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>TheNuclearAlchemist</name>
+<isAnonymous>false</isAnonymous>
+<username>TheNuclearAlchemist</username>
+</author>
+<thread dsq:id="9672273205" />
+</post>
+<post dsq:id="6213718031">
+<id />
+<message><![CDATA[<p>Hello Sean, this was very insightful. I've been working as a Java developer for just a year now, so a lot of the journey I couldn't understand. Although given the nature of my project(JBoss standalone EAP/Java EE -&gt; Springboot migration) I could emphasize with some big pain points we have faced and how the polylith architecture helps in solving them. <br>This piece here really emphasizes the power the Polylith workspace gives to developers.<br>"Overall, I would consider this a big win for Polylith: our shared code is written against a functional interface, we can easily run all the tests against either implementation with just a command-line flag, and our projects can decide which implementation to use at build time! "</p><p>Although I must admit I cant picture the Polylith architecture tool ever working with the likes of Java Springboot, I believe this architecture only works with ecosystems that allow you to build modular systems. From my short introduction to the Clojure community and its philosophy I would say the ecosystem is made for this type of architecture. As should every other in my opinion.</p><p>During the project I faced a long period which I described to my colleagues as "coding in the dark". Teasing the application apart and trying to glue it back together with different implementation details with very little ways to get feedback.</p><p>I have started a small Polylith project and look forward to diving deeper into this tool and learning more about the Clojurist philosophy and ecosystem.</p><p>Thanks a lot for this series, <br>Niall</p>]]></message>
+<createdAt>2023-06-21T20:46:54Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Niall Duggan</name>
+<isAnonymous>false</isAnonymous>
+<username>disqus_wxe2zAtePU</username>
+</author>
+<thread dsq:id="9481106852" />
+</post>
+<post dsq:id="6267967380">
+<id />
+<message><![CDATA[<p>Sean, I’m very sorry for your loss. I’m also glad to hear you and your wife are recovering.</p><p>Although the Clojure work feels utterly secondary against this backdrop, I can’t help but say this would be an impressive amount of work in any circumstance, and given your challenges seems fairly staggering. I’m grateful for your contribution.</p><p>Wishing you the best in the fall, and a continued recovery.</p><p>Ryan, NYC</p>]]></message>
+<createdAt>2023-08-31T19:49:18Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>ryantate</name>
+<isAnonymous>false</isAnonymous>
+<username>ryantate</username>
+</author>
+<thread dsq:id="9835466980" />
+</post>
+<post dsq:id="6391395673">
+<id />
+<message><![CDATA[<p>Very interesting. Our company went roughly in the same direction. First utilized user level deps.edn file and then switched to generated files. The main difference is that we enforce the transitive dependencies via auto-generation. So we do not need to use `-Sforce` as individual `deps.edn` now fully specify all the dependencies and it would be updated should any of the subproject dependencies change. (In other words, subproject deps.edn file are also auto-generated).</p><p>My main question is: what was the reason for Alex Miller to refuse adding the requested feature?</p>]]></message>
+<createdAt>2024-02-14T22:50:33Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Alexander Kouznetsov</name>
+<isAnonymous>false</isAnonymous>
+<username>alexanderkouznetsov</username>
+</author>
+<thread dsq:id="8411112727" />
+</post>
+<post dsq:id="6391446056">
+<id />
+<message><![CDATA[<p>Nice job switching from Calva nrepl window to portal. I was also wondering how I can get there. Do you have a post on that somewhere?</p>]]></message>
+<createdAt>2024-02-15T00:18:40Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Alexander Kouznetsov</name>
+<isAnonymous>false</isAnonymous>
+<username>alexanderkouznetsov</username>
+</author>
+<thread dsq:id="9433017140" />
+</post>
+<post dsq:id="6391491097">
+<id />
+<message><![CDATA[<p>No point in asking that here. You've already identified the relevant post on <a href="http://ask.clojure.org" rel="nofollow noopener" target="_blank" title="ask.clojure.org">ask.clojure.org</a> and if there's going to be an explanation from the core team, it'll appear there.</p><p>We moved away from generated deps.edn file (as you'll see in later posts in this series), and settled on a reasonable structure and approach by adopting Polylith, and having a few aliases in the top-level deps.edn file for per-developer additions (:&lt;name&gt;-dev-repl mostly, one for each team member :)</p>]]></message>
+<createdAt>2024-02-15T01:43:55Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="8411112727" />
+<parent dsq:id="6391395673" />
+</post>
+<post dsq:id="6391492147">
+<id />
+<message><![CDATA[<p>The code and settings are all on GitHub as part of my dot-clojure and vscode-calva-setup repos (and I've blogged separately about VS Code, Calva, and Portal).</p>]]></message>
+<createdAt>2024-02-15T01:45:58Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="9433017140" />
+<parent dsq:id="6391446056" />
+</post>
+<post dsq:id="6589700653">
+<id />
+<message><![CDATA[<p>Thanks for the overview! Sounds like a really strong Conj and like there’s some good food in N Virginia (as a former Bay Area person myself I know how hard it is to compete with the food there). I’ll say the videos also indicate a particularly good Conj in my quick skim (I’ve only watched the ESPN one).</p>]]></message>
+<createdAt>2024-11-10T15:59:16Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>ryantate</name>
+<isAnonymous>false</isAnonymous>
+<username>ryantate</username>
+</author>
+<thread dsq:id="10373488658" />
+</post>
+<post dsq:id="6589766737">
+<id />
+<message><![CDATA[<p>At most Conj in the past, I've spent a lot more time in the "hallway track" and then caught up with the talks later on video. This year, I found many of the talks so compelling that I wanted to attend them live. That's not to say I didn't also have some excellent "hallway track" time, but the balance was definitely in favor of the actual talks this year, for me.</p>]]></message>
+<createdAt>2024-11-10T17:43:29Z</createdAt>
+<isDeleted>false</isDeleted>
+<isSpam>false</isSpam>
+<author>
+<name>Sean Corfield</name>
+<isAnonymous>false</isAnonymous>
+<username>seancorfield</username>
+</author>
+<thread dsq:id="10373488658" />
+<parent dsq:id="6589700653" />
+</post>
+</disqus>
