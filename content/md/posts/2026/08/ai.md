@@ -1,5 +1,5 @@
 {:title "My AI Usage Statement",
- :date "2026-08-05 17:00:00",
+ :date "2026-08-02 18:00:00",
  :tags ["ai" "open source"]}
 
 Lately, on the [Clojurians Slack](https://clojurians.net), there have been a
