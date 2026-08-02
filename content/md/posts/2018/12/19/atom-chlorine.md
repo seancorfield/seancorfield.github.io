@@ -45,7 +45,7 @@ to provide auto-completion while typing).
 that worked this way!
 
 A few days ago, in a side-thread in the `#off-topic` channel on the
-[Clojurians Slack](https://clojurians.slack.com) ([sign up here](http://clojurians.net/)),
+[Clojurians Slack](https://clojurians.slack.com) ([sign up here](https://clojurians.net/)),
 that had started with a question about [Cursive](https://cursive-ide.com/) vs
 Emacs/CIDER, Maurício Szabo mentioned "a (very experimental) package for Atom
 that ... uses socket repl". I was intrigued. Could this be what I'd been

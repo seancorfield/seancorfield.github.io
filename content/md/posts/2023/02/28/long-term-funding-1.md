@@ -100,7 +100,7 @@ Nearly 60 pages have been updated to fix broken links.
 
 I welcome feedback on both the updated content and the site itself,
 either via the [#clojure-doc channel on Slack](https://app.slack.com/client/T03RZGPFR/C02M6N5C137)
-_(self-signup at [clojurians.net](http://clojurians.net))_ or via
+_(self-signup at [clojurians.net](https://clojurians.net))_ or via
 [clojure-doc discussions on GitHub](https://github.com/clojure-doc/clojure-doc.github.io/discussions).
 Feel free to open issues directly for errors on the site and of course
 pull requests on the `source` branch are also welcome!
