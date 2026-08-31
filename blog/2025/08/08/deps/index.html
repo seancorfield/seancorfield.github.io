@@ -89,7 +89,7 @@ alias can do a lot more, so let's take a look!<!-- more --></p><p>First off, wha
 <code>clojure</code> or <code>clj</code> with the <code>-Sverbose</code> option, it'll show you the <code>root_deps</code>
 is the <code>clojure-tools</code> JAR, the "user" <code>deps.edn</code> (as <code>user_deps</code>), and if you are
 in a project folder, the "project" <code>deps.edn</code> file (as <code>project_deps</code>).
-You can see the "root" <code>deps.edn</code> file as a resource in the <code>tools.deps</code> project:</p><p>The <a href="https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn">root <code>deps.edn</code> resource</a>
+You can see the "root" <code>deps.edn</code> file as a resource in the <code>tools.deps</code> project:</p><p>The <a href="https://github.com/clojure/tools.deps.edn/blob/main/src/main/resources/clojure/tools/deps/deps.edn">root <code>deps.edn</code> resource</a>
 contains two <code>:aliases</code>: <code>:deps</code> and <code>:test</code>. The latter is a convenience
 that adds the <code>test</code> folder to your classpath. The former has the following
 entries:</p><ul><li><code>:replace-paths []</code></li><li><code>:replace-deps {org.clojure/tools.deps.cli {:mvn/version "0.11.93"}}</code> (as of August 8th, 2025)</li><li><code>:ns-default clojure.tools.deps.cli.api</code></li><li><code>:ns-aliases {help clojure.tools.deps.cli.help}</code></li></ul><p>The first two entries ensure that when you use <code>-X:deps</code>, your user/project
