@@ -18,7 +18,7 @@ is the `clojure-tools` JAR, the "user" `deps.edn` (as `user_deps`), and if you a
 in a project folder, the "project" `deps.edn` file (as `project_deps`).
 You can see the "root" `deps.edn` file as a resource in the `tools.deps` project:
 
-The [root `deps.edn` resource](https://github.com/clojure/tools.deps/blob/master/src/main/resources/clojure/tools/deps/deps.edn)
+The [root `deps.edn` resource](https://github.com/clojure/tools.deps.edn/blob/main/src/main/resources/clojure/tools/deps/deps.edn)
 contains two `:aliases`: `:deps` and `:test`. The latter is a convenience
 that adds the `test` folder to your classpath. The former has the following
 entries:
