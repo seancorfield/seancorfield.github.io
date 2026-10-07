@@ -90,16 +90,16 @@ and alongside that there is a data directory at <code>.cljconf/org.clojure/cloju
 which, in this case, contains a small Clojure project containing code that
 supports the customization of the CLI REPL.<!-- more --></p><p>That <code>.cljconf</code> directory can be in your user-level Clojure configuration
 (for me, that's <code>$HOME/.config/clojure</code> following XDG conventions, but for
-many people that would be <code>$HOME/.clojure/.cljconf</code>), or it can be in your
+many people that would be <code>$HOME/.clojure</code>), or it can be in your
 project directory, alongside other configuration directories.</p><p>With all that preamble out of the way, I'm going to walk through how I have
-the new CLI REPL set up for my development workflow.</p><h3 id="my-dot-clojure-repository">My <code>dot-clojure</code> Repository</h3><p>Back in March, 2018, I decided to keep my Clojure configuration on GitHub in
+the new CLI REPL set up for my development workflow. But first, some history!</p><h3 id="my-dot-clojure-repository">My <code>dot-clojure</code> Repository</h3><p>Back in March, 2018, I decided to keep my Clojure configuration on GitHub in
 case anyone found it useful. Back then, it was just my <code>deps.edn</code> file
 containing the aliases I found useful. In December, 2020, I added a <code>dev.clj</code>
 file which was my first "adaptive REPL startup code" -- see the
 <a href="https://github.com/seancorfield/dot-clojure/commit/a945f8a2e68eb4c88b52aaf6edd0b1c9e3700007">initial version of it here</a>.</p><p>The idea was that you could use a basic alias to "start a REPL" and,
 depending on what else was on your classpath, the REPL would include that
 additional tooling. Back then, I was using Cognitect's REBL data browser,
-now <a href="https://github.com/nubank/morse">Nubank'sMorse</a>, and
+now <a href="https://github.com/nubank/morse">Nubank's Morse</a>, and
 <a href="https://github.com/vlaaad/reveal">Reveal</a>, as well as
 <a href="https://github.com/bhauman/rebel-readline">Rebel Readline</a>. Sometimes, I
 would just fire up a bare REPL, sometimes I would use Rebel Readline's REPL,
@@ -107,15 +107,16 @@ and sometimes I would use one of the visualization tools.</p><p>Over the interve
 tools and libraries appeared, and I changed my workflow to adopt them. By
 May of this year (2026), I was using this,
 <a href="https://github.com/seancorfield/dot-clojure/tree/v1.4.2">much more sophisticated REPL setup</a>,
-which uses Portal (instead of REBL or Reveal), CIDER/nREPL, and my
-<a href="https://github.com/seancorfield/rephrase"><code>rephrase</code></a> library to produce
+which uses <a href="https://github.com/djblue/portal">Portal</a>
+(instead of REBL or Reveal), CIDER/nREPL, and my
+<a href="https://github.com/seancorfield/rephrase">Rephrase</a> library to produce
 more readable error messages. I was still using Rebel Readline.</p><h3 id="enter-clojure-clirepl">Enter <code>clojure-cli.repl</code></h3><p>The new Clojure CLI REPL is based on nREPL and aims to provide a similar
 experience to Rebel Readline (it isn't quite there yet but I expect it will
 surpass it fairly soon), as well as providing an integrated data inspector
 built into the REPL (based on <code>datafy</code>/<code>nav</code>).</p><p>In addition, it is designed to be extremely configurable, with easily
 customizable keybindings, including Paredit-style structural editing.</p><p>You can browse the <a href="https://github.com/seancorfield/dot-clojure">latest version of my REPL setup</a>
 but I'm going to dive into my specific configuration and customization of it.</p><h3 id="my-clojure-clirepledn-configuration">My <code>clojure-cli.repl.edn</code> Configuration</h3><p>I'll start with my configuration file, and then talk about the code I wrote
-to customize the behavior further.</p><pre><code>{:auto-require [[clojure.repl.deps :refer [add-lib]]
+to customize the behavior further.</p><pre><code> :auto-require [[clojure.repl.deps :refer [add-lib]]
                 [dev.uptime :refer [uptime]]]
 </code></pre><p>The <code>:auto-require</code> setting lets you specify namespaces (and symbols) that
 should be required (and referred) into every namespace you use via the REPL.
@@ -164,8 +165,8 @@ to in VS Code/Calva:</p><pre><code> :paredit/barf-forward "M-,"
 </code></pre><p>The following are unchanged from the <code>examples</code>:</p><pre><code> ;; note: portal middleware overrides the print hook:
  :print-hook dev.hooks/pprint-values
  :prompt dev.full-width-prompt/prompt
-</code></pre><p>And, finally, I like to see all reflection warnings in all the code I load:</p><pre><code> :warn-on-reflection true}
-</code></pre><h3 id="my-clojure-clirepl-customizations">My <code>clojure-cli.repl</code> Customizations</h3><p>The <code>examples</code> provided in the CLI REPL repo, provide these files in the data
+</code></pre><p>And, finally, I like to see all reflection warnings in all the code I load:</p><pre><code> :warn-on-reflection true
+</code></pre><h3 id="my-clojure-clirepl-customizations">My <code>clojure-cli.repl</code> Customizations</h3><p>The <code>examples</code> provided in the CLI REPL repo contains these files in the data
 directory (under <code>src/dev</code>, so all the namespaces start with <code>dev.</code>):</p><pre><code>full_width_prompt.clj  
 heap.clj  
 hooks.clj  
