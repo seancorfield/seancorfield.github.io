@@ -25,11 +25,11 @@ supports the customization of the CLI REPL.<!-- more -->
 
 That `.cljconf` directory can be in your user-level Clojure configuration
 (for me, that's `$HOME/.config/clojure` following XDG conventions, but for
-many people that would be `$HOME/.clojure/.cljconf`), or it can be in your
+many people that would be `$HOME/.clojure`), or it can be in your
 project directory, alongside other configuration directories.
 
 With all that preamble out of the way, I'm going to walk through how I have
-the new CLI REPL set up for my development workflow.
+the new CLI REPL set up for my development workflow. But first, some history!
 
 ### My `dot-clojure` Repository
 
@@ -42,7 +42,7 @@ file which was my first "adaptive REPL startup code" -- see the
 The idea was that you could use a basic alias to "start a REPL" and,
 depending on what else was on your classpath, the REPL would include that
 additional tooling. Back then, I was using Cognitect's REBL data browser,
-now [Nubank'sMorse](https://github.com/nubank/morse), and
+now [Nubank's Morse](https://github.com/nubank/morse), and
 [Reveal](https://github.com/vlaaad/reveal), as well as
 [Rebel Readline](https://github.com/bhauman/rebel-readline). Sometimes, I
 would just fire up a bare REPL, sometimes I would use Rebel Readline's REPL,
@@ -52,8 +52,9 @@ Over the intervening five and a half years, my setup evolved a lot, as new
 tools and libraries appeared, and I changed my workflow to adopt them. By
 May of this year (2026), I was using this, 
 [much more sophisticated REPL setup](https://github.com/seancorfield/dot-clojure/tree/v1.4.2),
-which uses Portal (instead of REBL or Reveal), CIDER/nREPL, and my
-[`rephrase`](https://github.com/seancorfield/rephrase) library to produce
+which uses [Portal](https://github.com/djblue/portal) 
+(instead of REBL or Reveal), CIDER/nREPL, and my
+[Rephrase](https://github.com/seancorfield/rephrase) library to produce
 more readable error messages. I was still using Rebel Readline.
 
 ### Enter `clojure-cli.repl`
@@ -75,7 +76,7 @@ I'll start with my configuration file, and then talk about the code I wrote
 to customize the behavior further.
 
 ```
-{:auto-require [[clojure.repl.deps :refer [add-lib]]
+ :auto-require [[clojure.repl.deps :refer [add-lib]]
                 [dev.uptime :refer [uptime]]]
 ```
 
@@ -171,12 +172,12 @@ The following are unchanged from the `examples`:
 And, finally, I like to see all reflection warnings in all the code I load:
 
 ```
- :warn-on-reflection true}
+ :warn-on-reflection true
 ```
 
 ### My `clojure-cli.repl` Customizations
 
-The `examples` provided in the CLI REPL repo, provide these files in the data
+The `examples` provided in the CLI REPL repo contains these files in the data
 directory (under `src/dev`, so all the namespaces start with `dev.`):
 
 ```
