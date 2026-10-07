@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>An Architect&#39;s View: A look at the Clojure CLI REPL</title>
+    
+<meta name="keywords" content="diversity,strange loop,frege,clojure,polylith,boot,conferences,process,expectations,editors,java,joyride,personal,atom,tools.build,calva,windows,monorepo,community,ai,jdbc,honeysql,portal,clojurists together,clojure-doc.org,conj,leiningen,javascript,observability,clojure-clr,presentations,new relic,watson,vs code,clj-commons,open source">
+
+<meta name="description" content="Just before this year&#39;s Clojure/conj, the Clojure team released a new
+Clojure CLI REPL. Per the
+README:A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.">
+
+<meta property="og:description" content="Just before this year&#39;s Clojure/conj, the Clojure team released a new
+Clojure CLI REPL. Per the
+README:A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.">
+
+<meta property="og:url" content="https://corfield.org/blog/2026/10/07/cli-repl/" />
+<meta property="og:title" content="A look at the Clojure CLI REPL" />
+<meta property="og:type" content="article" />
+
+    <link rel="canonical" href="https://corfield.org/blog/2026/10/07/cli-repl/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400italic,700italic,400,700" rel="stylesheet"
+          type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+    <link href="/css/screen.css?1" rel="stylesheet" type="text/css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header right">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">An Architect&#39;s View</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse right">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/">Home</a></li>
+                <li
+                ><a href="/archives/">Archives</a></li>
+                
+                <li
+                >
+                <a href="/pages/presentations/">Presentations</a>
+                </li>
+                
+                <li><a href="/atom.xml">RSS</a></li>
+                <li><a rel="me" href="https://tech.lgbt/@seancorfield">tech.lgbt</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <div id="content">
+                
+<div id="post">
+    <div class="post-header">
+    <div id="post-meta" class="row">
+        <div class="col-lg-6">October 7, 2026</div>
+        
+    </div>
+    <h2>A look at the Clojure CLI REPL</h2>
+</div>
+<div>
+    
+    <p>Just before this year's Clojure/conj, the Clojure team released a new
+<a href="https://github.com/clojure/clojure-cli.repl">Clojure CLI REPL</a>. Per the
+README:</p><blockquote><p>A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.</p></blockquote><p>The repo includes an <a href="https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf">example configuration</a>
+and I think it is the first use case for the recently created
+<a href="https://github.com/clojure/tools.deps.config">tools.deps.config</a> which is
+intended to provide a standardized way for Clojure tooling to manage its
+configuration, on a per-project or user-level basis. Per the README:</p><blockquote><p>Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there.</p></blockquote><p>The idea is that each tool's configuration lives at <code>&lt;location&gt;/.cljconf/&lt;lib-ns&gt;/&lt;lib-name&gt;.edn</code>
+(and is expected to contain a 1-level map with keyword keys). The CLI REPL's
+configuration therefore lives at <code>.cljconf/org.clojure/clojure-cli.repl/clojure-cli.repl.edn</code>
+and alongside that there is a data directory at <code>.cljconf/org.clojure/clojure-cli.repl/</code>
+which, in this case, contains a small Clojure project containing code that
+supports the customization of the CLI REPL.<!-- more --></p><p>That <code>.cljconf</code> directory can be in your user-level Clojure configuration
+(for me, that's <code>$HOME/.config/clojure</code> following XDG conventions, but for
+many people that would be <code>$HOME/.clojure/.cljconf</code>), or it can be in your
+project directory, alongside other configuration directories.</p><p>With all that preamble out of the way, I'm going to walk through how I have
+the new CLI REPL set up for my development workflow.</p><h3 id="my-dot-clojure-repository">My <code>dot-clojure</code> Repository</h3><p>Back in March, 2018, I decided to keep my Clojure configuration on GitHub in
+case anyone found it useful. Back then, it was just my <code>deps.edn</code> file
+containing the aliases I found useful. In December, 2020, I added a <code>dev.clj</code>
+file which was my first "adaptive REPL startup code" -- see the
+<a href="https://github.com/seancorfield/dot-clojure/commit/a945f8a2e68eb4c88b52aaf6edd0b1c9e3700007">initial version of it here</a>.</p><p>The idea was that you could use a basic alias to "start a REPL" and,
+depending on what else was on your classpath, the REPL would include that
+additional tooling. Back then, I was using Cognitect's REBL data browser,
+now <a href="https://github.com/nubank/morse">Nubank'sMorse</a>, and
+<a href="https://github.com/vlaaad/reveal">Reveal</a>, as well as
+<a href="https://github.com/bhauman/rebel-readline">Rebel Readline</a>. Sometimes, I
+would just fire up a bare REPL, sometimes I would use Rebel Readline's REPL,
+and sometimes I would use one of the visualization tools.</p><p>Over the intervening five and a half years, my setup evolved a lot, as new
+tools and libraries appeared, and I changed my workflow to adopt them. By
+May of this year (2026), I was using this,
+<a href="https://github.com/seancorfield/dot-clojure/tree/v1.4.2">much more sophisticated REPL setup</a>,
+which uses Portal (instead of REBL or Reveal), CIDER/nREPL, and my
+<a href="https://github.com/seancorfield/rephrase"><code>rephrase</code></a> library to produce
+more readable error messages. I was still using Rebel Readline.</p><h3 id="enter-clojure-clirepl">Enter <code>clojure-cli.repl</code></h3><p>The new Clojure CLI REPL is based on nREPL and aims to provide a similar
+experience to Rebel Readline (it isn't quite there yet but I expect it will
+surpass it fairly soon), as well as providing an integrated data inspector
+built into the REPL (based on <code>datafy</code>/<code>nav</code>).</p><p>In addition, it is designed to be extremely configurable, with easily
+customizable keybindings, including Paredit-style structural editing.</p><p>You can browse the <a href="https://github.com/seancorfield/dot-clojure">latest version of my REPL setup</a>
+but I'm going to dive into my specific configuration and customization of it.</p><h3 id="my-clojure-clirepledn-configuration">My <code>clojure-cli.repl.edn</code> Configuration</h3><p>I'll start with my configuration file, and then talk about the code I wrote
+to customize the behavior further.</p><pre><code>{:auto-require [[clojure.repl.deps :refer [add-lib]]
+                [dev.uptime :refer [uptime]]]
+</code></pre><p>The <code>:auto-require</code> setting lets you specify namespaces (and symbols) that
+should be required (and referred) into every namespace you use via the REPL.
+I like to be able to invoke <code>add-lib</code> to add new dependencies, and I didn't
+want to have to require/refer it manually as I work. The <code>uptime</code> function
+is a little utility that tells me how long my REPL has been running, in a
+friendly format. I'm quite proud of how long many of my REPL sessions
+actually live!</p><pre><code> :bracket-pairs true
+</code></pre><p>I'm a bit surprised that the default for auto-close <code>(</code>, <code>[</code>, and <code>{</code> isn't
+enabled by default, but I guess this is subjective.</p><pre><code> :doc-at-cursor "M-d"
+ :eval-form-at-cursor "M-e"
+</code></pre><p>Unchanged from the default in the <code>examples</code> provided with <code>clojure-cli.repl</code>.</p><pre><code> :history :project
+</code></pre><p>The default is for all your REPL history to be shared across projects, in the
+user-level configuration, but I prefer a per-project history.</p><pre><code> :inspect "M-i"
+ :keybindings dev.keybindings/install
+</code></pre><p>Unchanged from the default in the <code>examples</code>.</p><pre><code> :middleware [dev.heap/middleware
+              dev.timing/middleware
+</code></pre><p>Unchanged from the default in the <code>examples</code>. These are examples of custom
+middleware that enhance the REPL experience by showing how much heap is
+currently used and how long each evaluation takes. A very nice touch!</p><pre><code>              ^:optional cider.nrepl/cider-middleware
+              ^:optional org.corfield.rephrase.nrepl/middleware
+              ;; add the following setting to ~/.config/nrepl/nrepl.edn
+              ;; {:portal.nrepl/wrap-portal {:all-evals true}}
+              ;; that will tap&gt; all REPL evaluations
+              ^:optional portal.nrepl/middleware]
+</code></pre><p>These are the three pieces of middleware I use at different times, depending
+on whether I want a quick, basic REPL or something more feature-rich (for
+integration with editors, for example). The <code>^:optional</code> metadata tells the
+CLI REPL to just ignore the middleware if it is not on the classpath. This
+provides the same "adaptive REPL startup code" that I used to have in my
+previous setup, but in a much cleaner and more maintainable way.</p><p>The <code>examples</code> configuration has no Paredit keybindings, but here's what I use
+the most. Currently, the CLI REPL seems to only support single-key bindings,
+with a single-modifier, so these are only "similar" to the bindings I'm used
+to in VS Code/Calva:</p><pre><code> :paredit/barf-forward "M-,"
+ :paredit/join "M-j"
+ :paredit/kill "M-k"
+ :paredit/move-to-prev "M-b"
+ :paredit/raise "M-r"
+ :paredit/slurp-forward "M-."
+ :paredit/slurp-forward-fully "M-/"
+ :paredit/splice "M-h"
+ :paredit/split "M-l"
+ :paredit/wrap-list "M-p"
+ :paredit/wrap-map "M-c"
+ :paredit/wrap-vector "M-s"
+</code></pre><p>The following are unchanged from the <code>examples</code>:</p><pre><code> ;; note: portal middleware overrides the print hook:
+ :print-hook dev.hooks/pprint-values
+ :prompt dev.full-width-prompt/prompt
+</code></pre><p>And, finally, I like to see all reflection warnings in all the code I load:</p><pre><code> :warn-on-reflection true}
+</code></pre><h3 id="my-clojure-clirepl-customizations">My <code>clojure-cli.repl</code> Customizations</h3><p>The <code>examples</code> provided in the CLI REPL repo, provide these files in the data
+directory (under <code>src/dev</code>, so all the namespaces start with <code>dev.</code>):</p><pre><code>full_width_prompt.clj  
+heap.clj  
+hooks.clj  
+keybindings.clj  
+timing.clj
+</code></pre><p>The example <code>keybindings.clj</code> binds <code>C-t</code> to insert a UUID into the REPL,
+which seems a bit random to me, so I changed it to insert <code>tap-&gt;</code> which is
+new in Clojure 1.13 and I'm already finding very useful.</p><p>In the absence of any global initialization code, I've added a top-level form
+to the examples <code>hooks.clj</code> file, that "installs" some extra goodies I like
+to use with Portal - see below.</p><p>I mentioned my <code>uptime</code> function above - that is in my
+<a href="https://github.com/seancorfield/dot-clojure/blob/503aaed7249b5c83bbd972d6c4141233959b8e4f/.cljconf/org.clojure/clojure-cli.repl/src/dev/uptime.clj"><code>uptime.clj</code> file</a>.
+It is auto-required into every namespace, and <code>uptime</code> is referred in for
+unqualified use.</p><p>And, finally, I added a
+<a href="https://github.com/seancorfield/dot-clojure/blob/503aaed7249b5c83bbd972d6c4141233959b8e4f/.cljconf/org.clojure/clojure-cli.repl/src/dev/portal.clj"><code>portal.clj</code> file</a>.
+If Portal is on the classpath, and either <code>clojure.tools.logging</code> and/or my
+<a href="https://github.com/seancorfield/logging4j2"><code>logging4j2</code> library</a>
+is on the classpath, the underlying logging function in those libraries is
+redefined to also <code>tap&gt;</code> a "logging information" data structure that Portal understands,
+so that all my logging information also appears in Portal.
+The <code>dev.portal/install!</code> function is currently call from the example <code>hooks.clj</code> file,
+but I'm hoping the CLI REPL adds some sort of <code>:init-fn</code> configuration option
+in the future.</p><h3 id="wrapping-up">Wrapping Up</h3><p>All of this has allowed me to retire my custom REPL setup, and some of my old
+aliases, and rely entirely on the new CLI REPL with my enhancements.</p><p>If you're on the Clojurians Slack, join the
+<a href="https://app.slack.com/client/T03RZGPFR/C0C5YK5PAQ0">#clojure-cli-repl channel</a>
+to chat about this new tooling.</p><p>Major kudos to Jarrod Taylor, on the Clojure team, for creating this!
+I look forward to future enhancements (and possibly seeing this integrated into
+the Clojure CLI itself, at some point).</p>
+</div>
+
+<div id="post-tags">
+    <b>Tags: </b>
+    
+    <a href="/tags/clojure/">clojure</a>
+    
+    <a href="/tags/open%20source/">open source</a>
+    
+</div>
+
+
+    <div id="prev-next">
+        
+        
+        <a class="right" href="/blog/2026/08/02/ai/">My AI Usage Statement &raquo;</a>
+        
+    </div>
+
+    
+
+
+</div>
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div id="sidebar">
+                <h3>About This Blog</h3>
+                <p>Sean Corfield, Software Architect, offers his views on the world of software development.</p>
+                <p class="smallprint">Masthead image &copy; Vernon Viehe.</p>
+                
+                
+                <div id="recent">
+                    <h3>Recent Posts</h3>
+                    <ul>
+                        
+                        <li><a href="/blog/2026/10/07/cli-repl/">A look at the Clojure CLI REPL</a></li>
+                        
+                        <li><a href="/blog/2026/08/02/ai/">My AI Usage Statement</a></li>
+                        
+                        <li><a href="/blog/2025/08/08/deps/">The power of the :deps alias</a></li>
+                        
+                        <li><a href="/blog/2025/03/12/lazytest/">Migrating to LazyTest</a></li>
+                        
+                        <li><a href="/blog/2024/11/09/conj-2024/">Clojure/conj 2024</a></li>
+                        
+                    </ul>
+                </div>
+                
+                
+                
+                <h3>GitHub Repos</h3>
+                <iframe src="https://github.com/sponsors/seancorfield/button" title="Sponsor seancorfield" height="35" width="116" style="border: 0;"></iframe>
+                <ul id="gh_repos" class="smallprint">
+                  <li class="loading">Status updating...</li>
+                </ul>
+                
+                <a href="https://github.com/seancorfield">@seancorfield</a> on GitHub
+                
+                <script type="text/javascript">
+                  $(document).ready(function(){
+                      if (!window.jXHR){
+                          var jxhr = document.createElement('script');
+                          jxhr.type = 'text/javascript';
+                          jxhr.src = 'https://corfield.org/js/libs/jXHR.js';
+                          var s = document.getElementsByTagName('script')[0];
+                          s.parentNode.insertBefore(jxhr, s);
+                      }
+
+                      github.showRepos({
+                          user: 'seancorfield',
+                          count: 6,
+                          skip_forks: true,
+                          target: '#gh_repos'
+                      });
+                  });
+                </script>
+                <script src="https://corfield.org/js/github.js" type="text/javascript"> </script>
+                
+                
+                <div id="tags">
+                    <h3>Tags</h3>
+                    <ul>
+                        
+                        <li><a href="/tags/diversity/">diversity</a></li>
+                        
+                        <li><a href="/tags/strange%20loop/">strange loop</a></li>
+                        
+                        <li><a href="/tags/frege/">frege</a></li>
+                        
+                        <li><a href="/tags/clojure/">clojure</a></li>
+                        
+                        <li><a href="/tags/polylith/">polylith</a></li>
+                        
+                        <li><a href="/tags/boot/">boot</a></li>
+                        
+                        <li><a href="/tags/conferences/">conferences</a></li>
+                        
+                        <li><a href="/tags/process/">process</a></li>
+                        
+                        <li><a href="/tags/expectations/">expectations</a></li>
+                        
+                        <li><a href="/tags/editors/">editors</a></li>
+                        
+                        <li><a href="/tags/java/">java</a></li>
+                        
+                        <li><a href="/tags/joyride/">joyride</a></li>
+                        
+                        <li><a href="/tags/personal/">personal</a></li>
+                        
+                        <li><a href="/tags/atom/">atom</a></li>
+                        
+                        <li><a href="/tags/tools.build/">tools.build</a></li>
+                        
+                        <li><a href="/tags/calva/">calva</a></li>
+                        
+                        <li><a href="/tags/windows/">windows</a></li>
+                        
+                        <li><a href="/tags/monorepo/">monorepo</a></li>
+                        
+                        <li><a href="/tags/community/">community</a></li>
+                        
+                        <li><a href="/tags/ai/">ai</a></li>
+                        
+                        <li><a href="/tags/jdbc/">jdbc</a></li>
+                        
+                        <li><a href="/tags/honeysql/">honeysql</a></li>
+                        
+                        <li><a href="/tags/portal/">portal</a></li>
+                        
+                        <li><a href="/tags/clojurists%20together/">clojurists together</a></li>
+                        
+                        <li><a href="/tags/clojure-doc.org/">clojure-doc.org</a></li>
+                        
+                        <li><a href="/tags/conj/">conj</a></li>
+                        
+                        <li><a href="/tags/leiningen/">leiningen</a></li>
+                        
+                        <li><a href="/tags/javascript/">javascript</a></li>
+                        
+                        <li><a href="/tags/observability/">observability</a></li>
+                        
+                        <li><a href="/tags/clojure-clr/">clojure-clr</a></li>
+                        
+                        <li><a href="/tags/presentations/">presentations</a></li>
+                        
+                        <li><a href="/tags/new%20relic/">new relic</a></li>
+                        
+                        <li><a href="/tags/watson/">watson</a></li>
+                        
+                        <li><a href="/tags/vs%20code/">vs code</a></li>
+                        
+                        <li><a href="/tags/clj-commons/">clj-commons</a></li>
+                        
+                        <li><a href="/tags/open%20source/">open source</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer>Copyright &copy; 2026 Sean Corfield
+        <p style="text-align: center;">Powered by <a href="https://cryogenweb.org">Cryogen</a></p></footer>
+</div>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="/js/highlight.pack.js" type="application/javascript"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+</body>
+</html>
