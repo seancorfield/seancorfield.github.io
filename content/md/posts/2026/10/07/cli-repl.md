@@ -2,6 +2,8 @@
  :date "2026-10-07 10:30:00",
  :tags ["clojure" "open source"]}
 
+_[Updated 2026-10-20 to reflect the 0.2.1 release and my changes for that!]_
+
 Just before this year's Clojure/conj, the Clojure team released a new
 [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl). Per the
 README:
@@ -60,8 +62,10 @@ more readable error messages. I was still using Rebel Readline.
 ### Enter `clojure-cli.repl`
 
 The new Clojure CLI REPL is based on nREPL and aims to provide a similar
-experience to Rebel Readline (it isn't quite there yet but I expect it will
-surpass it fairly soon), as well as providing an integrated data inspector
+experience to Rebel Readline 
+~~(it isn't quite there yet but I expect it will surpass it fairly soon)~~,
+_(with the 0.2.1 release, I believe it is on-par or better)_
+as well as providing an integrated data inspector
 built into the REPL (based on `datafy`/`nav`).
 
 In addition, it is designed to be extremely configurable, with easily
@@ -100,7 +104,19 @@ enabled by default, but I guess this is subjective.
  :eval-form-at-cursor "M-e"
 ```
 
-Unchanged from the default in the `examples` provided with `clojure-cli.repl`.
+Unchanged from the original default in the `examples` provided with `clojure-cli.repl`.
+_In the 0.2.1 release, these (and several other keybindings) have been updated to be more like Emacs: C-x d, C-x e._
+
+```
+ :echo-editor-code false
+ :follow-editor-ns true
+```
+
+_New in 0.2.1, these control whether editor-eval'd code is echoed in the REPL and whether the REPL switches to the editor-eval'd namespace each time. The defaults are `true` and `false` respectively._
+I find code echoing too noisy and have it turned off in VS Code, so I also
+turned it off in the CLI REPL, but I do like the REPL to switch namespaces, in
+case I want to manually explore code/behavior in the REPL, after eval'ing code
+in the editor.
 
 ```
  :history :project
@@ -110,11 +126,20 @@ The default is for all your REPL history to be shared across projects, in the
 user-level configuration, but I prefer a per-project history.
 
 ```
+ :init dev.portal/install!
+```
+
+_New in 0.2.1, this allows you to have code executed when the server starts up._
+Previously, I called this function from the `hooks.clj` example file (see below),
+so I really appreciate this new option!
+
+```
  :inspect "M-i"
  :keybindings dev.keybindings/install
 ```
 
-Unchanged from the default in the `examples`.
+Unchanged from the original defaults in the `examples`.
+_As noted above, the keybindings have been updated in 0.2.1 to be more like Emacs: C-x i._
 
 ```
  :middleware [dev.heap/middleware
@@ -147,19 +172,27 @@ with a single-modifier, so these are only "similar" to the bindings I'm used
 to in VS Code/Calva:
 
 ```
+ :paredit/barf-backward "M->"
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"
- :paredit/kill "M-k"
- :paredit/move-to-prev "M-b"
- :paredit/raise "M-r"
+ :paredit/kill "M-K"
+ :paredit/move-to-prev "M-B"
+ :paredit/raise "M-p M-r"
+ :paredit/slurp-backward "M-<"
+ :paredit/slurp-backward-fully "M-?"
  :paredit/slurp-forward "M-."
  :paredit/slurp-forward-fully "M-/"
- :paredit/splice "M-h"
- :paredit/split "M-l"
- :paredit/wrap-list "M-p"
- :paredit/wrap-map "M-c"
- :paredit/wrap-vector "M-s"
+ :paredit/splice "M-k SPC"
+ :paredit/splice-killing-backward "M-k <home>"
+ :paredit/splice-killing-forward "M-k <end>"
+ :paredit/split "M-s"
+ :paredit/wrap-list "M-P"
+ :paredit/wrap-map "M-C"
+ ;; :paredit/wrap-set unused
+ :paredit/wrap-vector "M-S"
 ```
+
+_As you can see, 0.2.1 supports quite a few new paredit commands! I would have made them match my VS Code keybindings, but several of the control keys (`C-`) do not play nice with VS Code's terminal._
 
 The following are unchanged from the `examples`:
 
@@ -192,9 +225,8 @@ The example `keybindings.clj` binds `C-t` to insert a UUID into the REPL,
 which seems a bit random to me, so I changed it to insert `tap->` which is
 new in Clojure 1.13 and I'm already finding very useful.
 
-In the absence of any global initialization code, I've added a top-level form
-to the examples `hooks.clj` file, that "installs" some extra goodies I like
-to use with Portal - see below.
+~~In the absence of any global initialization code, I've added a top-level form to the examples `hooks.clj` file, that "installs" some extra goodies I like to use with Portal - see below.~~
+_No longer necessary, with the `:init` option in 0.2.1._
 
 I mentioned my `uptime` function above - that is in my 
 [`uptime.clj` file](https://github.com/seancorfield/dot-clojure/blob/503aaed7249b5c83bbd972d6c4141233959b8e4f/.cljconf/org.clojure/clojure-cli.repl/src/dev/uptime.clj).
@@ -208,9 +240,9 @@ If Portal is on the classpath, and either `clojure.tools.logging` and/or my
 is on the classpath, the underlying logging function in those libraries is
 redefined to also `tap>` a "logging information" data structure that Portal understands,
 so that all my logging information also appears in Portal.
-The `dev.portal/install!` function is currently call from the example `hooks.clj` file,
-but I'm hoping the CLI REPL adds some sort of `:init-fn` configuration option
-in the future.
+The `dev.portal/install!` function is 
+~~currently call from the example `hooks.clj` file, but I'm hoping the CLI REPL adds some sort of `:init-fn` configuration option in the future.~~
+_configured with the `:init` option that was added in 0.2.1._
 
 ### Wrapping Up
 
