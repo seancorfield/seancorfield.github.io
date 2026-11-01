@@ -7,7 +7,6 @@ _[Updated 2026-10-20 to reflect the 0.2.1 release and my changes for that!]_
 Just before this year's Clojure/conj, the Clojure team released a new
 [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl). Per the
 README:
-
 > A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.
 
 The repo includes an [example configuration](https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf)
@@ -18,7 +17,7 @@ configuration, on a per-project or user-level basis. Per the README:
 
 > Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there.
 
-The idea is that each tool's configuration lives at `<location>/.cljconf/<lib-ns>/<lib-name>.edn` 
+The idea is that each tool's configuration lives at `<location>/.cljconf/<group-id>/<artifact-id>.edn` 
 (and is expected to contain a 1-level map with keyword keys). The CLI REPL's
 configuration therefore lives at `.cljconf/org.clojure/clojure-cli.repl/clojure-cli.repl.edn`
 and alongside that there is a data directory at `.cljconf/org.clojure/clojure-cli.repl/`
