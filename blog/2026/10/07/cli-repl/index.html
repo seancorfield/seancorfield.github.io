@@ -8,11 +8,11 @@
 
 <meta name="description" content="[Updated 2026-10-20 to reflect the 0.2.1 release and my changes for that!]Just before this year&#39;s Clojure/conj, the Clojure team released a new
 Clojure CLI REPL. Per the
-README:">
+README: &quot;A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.&quot;">
 
 <meta property="og:description" content="[Updated 2026-10-20 to reflect the 0.2.1 release and my changes for that!]Just before this year&#39;s Clojure/conj, the Clojure team released a new
 Clojure CLI REPL. Per the
-README:">
+README: &quot;A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.&quot;">
 
 <meta property="og:url" content="https://corfield.org/blog/2026/10/07/cli-repl/" />
 <meta property="og:title" content="A look at the Clojure CLI REPL" />
@@ -79,11 +79,11 @@ README:">
     
     <p><em>[Updated 2026-10-20 to reflect the 0.2.1 release and my changes for that!]</em></p><p>Just before this year's Clojure/conj, the Clojure team released a new
 <a href="https://github.com/clojure/clojure-cli.repl">Clojure CLI REPL</a>. Per the
-README:</p><blockquote><p>A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more.</p></blockquote><p>The repo includes an <a href="https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf">example configuration</a>
+README: "A REPL for the Clojure CLI featuring multi-line editing with proper indentation, bracket highlighting, structural editing, inline eval, doc lookup for Clojure and Java, a data inspector, configurable prompts, keybindings, and much more."</p><p>The repo includes an <a href="https://github.com/clojure/clojure-cli.repl/tree/main/examples/.cljconf">example configuration</a>
 and I think it is the first use case for the recently created
 <a href="https://github.com/clojure/tools.deps.config">tools.deps.config</a> which is
 intended to provide a standardized way for Clojure tooling to manage its
-configuration, on a per-project or user-level basis. Per the README:</p><blockquote><p>Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there.</p></blockquote><p>The idea is that each tool's configuration lives at <code>&lt;location&gt;/.cljconf/&lt;group-id&gt;/&lt;artifact-id&gt;.edn</code>
+configuration, on a per-project or user-level basis. Per the README: "Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there."</p><p>The idea is that each tool's configuration lives at <code>&lt;location&gt;/.cljconf/&lt;group-id&gt;/&lt;artifact-id&gt;.edn</code>
 (and is expected to contain a 1-level map with keyword keys). The CLI REPL's
 configuration therefore lives at <code>.cljconf/org.clojure/clojure-cli.repl/clojure-cli.repl.edn</code>
 and alongside that there is a data directory at <code>.cljconf/org.clojure/clojure-cli.repl/</code>
