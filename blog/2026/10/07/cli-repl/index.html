@@ -83,7 +83,7 @@ README:</p><blockquote><p>A REPL for the Clojure CLI featuring multi-line editin
 and I think it is the first use case for the recently created
 <a href="https://github.com/clojure/tools.deps.config">tools.deps.config</a> which is
 intended to provide a standardized way for Clojure tooling to manage its
-configuration, on a per-project or user-level basis. Per the README:</p><blockquote><p>Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there.</p></blockquote><p>The idea is that each tool's configuration lives at <code>&lt;location&gt;/.cljconf/&lt;lib-ns&gt;/&lt;lib-name&gt;.edn</code>
+configuration, on a per-project or user-level basis. Per the README:</p><blockquote><p>Clojure tools need a well-known place to store user and project configuration. This library defines that place and provides functions for reading the files stored there.</p></blockquote><p>The idea is that each tool's configuration lives at <code>&lt;location&gt;/.cljconf/&lt;group-id&gt;/&lt;artifact-id&gt;.edn</code>
 (and is expected to contain a 1-level map with keyword keys). The CLI REPL's
 configuration therefore lives at <code>.cljconf/org.clojure/clojure-cli.repl/clojure-cli.repl.edn</code>
 and alongside that there is a data directory at <code>.cljconf/org.clojure/clojure-cli.repl/</code>
