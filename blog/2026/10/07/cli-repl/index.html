@@ -161,8 +161,8 @@ integration with editors, for example). The <code>^:optional</code> metadata tel
 CLI REPL to just ignore the middleware if it is not on the classpath. This
 provides the same "adaptive REPL startup code" that I used to have in my
 previous setup, but in a much cleaner and more maintainable way.</p><p>The <code>examples</code> configuration has no Paredit keybindings, but here's what I use
-the most. Currently, the CLI REPL seems to only support single-key bindings,
-with a single-modifier, so these are only "similar" to the bindings I'm used
+the most. As of 0.2.1, the CLI REPL supports key-chord bindings,
+with some restrictions, so these are only "similar" to the bindings I'm used
 to in VS Code/Calva:</p><pre><code> :paredit/barf-backward "M-&gt;"
  :paredit/barf-forward "M-,"
  :paredit/join "M-j"
@@ -193,7 +193,7 @@ keybindings.clj
 timing.clj
 </code></pre><p>The example <code>keybindings.clj</code> binds <code>C-t</code> to insert a UUID into the REPL,
 which seems a bit random to me, so I changed it to insert <code>tap-&gt;</code> which is
-new in Clojure 1.13 and I'm already finding very useful.</p><p><del>In the absence of any global initialization code, I've added a top-level form to the examples <code>hooks.clj</code> file, that "installs" some extra goodies I like to use with Portal - see below.</del><em>No longer necessary, with the <code>:init</code> option in 0.2.1.</em></p><p>I mentioned my <code>uptime</code> function above - that is in my
+new in Clojure 1.13 and I'm already finding very useful.</p><p><del>In the absence of any global initialization code, I've added a top-level form to the examples <code>hooks.clj</code> file, that "installs" some extra goodies I like to use with Portal - see below.</del> <em>No longer necessary, with the <code>:init</code> option in 0.2.1.</em></p><p>I mentioned my <code>uptime</code> function above - that is in my
 <a href="https://github.com/seancorfield/dot-clojure/blob/503aaed7249b5c83bbd972d6c4141233959b8e4f/.cljconf/org.clojure/clojure-cli.repl/src/dev/uptime.clj"><code>uptime.clj</code> file</a>.
 It is auto-required into every namespace, and <code>uptime</code> is referred in for
 unqualified use.</p><p>And, finally, I added a
@@ -204,7 +204,7 @@ is on the classpath, the underlying logging function in those libraries is
 redefined to also <code>tap&gt;</code> a "logging information" data structure that Portal understands,
 so that all my logging information also appears in Portal.
 The <code>dev.portal/install!</code> function is
-<del>currently call from the example <code>hooks.clj</code> file, but I'm hoping the CLI REPL adds some sort of <code>:init-fn</code> configuration option in the future.</del><em>configured with the <code>:init</code> option that was added in 0.2.1.</em></p><h3 id="wrapping-up">Wrapping Up</h3><p>All of this has allowed me to retire my custom REPL setup, and some of my old
+<del>currently call from the example <code>hooks.clj</code> file, but I'm hoping the CLI REPL adds some sort of <code>:init-fn</code> configuration option in the future.</del> <em>configured with the <code>:init</code> option that was added in 0.2.1.</em></p><h3 id="wrapping-up">Wrapping Up</h3><p>All of this has allowed me to retire my custom REPL setup, and some of my old
 aliases, and rely entirely on the new CLI REPL with my enhancements.</p><p>If you're on the Clojurians Slack, join the
 <a href="https://app.slack.com/client/T03RZGPFR/C0C5YK5PAQ0">#clojure-cli-repl channel</a>
 to chat about this new tooling.</p><p>Major kudos to Jarrod Taylor, on the Clojure team, for creating this!
