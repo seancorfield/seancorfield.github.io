@@ -163,8 +163,8 @@ provides the same "adaptive REPL startup code" that I used to have in my
 previous setup, but in a much cleaner and more maintainable way.
 
 The `examples` configuration has no Paredit keybindings, but here's what I use
-the most. Currently, the CLI REPL seems to only support single-key bindings,
-with a single-modifier, so these are only "similar" to the bindings I'm used
+the most. As of 0.2.1, the CLI REPL supports key-chord bindings,
+with some restrictions, so these are only "similar" to the bindings I'm used
 to in VS Code/Calva:
 
 ```
@@ -221,8 +221,7 @@ The example `keybindings.clj` binds `C-t` to insert a UUID into the REPL,
 which seems a bit random to me, so I changed it to insert `tap->` which is
 new in Clojure 1.13 and I'm already finding very useful.
 
-~~In the absence of any global initialization code, I've added a top-level form to the examples `hooks.clj` file, that "installs" some extra goodies I like to use with Portal - see below.~~
-_No longer necessary, with the `:init` option in 0.2.1._
+~~In the absence of any global initialization code, I've added a top-level form to the examples `hooks.clj` file, that "installs" some extra goodies I like to use with Portal - see below.~~ _No longer necessary, with the `:init` option in 0.2.1._
 
 I mentioned my `uptime` function above - that is in my 
 [`uptime.clj` file](https://github.com/seancorfield/dot-clojure/blob/503aaed7249b5c83bbd972d6c4141233959b8e4f/.cljconf/org.clojure/clojure-cli.repl/src/dev/uptime.clj).
@@ -237,8 +236,7 @@ is on the classpath, the underlying logging function in those libraries is
 redefined to also `tap>` a "logging information" data structure that Portal understands,
 so that all my logging information also appears in Portal.
 The `dev.portal/install!` function is 
-~~currently call from the example `hooks.clj` file, but I'm hoping the CLI REPL adds some sort of `:init-fn` configuration option in the future.~~
-_configured with the `:init` option that was added in 0.2.1._
+~~currently call from the example `hooks.clj` file, but I'm hoping the CLI REPL adds some sort of `:init-fn` configuration option in the future.~~ _configured with the `:init` option that was added in 0.2.1._
 
 ### Wrapping Up
 
